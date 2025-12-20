@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mastodon-ui"
-version = "1.0.5"
+version = "1.0.6"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
@@ -25,6 +25,7 @@ dependencies = [
     "rich>=13.0.0",
     "lxml>=4.9.0",
     "tinycss2>=1.2.0",
+    "cssutils>=2.11.1",
 ]
 
 [project.urls]

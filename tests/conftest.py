@@ -1,6 +1,6 @@
 # ... existing fixtures ...
 import pytest
-# from django.conf import settings
+from django.conf import settings
 
 
 class MockUser:
@@ -23,7 +23,7 @@ def mock_props_context():
         'csrf_token': 'abc-123'
     }
 
-'''def pytest_configure():
+def pytest_configure():
     """
     Configure a minimal Django settings environment for testing.
     This allows us to use RequestFactory and Forms without a full project.
@@ -37,7 +37,6 @@ def mock_props_context():
                 'django.contrib.contenttypes',
                 'django.contrib.auth',
                 'django.contrib.sessions',
-                # 'mui', # Add your lib if it has models/tags
             ],
             MIDDLEWARE=[
                 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,4 +52,4 @@ def mock_props_context():
                     'NAME': ':memory:',
                 }
             }
-        )'''
+        )

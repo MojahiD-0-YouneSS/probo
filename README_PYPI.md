@@ -8,7 +8,7 @@
 
 [![PyPI version](https://badge.fury.io/py/mastodon-ui.svg)](https://badge.fury.io/py/mastodon-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests](https://img.shields.io/badge/Tests-376_Passed-green)](https://github.com/MojahiD-0-YouneSS/mastodon-ui)
+[![Tests](https://img.shields.io/badge/Tests-391_Passed-green)](https://github.com/MojahiD-0-YouneSS/mastodon-ui)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://pypi.org/project/mastodon-ui/)
 <!-- CHANGED: Uses official Ko-fi CDN image (Safer than local repo link) -->
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20My%20Work-red)](https://ko-fi.com/youness_mojahid)
