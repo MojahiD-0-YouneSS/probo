@@ -13,12 +13,29 @@ from rich.panel import Panel
 from rich.syntax import Syntax
 from rich.traceback import install
 from mui.terminal.app_generator import (create_mui_dj_structure,create_hacksoft_structure)
+
+from importlib.metadata import version, PackageNotFoundError
+
+# ... imports ...
+
+try:
+    # This reads the version from the installed package (pyproject.toml)
+    VERSION = version("mastodon-ui")
+except PackageNotFoundError:
+    # Fallback if package is not installed (e.g., running script directly)
+    VERSION = "0.0.0-dev"
+
+# ... rest of your code ...
+
+@app.command("version")
+def show_version():
+    """Show the current version."""
+    console.print(f"[bold cyan]Mastodon UI (mui)[/bold cyan] version [yellow]{VERSION}[/yellow]")
 app = typer.Typer(
     help="MUI: The declarative rendering engine for Django.",
     add_completion=False
 )
 console = Console()
-VERSION = "1.0.0"
 
 def load_tcm_registry(path: Path):
     """
