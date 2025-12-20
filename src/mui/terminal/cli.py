@@ -27,10 +27,6 @@ except PackageNotFoundError:
 
 # ... rest of your code ...
 
-@app.command("version")
-def show_version():
-    """Show the current version."""
-    console.print(f"[bold cyan]Mastodon UI (mui)[/bold cyan] version [yellow]{VERSION}[/yellow]")
 app = typer.Typer(
     help="MUI: The declarative rendering engine for Django.",
     add_completion=False

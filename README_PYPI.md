@@ -1,10 +1,7 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.png" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
+<h1 align="center">
+🐘 Mastodon UI (mui)
+</h1>
 
-<p align="center">
-<img src="./assets/images/logo.png" alt="MUI Logo" width="200" height="200">
-</p>
-
-# 🐘 Mastodon UI (mui)
 
 > **A Python-Native Template Rendering Framework and Meta-framework for Django.**
 > Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
@@ -28,7 +25,7 @@ MUI has officially reached stable v1 status. It is a backend-first framework tha
 
 ## 📚 Read the Full Sample Documentation (v1.0)
 
-### Click the link above for deep dives into : <a href="./docs/simple_doc.md">view sample documentation</a>
+### Click the link above for deep dives into : <a href="https://github.com/MojahiD-0-YouneSS/mastodon-ui/blob/main/docs/simple_doc.md">view sample documentation</a>
 
 The Component Architecture: Brain (State) / Body (Elements) / Skin (Style).
 
