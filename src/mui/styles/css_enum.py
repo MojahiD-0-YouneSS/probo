@@ -1,0 +1,810 @@
+from enum import Enum
+
+class CssPropertyEnum(Enum):
+    ACCENT_COLOR = 'accent-color: %s'
+    ALIGN_CONTENT = 'align-content: %s'
+    ALIGN_ITEMS = 'align-items: %s'
+    ALIGN_SELF = 'align-self: %s'
+    ALL = 'all: %s'
+    ANIMATION = 'animation: %s'
+    ANIMATION_DELAY = 'animation-delay: %s'
+    ANIMATION_DIRECTION = 'animation-direction: %s'
+    ANIMATION_DURATION = 'animation-duration: %s'
+    ANIMATION_FILL_MODE = 'animation-fill-mode: %s'
+    ANIMATION_ITERATION_COUNT = 'animation-iteration-count: %s'
+    ANIMATION_NAME = 'animation-name: %s'
+    ANIMATION_PLAY_STATE = 'animation-play-state: %s'
+    ANIMATION_TIMING_FUNCTION = 'animation-timing-function: %s'
+    APPEARANCE = 'appearance: %s'
+    ASPECT_RATIO = 'aspect-ratio: %s'
+    BACKDROP_FILTER = 'backdrop-filter: %s'
+    BACKFACE_VISIBILITY = 'backface-visibility: %s'
+    BACKGROUND = 'background: %s'
+    BACKGROUND_ATTACHMENT = 'background-attachment: %s'
+    BACKGROUND_BLEND_MODE = 'background-blend-mode: %s'
+    BACKGROUND_CLIP = 'background-clip: %s'
+    BACKGROUND_COLOR = 'background-color: %s'
+    BACKGROUND_IMAGE = 'background-image: %s'
+    BACKGROUND_ORIGIN = 'background-origin: %s'
+    BACKGROUND_POSITION = 'background-position: %s'
+    BACKGROUND_POSITION_X = 'background-position-x: %s'
+    BACKGROUND_POSITION_Y = 'background-position-y: %s'
+    BACKGROUND_REPEAT = 'background-repeat: %s'
+    BACKGROUND_SIZE = 'background-size: %s'
+    BLOCK_SIZE = 'block-size: %s'
+    BORDER = 'border: %s'
+    BORDER_BLOCK = 'border-block: %s'
+    BORDER_BLOCK_COLOR = 'border-block-color: %s'
+    BORDER_BLOCK_END = 'border-block-end: %s'
+    BORDER_BLOCK_END_COLOR = 'border-block-end-color: %s'
+    BORDER_BLOCK_END_STYLE = 'border-block-end-style: %s'
+    BORDER_BLOCK_END_WIDTH = 'border-block-end-width: %s'
+    BORDER_BLOCK_START = 'border-block-start: %s'
+    BORDER_BLOCK_START_COLOR = 'border-block-start-color: %s'
+    BORDER_BLOCK_START_STYLE = 'border-block-start-style: %s'
+    BORDER_BLOCK_START_WIDTH = 'border-block-start-width: %s'
+    BORDER_BLOCK_STYLE = 'border-block-style: %s'
+    BORDER_BLOCK_WIDTH = 'border-block-width: %s'
+    BORDER_BOTTOM = 'border-bottom: %s'
+    BORDER_BOTTOM_COLOR = 'border-bottom-color: %s'
+    BORDER_BOTTOM_LEFT_RADIUS = 'border-bottom-left-radius: %s'
+    BORDER_BOTTOM_RIGHT_RADIUS = 'border-bottom-right-radius: %s'
+    BORDER_BOTTOM_STYLE = 'border-bottom-style: %s'
+    BORDER_BOTTOM_WIDTH = 'border-bottom-width: %s'
+    BORDER_COLLAPSE = 'border-collapse: %s'
+    BORDER_COLOR = 'border-color: %s'
+    BORDER_END_END_RADIUS = 'border-end-end-radius: %s'
+    BORDER_END_START_RADIUS = 'border-end-start-radius: %s'
+    BORDER_IMAGE = 'border-image: %s'
+    BORDER_IMAGE_OUTSET = 'border-image-outset: %s'
+    BORDER_IMAGE_REPEAT = 'border-image-repeat: %s'
+    BORDER_IMAGE_SLICE = 'border-image-slice: %s'
+    BORDER_IMAGE_SOURCE = 'border-image-source: %s'
+    BORDER_IMAGE_WIDTH = 'border-image-width: %s'
+    BORDER_INLINE = 'border-inline: %s'
+    BORDER_INLINE_COLOR = 'border-inline-color: %s'
+    BORDER_INLINE_END = 'border-inline-end: %s'
+    BORDER_INLINE_END_COLOR = 'border-inline-end-color: %s'
+    BORDER_INLINE_END_STYLE = 'border-inline-end-style: %s'
+    BORDER_INLINE_END_WIDTH = 'border-inline-end-width: %s'
+    BORDER_INLINE_START = 'border-inline-start: %s'
+    BORDER_INLINE_START_COLOR = 'border-inline-start-color: %s'
+    BORDER_INLINE_START_STYLE = 'border-inline-start-style: %s'
+    BORDER_INLINE_START_WIDTH = 'border-inline-start-width: %s'
+    BORDER_INLINE_STYLE = 'border-inline-style: %s'
+    BORDER_INLINE_WIDTH = 'border-inline-width: %s'
+    BORDER_LEFT = 'border-left: %s'
+    BORDER_LEFT_COLOR = 'border-left-color: %s'
+    BORDER_LEFT_STYLE = 'border-left-style: %s'
+    BORDER_LEFT_WIDTH = 'border-left-width: %s'
+    BORDER_RADIUS = 'border-radius: %s'
+    BORDER_RIGHT = 'border-right: %s'
+    BORDER_RIGHT_COLOR = 'border-right-color: %s'
+    BORDER_RIGHT_STYLE = 'border-right-style: %s'
+    BORDER_RIGHT_WIDTH = 'border-right-width: %s'
+    BORDER_SPACING = 'border-spacing: %s'
+    BORDER_START_END_RADIUS = 'border-start-end-radius: %s'
+    BORDER_START_START_RADIUS = 'border-start-start-radius: %s'
+    BORDER_STYLE = 'border-style: %s'
+    BORDER_TOP = 'border-top: %s'
+    BORDER_TOP_COLOR = 'border-top-color: %s'
+    BORDER_TOP_LEFT_RADIUS = 'border-top-left-radius: %s'
+    BORDER_TOP_RIGHT_RADIUS = 'border-top-right-radius: %s'
+    BORDER_TOP_STYLE = 'border-top-style: %s'
+    BORDER_TOP_WIDTH = 'border-top-width: %s'
+    BORDER_WIDTH = 'border-width: %s'
+    BOTTOM = 'bottom: %s'
+    BOX_DECORATION_BREAK = 'box-decoration-break: %s'
+    BOX_REFLECT = 'box-reflect: %s'
+    BOX_SHADOW = 'box-shadow: %s'
+    BOX_SIZING = 'box-sizing: %s'
+    BREAK_AFTER = 'break-after: %s'
+    BREAK_BEFORE = 'break-before: %s'
+    BREAK_INSIDE = 'break-inside: %s'
+    CAPTION_SIDE = 'caption-side: %s'
+    CARET_COLOR = 'caret-color: %s'
+    AT_CHARSET = '@charset: %s'
+    CLEAR = 'clear: %s'
+    CLIP = 'clip: %s'
+    CLIP_PATH = 'clip-path: %s'
+    COLOR = 'color: %s'
+    COLOR_SCHEME = 'color-scheme: %s'
+    COLUMN_COUNT = 'column-count: %s'
+    COLUMN_FILL = 'column-fill: %s'
+    COLUMN_GAP = 'column-gap: %s'
+    COLUMN_RULE = 'column-rule: %s'
+    COLUMN_RULE_COLOR = 'column-rule-color: %s'
+    COLUMN_RULE_STYLE = 'column-rule-style: %s'
+    COLUMN_RULE_WIDTH = 'column-rule-width: %s'
+    COLUMN_SPAN = 'column-span: %s'
+    COLUMN_WIDTH = 'column-width: %s'
+    COLUMNS = 'columns: %s'
+    AT_CONTAINER = '@container: %s'
+    CONTENT = 'content: %s'
+    COUNTER_INCREMENT = 'counter-increment: %s'
+    COUNTER_RESET = 'counter-reset: %s'
+    COUNTER_SET = 'counter-set: %s'
+    AT_COUNTER_STYLE = '@counter-style: %s'
+    CURSOR = 'cursor: %s'
+    DIRECTION = 'direction: %s'
+    DISPLAY = 'display: %s'
+    EMPTY_CELLS = 'empty-cells: %s'
+    FILTER = 'filter: %s'
+    FLEX = 'flex: %s'
+    FLEX_BASIS = 'flex-basis: %s'
+    FLEX_DIRECTION = 'flex-direction: %s'
+    FLEX_FLOW = 'flex-flow: %s'
+    FLEX_GROW = 'flex-grow: %s'
+    FLEX_SHRINK = 'flex-shrink: %s'
+    FLEX_WRAP = 'flex-wrap: %s'
+    FLOAT = 'float: %s'
+    FONT = 'font: %s'
+    AT_FONT_FACE = '@font-face: %s'
+    FONT_FAMILY = 'font-family: %s'
+    FONT_FEATURE_SETTINGS = 'font-feature-settings: %s'
+    FONT_KERNING = 'font-kerning: %s'
+    FONT_LANGUAGE_OVERRIDE = 'font-language-override: %s'
+    AT_FONT_PALETTE_VALUES = '@font-palette-values: %s'
+    FONT_SIZE = 'font-size: %s'
+    FONT_SIZE_ADJUST = 'font-size-adjust: %s'
+    FONT_STRETCH = 'font-stretch: %s'
+    FONT_STYLE = 'font-style: %s'
+    FONT_SYNTHESIS = 'font-synthesis: %s'
+    FONT_VARIANT = 'font-variant: %s'
+    FONT_VARIANT_ALTERNATES = 'font-variant-alternates: %s'
+    FONT_VARIANT_CAPS = 'font-variant-caps: %s'
+    FONT_VARIANT_EAST_ASIAN = 'font-variant-east-asian: %s'
+    FONT_VARIANT_LIGATURES = 'font-variant-ligatures: %s'
+    FONT_VARIANT_NUMERIC = 'font-variant-numeric: %s'
+    FONT_VARIANT_POSITION = 'font-variant-position: %s'
+    FONT_WEIGHT = 'font-weight: %s'
+    GAP = 'gap: %s'
+    GRID = 'grid: %s'
+    GRID_AREA = 'grid-area: %s'
+    GRID_AUTO_COLUMNS = 'grid-auto-columns: %s'
+    GRID_AUTO_FLOW = 'grid-auto-flow: %s'
+    GRID_AUTO_ROWS = 'grid-auto-rows: %s'
+    GRID_COLUMN = 'grid-column: %s'
+    GRID_COLUMN_END = 'grid-column-end: %s'
+    GRID_COLUMN_START = 'grid-column-start: %s'
+    GRID_ROW = 'grid-row: %s'
+    GRID_ROW_END = 'grid-row-end: %s'
+    GRID_ROW_START = 'grid-row-start: %s'
+    GRID_TEMPLATE = 'grid-template: %s'
+    GRID_TEMPLATE_AREAS = 'grid-template-areas: %s'
+    GRID_TEMPLATE_COLUMNS = 'grid-template-columns: %s'
+    GRID_TEMPLATE_ROWS = 'grid-template-rows: %s'
+    HANGING_PUNCTUATION = 'hanging-punctuation: %s'
+    HEIGHT = 'height: %s'
+    HYPHENS = 'hyphens: %s'
+    HYPHENATE_CHARACTER = 'hyphenate-character: %s'
+    IMAGE_RENDERING = 'image-rendering: %s'
+    AT_IMPORT = '@import: %s'
+    INITIAL_LETTER = 'initial-letter: %s'
+    INLINE_SIZE = 'inline-size: %s'
+    INSET = 'inset: %s'
+    INSET_BLOCK = 'inset-block: %s'
+    INSET_BLOCK_END = 'inset-block-end: %s'
+    INSET_BLOCK_START = 'inset-block-start: %s'
+    INSET_INLINE = 'inset-inline: %s'
+    INSET_INLINE_END = 'inset-inline-end: %s'
+    INSET_INLINE_START = 'inset-inline-start: %s'
+    ISOLATION = 'isolation: %s'
+    JUSTIFY_CONTENT = 'justify-content: %s'
+    JUSTIFY_ITEMS = 'justify-items: %s'
+    JUSTIFY_SELF = 'justify-self: %s'
+    AT_KEYFRAMES = '@keyframes: %s'
+    AT_LAYER = '@layer: %s'
+    LEFT = 'left: %s'
+    LETTER_SPACING = 'letter-spacing: %s'
+    LINE_BREAK = 'line-break: %s'
+    LINE_HEIGHT = 'line-height: %s'
+    LIST_STYLE = 'list-style: %s'
+    LIST_STYLE_IMAGE = 'list-style-image: %s'
+    LIST_STYLE_POSITION = 'list-style-position: %s'
+    LIST_STYLE_TYPE = 'list-style-type: %s'
+    MARGIN = 'margin: %s'
+    MARGIN_BLOCK = 'margin-block: %s'
+    MARGIN_BLOCK_END = 'margin-block-end: %s'
+    MARGIN_BLOCK_START = 'margin-block-start: %s'
+    MARGIN_BOTTOM = 'margin-bottom: %s'
+    MARGIN_INLINE = 'margin-inline: %s'
+    MARGIN_INLINE_END = 'margin-inline-end: %s'
+    MARGIN_INLINE_START = 'margin-inline-start: %s'
+    MARGIN_LEFT = 'margin-left: %s'
+    MARGIN_RIGHT = 'margin-right: %s'
+    MARGIN_TOP = 'margin-top: %s'
+    MARKER = 'marker: %s'
+    MARKER_END = 'marker-end: %s'
+    MARKER_MID = 'marker-mid: %s'
+    MARKER_START = 'marker-start: %s'
+    MASK = 'mask: %s'
+    MASK_CLIP = 'mask-clip: %s'
+    MASK_COMPOSITE = 'mask-composite: %s'
+    MASK_IMAGE = 'mask-image: %s'
+    MASK_MODE = 'mask-mode: %s'
+    MASK_ORIGIN = 'mask-origin: %s'
+    MASK_POSITION = 'mask-position: %s'
+    MASK_REPEAT = 'mask-repeat: %s'
+    MASK_SIZE = 'mask-size: %s'
+    MASK_TYPE = 'mask-type: %s'
+    MAX_HEIGHT = 'max-height: %s'
+    MAX_WIDTH = 'max-width: %s'
+    AT_MEDIA = '@media: %s'
+    MAX_BLOCK_SIZE = 'max-block-size: %s'
+    MAX_INLINE_SIZE = 'max-inline-size: %s'
+    MIN_BLOCK_SIZE = 'min-block-size: %s'
+    MIN_INLINE_SIZE = 'min-inline-size: %s'
+    MIN_HEIGHT = 'min-height: %s'
+    MIN_WIDTH = 'min-width: %s'
+    MIX_BLEND_MODE = 'mix-blend-mode: %s'
+    AT_NAMESPACE = '@namespace: %s'
+    OBJECT_FIT = 'object-fit: %s'
+    OBJECT_POSITION = 'object-position: %s'
+    OFFSET = 'offset: %s'
+    OFFSET_ANCHOR = 'offset-anchor: %s'
+    OFFSET_DISTANCE = 'offset-distance: %s'
+    OFFSET_PATH = 'offset-path: %s'
+    OFFSET_POSITION = 'offset-position: %s'
+    OFFSET_ROTATE = 'offset-rotate: %s'
+    OPACITY = 'opacity: %s'
+    ORDER = 'order: %s'
+    ORPHANS = 'orphans: %s'
+    OUTLINE = 'outline: %s'
+    OUTLINE_COLOR = 'outline-color: %s'
+    OUTLINE_OFFSET = 'outline-offset: %s'
+    OUTLINE_STYLE = 'outline-style: %s'
+    OUTLINE_WIDTH = 'outline-width: %s'
+    OVERFLOW = 'overflow: %s'
+    OVERFLOW_ANCHOR = 'overflow-anchor: %s'
+    OVERFLOW_WRAP = 'overflow-wrap: %s'
+    OVERFLOW_X = 'overflow-x: %s'
+    OVERFLOW_Y = 'overflow-y: %s'
+    OVERSCROLL_BEHAVIOR = 'overscroll-behavior: %s'
+    OVERSCROLL_BEHAVIOR_BLOCK = 'overscroll-behavior-block: %s'
+    OVERSCROLL_BEHAVIOR_INLINE = 'overscroll-behavior-inline: %s'
+    OVERSCROLL_BEHAVIOR_X = 'overscroll-behavior-x: %s'
+    OVERSCROLL_BEHAVIOR_Y = 'overscroll-behavior-y: %s'
+    PADDING = 'padding: %s'
+    PADDING_BLOCK = 'padding-block: %s'
+    PADDING_BLOCK_END = 'padding-block-end: %s'
+    PADDING_BLOCK_START = 'padding-block-start: %s'
+    PADDING_BOTTOM = 'padding-bottom: %s'
+    PADDING_INLINE = 'padding-inline: %s'
+    PADDING_INLINE_END = 'padding-inline-end: %s'
+    PADDING_INLINE_START = 'padding-inline-start: %s'
+    PADDING_LEFT = 'padding-left: %s'
+    PADDING_RIGHT = 'padding-right: %s'
+    PADDING_TOP = 'padding-top: %s'
+    AT_PAGE = '@page: %s'
+    PAGE_BREAK_AFTER = 'page-break-after: %s'
+    PAGE_BREAK_BEFORE = 'page-break-before: %s'
+    PAGE_BREAK_INSIDE = 'page-break-inside: %s'
+    PAINT_ORDER = 'paint-order: %s'
+    PERSPECTIVE = 'perspective: %s'
+    PERSPECTIVE_ORIGIN = 'perspective-origin: %s'
+    PLACE_CONTENT = 'place-content: %s'
+    PLACE_ITEMS = 'place-items: %s'
+    PLACE_SELF = 'place-self: %s'
+    POINTER_EVENTS = 'pointer-events: %s'
+    POSITION = 'position: %s'
+    AT_PROPERTY = '@property: %s'
+    QUOTES = 'quotes: %s'
+    RESIZE = 'resize: %s'
+    RIGHT = 'right: %s'
+    ROTATE = 'rotate: %s'
+    ROW_GAP = 'row-gap: %s'
+    SCALE = 'scale: %s'
+    AT_SCOPE = '@scope: %s'
+    SCROLL_BEHAVIOR = 'scroll-behavior: %s'
+    SCROLL_MARGIN = 'scroll-margin: %s'
+    SCROLL_MARGIN_BLOCK = 'scroll-margin-block: %s'
+    SCROLL_MARGIN_BLOCK_END = 'scroll-margin-block-end: %s'
+    SCROLL_MARGIN_BLOCK_START = 'scroll-margin-block-start: %s'
+    SCROLL_MARGIN_BOTTOM = 'scroll-margin-bottom: %s'
+    SCROLL_MARGIN_INLINE = 'scroll-margin-inline: %s'
+    SCROLL_MARGIN_INLINE_END = 'scroll-margin-inline-end: %s'
+    SCROLL_MARGIN_INLINE_START = 'scroll-margin-inline-start: %s'
+    SCROLL_MARGIN_LEFT = 'scroll-margin-left: %s'
+    SCROLL_MARGIN_RIGHT = 'scroll-margin-right: %s'
+    SCROLL_MARGIN_TOP = 'scroll-margin-top: %s'
+    SCROLL_PADDING = 'scroll-padding: %s'
+    SCROLL_PADDING_BLOCK = 'scroll-padding-block: %s'
+    SCROLL_PADDING_BLOCK_END = 'scroll-padding-block-end: %s'
+    SCROLL_PADDING_BLOCK_START = 'scroll-padding-block-start: %s'
+    SCROLL_PADDING_BOTTOM = 'scroll-padding-bottom: %s'
+    SCROLL_PADDING_INLINE = 'scroll-padding-inline: %s'
+    SCROLL_PADDING_INLINE_END = 'scroll-padding-inline-end: %s'
+    SCROLL_PADDING_INLINE_START = 'scroll-padding-inline-start: %s'
+    SCROLL_PADDING_LEFT = 'scroll-padding-left: %s'
+    SCROLL_PADDING_RIGHT = 'scroll-padding-right: %s'
+    SCROLL_PADDING_TOP = 'scroll-padding-top: %s'
+    SCROLL_SNAP_ALIGN = 'scroll-snap-align: %s'
+    SCROLL_SNAP_STOP = 'scroll-snap-stop: %s'
+    SCROLL_SNAP_TYPE = 'scroll-snap-type: %s'
+    SCROLLBAR_COLOR = 'scrollbar-color: %s'
+    SHAPE_OUTSIDE = 'shape-outside: %s'
+    AT_STARTING_STYLE = '@starting-style: %s'
+    AT_SUPPORTS = '@supports: %s'
+    TAB_SIZE = 'tab-size: %s'
+    TABLE_LAYOUT = 'table-layout: %s'
+    TEXT_ALIGN = 'text-align: %s'
+    TEXT_ALIGN_LAST = 'text-align-last: %s'
+    TEXT_COMBINE_UPRIGHT = 'text-combine-upright: %s'
+    TEXT_DECORATION = 'text-decoration: %s'
+    TEXT_DECORATION_COLOR = 'text-decoration-color: %s'
+    TEXT_DECORATION_LINE = 'text-decoration-line: %s'
+    TEXT_DECORATION_STYLE = 'text-decoration-style: %s'
+    TEXT_DECORATION_THICKNESS = 'text-decoration-thickness: %s'
+    TEXT_EMPHASIS = 'text-emphasis: %s'
+    TEXT_EMPHASIS_COLOR = 'text-emphasis-color: %s'
+    TEXT_EMPHASIS_POSITION = 'text-emphasis-position: %s'
+    TEXT_EMPHASIS_STYLE = 'text-emphasis-style: %s'
+    TEXT_INDENT = 'text-indent: %s'
+    TEXT_JUSTIFY = 'text-justify: %s'
+    TEXT_ORIENTATION = 'text-orientation: %s'
+    TEXT_OVERFLOW = 'text-overflow: %s'
+    TEXT_SHADOW = 'text-shadow: %s'
+    TEXT_TRANSFORM = 'text-transform: %s'
+    TEXT_UNDERLINE_OFFSET = 'text-underline-offset: %s'
+    TEXT_UNDERLINE_POSITION = 'text-underline-position: %s'
+    TOP = 'top: %s'
+    TRANSFORM = 'transform: %s'
+    TRANSFORM_ORIGIN = 'transform-origin: %s'
+    TRANSFORM_STYLE = 'transform-style: %s'
+    TRANSITION = 'transition: %s'
+    TRANSITION_DELAY = 'transition-delay: %s'
+    TRANSITION_DURATION = 'transition-duration: %s'
+    TRANSITION_PROPERTY = 'transition-property: %s'
+    TRANSITION_TIMING_FUNCTION = 'transition-timing-function: %s'
+    TRANSLATE = 'translate: %s'
+    UNICODE_BIDI = 'unicode-bidi: %s'
+    USER_SELECT = 'user-select: %s'
+    VERTICAL_ALIGN = 'vertical-align: %s'
+    VISIBILITY = 'visibility: %s'
+    WHITE_SPACE = 'white-space: %s'
+    WIDOWS = 'widows: %s'
+    WIDTH = 'width: %s'
+    WORD_BREAK = 'word-break: %s'
+    WORD_SPACING = 'word-spacing: %s'
+    WORD_WRAP = 'word-wrap: %s'
+    WRITING_MODE = 'writing-mode: %s'
+    Z_INDEX = 'z-index: %s'
+    ZOOM = 'zoom: %s'
+    __DEFAULT=None
+    
+    def __call__(self, value):
+        """Allows syntax like CssPropertyEnum.COLOR('red')"""
+        return self.value % value
+    
+    @classmethod
+    def get(cls, name, default=None):
+        
+        try:
+            return cls[name.upper()]
+        except KeyError:
+            return cls.__DEFAULT
+
+class PseudoClassEnum(Enum):
+    ACTIVE = ":active"
+    ANY_LINK = ":any-link"
+    ANYLINK = ":anylink" # Non-standard, but sometimes used
+    AUTO_FILL = ":auto-fill"
+    CHECKED = ":checked"
+    DEFAULT = ":default"
+    DEFINED = ":defined"
+    DIR = ":dir()"
+    DISABLED = ":disabled"
+    EMPTY = ":empty"
+    ENABLED = ":enabled"
+    FIRST = ":first" # Paged media
+    FIRST_CHILD = ":first-child"
+    FIRST_OF_TYPE = ":first-of-type"
+    FOCUS = ":focus"
+    FOCUS_VISIBLE = ":focus-visible"
+    FOCUS_WITHIN = ":focus-within"
+    FULLSCREEN = ":fullscreen"
+    HAS = ":has()"
+    HOVER = ":hover"
+    IN_RANGE = ":in-range"
+    INDETERMINATE = ":indeterminate"
+    INVALID = ":invalid"
+    IS = ":is()"
+    LANG = ":lang()"
+    LAST_CHILD = ":last-child"
+    LAST_OF_TYPE = ":last-of-type"
+    LEFT = ":left" # Paged media
+    LINK = ":link"
+    MODAL = ":modal"
+    NOT = ":not()"
+    NTH_CHILD = ":nth-child()"
+    NTH_LAST_CHILD = ":nth-last-child()"
+    NTH_LAST_OF_TYPE = ":nth-last-of-type()"
+    NTH_OF_TYPE = ":nth-of-type()"
+    ONLY_CHILD = ":only-child"
+    ONLY_OF_TYPE = ":only-of-type"
+    OPTIONAL = ":optional"
+    OUT_OF_RANGE = ":out-of-range"
+    PLACEHOLDER_SHOWN = ":placeholder-shown"
+    POPOVER_OPEN = ":popover-open"
+    READ_ONLY = ":read-only"
+    READ_WRITE = ":read-write"
+    REQUIRED = ":required"
+    RIGHT = ":right" # Paged media
+    ROOT = ":root"
+    SCOPE = ":scope"
+    STATE = ":state()"
+    TARGET = ":target"
+    USER_INVALID = ":user-invalid"
+    USER_VALID = ":user-valid"
+    VALID = ":valid"
+    VISITED = ":visited"
+    WHERE = ":where()"
+    
+    # Webkit / Vendor specific (Optional, but useful)
+    WEBKIT_SCROLLBAR = "::-webkit-scrollbar" 
+
+    @classmethod
+    def get(cls, name, default=None):
+        """
+        Robust lookup that handles different naming conventions.
+        Examples:
+        - get(':hover') -> HOVER
+        - get('first-child') -> FIRST_CHILD
+        - get('FIRST_CHILD') -> FIRST_CHILD
+        """
+        # 1. Remove leading colons
+        # 2. Replace dashes with underscores (CSS -> Python Enum)
+        # 3. Uppercase
+        clean_name = name.lstrip(':').replace('-', '_').upper()
+        
+        try:
+            return cls[clean_name].value
+        except KeyError:
+            return default
+
+class PseudoElementEnum(Enum):
+    AFTER = '::after'
+    BACKDROP = '::backdrop'
+    BEFORE = '::before'
+    CUE = '::cue'
+    FILE_SELECTOR_BUTTON = '::file-selector-button'
+    FIRST_LETTER = '::first-letter'
+    FIRST_LINE = '::first-line'
+    GRAMMAR_ERROR = '::grammar-error' # Fixed typo
+    HIGHLIGHT = '::highlight()'
+    MARKER = '::marker'
+    PART = '::part()'
+    PLACEHOLDER = '::placeholder'
+    SELECTION = '::selection'
+    SLOTTED = '::slotted()'
+    SPELLING_ERROR = '::spelling-error'
+    TARGET_TEXT = '::target-text'
+    VIEW_TRANSITION = '::view-transition'
+    VIEW_TRANSITION_GROUP = '::view-transition-group()'
+    VIEW_TRANSITION_IMAGE_PAIR = '::view-transition-image-pair()'
+    VIEW_TRANSITION_NEW = '::view-transition-new()'
+    VIEW_TRANSITION_OLD = '::view-transition-old()'
+
+    @classmethod
+    def get(cls, name, default=None):
+        """
+        Robust lookup for pseudo-elements.
+        Examples:
+        - get('::before') -> BEFORE
+        - get('first-line') -> FIRST_LINE
+        """
+        clean_name = name.lstrip(':').replace('-', '_').upper()
+        try:
+            return cls[clean_name].value
+        except KeyError:
+            return default
+
+class CssFunctionsEnum(str, Enum):    
+    # ex usage=CssFunctionsEnum.BLUR.value % "5px"==>  'blur(5px)'
+    ACOS = "acos(%s)"
+    ASIN = "asin(%s)"
+    ATAN = "atan(%s)"
+    ATAN2 = "atan2(%s)"
+    ATTR = "attr(%s)"
+    BLUR = "blur(%s)"
+    BRIGHTNESS = "brightness(%s)"
+    CALC = "calc(%s)"
+    CIRCLE = "circle(%s)"
+    CLAMP = "clamp(%s)"
+    COLOR = "color(%s)"
+    COLOR_MIX = "color-mix(%s)"
+    CONIC_GRADIENT = "conic-gradient(%s)"
+    CONTRAST = "contrast(%s)"
+    COS = "cos(%s)"
+    COUNTER = "counter(%s)"
+    COUNTERS = "counters(%s)"
+    CUBIC_BEZIER = "cubic-bezier(%s)"
+    DROP_SHADOW = "drop-shadow(%s)"
+    ELLIPSE = "ellipse(%s)"
+    EXP = "exp(%s)"
+    FIT_CONTENT = "fit-content(%s)"
+    GRAYSCALE = "grayscale(%s)"
+    HSL = "hsl(%s)"
+    HSLA = "hsla(%s)"
+    HUE_ROTATE = "hue-rotate(%s)"
+    HWB = "hwb(%s)"
+    HYPOT = "hypot(%s)"
+    INSET = "inset(%s)"
+    INVERT = "invert(%s)"
+    LAB = "lab(%s)"
+    LCH = "lch(%s)"
+    LIGHT_DARK = "light-dark(%s)"
+    LINEAR_GRADIENT = "linear-gradient(%s)"
+    LOG = "log(%s)"
+    MATRIX = "matrix(%s)"
+    MATRIX3D = "matrix3d(%s)"
+    MAX = "max(%s)"
+    MIN = "min(%s)"
+    MINMAX = "minmax(%s)"
+    MOD = "mod(%s)"
+    OKLAB = "oklab(%s)"
+    OKLCH = "oklch(%s)"
+    OPACITY = "opacity(%s)"
+    PERSPECTIVE = "perspective(%s)"
+    POLYGON = "polygon(%s)"
+    POW = "pow(%s)"
+    RADIAL_GRADIENT = "radial-gradient(%s)"
+    RAY = "ray(%s)"
+    REM = "rem(%s)"
+    REPEAT = "repeat(%s)"
+    REPEATING_CONIC_GRADIENT = "repeating-conic-gradient(%s)"
+    REPEATING_LINEAR_GRADIENT = "repeating-linear-gradient(%s)"
+    REPEATING_RADIAL_GRADIENT = "repeating-radial-gradient(%s)"
+    RGB = "rgb(%s)"
+    RGBA = "rgba(%s)"
+    ROTATE = "rotate(%s)"
+    ROTATE3D = "rotate3d(%s)"
+    ROTATEX = "rotateX(%s)"
+    ROTATEY = "rotateY(%s)"
+    ROTATEZ = "rotateZ(%s)"
+    ROUND = "round(%s)"
+    SATURATE = "saturate(%s)"
+    SCALE = "scale(%s)"
+    SCALE3D = "scale3d(%s)"
+    SCALEX = "scaleX(%s)"
+    SCALEY = "scaleY(%s)"
+    SEPIA = "sepia(%s)"
+    SIN = "sin(%s)"
+    SKEW = "skew(%s)"
+    SKEWX = "skewX(%s)"
+    SKEWY = "skewY(%s)"
+    SQRT = "sqrt(%s)"
+    STEPS = "steps(%s)"
+    TAN = "tan(%s)"
+    TRANSLATE = "translate(%s)"
+    TRANSLATEX = "translateX(%s)"
+    TRANSLATEY = "translateY(%s)"
+    URL = "url(%s)"
+    VAR = "var(%s)"
+    
+    @classmethod
+    def get(cls, name, default=None):
+        try:
+            return cls[name.upper()]
+        except KeyError:
+            return default
+        
+class CssFontsEnum(Enum):
+    # --- Generic Families ---
+    SERIF = 'serif'
+    SANS_SERIF = 'sans-serif'
+    MONOSPACE = 'monospace'
+    CURSIVE = 'cursive'
+    FANTASY = 'fantasy'
+    SYSTEM_UI = 'system-ui'
+
+    # --- Sans-Serif ---
+    ARIAL = 'Arial, Helvetica, sans-serif'
+    ARIAL_BLACK = '"Arial Black", Gadget, sans-serif'
+    VERDANA = 'Verdana, Geneva, sans-serif'
+    TAHOMA = 'Tahoma, Geneva, sans-serif'
+    TREBUCHET_MS = '"Trebuchet MS", Helvetica, sans-serif'
+    IMPACT = 'Impact, Charcoal, sans-serif'
+    GILL_SANS = '"Gill Sans", "Gill Sans MT", Calibri, sans-serif'
+    HELVETICA = 'Helvetica, Arial, sans-serif'
+    LUCIDA_SANS = '"Lucida Sans Unicode", "Lucida Grande", sans-serif'
+    
+    # --- Serif ---
+    TIMES_NEW_ROMAN = '"Times New Roman", Times, serif'
+    GEORGIA = 'Georgia, serif'
+    GARAMOND = 'Garamond, serif'
+    PALATINO = '"Palatino Linotype", "Book Antiqua", Palatino, serif'
+    BOOK_ANTIQUA = '"Book Antiqua", Palatino, serif'
+    
+    # --- Monospace ---
+    COURIER_NEW = '"Courier New", Courier, monospace'
+    LUCIDA_CONSOLE = '"Lucida Console", Monaco, monospace'
+    CONSOLAS = 'Consolas, monaco, monospace'
+    MENLO = 'Menlo, "DejaVu Sans Mono", "Liberation Mono", "Consolas", "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace'
+
+    # --- Cursive / Fantasy ---
+    COMIC_SANS = '"Comic Sans MS", cursive, sans-serif'
+    BRUSH_SCRIPT = '"Brush Script MT", cursive'
+    COPPERPLATE = 'Copperplate, Papyrus, fantasy'
+    PAPYRUS = 'Papyrus, fantasy'
+
+    # --- Modern / System ---
+    APPLE_SYSTEM = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+    ROBOTO = 'Roboto, sans-serif'
+    OPEN_SANS = '"Open Sans", sans-serif'
+    LATO = 'Lato, sans-serif'
+    MONTSERRAT = 'Montserrat, sans-serif'
+
+    @classmethod
+    def get(cls, name, default=None):
+        # Handles "ARIAL" and "arial"
+        try:
+            return cls[name.upper()]
+        except KeyError:
+            return default        
+
+class CssAnimatableEnum(str, Enum):
+    
+    ASPECT_RATIO = 'aspect-ratio'
+    BACKGROUND = 'background'
+    BACKGROUND_COLOR = 'background-color'
+    BACKGROUND_POSITION = 'background-position'
+    BACKGROUND_POSITION_X = 'background-position-x'
+    BACKGROUND_POSITION_Y = 'background-position-y'
+    BACKGROUND_SIZE = 'background-size'
+    BLOCK_SIZE = 'block-size'
+    BORDER = 'border'
+    BORDER_BOTTOM = 'border-bottom'
+    BORDER_BOTTOM_COLOR = 'border-bottom-color'
+    BORDER_END_END_RADIUS = 'border-end-end-radius'
+    BORDER_END_START_RADIUS = 'border-end-start-radius'
+    BORDER_BLOCK = 'border-block'
+    BORDER_BLOCK_COLOR = 'border-block-color'
+    BORDER_BLOCK_END_COLOR = 'border-block-end-color'
+    BORDER_BLOCK_END_WIDTH = 'border-block-end-width'
+    BORDER_BLOCK_START_COLOR = 'border-block-start-color'
+    BORDER_BLOCK_START_WIDTH = 'border-block-start-width'
+    BORDER_BLOCK_WIDTH = 'border-block-width'
+    BORDER_BOTTOM_LEFT_RADIUS = 'border-bottom-left-radius'
+    BORDER_BOTTOM_RIGHT_RADIUS = 'border-bottom-right-radius'
+    BORDER_INLINE = 'border-inline'
+    BORDER_INLINE_COLOR = 'border-inline-color'
+    BORDER_INLINE_END_COLOR = 'border-inline-end-color'
+    BORDER_INLINE_END_WIDTH = 'border-inline-end-width'
+    BORDER_INLINE_START_COLOR = 'border-inline-start-color'
+    BORDER_INLINE_START_WIDTH = 'border-inline-start-width'
+    BORDER_INLINE_WIDTH = 'border-inline-width'
+    BORDER_START_END_RADIUS = 'border-start-end-radius'
+    BORDER_START_START_RADIUS = 'border-start-start-radius'
+    BORDER_BOTTOM_WIDTH = 'border-bottom-width'
+    BORDER_COLOR = 'border-color'
+    BORDER_LEFT = 'border-left'
+    BORDER_LEFT_COLOR = 'border-left-color'
+    BORDER_LEFT_WIDTH = 'border-left-width'
+    BORDER_RIGHT = 'border-right'
+    BORDER_RIGHT_COLOR = 'border-right-color'
+    BORDER_RIGHT_WIDTH = 'border-right-width'
+    BORDER_SPACING = 'border-spacing'
+    BORDER_TOP = 'border-top'
+    BORDER_TOP_COLOR = 'border-top-color'
+    BORDER_TOP_LEFT_RADIUS = 'border-top-left-radius'
+    BORDER_TOP_RIGHT_RADIUS = 'border-top-right-radius'
+    BORDER_TOP_WIDTH = 'border-top-width'
+    BOTTOM = 'bottom'
+    BOX_SHADOW = 'box-shadow'
+    CLIP = 'clip'
+    COLOR = 'color'
+    COLUMN_COUNT = 'column-count'
+    COLUMN_GAP = 'column-gap'
+    COLUMN_RULE = 'column-rule'
+    COLUMN_RULE_COLOR = 'column-rule-color'
+    COLUMN_RULE_WIDTH = 'column-rule-width'
+    COLUMN_WIDTH = 'column-width'
+    COLUMNS = 'columns'
+    FILTER = 'filter'
+    FLEX = 'flex'
+    FLEX_BASIS = 'flex-basis'
+    FLEX_GROW = 'flex-grow'
+    FLEX_SHRINK = 'flex-shrink'
+    FONT = 'font'
+    FONT_SIZE = 'font-size'
+    FONT_SIZE_ADJUST = 'font-size-adjust'
+    FONT_STRETCH = 'font-stretch'
+    FONT_WEIGHT = 'font-weight'
+    GRID = 'grid'
+    GRID_AREA = 'grid-area'
+    GRID_AUTO_COLUMNS = 'grid-auto-columns'
+    GRID_AUTO_FLOW = 'grid-auto-flow'
+    GRID_AUTO_ROWS = 'grid-auto-rows'
+    GRID_COLUMN = 'grid-column'
+    GRID_COLUMN_END = 'grid-column-end'
+    GRID_COLUMN_GAP = 'grid-column-gap'
+    GRID_COLUMN_START = 'grid-column-start'
+    GRID_GAP = 'grid-gap'
+    GRID_ROW = 'grid-row'
+    GRID_ROW_END = 'grid-row-end'
+    GRID_ROW_GAP = 'grid-row-gap'
+    GRID_ROW_START = 'grid-row-start'
+    GRID_TEMPLATE = 'grid-template'
+    GRID_TEMPLATE_AREAS = 'grid-template-areas'
+    GRID_TEMPLATE_COLUMNS = 'grid-template-columns'
+    GRID_TEMPLATE_ROWS = 'grid-template-rows'
+    HEIGHT = 'height'
+    INLINE_SIZE = 'inline-size'
+    INSET = 'inset'
+    INSET_BLOCK = 'inset-block'
+    INSET_BLOCK_END = 'inset-block-end'
+    INSET_BLOCK_START = 'inset-block-start'
+    INSET_INLINE = 'inset-inline'
+    INSET_INLINE_END = 'inset-inline-end'
+    INSET_INLINE_START = 'inset-inline-start'
+    LEFT = 'left'
+    LETTER_SPACING = 'letter-spacing'
+    LINE_HEIGHT = 'line-height'
+    MARGIN = 'margin'
+    MARGIN_BLOCK = 'margin-block'
+    MARGIN_BLOCK_END = 'margin-block-end'
+    MARGIN_BLOCK_START = 'margin-block-start'
+    MARGIN_BOTTOM = 'margin-bottom'
+    MARGIN_INLINE = 'margin-inline'
+    MARGIN_INLINE_END = 'margin-inline-end'
+    MARGIN_INLINE_START = 'margin-inline-start'
+    MARGIN_LEFT = 'margin-left'
+    MARGIN_RIGHT = 'margin-right'
+    MARGIN_TOP = 'margin-top'
+    MAX_HEIGHT = 'max-height'
+    MAX_WIDTH = 'max-width'
+    MAX_BLOCK_SIZE = 'max-block-size'
+    MAX_INLINE_SIZE = 'max-inline-size'
+    MIN_BLOCK_SIZE = 'min-block-size'
+    MIN_INLINE_SIZE = 'min-inline-size'
+    MIN_HEIGHT = 'min-height'
+    MIN_WIDTH = 'min-width'
+    OBJECT_POSITION = 'object-position'
+    OFFSET_ANCHOR = 'offset-anchor'
+    OFFSET_DISTANCE = 'offset-distance'
+    OFFSET_PATH = 'offset-path'
+    OFFSET_ROTATE = 'offset-rotate'
+    OPACITY = 'opacity'
+    ORDER = 'order'
+    OUTLINE = 'outline'
+    OUTLINE_COLOR = 'outline-color'
+    OUTLINE_OFFSET = 'outline-offset'
+    OUTLINE_WIDTH = 'outline-width'
+    PADDING = 'padding'
+    PADDING_BLOCK = 'padding-block'
+    PADDING_BLOCK_END = 'padding-block-end'
+    PADDING_BLOCK_START = 'padding-block-start'
+    PADDING_BOTTOM = 'padding-bottom'
+    PADDING_INLINE = 'padding-inline'
+    PADDING_INLINE_END = 'padding-inline-end'
+    PADDING_INLINE_START = 'padding-inline-start'
+    PADDING_LEFT = 'padding-left'
+    PADDING_RIGHT = 'padding-right'
+    PADDING_TOP = 'padding-top'
+    PERSPECTIVE = 'perspective'
+    PERSPECTIVE_ORIGIN = 'perspective-origin'
+    RIGHT = 'right'
+    ROTATE = 'rotate'
+    SCALE = 'scale'
+    TEXT_DECORATION_COLOR = 'text-decoration-color'
+    TEXT_INDENT = 'text-indent'
+    TEXT_SHADOW = 'text-shadow'
+    TOP = 'top'
+    TRANSFORM = 'transform'
+    TRANSFORM_ORIGIN = 'transform-origin'
+    TRANSLATE = 'translate'
+    VERTICAL_ALIGN = 'vertical-align'
+    VISIBILITY = 'visibility'
+    WIDTH = 'width'
+    WORD_SPACING = 'word-spacing'
+    Z_INDEX = 'z-index'
+    
+    @classmethod
+    def get(cls, name, default=None):
+        try:
+            return cls[name.upper()]
+        except KeyError:
+            return default
+ 
