@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mastodon-ui"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
@@ -18,7 +18,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content"::"server side rendering",
 ]
 dependencies = [
     "typer>=0.9.0",

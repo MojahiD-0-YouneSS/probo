@@ -1,7 +1,7 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
+<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="https://github.com/MojahiD-0-YouneSS/mastodon-ui/blob/main/assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
 
 <p align="center">
-<img src="./assets/images/mastodon_ui.ico" alt="MUI Logo" width="200" height="200">
+<img src="https://github.com/MojahiD-0-YouneSS/mastodon-ui/blob/main/assets/images/mastodon_ui.ico" alt="MUI Logo" width="200" height="200">
 </p>
 
 # 🐘 Mastodon UI (mui)
@@ -15,7 +15,7 @@ MUI has officially reached stable v1 status. It is a backend-first framework tha
 
 ## 📚 Read the Full Sample Documentation (v1.0)
 
-### Click the link above for deep dives into : <a href="./docs/simple_doc.md">view sample documentation</a>
+### Click the link above for deep dives into : <a href="https://github.com/MojahiD-0-YouneSS/mastodon-ui/blob/main/docs/simple_doc.md">view sample documentation</a>
 
 The Component Architecture: Brain (State) / Body (Elements) / Skin (Style).
 
