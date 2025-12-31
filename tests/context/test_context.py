@@ -1,12 +1,12 @@
-import pytest
-from mui.context.context_logic import (
+from src.probo.context.context_logic import (
     TemplateProcessor,
     loop,
-    TemplateComponentMap, 
+    TemplateComponentMap,
     StaticData,
     DynamicData,
 )
-from mui import div, span
+from src.probo import div, span
+
 
 # --- LOOP TEST ---
 def test_loop_logic():
@@ -17,27 +17,28 @@ def test_loop_logic():
     assert "Item 0" in res_int[0]
 
     # 2. List Loop
-    res_list = loop(['a', 'b'], lambda x: span(x))
+    res_list = loop(["a", "b"], lambda x: span(x))
     assert "<span>a</span>" in res_list[0]
 
     # 3. Dict Loop
-    res_dict = loop({'k': 'v'}, lambda k, v: div(f"{k}={v}"))
+    res_dict = loop({"k": "v"}, lambda k, v: div(f"{k}={v}"))
     assert "k=v" in res_dict[0]
 
 
 # --- TEMPLATE PROCESSOR TEST ---
 def test_template_processor_logic():
     """Test TemplateProcessor initialization and context handling."""
-    data = {'key': 'value'}
+    data = {"key": "value"}
     tp = TemplateProcessor(data)
-    
+
     # Verify initialization
     assert tp is not None
     # Assuming it stores the context data
-    if hasattr(tp, 'data'):
+    if hasattr(tp, "data"):
         assert tp.data == data
-    elif hasattr(tp, 'context'):
+    elif hasattr(tp, "context"):
         assert tp.context == data
+
 
 def test_template_processor_rendering():
     """
@@ -46,12 +47,12 @@ def test_template_processor_rendering():
     """
     # 1. Setup Context
     data = {
-        'username': 'youness',
-        'role': 'admin',
-        'score': 10,
-        'items': ['apple', 'banana', 'cherry'],
-        'is_active': True,
-        'is_banned': False
+        "username": "youness",
+        "role": "admin",
+        "score": 10,
+        "items": ["apple", "banana", "cherry"],
+        "is_active": True,
+        "is_banned": False,
     }
     tp = TemplateProcessor(data)
 
@@ -79,6 +80,7 @@ def test_template_processor_rendering():
     expected_for = "<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul>"
     assert tp.render_template(tmpl_for) == expected_for
 
+
 def test_template_processor_static_generators():
     """
     Test the static helper methods that generate the template syntax.
@@ -86,9 +88,7 @@ def test_template_processor_static_generators():
     # 1. if_true helper
     # Should generate: <$if user.is_auth>Dashboard<$else>Login</$if>
     block = TemplateProcessor.if_true(
-        expression="user.is_auth", 
-        if_block="Dashboard", 
-        else_statement="Login"
+        expression="user.is_auth", if_block="Dashboard", else_statement="Login"
     )
     assert "<$if user.is_auth>Dashboard" in block
     assert "<$else>Login</$if>" in block
@@ -98,32 +98,38 @@ def test_template_processor_static_generators():
     loop_block = TemplateProcessor.for_loop("i in list", "Item")
     assert "<$for i in list>Item</$for>" == loop_block
 
+
 # --- TCM TEST ---
 def test_template_component_map():
     """Test the registry logic."""
     tcm = TemplateComponentMap()
-    
+
     # Register
-    class MockComp: pass
+    class MockComp:
+        pass
+
     tcm.set_component(home=MockComp)
-    
+
     # Retrieve
-    assert tcm.url_name_comp.get('home',None) == MockComp
-    assert tcm.url_name_comp.get('missing',None) is None
+    assert tcm.url_name_comp.get("home", None) == MockComp
+    assert tcm.url_name_comp.get("missing", None) is None
+
 
 # --- DATA TESTS ---
 def test_static_and_dynamic_data():
     """Test data containers."""
     # Static
-    sd = StaticData({'title': 'Hello'})
-    assert sd.get('title') == 'Hello' # Assuming .get() or dict access
-    
+    sd = StaticData({"title": "Hello"})
+    assert sd.get("title") == "Hello"  # Assuming .get() or dict access
+
     # Dynamic (with processor)
     dd = DynamicData(
-        data_obj={'raw': 'lowercase'},
-        processor=lambda x: {'processed': x['raw'].upper()}
+        data_obj={"raw": "lowercase"},
+        processor=lambda x: {"processed": x["raw"].upper()},
     )
     # Triggers __post_init__
-    assert dd.dynamic_data['processed'] == 'LOWERCASE'
+    assert dd.dynamic_data["processed"] == "LOWERCASE"
 
-def test_template_processor():pass
+
+def test_template_processor():
+    pass

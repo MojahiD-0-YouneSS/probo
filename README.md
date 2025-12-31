@@ -4,7 +4,7 @@
 <img src="./assets/images/mastodon_ui.ico" alt="MUI Logo" width="200" height="200">
 </p>
 
-# 🐘 Mastodon UI (mui)
+# 🐘 Probo UI (mui)
 
 A Python-Native Template Rendering Framework and Meta-framework for Django.
 Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
@@ -21,7 +21,7 @@ The Component Architecture: Brain (State) / Body (Elements) / Skin (Style).
 
 Shortcuts for building complex UIs.
 
-Mastodon Forms: Automatic Django Form rendering.
+Probo Forms: Automatic Django Form rendering.
 
 JIT Styling: How the CSS engine works.
 
@@ -59,7 +59,6 @@ def user_card(username):
     user_info = {'practical-info':['python','javascript','docker','django']}
     li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,)
     user_comp_state = ComponentState(
-        s_data={},
         d_data=user_info,
         li_el,
     )

@@ -1,9 +1,9 @@
-import pytest
-from mui import CssRule, CssSelector
+from src.probo.styles.plain_css import CssRule, CssSelector
 
 # ==============================================================================
 #  COMPLEX SELECTOR SCENARIOS
 # ==============================================================================
+
 
 def test_selector_descendant_logic():
     """
@@ -13,10 +13,11 @@ def test_selector_descendant_logic():
     """
     # Assuming your API supports a generic 'descendant' or implied space via chaining
     # If not, testing manual string construction or specific method
-    sel = CssSelector().el('nav').cls('menu-item').descendant('span')
-    
+    sel = CssSelector().el("nav").cls("menu-item").descendant("span")
+
     # Result should imply a space
     assert sel.render() == "nav.menu-item span"
+
 
 def test_selector_direct_child():
     """
@@ -24,8 +25,9 @@ def test_selector_direct_child():
     Scenario: Direct list items of a specific list.
     Expected: "ul.clean-list > li"
     """
-    sel = CssSelector().el('ul').cls('clean-list').child('li')
+    sel = CssSelector().el("ul").cls("clean-list").child("li")
     assert sel.render() == "ul.clean-list > li"
+
 
 def test_selector_adjacent_sibling():
     """
@@ -33,8 +35,9 @@ def test_selector_adjacent_sibling():
     Scenario: Paragraphs immediately following an H1.
     Expected: "h1 + p"
     """
-    sel = CssSelector().adjacent('h1','p')
+    sel = CssSelector().adjacent("h1", "p")
     assert sel.render() == "h1 + p"
+
 
 def test_selector_general_sibling():
     """
@@ -42,8 +45,9 @@ def test_selector_general_sibling():
     Scenario: All images following a break tag.
     Expected: "br ~ img"
     """
-    sel = CssSelector().sibling('br','img')
+    sel = CssSelector().sibling("br", "img")
     assert sel.render() == "br ~ img"
+
 
 def test_selector_attribute_exact():
     """
@@ -51,8 +55,12 @@ def test_selector_attribute_exact():
     Scenario: Inputs with specific type.
     Expected: "input[type='password']"
     """
-    sel = CssSelector().el('input').attr('type', 'password')
-    assert "input[type='password']" in sel.render() or 'input[type="password"]' in sel.render()
+    sel = CssSelector().el("input").attr("type", "password")
+    assert (
+        "input[type='password']" in sel.render()
+        or 'input[type="password"]' in sel.render()
+    )
+
 
 def test_selector_attribute_partial_match():
     """
@@ -61,8 +69,9 @@ def test_selector_attribute_partial_match():
     Expected: "a[href^='https']"
     """
     # Assuming API supports op argument
-    sel = CssSelector().el('a').attr('href', 'https', op='^=')
+    sel = CssSelector().el("a").attr("href", "https", op="^=")
     assert 'a[href^="https"]' in sel.render()
+
 
 def test_selector_pseudo_class_chain():
     """
@@ -70,8 +79,11 @@ def test_selector_pseudo_class_chain():
     Scenario: Hover state on a non-disabled button.
     Expected: "button:hover:not(:disabled)"
     """
-    sel = CssSelector().el('button').pseudo_class('hover').pseudo_class('not(:disabled)')
+    sel = (
+        CssSelector().el("button").pseudo_class("hover").pseudo_class("not(:disabled)")
+    )
     assert sel.render() == "button:hover:not(:disabled)"
+
 
 def test_selector_pseudo_element_double_colon():
     """
@@ -79,10 +91,11 @@ def test_selector_pseudo_element_double_colon():
     Scenario: Styling the first line of a paragraph.
     Expected: "p.intro::first-line"
     """
-    sel = CssSelector().el('p').cls('intro').pseudo_element('first-line')
+    sel = CssSelector().el("p").cls("intro").pseudo_element("first-line")
     # Ensure double colon is used
     assert "::first-line" in sel.render()
     assert "p.intro" in sel.render()
+
 
 def test_selector_complex_grouping():
     """
@@ -91,13 +104,14 @@ def test_selector_complex_grouping():
     Expected: "h1, h2, .display-text"
     """
     # Assuming .group() creates a split point or adds a new selector obj
-    sel = CssSelector().group('h1','h2').group().cls('display-text')
-    
+    sel = CssSelector().group("h1", "h2").group().cls("display-text")
+
     res = sel.render()
     assert "h1" in res
     assert "h2" in res
     assert ".display-text" in res
     assert "," in res
+
 
 def test_rule_integration_complex():
     """
@@ -105,25 +119,26 @@ def test_rule_integration_complex():
     Scenario: Full rule generation for a specific UI state.
     """
     # "div#main > .card:hover"
-    complex_sel = CssSelector().el('div').Id('main').child('.card').pseudo_class('hover').render()
-    
-    rule = CssRule(
-        box_shadow="0 4px 8px rgba(0,0,0,0.1)",
-        transform="translateY(-2px)"
+    complex_sel = (
+        CssSelector().el("div").Id("main").child(".card").pseudo_class("hover").render()
     )
-    
+
+    rule = CssRule(box_shadow="0 4px 8px rgba(0,0,0,0.1)", transform="translateY(-2px)")
+
     css = rule.render()
-    
+
     # Check Selector
     assert "div#main > .card:hover" in complex_sel
     # Check Properties (snake_case conversion)
     assert "box-shadow:" in css
     assert "transform:" in css
     assert "translateY(-2px)" in css
-    
+
+
 # ==============================================================================
 #  COMPLEX SELECTOR SCENARIOS
 # ==============================================================================
+
 
 def test_selector_fix_tag_collision():
     """
@@ -131,8 +146,9 @@ def test_selector_fix_tag_collision():
     Scenario: User chains .el('div').el('span')
     Expected Fix: "div span" (Implicit Descendant)
     """
-    sel = CssSelector().el('div').el('span')
+    sel = CssSelector().el("div").el("span")
     assert sel.render() == "div span"
+
 
 def test_selector_fix_tag_after_class():
     """
@@ -140,8 +156,9 @@ def test_selector_fix_tag_after_class():
     Scenario: User chains .cls('btn').el('span')
     Expected Fix: ".btn span" (Implicit Descendant)
     """
-    sel = CssSelector().cls('btn').el('span')
+    sel = CssSelector().cls("btn").el("span")
     assert sel.render() == ".btn span"
+
 
 def test_selector_fix_tag_after_id():
     """
@@ -149,8 +166,9 @@ def test_selector_fix_tag_after_id():
     Scenario: User chains .id('header').el('div')
     Expected Fix: "#header div" (Implicit Descendant)
     """
-    sel = CssSelector().Id('header').el('div')
+    sel = CssSelector().Id("header").el("div")
     assert sel.render() == "#header div"
+
 
 def test_selector_fix_tag_after_pseudo():
     """
@@ -158,8 +176,9 @@ def test_selector_fix_tag_after_pseudo():
     Scenario: User chains .pseudo_class('hover').el('div')
     Expected Fix: ":hover div" (Implicit Descendant)
     """
-    sel = CssSelector().pseudo_class('hover').el('div')
+    sel = CssSelector().pseudo_class("hover").el("div")
     assert sel.render() == ":hover div"
+
 
 def test_selector_pseudo_element_lock():
     """
@@ -169,14 +188,17 @@ def test_selector_pseudo_element_lock():
     Based on the logic: "::before :hover"
     """
     # If your logic adds a space when appending to a pseudo-element:
-    sel = CssSelector().el('div').pseudo_element('before').pseudo_class('hover')
-    
+    sel = CssSelector().el("div").pseudo_element("before").pseudo_class("hover")
+
     # This depends on your specific implementation choice for the "Lock" logic.
     # Assuming you insert a combinator to prevent invalid syntax:
-    assert sel.render() == "div::before :hover" or sel.render() == "div::before > :hover"  
+    assert (
+        sel.render() == "div::before :hover" or sel.render() == "div::before > :hover"
+    )
 
 
 from mui.styles.utils import selector_type_identifier
+
 
 def test_selector_identifier_basic():
     # Element
@@ -190,6 +212,7 @@ def test_selector_identifier_basic():
     # ID
     assert selector_type_identifier("#main") == ("main", "ID")
 
+
 def test_selector_identifier_pseudos():
     # Pseudo Class
     assert selector_type_identifier(":hover") == ("hover", "PSEUDO_CLASS")
@@ -197,16 +220,17 @@ def test_selector_identifier_pseudos():
 
     # Pseudo Element
     assert selector_type_identifier("::before") == ("before", "PSEUDO_ELEMENT")
-    # Legacy single colon pseudo-elements often treated as Class by simple parsers, 
+    # Legacy single colon pseudo-elements often treated as Class by simple parsers,
     # but :: strictly catches Element.
+
 
 def test_selector_identifier_attributes():
     # Attribute
     assert selector_type_identifier("[disabled]") == ("disabled", "ATR")
     assert selector_type_identifier('[type="text"]') == ('type="text"', "ATR")
 
+
 def test_selector_identifier_combinators():
     assert selector_type_identifier(">") == (">", "COMBINATOR >")
     assert selector_type_identifier("+") == ("+", "COMBINATOR +")
     assert selector_type_identifier("~") == ("~", "COMBINATOR ~")
-

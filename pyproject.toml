@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mastodon-ui"
-version = "1.0.1"
+name = "probo"
+version = "1.1.0"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
@@ -27,14 +27,37 @@ dependencies = [
     "tinycss2>=1.2.0",
 ]
 
+[tool.ruff]
+
+# Enable specific rule sets:
+# E, F = Standard python errors
+# N = pep8-naming (This is the one that enforces naming rules!)
+lint.select = ["E", "F", "N"]
+
+# exclude auto-generated files if any
+
+exclude = [
+    ".git",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint.pep8-naming]
+
+# This section allows to fine-tune naming if needed.
+# By default, 'N' enforces:
+# - Class names must be CapWords (CamelCase)
+# - Function names must be snake_case
+# - Method names must be snake_case
+
 [project.urls]
-"Homepage" = "https://github.com/MojahiD-0-YouneSS/mastodon-ui"
-"Bug Tracker" = "https://github.com/MojahiD-0-YouneSS/mastodon-ui/issues"
-"Documentation" = "https://MojahiD-0-YouneSS.github.io/mastodon-ui/"
+"Homepage" = "https://github.com/MojahiD-0-YouneSS/probo"
+"Bug Tracker" = "https://github.com/MojahiD-0-YouneSS/probo/issues"
+"Documentation" = "https://MojahiD-0-YouneSS.github.io/probo/"
 "Funding" = "https://ko-fi.com/youness_mojahid"
 
 [project.scripts]
-mui = "mui.terminal.cli:main"
+probo = "probo.terminal.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mui"]
+packages = ["src/probo"]

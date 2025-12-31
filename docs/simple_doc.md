@@ -1,4 +1,4 @@
-# Mastodon UI (MUI) v1.0 Documentation
+# Probo UI (PUI) v1.1.0 Documentation
 
 MUI allows you to build type-safe, server-side rendered HTML components in Python with built-in state management and JIT CSS generation.
 
