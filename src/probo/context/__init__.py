@@ -1,11 +1,11 @@
-from src.probo.context.context_logic import (
+from probo.context.context_logic import (
     TemplateProcessor,
     loop,
     TemplateComponentMap,
     StaticData,
     DynamicData,
 )
-from src.probo.context.django import (
+from probo.context.django import (
     DjangoComponentTools,
     DjangoComponent,
 )

@@ -1,8 +1,8 @@
-from src.probo.components.elements import Element
-from src.probo.components.state.component_state import (
+from probo.components.elements import Element
+from probo.components.state.component_state import (
     ComponentState,
 )
-from src.probo.styles.elements import (
+from probo.styles.elements import (
     ComponentStyle,
     element_style_state,
     CssRule,
@@ -10,7 +10,7 @@ from src.probo.styles.elements import (
     SelectorRuleBridge,
 )
 from typing import Any, Self
-from src.probo.templates.resolver import TemplateResolver
+from probo.templates.resolver import TemplateResolver
 
 
 class Component:

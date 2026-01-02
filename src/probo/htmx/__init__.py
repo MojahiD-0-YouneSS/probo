@@ -1,4 +1,4 @@
-from src.probo.htmx.htmx import (
+from probo.htmx.htmx import (
     HTMX,
     HTMXElement,
 )

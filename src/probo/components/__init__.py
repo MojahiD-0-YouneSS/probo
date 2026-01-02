@@ -1,20 +1,20 @@
-from src.probo.components.elements import (
+from probo.components.elements import (
     Element,
     Head,
     Template,
 )
-from src.probo.components.forms import (
+from probo.components.forms import (
     ProboForm,
     ProboFormField,
 )
-from src.probo.components.component import (
+from probo.components.component import (
     Component,
 )
-from src.probo.components.attributes import (
+from probo.components.attributes import (
     ElementAttributeValidator,
 )
 
-from src.probo.components.state import (
+from probo.components.state import (
     StateProps,
     ComponentState,
     ElementState,

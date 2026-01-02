@@ -1,6 +1,6 @@
 from typing import Dict, Any
 import re
-from src.probo.context.context_logic import TemplateProcessor
+from probo.context.context_logic import TemplateProcessor
 
 
 class DjangoComponentTools(TemplateProcessor):

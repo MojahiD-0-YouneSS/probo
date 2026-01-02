@@ -1,4 +1,4 @@
-from src.probo.components.tag_functions.block_tags import (
+from probo.components.tag_functions.block_tags import (
     a,
     abbr,
     address,
@@ -106,7 +106,7 @@ from src.probo.components.tag_functions.block_tags import (
     text,
     tspan,
 )
-from src.probo.components.tag_functions.self_closing import (
+from probo.components.tag_functions.self_closing import (
     doctype,
     area,
     base,

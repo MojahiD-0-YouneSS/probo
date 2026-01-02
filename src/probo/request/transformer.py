@@ -1,4 +1,4 @@
-from src.probo.request.props import RequestProps
+from probo.request.props import RequestProps
 
 
 class RequestDataTransformer:

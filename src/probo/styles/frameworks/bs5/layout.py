@@ -1,6 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass
-from src.probo.styles.frameworks.bs5.utilities import Breakpoint, Color
+from probo.styles.frameworks.bs5.utilities import Breakpoint, Color
 
 
 class Container(Enum):

@@ -1,6 +1,6 @@
-from src.probo.components.state.props import StateProps
-from src.probo.components.elements import Element
-from src.probo.components.attributes import ElementAttributeValidator
+from probo.components.state.props import StateProps
+from probo.components.elements import Element
+from probo.components.attributes import ElementAttributeValidator
 import re
 from typing import Any, Self
 
@@ -217,6 +217,7 @@ class ElementState:
         i_state=False,
         hide_dynamic=False,
         is_void_element: bool = False,
+        key_as_content=False,
         **attrs,
     ):
         import uuid
@@ -227,7 +228,7 @@ class ElementState:
             .custom_element(
                 "$",
                 content=Element()
-                .custom_element(element, s_state, is_void_element, **attrs)
+                .custom_element(element, str(s_state), is_void_element, **attrs)
                 .element,
                 s=s_state,
                 d=d_state,
@@ -251,6 +252,7 @@ class ElementState:
         self.hide_dynamic = hide_dynamic
         self.bind_to = bind_to
         self.is_custom = is_custom
+        self.key_as_content = key_as_content
         self.inner_html = (
             inner_html
             if callable(inner_html)
@@ -274,70 +276,91 @@ class ElementState:
                 ):
                     self.state_placeholder = None
                 else:
-                    if self.hide_dynamic and self.d_state and self.d_state not in data:
-                        self.state_placeholder = None
-                    elif self.d_state and self.d_state in data:
+                    if self.key_as_content and not data:
+                        key = self.d_state if self.d_state else self.s_state
+                        print(key)
+                        if not key:
+                            self.state_placeholder = None
                         if self.i_state:
-                            self.state_placeholder = "".join(
-                                [
-                                    Element()
-                                    .custom_element(
-                                        self.element, self.inner_html(d), **self.attrs
-                                    )
-                                    .element
-                                    for d in enumerate(data.get(self.d_state))
-                                ]
-                            )
+                                self.state_placeholder = "".join(
+                                    [
+                                        Element()
+                                        .custom_element(
+                                            self.element, self.inner_html(d), **self.attrs
+                                        )
+                                        .element
+                                        for d in enumerate(key)
+                                    ]
+                                )
                         else:
-                            self.state_placeholder = (
-                                Element()
-                                .custom_element(
-                                    self.element,
-                                    self.inner_html(self.c_state),
-                                    **self.bind_data_to(str(data.get(self.d_state))),
-                                )
-                                .element
-                                if self.bind_to
-                                else Element()
-                                .custom_element(
-                                    self.element,
-                                    self.inner_html(data.get(self.d_state)),
-                                    **self.attrs,
-                                )
-                                .element
-                            )
-                    elif self.s_state in data:
-                        if self.i_state:
-                            self.state_placeholder = "".join(
-                                [
-                                    Element()
-                                    .custom_element(
-                                        self.element, self.inner_html(s), **self.attrs
-                                    )
-                                    .element
-                                    for s in enumerate(data.get(self.s_state))
-                                ]
-                            )
-                        else:
-                            self.state_placeholder = (
-                                Element()
-                                .custom_element(
-                                    self.element,
-                                    self.inner_html(self.c_state),
-                                    **self.bind_data_to(str(data.get(self.s_state))),
-                                )
-                                .element
-                                if self.bind_to
-                                else Element()
-                                .custom_element(
-                                    self.element,
-                                    self.inner_html(data.get(self.s_state)),
-                                    **self.attrs,
-                                )
-                                .element
-                            )
+                            self.state_placeholder = Element().custom_element(
+                                            self.element, self.inner_html(key), **self.attrs
+                                        ).element
                     else:
-                        self.state_placeholder = None
+                        if self.hide_dynamic and self.d_state and self.d_state not in data:
+                            self.state_placeholder = None
+                        elif self.d_state and self.d_state in data:
+                            if self.i_state:
+                                self.state_placeholder = "".join(
+                                    [
+                                        Element()
+                                        .custom_element(
+                                            self.element, self.inner_html(d), **self.attrs
+                                        )
+                                        .element
+                                        for d in enumerate(data.get(self.d_state))
+                                    ]
+                                )
+                            else:
+                                self.state_placeholder = (
+                                    Element()
+                                    .custom_element(
+                                        self.element,
+                                        self.inner_html(self.c_state),
+                                        **self.bind_data_to(str(data.get(self.d_state))),
+                                    )
+                                    .element
+                                    if self.bind_to
+                                    else Element()
+                                    .custom_element(
+                                        self.element,
+                                        self.inner_html(data.get(self.d_state)),
+                                        **self.attrs,
+                                    )
+                                    .element
+                                )
+                        elif self.s_state in data:
+                            if self.i_state:
+                                self.state_placeholder = "".join(
+                                    [
+                                        Element()
+                                        .custom_element(
+                                            self.element, self.inner_html(s), **self.attrs
+                                        )
+                                        .element
+                                        for s in enumerate(data.get(self.s_state))
+                                    ]
+                                )
+                            else:
+                                self.state_placeholder = (
+                                    Element()
+                                    .custom_element(
+                                        self.element,
+                                        self.inner_html(self.c_state),
+                                        **self.bind_data_to(str(data.get(self.s_state))),
+                                    )
+                                    .element
+                                    if self.bind_to
+                                    else Element()
+                                    .custom_element(
+                                        self.element,
+                                        self.inner_html(data.get(self.s_state)),
+                                        **self.attrs,
+                                    )
+                                    .element
+                                )
+                        else:
+                            self.state_placeholder = None
             else:
                 target_value = data.get(self.s_state) or data.get(self.d_state)
                 self.state_placeholder = (

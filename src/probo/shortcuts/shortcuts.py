@@ -1,27 +1,27 @@
-from src.probo.components.forms.mui_form import (
+from probo.components.forms.mui_form import (
     ProboForm,
     ProboFormField,
 )  # 3
-from src.probo.components.state.component_state import (
+from probo.components.state.component_state import (
     ComponentState,
 )  # 2
-from src.probo.components.component import (
+from probo.components.component import (
     Component,
 )  # 1
-from src.probo.components.elements import (
+from probo.components.elements import (
     Element,
     Head,
     Template,
 )  # 3
-from src.probo.request.transformer import (
+from probo.request.transformer import (
     RequestDataTransformer,
 )  # 2) # 2
-from src.probo.styles.plain_css import (
+from probo.styles.plain_css import (
     CssRule,
 )  # 8
-from src.probo.context.context_logic import loop
+from probo.context.context_logic import loop
 
-from src.probo.shortcuts.configs import (
+from probo.shortcuts.configs import (
     ComponentConfig,
     HeadConfig,
     PageConfig,
@@ -33,7 +33,7 @@ from src.probo.shortcuts.configs import (
     ThemeConfig,
     SemanticLayoutConfig,
 )  # 17
-from src.probo.shortcuts.shortcuts_utils import (
+from probo.shortcuts.shortcuts_utils import (
     make_es_from_esc,
 )
 

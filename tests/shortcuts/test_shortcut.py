@@ -75,7 +75,7 @@ def test_custom_nested_content():
     Expected: <card-body><div>Data</div></card-body>
     """
     # Assuming 'div' string generation works or passing Element object
-    from mui import div
+    from probo import div
 
     inner = div("Data")
     html = custom("card-body", inner)
@@ -442,7 +442,7 @@ def test_iterator_empty():
 
 def test_iterator_nested_elements():
     """5. Render list of MUI Elements."""
-    from mui import div
+    from probo import div
 
     # items are already Elements
     items = [div("1"), div("2")]
@@ -663,7 +663,7 @@ def test_document_body_string():
 
 def test_document_body_element():
     """4. Element object body."""
-    from mui import div
+    from probo import div
 
     conf = PageConfig(body=div("Content"))
     html = document(conf).render()

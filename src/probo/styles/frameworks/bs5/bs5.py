@@ -1,8 +1,8 @@
-from src.probo.styles.frameworks.bs5.layout import Layout
-from src.probo.styles.frameworks.bs5.typography import Typography
-from src.probo.styles.frameworks.bs5.forms import Form
-from src.probo.styles.frameworks.bs5.utilities import Utilities
-from src.probo.styles.frameworks.bs5.components.comp_enum import Components
+from probo.styles.frameworks.bs5.layout import Layout
+from probo.styles.frameworks.bs5.typography import Typography
+from probo.styles.frameworks.bs5.forms import Form
+from probo.styles.frameworks.bs5.utilities import Utilities
+from probo.styles.frameworks.bs5.components.comp_enum import Components
 from typing import Optional
 from enum import Enum
 
@@ -130,7 +130,7 @@ class BS5Element:
         if final_class_str:
             self.attrs["Class"] = final_class_str.strip()
         # Delegate to the Core Engine
-        from src.probo.components.elements import Element
+        from probo.components.elements import Element
 
         return Element(tag=self.tag, content=self.content, **self.attrs).element
 

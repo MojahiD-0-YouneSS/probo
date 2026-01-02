@@ -7,7 +7,7 @@ Thank you for investing your time in contributing to our project!
 1. **Fork** the repository on GitHub.
 2. **Clone** your fork locally:
    ```bash
-   git clone [https://github.com/MojahiD-0-YouneSS/probo.git](https://github.com/MojahiD-0-YouneSS/probo.git)
+   git clone https://github.com/MojahiD-0-YouneSS/probo.git
    ```
 3. **Set up a virtual environment and install dependencies**
     cd probo
@@ -40,3 +40,4 @@ Thank you for investing your time in contributing to our project!
     Push your branch to GitHub.
     Open a Pull Request against the main branch.
     Describe your changes and link to any relevant issues.
+💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.

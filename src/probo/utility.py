@@ -1,4 +1,4 @@
-from src.probo.styles.utils import resolve_complex_selector
+from probo.styles.utils import resolve_complex_selector
 
 
 def exists_in_dict(data: dict, x):

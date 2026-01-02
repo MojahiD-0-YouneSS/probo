@@ -60,7 +60,7 @@ def test_newly_added_tags():
 
 
 def test_doctype_render():
-    from mui import doctype
+    from probo import doctype
 
     """Test that doctype renders without a closing slash."""
     el = doctype()

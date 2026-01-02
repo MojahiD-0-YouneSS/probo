@@ -1,8 +1,8 @@
-from src.probo.components.forms.mui_form import ProboFormField
-from src.probo.components.state.props import StateProps  # 1
-from src.probo.components.component import Component  # 1
-from src.probo.components.tag_functions.self_closing import doctype  # 1
-from src.probo.styles.plain_css import CssRule  # 1
+from probo.components.forms.mui_form import ProboFormField
+from probo.components.state.props import StateProps  # 1
+from probo.components.component import Component  # 1
+from probo.components.tag_functions.self_closing import doctype  # 1
+from probo.styles.plain_css import CssRule  # 1
 
 from typing import Dict, List, Any, Union, Optional
 
@@ -75,8 +75,8 @@ class ComponentConfig:
     The Master Configuration.
     Defines the Component's Identity, Structure, State, and Style.
     usage:
-    from src.probo.shortcuts import Flow
-    from src.probo.shortcuts.configs import ComponentConfig, StateConfig, StyleConfig, ElementState
+    from probo.shortcuts import Flow
+    from probo.shortcuts.configs import ComponentConfig, StateConfig, StyleConfig, ElementState
 
     # 1. Define the Config
     card_config = ComponentConfig(

@@ -1,5 +1,5 @@
-from src.probo.components.elements import Element
-from src.probo.components.base import BaseHTMLElement
+from probo.components.elements import Element
+from probo.components.base import BaseHTMLElement
 
 # --- Specific HTML Block Element Classes (accepting content and attributes) ---
 # These classes now use the `Element` helper class as per your blueprint.

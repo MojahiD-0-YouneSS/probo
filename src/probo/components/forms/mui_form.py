@@ -1,7 +1,7 @@
-from src.probo.components.state.component_state import (
+from probo.components.state.component_state import (
     ElementState,
 )
-from src.probo.components.tag_functions.block_tags import (
+from probo.components.tag_functions.block_tags import (
     form,
     div,
     button,
@@ -15,10 +15,10 @@ from src.probo.components.tag_functions.block_tags import (
     label,
     option,
 )
-from src.probo.components.tag_functions.self_closing import (
+from probo.components.tag_functions.self_closing import (
     Input,
 )
-from src.probo.request.transformer import (
+from probo.request.transformer import (
     FormHandler,
     RequestDataTransformer,
 )

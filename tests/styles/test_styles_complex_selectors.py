@@ -197,7 +197,7 @@ def test_selector_pseudo_element_lock():
     )
 
 
-from mui.styles.utils import selector_type_identifier
+from src.probo.styles.utils import selector_type_identifier
 
 
 def test_selector_identifier_basic():

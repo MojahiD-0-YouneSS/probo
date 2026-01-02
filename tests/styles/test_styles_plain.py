@@ -171,7 +171,7 @@ def test_css_selector_pseudo_element():
 
 
 # ==============================================================================
-#  3. Animation Tests
+#  3. Animation Tests mui
 # ==============================================================================
 
 
@@ -419,7 +419,7 @@ def test_css_style_plain():
 
 def test_validator_existence():
     """5. Ensure validator is accessible."""
-    from mui.styles.plain_css import CssRuleValidator
+    from probo.styles.plain_css import CssRuleValidator
 
     assert CssRuleValidator is not None
 

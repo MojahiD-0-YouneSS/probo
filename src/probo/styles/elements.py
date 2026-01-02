@@ -1,11 +1,11 @@
-from src.probo.styles.plain_css import (
+from probo.styles.plain_css import (
     CssAnimatable,
     CssRule,
     CssSelector,
 )
 from dataclasses import dataclass
 from typing import List, Dict, Any, Union
-from src.probo.styles.utils import resolve_complex_selector
+from probo.styles.utils import resolve_complex_selector
 
 
 class ComponentStyle:
@@ -39,7 +39,7 @@ class ComponentStyle:
         if not as_string:
             return self.template_representation
         else:
-            from src.probo.components.tag_functions.block_tags import style
+            from probo.components.tag_functions.block_tags import style
 
             return (
                 "".join(self.template_representation)
@@ -49,7 +49,7 @@ class ComponentStyle:
 
     def _validate_css(self, bridge):
         s, r = bridge.selector_str, bridge.rule.render()
-        from src.probo.utility import exists_in_dict
+        from probo.utility import exists_in_dict
 
         if "_$_" in s:
             if all(
@@ -113,15 +113,16 @@ class SelectorRuleBridge:
     def make_selector_obj(
         self,
     ) -> None:
+        if isinstance(self.selector, CssSelector):
+            return None
+        
         if isinstance(self.selector, str):
             sel_obj = CssSelector()
             for x in resolve_complex_selector(self.selector):
                 sel_obj.add_selector(x)
             self.selector = sel_obj
-        elif isinstance(self.selector, CssSelector):
-            pass
         else:
-            raise TypeError("selector must be str or CssSelector")
+            raise TypeError("selector must be str or CssSelector", self.selector)
 
     def render(self) -> str:
         """

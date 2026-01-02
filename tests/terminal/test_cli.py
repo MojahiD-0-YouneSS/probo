@@ -1,9 +1,9 @@
 import pytest
 import os
 from typer.testing import CliRunner
-from src.probo.terminal.cli import (
+from probo.terminal.cli import (
     app,
-)  # Assuming you named the Enum DjangoStructure or DjangoStructure
+)  # Assuming you named the Enum DjangoStructure or DjangoStructure mui
 
 runner = CliRunner()
 
@@ -156,7 +156,7 @@ def test_build_css_command(tmp_path):
     # 1. SETUP: Create a valid mui_tcm.py file
     # This ensures the command doesn't fail with "Registry not found"
     registry_code = """
-from mui import TemplateComponentMap
+from probo.context import TemplateComponentMap
 tcm = TemplateComponentMap()
 """
     (tmp_path / "mui_tcm.py").write_text(registry_code, encoding="utf-8")

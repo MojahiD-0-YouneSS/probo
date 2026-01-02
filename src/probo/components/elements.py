@@ -1,4 +1,4 @@
-from src.probo.components.attributes import (
+from probo.components.attributes import (
     ElementAttributeValidator,
     Tag,
     VoidTags,
@@ -8,7 +8,7 @@ import tempfile
 import webbrowser
 import os
 from collections import OrderedDict
-from src.probo.utility import render_attributes
+from probo.utility import render_attributes
 
 MARKER = chr(31)
 CONTENT_MARKER = f"@probo:{MARKER}"

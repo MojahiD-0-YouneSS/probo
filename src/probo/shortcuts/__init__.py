@@ -1,4 +1,4 @@
-from src.probo.shortcuts.configs import (
+from probo.shortcuts.configs import (
     StateConfig,
     StyleConfig,
     ComponentConfig,
@@ -14,7 +14,7 @@ from src.probo.shortcuts.configs import (
     SemanticLayoutConfig,
     ElementStateConfig,
 )
-from src.probo.shortcuts.shortcuts import (
+from probo.shortcuts.shortcuts import (
     custom,
     set_data,
     form_field,

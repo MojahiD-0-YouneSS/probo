@@ -10,7 +10,7 @@ import code as python_code
 import subprocess
 from rich.panel import Panel
 from rich.syntax import Syntax
-from src.probo.terminal.app_generator import (
+from probo.terminal.app_generator import (
     create_mui_dj_structure,
     create_hacksoft_structure,
 )

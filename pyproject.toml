@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "probo-ui"
-version = "1.1.0"
+version = "1.1.1"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
 description = "A declarative, type-safe ,Python-Native template Rendering Framework and Meta-framework for Django."
-readme = "README.md"
+readme = "docs\simple_doc.md"
 requires-python = ">=3.9"
 license = { file="LICENSE" }
 classifiers = [

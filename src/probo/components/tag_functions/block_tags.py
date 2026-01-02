@@ -1,4 +1,4 @@
-from src.probo.components.tag_classes import block_tags
+from probo.components.tag_classes import block_tags
 
 # --- Specific HTML Block Element Classes (accepting content and attributes) ---
 # These classes now use the `Element` helper class as per your blueprint.

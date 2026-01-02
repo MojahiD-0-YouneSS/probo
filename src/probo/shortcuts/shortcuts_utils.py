@@ -1,5 +1,5 @@
-from src.probo.shortcuts.configs import ElementStateConfig
-from src.probo.components.state.component_state import ElementState
+from probo.shortcuts.configs import ElementStateConfig
+from probo.components.state.component_state import ElementState
 
 
 def make_es_from_esc(config: ElementStateConfig) -> ElementState:

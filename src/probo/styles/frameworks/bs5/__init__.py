@@ -1,6 +1,6 @@
-from src.probo.styles.frameworks.bs5.forms import Form
+from probo.styles.frameworks.bs5.forms import Form
 
-from src.probo.styles.frameworks.bs5.layout import (
+from probo.styles.frameworks.bs5.layout import (
     Container,
     Row,
     Column,
@@ -8,7 +8,7 @@ from src.probo.styles.frameworks.bs5.layout import (
     Button,
     Layout,
 )
-from src.probo.styles.frameworks.bs5.typography import (
+from probo.styles.frameworks.bs5.typography import (
     Heading,
     Text,
     Lead,
@@ -17,7 +17,7 @@ from src.probo.styles.frameworks.bs5.typography import (
     Image,
     Typography,
 )
-from src.probo.styles.frameworks.bs5.utilities import (
+from probo.styles.frameworks.bs5.utilities import (
     Utilities,
     Tooltip,
     Flex,
@@ -47,7 +47,7 @@ from src.probo.styles.frameworks.bs5.utilities import (
     Effect,
     Breakpoint,
 )
-from src.probo.styles.frameworks.bs5.bs5 import (
+from probo.styles.frameworks.bs5.bs5 import (
     BS5,
     BS5ElementStyle,
     BS5Props,

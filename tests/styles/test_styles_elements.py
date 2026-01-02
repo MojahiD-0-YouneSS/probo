@@ -1,13 +1,13 @@
 import pytest
-from src.probo.styles.elements import (
+from probo.styles.elements import (
     ComponentStyle,
     element_style_state,
     element_style,
     SelectorRuleBridge,
 )
-from src.probo.styles.plain_css import CssRule, CssSelector
-from src.probo.components.state.component_state import ElementState
-from src.probo.styles.utils import resolve_complex_selector
+from probo.styles.plain_css import CssRule, CssSelector
+from probo.components.state.component_state import ElementState
+from probo.styles.utils import resolve_complex_selector
 
 # ==============================================================================
 #  MOCKS & FIXTURES

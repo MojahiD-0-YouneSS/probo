@@ -1,6 +1,6 @@
-from src.probo.components.tag_functions import script as Srpt
+from probo.components.tag_functions import script as Srpt
 from typing import Dict, Any, Optional, List
-from src.probo.htmx.htmx_enum import (
+from probo.htmx.htmx_enum import (
     HxAttr,
     HxBoolValue,
     HxSwap,
@@ -8,8 +8,8 @@ from src.probo.htmx.htmx_enum import (
     HxParams,
     HxSyncStrategy,
 )
-from src.probo.components.elements import Element
-from src.probo.utility import render_attributes as r
+from probo.components.elements import Element
+from probo.utility import render_attributes as r
 
 HTMX_CDN_URL = "https://unpkg.com/htmx.org@1.9.10"
 

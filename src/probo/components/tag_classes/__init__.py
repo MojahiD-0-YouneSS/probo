@@ -1,4 +1,4 @@
-from src.probo.components.tag_classes.block_tags import (
+from probo.components.tag_classes.block_tags import (
     A,
     ABBR,
     ADDRESS,
@@ -107,7 +107,7 @@ from src.probo.components.tag_classes.block_tags import (
     TSPAN,
 )
 
-from src.probo.components.tag_classes.self_closing import (
+from probo.components.tag_classes.self_closing import (
     DOCTYPE,
     AREA,
     BASE,
@@ -132,7 +132,7 @@ from src.probo.components.tag_classes.self_closing import (
     USE,
     STOP,
 )
-from src.probo.components.base import BaseHTMLElement
+from probo.components.base import BaseHTMLElement
 
 __all__ = [
     # bock tags <x></x>

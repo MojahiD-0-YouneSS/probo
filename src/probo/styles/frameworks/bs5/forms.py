@@ -1,5 +1,5 @@
 from enum import Enum
-from src.probo.styles.frameworks.bs5.utilities import Breakpoint
+from probo.styles.frameworks.bs5.utilities import Breakpoint
 
 
 class FormEnum(Enum):

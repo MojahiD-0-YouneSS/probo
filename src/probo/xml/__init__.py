@@ -1,5 +1,5 @@
-from src.probo.xml.xml import HtmlToXmlConverter
-from src.probo.xml.elements import (
+from probo.xml.xml import HtmlToXmlConverter
+from probo.xml.elements import (
     XMLElement,
     XMLSection,
     XMLComment,

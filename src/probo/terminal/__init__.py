@@ -1,6 +1,6 @@
-from src.probo.terminal.emmet import emmet
+from probo.terminal.emmet import emmet
 
-from src.probo.terminal.cli import (
+from probo.terminal.cli import (
     build_css,
     build_html,
     preview_component,

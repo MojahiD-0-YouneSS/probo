@@ -21,7 +21,7 @@ def test_htmx_enums_integration():
     Test that Enums (like HxSwap) resolve to strings.
     """
     # Assuming you allow passing Enum or String
-    from mui.htmx.htmx_enum import HxSwap
+    from probo.htmx.htmx_enum import HxSwap
 
     el = HTMXElement("div", hx_swap=HxSwap.OUTER_HTML.value)  # or however enum is named
     html = el.render()

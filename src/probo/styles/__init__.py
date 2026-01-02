@@ -1,10 +1,10 @@
-from src.probo.styles.elements import (
+from probo.styles.elements import (
     ComponentStyle,
     element_style,
     SelectorRuleBridge,
     element_style_state,
 )
-from src.probo.styles.plain_css import (
+from probo.styles.plain_css import (
     CssRuleValidator,
     CssRule,
     CssAnimatable,
@@ -16,13 +16,13 @@ from src.probo.styles.plain_css import (
     Animation,
     MediaQueries,
 )
-from src.probo.styles.frameworks.bs5 import (
+from probo.styles.frameworks.bs5 import (
     BS5,
     BS5ElementStyle,
     BS5Element,
 )
 
-from src.probo.styles.utils import (
+from probo.styles.utils import (
     resolve_complex_selector,
     selector_type_identifier,
 )

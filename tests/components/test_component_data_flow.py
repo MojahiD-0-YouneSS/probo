@@ -57,7 +57,7 @@ def test_render_with_es_and_cs():
 
 def test_render_override_props():
     """Test render(override_props=...) affecting StateProps logic."""
-    from mui import StateProps
+    from probo.components import StateProps
 
     # Element requires 'is_admin' to show
     rules = StateProps(required=True, prop_equals={"is_admin": False})
@@ -84,7 +84,7 @@ def test_render_override_props():
 
 def test_render_override_props_no_state_props_with_global_prop():
     """Test render(override_props=...) affecting StateProps logic."""
-    from mui import StateProps
+    from probo.components import StateProps
 
     # Element requires 'is_admin' to show
     rules = StateProps(required=True, prop_equals={"is_admin": True})
@@ -109,7 +109,7 @@ def test_render_override_props_no_state_props_with_global_prop():
 
 def test_render_override_props_no_state_props():
     """Test render(override_props=...) affecting StateProps logic."""
-    from mui import StateProps
+    from probo.components import StateProps
 
     # Element requires 'is_admin' to show
     rules = StateProps(required=True, prop_equals={"is_admin": True})

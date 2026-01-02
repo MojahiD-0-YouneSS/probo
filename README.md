@@ -4,6 +4,8 @@
 <img src="./assets/images/mastodon_ui.ico" alt="MUI Logo" width="200" height="200">
 </p>
 
+[![Discord](https://img.shields.io/discord/YOUR_SERVER_ID?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](YOUR_INVITE_LINK)
+
 # 🐘 Probo UI (mui)
 
 A Python-Native Template Rendering Framework and Meta-framework for Django.
@@ -78,3 +80,4 @@ print(html)
 # Output: 
 # <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
+💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.

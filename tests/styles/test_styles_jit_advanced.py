@@ -1,10 +1,10 @@
 import pytest
-from src.probo.styles.elements import (
+from probo.styles.elements import (
     ComponentStyle,
     element_style_state,
     SelectorRuleBridge,
 )
-from src.probo.styles.plain_css import CssRule, CssSelector
+from probo.styles.plain_css import CssRule, CssSelector
 
 # ==============================================================================
 #  FIXTURES: The Static Template

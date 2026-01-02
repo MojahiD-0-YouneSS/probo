@@ -1,4 +1,4 @@
-from src.probo.components.tag_classes import (
+from probo.components.tag_classes import (
     A,
     ABBR,
     ADDRESS,
@@ -130,7 +130,7 @@ from src.probo.components.tag_classes import (
     USE,
     STOP,
 )
-from src.probo.components.tag_functions import (
+from probo.components.tag_functions import (
     a,
     abbr,
     address,
@@ -263,7 +263,7 @@ from src.probo.components.tag_functions import (
     stop,
 )
 
-from src.probo.styles import (
+from probo.styles import (
     element_style,
     CssRule,
     CssSelector,

@@ -1,5 +1,5 @@
 def base_template():
-    from src.probo.components.tag_functions import (
+    from probo.components.tag_functions import (
         meta,
         link,
         title,
@@ -17,9 +17,9 @@ def base_template():
         html,
         doctype,
     )
-    from src.probo.htmx.htmx import HTMX as HX, HTMXElement as HXE
+    from probo.htmx.htmx import HTMX as HX, HTMXElement as HXE
 
-    from src.probo.styles.frameworks import (
+    from probo.styles.frameworks import (
         BS5ElementStyle,
     )
 
@@ -140,7 +140,7 @@ def base_template():
         script(""),
     )
     html_string = html(head_string, body_string, lang="en")
-    from src.probo.components.elements import (
+    from probo.components.elements import (
         Template as TMPLT,
     )
 

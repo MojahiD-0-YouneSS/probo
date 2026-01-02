@@ -1,5 +1,5 @@
-from src.probo.components.elements import Element
-from src.probo.components.base import BaseHTMLElement
+from probo.components.elements import Element
+from probo.components.base import BaseHTMLElement
 
 # --- Specific HTML Self-Closing Element Classes ---
 # These classes use the `Element` helper class and are designed for self-closing tags.

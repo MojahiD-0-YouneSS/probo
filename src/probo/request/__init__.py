@@ -1,9 +1,9 @@
-from src.probo.request.transformer import (
+from probo.request.transformer import (
     RequestDataTransformer,
     FormHandler,
 )
-from src.probo.request.props import RequestProps
-from src.probo.request.request_context import (
+from probo.request.props import RequestProps
+from probo.request.request_context import (
     ComponentRequestContext,
 )
 

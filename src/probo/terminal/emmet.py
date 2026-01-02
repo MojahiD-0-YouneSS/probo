@@ -1,4 +1,4 @@
-from src.probo.components import tag_functions  # Your standard tags (div, span, etc.)
+from probo.components import tag_functions  # Your standard tags (div, span, etc.)
 
 
 def emmet(command_str: str):

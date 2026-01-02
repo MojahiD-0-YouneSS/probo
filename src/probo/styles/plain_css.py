@@ -1,4 +1,4 @@
-from src.probo.styles.css_enum import (
+from probo.styles.css_enum import (
     CssPropertyEnum,
     PseudoClassEnum,
     PseudoElementEnum,
@@ -6,9 +6,9 @@ from src.probo.styles.css_enum import (
     CssFontsEnum,
     CssAnimatableEnum,
 )
-from src.probo.templates.resolver import TemplateResolver
+from probo.templates.resolver import TemplateResolver
 import cssutils
-from src.probo.styles.utils import selector_type_identifier
+from probo.styles.utils import selector_type_identifier
 
 
 class CssRuleValidator:

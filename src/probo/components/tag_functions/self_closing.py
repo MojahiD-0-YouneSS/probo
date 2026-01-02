@@ -1,4 +1,4 @@
-from src.probo.components.tag_classes import self_closing
+from probo.components.tag_classes import self_closing
 
 # --- Specific HTML Self-Closing Element Classes ---
 # These classes use the `Element` helper class and are designed for self-closing tags.

@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from src.probo.xml.xml import HtmlToXmlConverter
+from probo.xml.xml import HtmlToXmlConverter
 
 
 class TemplateResolver:
