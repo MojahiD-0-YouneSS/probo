@@ -1,19 +1,19 @@
 <a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
 
 <p align="center">
-<img src="./assets/images/mastodon_ui.ico" alt="MUI Logo" width="200" height="200">
+<img src="./assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
 </p>
 
 [![Discord](https://img.shields.io/discord/YOUR_SERVER_ID?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](YOUR_INVITE_LINK)
 
-# 🐘 Probo UI (mui)
+# 🐘 Probo UI
 
 A Python-Native Template Rendering Framework and Meta-framework for Django.
 Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
 
 ## 📣 Version 1.0.0 is Live!
 
-MUI has officially reached stable v1 status. It is a backend-first framework that transforms Python objects into performant HTML/CSS, creating a seamless bridge between Django's backend logic and the frontend interface.
+Probo UI has officially reached stable v1 status. It is a backend-first framework that transforms Python objects into performant HTML/CSS, creating a seamless bridge between Django's backend logic and the frontend interface.
 
 ## 📚 Read the Full Sample Documentation (v1.0)
 
@@ -31,11 +31,11 @@ JIT Styling: How the CSS engine works.
 
 Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.
 
-MUI solves this by bringing the Frontend into Python:
+Probo UI solves this by bringing the Frontend into Python:
 
 🧠 Type-Safe UI: Write HTML in Python. If your code compiles, your HTML is valid.
 
-🎨 Just-In-Time (JIT) CSS: Styles live with components. MUI scans your active components and generates a minified CSS bundle on the fly. No unused styles.
+🎨 Just-In-Time (JIT) CSS: Styles live with components. Probo UI scans your active components and generates a minified CSS bundle on the fly. No unused styles.
 
 🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
 
