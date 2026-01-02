@@ -9,7 +9,7 @@ authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
 description = "A declarative, type-safe ,Python-Native template Rendering Framework and Meta-framework for Django."
-readme = "docs.simple_doc.md"
+readme = "docs/simple_doc.md"
 requires-python = ">=3.9"
 license = { file="LICENSE" }
 classifiers = [
