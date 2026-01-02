@@ -1,30 +1,40 @@
 # Probo UI (PUI) v1.1.0 Documentation
 
-MUI allows you to build type-safe, server-side rendered HTML components in Python with built-in state management and JIT CSS generation.
+Probo allows you to build type-safe, server-side rendered HTML components in Python with built-in state management and JIT CSS generation.
 
 ## 1. Basic HTML Generation (Functional API)
 
-The simplest way to use MUI is through its functional tags. This replaces writing raw HTML strings.
+The simplest way to use Probo is through its functional tags. This replaces writing raw HTML strings.
 
 Goal: Create the "Logo Section" from your example.
 
 ```python
-from mui import section, div, img, h2, span
+from probo import div, img, h2, span
 
 def logo_component():
     return div(
-        img(src="./user/Images/logo.jpg", alt="logo", width="80px"),
-        h2(span("CLUB"), "BAC"),
-        Class="log_logo"
+        img(
+            src="./user/Images/logo.jpg", 
+            alt="logo", 
+            width="80px",
+        ),
+        h2(
+            span("CLUB"), 
+            "BAC",
+        ),
+        Class="log_logo",
     )
 
 # Render to string
-print(logo_component().render())
+print(logo_component())
 
 
 Output:
 
-<div class="log_logo"><img src="./user/Images/logo.jpg" alt="logo" width="80px" /><h2><span>CLUB</span>BAC</h2></div>
+<div class="log_logo">
+    <img src="./user/Images/logo.jpg" alt="logo" width="80px" />
+    <h2><span>CLUB</span>BAC</h2>
+</div>
 ```
 
 ## 2. The Component Class (Static)
@@ -33,173 +43,283 @@ For reusable UI parts, use the Component class. This allows you to manage templa
 
 Goal: Create the "Sign Up Form" container.
 ```python
-from mui import Component, div, form, h2, Input, button, p, a
+from probo.components.component import Component
+from probo import div, form, h2, Input, button
 
-# 1. Define the internal structure (Template)
-# We use Python functions to build the structure dynamically
+
+# 1. Define the internal structure (template)
+# The template is built using functional HTML helpers
 def signup_template():
     return form(
         h2("Sign Up"),
-        # Name Fields
+        # Name fields
         div(
             Input(type="text", placeholder="First Name", required=True),
             Input(type="text", placeholder="Last Name", required=True),
-            Class="input-box1"
+            Class="input-box1",
         ),
-        # Submit
-        button("Sign Up", type="submit", Class="btn", onclick="login()")
+        # Submit button
+        button(
+            "Sign Up",
+            type="submit",
+            Class="btn",
+            onclick="login()",
+        ),
     )
 
+
 # 2. Create the Component
-# Passing the rendered string as the 'template'
+# The template is passed as rendered HTML
 signup_comp = Component(
-    name="SignUpCard", 
-    template=signup_template()
+    name="SignUpCard",
+    template=signup_template(),
 )
 
-# 3. Add Root Styling (Optional)
-signup_comp.set_root_element("div", Class="sign")
+
+# 3. Set a root element (optional)
+signup_comp.set_root_element(
+    "div",
+    Class="sign",
+)
+
 
 # 4. Render
 html = signup_comp.render()
+print(html)
 ```
 
 ## 3. Adding State (Dynamic Components)
 
-MUI Components become powerful when you add State. This allows you to inject data dynamically without string formatting hacks.
+Probo Components become powerful when you add State. This allows you to inject data dynamically without string formatting hacks.
 
 Goal: Make the "Welcome" header dynamic.
 
 ## Step 1: Define Element State
 
-We use ElementState to create "Smart Placeholders" (<$...>...</$>) in our template.
+`ElementState` is used to create **smart placeholders** inside templates.
+During rendering, each placeholder is replaced with data resolved
+from the component state.
+
 ```python
-from mui import Component, ComponentState, ElementState, StateProps, section, h1, span
+from probo.components.state import ElementState
+from probo import h1, span
 
-# 1. Define Logic Elements
-# "Look for 'club_name' in static data (s_state)"
+# 1. Define Element States
+
+# Resolve value from static state (s_data["club_name"])
 es_club_name = ElementState(
-    'span', 
-    s_state='club_name', 
-    Class='highlight',
+    "span",
+    s_state="club_name",
+    Class="highlight",
 )
 
-# "Look for 'welcome_msg' in dynamic data (d_state)"
-# Strict Mode: If missing, don't render this H1 at all.
+# Resolve value from dynamic state (d_data["welcome_msg"])
+# If missing, the element will not be rendered
 es_message = ElementState(
-    element='h1', 
-    d_state='welcome_msg', 
-    strict_dynamic=True
+    "h1",
+    d_state="welcome_msg",
+    strict_dynamic=True,
 )
-# "Look for 'hello_1235' in dynamic data (d_state)"
-# the hirarchy : d_state > s_state so in normal use if no d_stae found but s_state found the element will use the s_state value.
-# Strict Mode: If missing, don't render this H1 at all.
+
+# Resolve value using both static and dynamic state
+# Priority: d_state > s_state
+# If strict_dynamic=True and d_state is missing, the element is skipped
 es_message_both = ElementState(
-    'h1', 
-    s_state='welcome_879',
-    d_state='hello_1235', 
-    strict_dynamic=True
+    "h1",
+    s_state="welcome_fallback",
+    d_state="welcome_override",
+    strict_dynamic=True,
 )
 
 ```
+
 ## Step 2: Create Component State
 
-The ComponentState acts as the "Brain" holding the data.
+The `ComponentState` acts as the "brain" of the component.
+It holds static and dynamic data and resolves which values are injected
+into each `ElementState` during rendering.
 ```python
-# 2. Define Data
+from probo.components.state import ComponentState
+
+# 2. Define Component State
 state = ComponentState(
-    # Static Data (Defaults)
-    s_data={'club_name': 'The Biologists in Action Club'},
-    
-    # Dynamic Data (From Database/View)
-    d_data={'welcome_msg': 'Jack the admin says: Welcome !!'},
-    
-    # Register elements so the State knows about them
-    es_club_name, es_message, es_message_both,
+    # Register ElementState instances
+    es_club_name,
+    es_message,
+    es_message_both,
+
+    # Static Data (Defaults / Fallbacks)
+    s_data={
+        "club_name": "The Biologists in Action Club",
+    },
+
+    # Dynamic Data (e.g. from a view or database)
+    d_data={
+        "welcome_msg": "Jack the admin says: Welcome !!",
+    },
 )
 
 ```
 ## Step 3: Wire it Together
 
-We construct the template using the elements' placeholders.
+We construct the template using placeholders generated by `ElementState`.
+Each `ElementState.placeholder` is replaced with resolved data during render.
+
 ```python
-# 3. Build Template using Placeholders
-# <$ ... $> is automatically inserted by .placeholder
+from probo.components.component import Component
+from probo.components.state import ElementState, ComponentState
+from probo import section
+
+# 1. Define Element States
+es_message = ElementState(
+    "h1",
+    d_state="welcome_msg",
+    strict_dynamic=True,
+)
+
+es_message_both = ElementState(
+    "h1",
+    s_state="welcome_fallback",
+    d_state="welcome_override",
+    strict_dynamic=True,
+)
+
+es_club_name = ElementState(
+    "span",
+    s_state="club_name",
+    Class="highlight",
+)
+
+# 2. Create Component State (data + element bindings)
+state = ComponentState(
+    es_message,
+    es_message_both,
+    es_club_name,
+    s_data={
+        "club_name": "The Biologists in Action Club",
+        "welcome_fallback": "Welcome!",
+    },
+    d_data={
+        "welcome_msg": "Jack the admin says: Welcome !!",
+    },
+)
+
+# 3. Build Template using placeholders
 template_str = section(
-    es_message.placeholder,  # <h1>Welcome to </h1>
-    es_message_both.placeholder,  # <h1>Welcome to </h1>
-    es_club_name.placeholder, # <span class="highlight">The Biologists...</span>
-    Class="page"
+    es_message.placeholder,
+    es_message_both.placeholder,
+    es_club_name.placeholder,
+    Class="page",
 )
 
 # 4. Initialize Component
 page_component = Component(
     name="HomePage",
     template=template_str,
-    state=state
+    state=state,
 )
 
 # 5. Render
-# The Component automatically resolves data -> elements -> HTML
 html = page_component.render()
-print(html):
-<section class="page"><span class="highlight">The Biologists in Action Club</span><h1>Jack the admin says: Welcome !!</h1></section>
+print(html)
+
 ```
+
 ## 4. Styling (JIT CSS)
 
-MUI allows you to attach CSS rules directly to components. These are only rendered if the elements exist.
+Styling support in Probo UI is currently **experimental** and **not yet connected
+to the HTML rendering pipeline**.
+
+While low-level CSS building blocks such as `CssRule` exist, they are **not
+automatically injected** into the rendered output of `Component` or `Template`.
+
+As a result, CSS rules defined in Python are **not applied to the final HTML**
+at this stage.
+
 ```python
-from mui import CssRule, CssSelector
+from probo.styles.plain_css import CssRule
 
-# Define Rules
-btn_style = {CssSelector().cls('btn'):CssRule(background_color='blue', color='white')}
-input_style = {CssSelector().cls('input-box'):CssRule(padding='40px', margin_bottom='10px')}
-
-# Load into Component , this a binding css to component
-signup_comp.load_css_rules(**{**btn_style, **input_style})
-# setting root elemnt
-signup_comp.set_root_element('main',Id="main")
-# Changing Skins (Theming)
-# You can swap styles entirely at runtime
-signup_comp.change_skin(
-    root_attr='class',
-    root_attr_value='root_css',
-    root_css={'background': '#f0f0f0', 'padding': '20px'} # Applied to root div
+# CssRule objects represent validated CSS declarations
+btn_style = CssRule(
+    background_color="blue",
+    color="white",
 )
+
+input_style = CssRule(
+    padding="40px",
+    margin_bottom="10px",
+)
+
+# Note:
+# These rules are currently not applied automatically during render.
+# Styling APIs are under active development.
 ```
 
 ## 5. Full Architecture Example (The "shortcut")
 
 For the best developer experience, use the shortcut to wire everything in one go.
 ```python
-from mui.shortcuts import (component, ComponentConfig, StateConfig, StyleConfig,ElementStateConfig)
-from mui import (ElementState, div, form,)
+from probo.shortcuts import (
+    component, 
+    ComponentConfig, 
+    StateConfig, 
+    StyleConfig, 
+    ElementStateConfig
+)
+
+from probo import div, form
 
 def build_signup_page():
     # 1. Logic
-    title_state = ElementStateConfig(tag='h2', s_state='form_title')
+    title_state = ElementStateConfig(
+        tag='h2', 
+        s_state='form_title',
+    )
     
     
     state_config = StateConfig(
-        s_data={'form_title': 'Join the Club'},
-        elements_state_config=[title_state,]
+        s_data={
+            'form_title': 'Join the Club',
+        },
+        elements_state_config=[
+            title_state,
+        ],
     )
+
     # 2. Style
     style_config = StyleConfig(
         css = {
-            '.sign': {'background': '#fff', 'padding': '2px'},
-            'input': {'width': '100%', 'padding': '10px'},#since no input element this is skipped
+            '.sign': {
+                'background': '#fff',
+                'padding': '2px',
+            },
+            # Since no input element exists in the template,
+            # this rule will be skipped automatically
+            'input': {
+                'width': '100%', 
+                'padding': '10px',
+            }, 
         }
     )
+
+    # 3. Component Configuration
     config = ComponentConfig(
         name="SignUpPage",
-        template=div(title_state.config_id,form('some form'),Class="sign"),
-        # Configuration
+        template=div(
+            title_state.config_id,
+            form('some form'),
+            Class="sign",
+        ),
         state_config=state_config,
         style_config=style_config,
     )
-    # 3. Component
+    # 4. Build Component
     return component(config)
+
 print(build_signup_page())
-('<div class="sign"><form>some form</form></div>', '.sign { background:#fff; padding:2px; }')
+
+(
+    '<div class="sign"><form>some form</form></div>', 
+    '.sign { background:#fff; padding:2px; }'
+)
 ```
