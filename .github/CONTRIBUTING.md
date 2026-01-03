@@ -40,4 +40,5 @@ Thank you for investing your time in contributing to our project!
     Push your branch to GitHub.
     Open a Pull Request against the main branch.
     Describe your changes and link to any relevant issues.
+
 💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.

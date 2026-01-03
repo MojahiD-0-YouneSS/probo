@@ -1,4 +1,4 @@
-from probo.components.forms.mui_form import (
+from probo.components.forms.probo_form import (
     ProboForm,
     ProboFormField,
 )  # 3

@@ -1,4 +1,4 @@
-from probo.components.forms.mui_form import ProboFormField
+from probo.components.forms.probo_form import ProboFormField
 from probo.components.state.props import StateProps  # 1
 from probo.components.component import Component  # 1
 from probo.components.tag_functions.self_closing import doctype  # 1
