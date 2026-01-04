@@ -1,3 +1,4 @@
+
 from typing import Dict, Any
 import re
 from probo.context.context_logic import TemplateProcessor
@@ -15,7 +16,18 @@ class DjangoComponentTools(TemplateProcessor):
     def If(
         self, condition: str, content: str, else_content: str = None, **elif_blocks
     ) -> str:
-        """Generates {% if condition %}...{% endif %}"""
+        """
+        Generates a standard Django IF block: {% if condition %}...{% endif %}
+
+        Args:
+            condition (str): The boolean expression to evaluate (e.g., "user.is_authenticated").
+            content (str): The template content to render if the condition is true.
+            else_content (str, optional): The content for the {% else %} block.
+            **elif_blocks: Key-value pairs where keys are conditions and values are content for {% elif %} blocks.
+
+        Returns:
+            str: The fully formatted Django template string.
+        """
         return self.if_true(
             condition,
             content,
@@ -31,8 +43,18 @@ class DjangoComponentTools(TemplateProcessor):
         content: str,
         empty_content=None,
     ) -> str:
-        """Generates {% for item in iterable %}...{% endfor %}"""
+        """
+        Generates a Django FOR loop: {% for item in iterable %}...{% endfor %}
 
+        Args:
+            item (str): The variable name for the current item in the loop.
+            iterable (str): The collection or iterable to loop over.
+            content (str): The template content to repeat for each item.
+            empty_content (str, optional): Content to render in the {% empty %} block if the iterable is empty.
+
+        Returns:
+            str: The fully formatted Django template string.
+        """
         return self.for_loop(
             f"{item} in {iterable}",
             content,
@@ -41,33 +63,80 @@ class DjangoComponentTools(TemplateProcessor):
         )
 
     def Var(self, variable_name: str) -> str:
-        """Generates {{ variable_name }}"""
+        """
+        Generates a Django variable tag: {{ variable_name }}
+
+        Args:
+            variable_name (str): The name of the variable to output.
+
+        Returns:
+            str: The formatted variable string.
+        """
         return self.set_variable(variable_name)
 
     @staticmethod
     def With(assignments: str, content: str) -> str:
-        """Generates {% with x=1 y=2 %}...{% endwith %}"""
+        """
+        Generates a Django WITH block: {% with x=1 y=2 %}...{% endwith %}
+
+        Args:
+            assignments (str): The variable assignments (e.g., "total=business.employees.count").
+            content (str): The content where these variables are available.
+
+        Returns:
+            str: The formatted with-block string.
+        """
         return f"{{% with {assignments} %}}\n{content}\n{{% endwith %}}"
 
     @staticmethod
     def Comment(content: str) -> str:
-        """Generates {# comment #}"""
+        """
+        Generates a Django comment block: {# comment #}
+
+        Args:
+            content (str): The text content of the comment.
+
+        Returns:
+            str: The formatted comment string.
+        """
         return f"{{# {content} #}}"
 
     @staticmethod
     def Include(template_name: str, with_args: str = None) -> str:
-        """Generates {% include 'name' %}"""
+        """
+        Generates a Django INCLUDE tag: {% include 'name' %}
+
+        Args:
+            template_name (str): The path/name of the template to include.
+            with_args (str, optional): Additional context variables to pass (e.g., "arg=value").
+
+        Returns:
+            str: The formatted include tag.
+        """
         args = f" with {with_args}" if with_args else ""
         return f"{{% include '{template_name}'{args} %}}"
 
     @staticmethod
     def Csrf() -> str:
-        """Generates {% csrf_token %}"""
+        """
+        Generates the Django CSRF token tag: {% csrf_token %}
+
+        Returns:
+            str: The csrf token tag.
+        """
         return "{% csrf_token %}"
 
     @staticmethod
     def Load(library: str) -> str:
-        """Generates {% load library %}"""
+        """
+        Generates a Django LOAD tag: {% load library %}
+
+        Args:
+            library (str): The name of the template library to load (e.g., "static").
+
+        Returns:
+            str: The formatted load tag.
+        """
         return f"{{% load {library} %}}"
 
 
@@ -87,6 +156,15 @@ class DjangoComponent:
         extends: str = None,
         **kwargs,
     ):
+        """
+        Initializes the DjangoComponent builder.
+
+        Args:
+            template_string (str, optional): The base raw template content.
+            context (Dict[str, Any], optional): Initial context dictionary.
+            extends (str, optional): The parent template to extend.
+            **kwargs: Additional variables to be added to the context.
+        """
         self.raw_template = template_string
         self.context = context or {}
         self.extends_from = extends
@@ -96,12 +174,29 @@ class DjangoComponent:
         super().__init__()
 
     def extends(self, template_name: str):
-        """Sets the parent template (e.g. 'base.html')."""
+        """
+        Sets the parent template (e.g. 'base.html').
+
+        Args:
+            template_name (str): The name/path of the parent template.
+
+        Returns:
+            DjangoComponent: Self, for method chaining.
+        """
         self.extends_from = template_name
         return self
 
     def add_block(self, name: str, content: str):
-        """Adds a {% block name %}...{% endblock %} section."""
+        """
+        Adds a named block to the template: {% block name %}...{% endblock %}
+
+        Args:
+            name (str): The name of the block.
+            content (str): The content to insert into the block.
+
+        Returns:
+            DjangoComponent: Self, for method chaining.
+        """
         self.blocks[name] = content
         return self
 
@@ -109,14 +204,26 @@ class DjangoComponent:
         """
         Sets context variables for the template.
         These are merged into the context at render time.
+
+        Args:
+            **kwargs: Key-value pairs representing template variables.
+
+        Returns:
+            DjangoComponent: Self, for method chaining.
         """
         self.variables.update(kwargs)
         return self
 
     def _build_vars(self, source: str) -> str:
         """
-        Compiles probo Variable syntax into Django Template syntax.
-        <$probo-var name='variable_name'/>  -->  {{ variable_name }}
+        Compiles internal variable syntax into valid Django Template syntax.
+        Converts <$probo-var name='variable_name'/>  -->  {{ variable_name }}
+
+        Args:
+            source (str): The template string containing internal variable placeholders.
+
+        Returns:
+            str: The template string with valid Django variable tags.
         """
         # Regex matches <$probo-var name='...'/> or name="..."
         pattern = r"<\$probo-var\s+name=['\"](.*?)['\"]\s*/>"
@@ -127,7 +234,18 @@ class DjangoComponent:
         return compiled_source
 
     def build_source(self) -> str:
-        """Constructs the raw Django Template string."""
+        """
+        Constructs the final raw Django Template string by assembling extensions, blocks, and content.
+
+        It combines:
+        1. The {% extends %} tag (if present).
+        2. All defined blocks.
+        3. Any raw template content.
+        4. Variable syntax translation.
+
+        Returns:
+            str: The complete, renderable Django template source string.
+        """
         parts = []
 
         # 1. Extends
@@ -153,7 +271,13 @@ class DjangoComponent:
     ) -> str:
         """
         Renders the constructed template using Django.
-        Safe to call only if Django is installed and configured.
+
+        This method compiles the source and returns it as a string.
+        Note: This currently returns the *source* string, but in a real Django environment,
+        this would likely interact with `django.template.Template` and `Context`.
+
+        Returns:
+            str: The final template source string (ready for Django engine processing).
         """
         source = self.build_source()
         return source
