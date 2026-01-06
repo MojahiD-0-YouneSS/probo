@@ -6,7 +6,7 @@ from typing import Dict, Union, Self
 class ElementAttributeManipulator:
     def __init__(self, attr_dict=None,**kwargs):
         # 1. Initialize storage per instance (Fixes Shared Memory Bug)
-        self.attrs: Dict[str, str] = attr_dict or dict()
+        self.attrs: Dict[str, str] = dict() if attr_dict is None else attr_dict
         self.attrs.update(kwargs)
 
     def add_class(self, cls_str: str) -> Self:
@@ -14,9 +14,8 @@ class ElementAttributeManipulator:
         # Split existing classes into a set to avoid duplicates
         current_classes = set(self.attrs.get("Class", "").split())
         new_classes = cls_str.split()
-        
         # Add new ones
-        current_classes.update(new_classes)
+        current_classes.update(set(new_classes))
         
         # Save back as sorted string (cleaner HTML)
         self.attrs["Class"] = " ".join(sorted(current_classes))
