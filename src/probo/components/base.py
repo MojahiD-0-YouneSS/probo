@@ -1,6 +1,120 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
 
+from typing import Dict, Union, Self
+
+class ElementAttributeManipulator:
+    def __init__(self, attr_dict=None,**kwargs):
+        # 1. Initialize storage per instance (Fixes Shared Memory Bug)
+        self.attrs: Dict[str, str] = attr_dict or dict()
+        self.attrs.update(kwargs)
+
+    def add_class(self, cls_str: str) -> Self:
+        """Smartly adds class(es) without duplicating."""
+        # Split existing classes into a set to avoid duplicates
+        current_classes = set(self.attrs.get("Class", "").split())
+        new_classes = cls_str.split()
+        
+        # Add new ones
+        current_classes.update(new_classes)
+        
+        # Save back as sorted string (cleaner HTML)
+        self.attrs["Class"] = " ".join(sorted(current_classes))
+        return self
+
+    def remove_class(self, cls_str: str) -> Self:
+        current_classes = self.attrs.get("Class", "").split()
+        
+        # Remove all instances of the class
+        if cls_str in current_classes:
+            # List comprehension to remove all occurrences safely
+            current_classes = [c for c in current_classes if c != cls_str]
+            self.attrs["Class"] = " ".join(current_classes)
+            
+        return self
+
+    def contains_class(self, cls_str: str) -> bool:
+        """Checks for exact class match."""
+        current_classes = self.attrs.get("Class", "").split()
+        return cls_str in current_classes
+
+    def toggle_class(self, class_name: str, condition: bool = None) -> Self:
+        # Force Add
+        if condition is True:
+            return self.add_class(class_name)
+        # Force Remove
+        if condition is False:
+            return self.remove_class(class_name)
+            
+        # Standard Toggle
+        if self.contains_class(class_name):
+            return self.remove_class(class_name)
+        return self.add_class(class_name)
+
+    def set_attr(self, key: str, value: Union[str, bool]) -> Self:
+        if isinstance(value, bool):
+            if value is False:
+                self.remove_attr(key)
+            else:
+                self.attrs[key] = "" # Boolean attribute (e.g. disabled="")
+        else:
+            self.attrs[self._normalize_attr_key(key)] = str(value)
+        return self
+
+    def get_attr(self, key: str, default=None) -> str:
+        return self.attrs.get(self._normalize_attr_key(key), default)
+
+    def remove_attr(self, key: str) -> Self:
+        """Safely removes an attribute if it exists."""
+        if key in self.attrs:
+            del self.attrs[self._normalize_attr_key(key)]
+        return self
+
+    def set_data(self, key: str, value: str) -> Self:
+        clean_key = key.replace("_", "-")
+        return self.set_attr(f"data-{clean_key}", value)
+    
+    def set_id(self, unique_id: str) -> Self:
+        return self.set_attr("Id", unique_id)
+
+    def merge_attrs(self, **kwargs) -> Self:
+        for key, value in kwargs.items():
+            if key == "Class":
+                self.add_class(value)
+            else:
+                clean_key = key.replace("_", "-")
+                self.set_attr(clean_key, value)
+        return self
+    def _normalize_attr_key(self,key):
+        reserved_attrs = {'id':'Id','class':'Class',}
+        return reserved_attrs.get(key.lower(),key)
+    def set_style(self, property: str, value: str) -> Self:
+        """Updates inline style intelligently."""
+        # 1. Parse existing style
+        current_style_str = self.attrs.get("style", "")
+        style_dict = self._parse_style_string(current_style_str)
+        
+        # 2. Update the property
+        style_dict[property] = value
+        
+        # 3. Rebuild string
+        new_style_str = "; ".join([f"{k}: {v}" for k, v in style_dict.items()])
+        self.attrs["style"] = new_style_str
+        return self
+
+    def _parse_style_string(self, style_str: str) -> Dict[str, str]:
+        """Helper to convert 'color: red; width: 10px' into a dict."""
+        if not style_str:
+            return {}
+        
+        result = {}
+        # Split by semicolon, then by colon
+        items = style_str.split(";")
+        for item in items:
+            if ":" in item:
+                key, val = item.split(":", 1)
+                result[key.strip()] = val.strip()
+        return result
 
 class BaseHTMLElement(ABC):
     """
@@ -19,6 +133,10 @@ class BaseHTMLElement(ABC):
         """
         self.content = content
         self.attributes = kwargs
+    
+    @property
+    def attr_manager(self):
+        return ElementAttributeManipulator(self.attributes)
 
     def _get_rendered_content(self):
         """
