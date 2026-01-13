@@ -132,6 +132,7 @@ class GlobalAttribute(Enum):
         "crossorigin",
         "integrity",
         "role",
+        "type",
     ]
 
 
@@ -303,6 +304,7 @@ class AttributeValue(Enum):
         },
         "autofocus": "autofocus",
         "autoplay": "autoplay",
+        "baseFrequency": "any",
         "charset": ["UTF-8", "ISO-8859-1", "ASCII", "ANSI"],
         "checked": "checked",
         "cite": "any",
@@ -313,14 +315,23 @@ class AttributeValue(Enum):
         "contenteditable": ["true", "false"],
         "controls": "controls",
         "coords": "any",
+        "crossorigin": ["anonymous", "use-credentials", ""],
+        "cx": "any",
+        "cy": "any",
+        "dx": "any",
+        "dy": "any",
+        "d": "any",       # Path data string
         "data": "any",
         "data-*": "any",
         "datetime": "any",
         "default": "default",
         "defer": "defer",
+        "decoding": ["sync", "async", "auto"],  # img
         "dir": ["ltr", "rtl", "auto"],
         "dirname": "*.dir",
         "disabled": "disabled",
+         "display": "any",
+        "dominant-baseline": ["auto", "middle", "central", "hanging", "mathematical"],
         "download": {"a": "download", "area": "any"},
         "draggable": ["true", "false", "auto"],
         "enctype": [
@@ -329,9 +340,13 @@ class AttributeValue(Enum):
             "text/plain",
         ],
         "enterkeyhint": ["done", "enter", "go", "next", "previous", "search", "send"],
+        "fill": "any",
+        "fill-opacity": "any",
         "for": "any",
         "form": "any",
         "formaction": "any",
+        "gradientUnits": ["userSpaceOnUse", "objectBoundingBox"],
+        "gradientTransform": "any",
         "headers": "any",
         "height": "any",  # number
         "hidden": "hidden",
@@ -540,6 +555,8 @@ class AttributeValue(Enum):
             "refresh",
         ],
         "id": "any",
+        "in": ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"],
+         "in2": "any",
         "integrity": "any",
         "inert": "inert",
         "inputmode": [
@@ -554,6 +571,7 @@ class AttributeValue(Enum):
         ],
         "ismap": "ismap",
         "kind": ["captions", "chapters", "descriptions", "metadata", "subtitles"],
+        "k1": "any", "k2": "any", "k3": "any", "k4": "any",
         "label": "any",
         "lang": [
             "ab",
@@ -751,9 +769,13 @@ class AttributeValue(Enum):
             "zu",
         ],
         "list": "any",
+        "loading": ["lazy", "eager"],  # img, iframe
         "loop": "loop",
         "low": "any",  # number
         "max": "any",  # date
+        "markerUnits": ["strokeWidth", "userSpaceOnUse"],
+        "markerWidth": "any",
+        "markerHeight": "any",
         "maxlength": "any",  # number
         "media": {
             "operator": ["and", "not", ","],
@@ -786,12 +808,17 @@ class AttributeValue(Enum):
         },
         "method": ["get", "post"],
         "min": "any",
+        "mode": ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"],
         "multiple": "multiple",
         "muted": "muted",
         "name": "any",
+        "numOctaves": "any",
         "novalidate": "novalidate",
         "open": "open",
         "optimum": "any",  # float number
+        "offset": "any",
+        "orient": "any",
+        "operator": ["over", "in", "out", "atop", "xor", "arithmetic", "erode", "dilate"],
         "pattern": "any",
         "crossorigin": "any",
         "placeholder": "any",
@@ -800,6 +827,11 @@ class AttributeValue(Enum):
         "popovertargetaction": ["hide", "show", "toggle"],
         "poster": "any",
         "preload": ["auto", "metadata", "none"],
+        "r": "any",
+        "rx": "any",
+        "ry": "any",
+        "refX": "any",
+        "refY": "any",
         "readonly": "readonly",
         "rel": {
             "a": [
@@ -864,7 +896,11 @@ class AttributeValue(Enum):
         },
         "required": "required",
         "reversed": "reversed",
-        "referrerpolicy": "any",
+        "referrerpolicy": [
+            "no-referrer", "no-referrer-when-downgrade", "origin", 
+            "origin-when-cross-origin", "same-origin", "strict-origin", 
+            "strict-origin-when-cross-origin", "unsafe-url"
+        ],
         "role": [
             "alert",
             "alertdialog",
@@ -963,8 +999,10 @@ class AttributeValue(Enum):
         "shape": ["default", "rect", "circle", "poly"],
         "size": "any",  # number
         "sizes": "any",  # numberxnumber
+        "slot": "any",
         "span": "any",  # number
         "spellcheck": ["true", "false"],
+        "spreadMethod": ["pad", "reflect", "repeat"],
         "src": "any",  # url
         "srcdoc": "any",  # HTML_code
         "srclang": [
@@ -1165,7 +1203,19 @@ class AttributeValue(Enum):
         "srcset": "any",  # url
         "start": "any",  # number
         "step": "any",  # number
-        "style": "any",  # css
+        "stop-color": "any",
+        "stop-opacity": "any",
+        "stroke": "any",
+        "stroke-width": "any",
+        "stroke-dasharray": "any",
+        "stroke-dashoffset": "any",
+        "stroke-opacity": "any",
+         "stdDeviation": "any", # Blur amount
+        "seed": "any",
+        "stitchTiles": ["stitch", "noStitch"],
+    "stroke-linecap": ["butt", "round", "square", "inherit"],
+        "stroke-linejoin": ["miter", "round", "bevel", "inherit"],
+        "style": "any",  # css        
         "tabindex": "any",  # number
         "target": [
             "_blank",
@@ -1174,36 +1224,62 @@ class AttributeValue(Enum):
             "_top",
             "framename",
         ],  # [0]=any tag, [1]= <base>tag
+        "text-anchor": ["start", "middle", "end", "inherit"],
         "title": "any",
         "translate": ["yes", "no"],
-        "type": [
-            "button",
-            "checkbox",
-            "color",
-            "date",
-            "datetime-local",
-            "email",
-            "file",
-            "hidden",
-            "image",
-            "month",
-            "number",
-            "password",
-            "radio",
-            "range",
-            "reset",
-            "search",
-            "submit",
-            "tel",
-            "text",
-            "time",
-            "url",
-            "week",
-        ],  # [0]=<input>, [1]=<bottun>, [2]=any
+         "transform": "any", 
+        "type": {
+            # --- HTML Forms ---
+            "input": [
+                "button", "checkbox", "color", "date", "datetime-local", "email", 
+                "file", "hidden", "image", "month", "number", "password", "radio", 
+                "range", "reset", "search", "submit", "tel", "text", "time", 
+                "url", "week"
+            ],
+            "button": ["submit", "reset", "button"],
+            
+            # --- HTML Lists ---
+            "ol": ["1", "a", "A", "i", "I"],
+
+            # --- HTML Resources ---
+            "script": ["text/javascript", "module", "application/javascript", "application/ecmascript", "application/json", "importmap"],
+            "style": ["text/css"],
+            "link": ["text/css", "image/x-icon", "image/png", "image/jpeg", "application/pdf", "font/woff2"], # MIME types (incomplete list, but common ones)
+            "object": "any", # MIME types
+            "embed": "any",  # MIME types
+            "source": "any", # MIME types (audio/video)
+            
+            # --- HTML Menu/Command (Obsolete but sometimes used) ---
+            "menu": ["list", "context", "toolbar"],
+            
+            # --- SVG Filters ---
+            "feColorMatrix": ["matrix", "saturate", "hueRotate", "luminanceToAlpha"],
+            "feTurbulence": ["fractalNoise", "turbulence"],
+            "feFuncR": ["identity", "table", "discrete", "linear", "gamma"],
+            "feFuncG": ["identity", "table", "discrete", "linear", "gamma"],
+            "feFuncB": ["identity", "table", "discrete", "linear", "gamma"],
+            "feFuncA": ["identity", "table", "discrete", "linear", "gamma"],
+            
+            # --- SVG Animation ---
+            "animateTransform": ["translate", "scale", "rotate", "skewX", "skewY"],
+        },  # [0]=<input>, [1]=<bottun>, [2]=any
         "usemap": ["#any"],  # starts with '#'
         "value": "any",
+        "values": "any", # Matrix values
+        "visibility": ["visible", "hidden", "collapse", "inherit"],
         "width": "any",  # number
         "wrap": ["soft", "hard"],
+         "x": "any",
+         'xmlns':["http://www.w3.org/2000/svg"],
+        "y": "any",
+        "x1": "any",
+        "y1": "any",
+        "x2": "any",
+        "y2": "any",
+        "points": "any",  # Polygon points string
+        "viewBox": "any", # "min-x min-y width height"
+        "preserveAspectRatio": "any", 
+         "opacity": "any",
     }
 
     BOOTSTRAP_DATA_BS_ATTRIBUTE = {
@@ -1419,6 +1495,9 @@ class ElementAttribute(Enum):
         "content": ["<meta>"],
         "controls": ["<audio>", "<video>"],
         "coords": ["<area>"],
+        'cx': ['<circle>', '<ellipse>', '<radialGradient>'],
+        'cy': ['<circle>', '<ellipse>', '<radialGradient>'],
+        'd': ['<path>'],
         "data": ["<object>"],
         "datetime": ["<del>", "<ins>", "<time>"],
         "default": ["<track>"],
@@ -1435,6 +1514,7 @@ class ElementAttribute(Enum):
         ],
         "download": ["<a>", "<area>"],
         "enctype": ["<form>"],
+        'fill': ['<circle>', '<ellipse>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>', '<text>','<symbol>'],
         "For": ["<label>", "<output>"],
         "form": [
             "<button>",
@@ -1448,6 +1528,7 @@ class ElementAttribute(Enum):
             "<textarea>",
         ],
         "formaction": ["<button>", "<input>"],
+        'gradientUnits': ['<linearGradient>', '<radialGradient>'],
         "headers": ["<td>", "<th>"],
         "height": [
             "<canvas>",
@@ -1457,9 +1538,10 @@ class ElementAttribute(Enum):
             "<input>",
             "<object>",
             "<video>",
+            '<foreignObject>', '<image>', '<rect>', '<svg>',
         ],
         "high": ["<meter>"],
-        "href": ["<a>", "<area>", "<base>", "<link>"],
+        "href": ["<a>", "<area>", "<base>", "<link>",'<image>', '<use>'],
         "hreflang": ["<a>", "<area>", "<link>"],
         "http-equiv": ["<meta>"],
         "ismap": ["<img>"],
@@ -1487,9 +1569,10 @@ class ElementAttribute(Enum):
             "<output>",
             "<param>",
             "<select>",
-            "<textarea>",
+            "<textarea>",'<slot>',
         ],
         "novalidate": ["<form>"],
+        'offset': ['<stop>'],
         "onabort": ["<audio>", "<embed>", "<img>", "<object>", "<video>"],
         "onafterprint": ["<body>"],
         "onbeforeprint": ["<body>"],
@@ -1547,14 +1630,19 @@ class ElementAttribute(Enum):
         "onunload": ["<body>"],
         "onvolumechange": ["<audio>", "<video>"],
         "onwaiting": ["<audio>", "<video>"],
-        "open": ["<details>"],
+        "open": ["<details>",'<dialog>',],
         "optimum": ["<meter>"],
         "pattern": ["<input>"],
         "placeholder": ["<input>", "<textarea>"],
+        'points': ['<polygon>', '<polyline>'],
         "popovertarget": ["<button>", "<input>"],
         "popovertargetaction": ["<button>", "<input>"],
+        'preserveAspectRatio': ['<image>', '<marker>', '<pattern>', '<svg>', '<symbol>', '<view>'],
         "poster": ["<video>"],
         "preload": ["<audio>", "<video>"],
+        'r': ['<circle>', '<radialGradient>'],
+        'rx': ['<ellipse>', '<rect>'],
+        'ry': ['<ellipse>', '<rect>'],
         "readonly": ["<input>", "<textarea>"],
         "rel": ["<a>", "<area>", "<form>", "<link>"],
         "required": ["<input>", "<select>", "<textarea>"],
@@ -1577,13 +1665,19 @@ class ElementAttribute(Enum):
             "<script>",
             "<source>",
             "<track>",
-            "<video>",
+            "<video>",'<portal>'
         ],
         "srcdoc": ["<iframe>"],
         "srclang": ["<track>"],
         "srcset": ["<img>", "<source>"],
         "start": ["<ol>"],
         "step": ["<input>"],
+        'stop-color': ['<stop>'],
+        'stop-opacity': ['<stop>'],
+        'stroke': ['<circle>', '<ellipse>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>', '<text>'],
+        'stroke-linecap': ['<line>', '<path>', '<polyline>'],
+        'stroke-linejoin': ['<path>', '<polygon>', '<polyline>', '<rect>'],
+        'stroke-width': ['<circle>', '<ellipse>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>'],
         "target": ["<a>", "<area>", "<base>", "<form>"],
         "type": [
             "<a>",
@@ -1597,6 +1691,7 @@ class ElementAttribute(Enum):
             "<source>",
             "<style>",
         ],
+        'transform': ['<circle>', '<ellipse>', '<g>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>', '<text>', '<use>'],
         "usemap": ["<img>", "<object>"],
         "value": [
             "<button>",
@@ -1607,6 +1702,7 @@ class ElementAttribute(Enum):
             "<progress>",
             "<param>",
         ],
+        'viewBox': ['<marker>', '<pattern>', '<svg>', '<symbol>', '<view>'],
         "width": [
             "<canvas>",
             "<embed>",
@@ -1615,8 +1711,16 @@ class ElementAttribute(Enum):
             "<input>",
             "<object>",
             "<video>",
+            "<svg>",'<foreignObject>', '<image>', '<rect>'
         ],
         "wrap": ["<textarea>"],
+        'x': ['<filter>', '<foreignObject>', '<image>', '<mask>', '<rect>', '<text>', '<tspan>', '<use>'],
+        'x1': ['<line>', '<linearGradient>'],
+        'x2': ['<line>', '<linearGradient>'],
+        'xmlns': ['<svg>'],
+        'y': ['<filter>', '<foreignObject>', '<image>', '<mask>', '<rect>', '<text>', '<tspan>', '<use>'],
+        'y1': ['<line>', '<linearGradient>'],
+        'y2': ['<line>', '<linearGradient>'],
     }
 
 
@@ -1761,38 +1865,38 @@ class Tag(Enum):
 
     # --- Filters (The "fe" prefix tags) ---
     FILTER = ("filter", {"void": False})
-    FE_BLEND = ("feBlend", {"void": True})
-    FE_COLOR_MATRIX = ("feColorMatrix", {"void": True})
-    FE_COMPONENT_TRANSFER = ("feComponentTransfer", {"void": False})
-    FE_COMPOSITE = ("feComposite", {"void": True})
-    FE_CONVOLVE_MATRIX = ("feConvolveMatrix", {"void": True})
-    FE_DIFFUSE_LIGHTING = ("feDiffuseLighting", {"void": False})
-    FE_DISPLACEMENT_MAP = ("feDisplacementMap", {"void": True})
-    FE_DROP_SHADOW = ("feDropShadow", {"void": True})
-    FE_FLOOD = ("feFlood", {"void": True})
-    FE_FUNC_A = ("feFuncA", {"void": True})
-    FE_FUNC_B = ("feFuncB", {"void": True})
-    FE_FUNC_G = ("feFuncG", {"void": True})
-    FE_FUNC_R = ("feFuncR", {"void": True})
-    FE_GAUSSIAN_BLUR = ("feGaussianBlur", {"void": True})
-    FE_IMAGE = ("feImage", {"void": True})
-    FE_MERGE = ("feMerge", {"void": False})
-    FE_MERGE_NODE = ("feMergeNode", {"void": True})
-    FE_MORPHOLOGY = ("feMorphology", {"void": True})
-    FE_OFFSET = ("feOffset", {"void": True})
-    FE_POINT_LIGHT = ("fePointLight", {"void": True})
-    FE_SPECULAR_LIGHTING = ("feSpecularLighting", {"void": False})
-    FE_SPOT_LIGHT = ("feSpotLight", {"void": True})
-    FE_TILE = ("feTile", {"void": True})
-    FE_TURBULENCE = ("feTurbulence", {"void": True})
+    FEBLEND = ("feBlend", {"void": True})
+    FECOLORMATRIX = ("feColorMatrix", {"void": True})
+    FECOMPONENTTRANSFER = ("feComponentTransfer", {"void": False})
+    FECOMPOSITE = ("feComposite", {"void": True})
+    FECONVOLVEMATRIX = ("feConvolveMatrix", {"void": True})
+    FEDIFFUSELIGHTING = ("feDiffuseLighting", {"void": False})
+    FEDISPLACEMENTMAP = ("feDisplacementMap", {"void": True})
+    FEDROPSHADOW = ("feDropShadow", {"void": True})
+    FEFLOOD = ("feFlood", {"void": True})
+    FEFUNCA = ("feFuncA", {"void": True})
+    FEFUNCB = ("feFuncB", {"void": True})
+    FEFUNCG = ("feFuncG", {"void": True})
+    FEFUNCR = ("feFuncR", {"void": True})
+    FEGAUSSIANBLUR = ("feGaussianBlur", {"void": True})
+    FEIMAGE = ("feImage", {"void": True})
+    FEMERGE = ("feMerge", {"void": False})
+    FEMERGENODE = ("feMergeNode", {"void": True})
+    FEMORPHOLOGY = ("feMorphology", {"void": True})
+    FEOFFSET = ("feOffset", {"void": True})
+    FEPOINTLIGHT = ("fePointLight", {"void": True})
+    FESPECULARLIGHTING = ("feSpecularLighting", {"void": False})
+    FESPOTLIGHT = ("feSpotLight", {"void": True})
+    FETILE = ("feTile", {"void": True})
+    FETURBULENCE = ("feTurbulence", {"void": True})
 
     # --- Animation & Interactivity ---
     ANIMATE = ("animate", {"void": True})
-    ANIMATE_MOTION = ("animateMotion", {"void": False})
-    ANIMATE_TRANSFORM = ("animateTransform", {"void": True})
+    ANIMATEMOTION = ("animateMotion", {"void": False})
+    ANIMATETRANSFORM = ("animateTransform", {"void": True})
     SET = ("set", {"void": True})
     VIEW = ("view", {"void": True})
-    FOREIGN_OBJECT = ("foreignObject", {"void": False})  # Embed HTML inside SVG
+    FOREIGNOBJECT = ("foreignObject", {"void": False})  # Embed HTML inside SVG
     # --- Containers & Text (Non-Void) ---
     G = ("g", {"void": False})  # Grouping
     DEFS = ("defs", {"void": False})  # Definitions
@@ -1851,11 +1955,13 @@ class ElementAttributeValidator:
 
         for raw_key, value in self.raw_attrs.items():
             # 1. NORMALIZE KEY (class_ -> class, aria_hidden -> aria-hidden)
-
-            key = raw_key.lower().strip().replace("_", "-")
+            if len(raw_key) >1:
+                key = raw_key[0].lower()+raw_key[1:].strip().replace("_", "-")
+            else:
+                key = raw_key.lower().strip().replace("_", "-")
 
             # --- SKIP PART 1: BOOLEANS ---
-            if isinstance(value, bool):
+            if isinstance(value, bool) :
                 if value is True:
                     self.valid_attrs[key] = True
                 # If False, we ignore it (it won't render)
@@ -1866,18 +1972,16 @@ class ElementAttributeValidator:
             if key.startswith(("data-", "aria-", "hx-", "on", "xml", "ng-", "v-")):
                 self.valid_attrs[key] = value
                 continue
-
+            el_attr_check = el_attr_definitions.get(key, None)
             if (
-                key in el_attr_definitions
-                and self.element_tag not in el_attr_definitions[key]
+                el_attr_check and not self.element_tag in el_attr_check
             ):
                 return False
             # --- SKIP PART 3: THE CLUSTER (Fast Pass) ---
             in_cluster = key in ATTR_CLUSTER
-
+            rule = definitions.get(key,None)
             # --- CHECK: DEFINITIONS ---
-            if key in definitions:
-                rule = definitions[key]
+            if rule:
 
                 # Case A: 'any' -> Accept anything
                 if rule == "any":

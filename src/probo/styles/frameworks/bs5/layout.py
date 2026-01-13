@@ -301,7 +301,7 @@ class Button(Enum):
         if not name:
             return cls.BTN
         try:
-            return cls[name]
+            return cls[name.upper().replace('-','_')].value
         except KeyError:
             return None
 

@@ -30,7 +30,7 @@ class Accordion(Enum):
     ITEM = "accordion-item"
     HEADER = "accordion-header"
     BUTTON = "accordion-button"
-    COLLAPSE = "accordion-collape"
+    COLLAPSE = "accordion-collapse"
     FLUSH = "accordion-flush"
     BODY = "accordion-body"
 
@@ -149,18 +149,9 @@ class Collapse(Enum):
     COLLAPSE = "collapse"  # Collapse container (hidden content)
     COLLAPSE_SHOW = "show"  # Show collapsed content
     COLLAPSE_HORIZONTAL = "collapse-horizontal"  # Horizontal collapse
-    COLLAPSE_MULTI = "accordion-collapse"  # Accordion collapse container
-    ACCORDION = "accordion"  # Accordion container
-    ACCORDION_ITEM = "accordion-item"  # Accordion item wrapper
-    ACCORDION_HEADER = "accordion-header"  # Accordion header
-    ACCORDION_BUTTON = "accordion-button"  # Accordion button (toggles collapse)
-    ACCORDION_BUTTON_COLLAPSED = (
-        "accordion-button collapsed"  # Collapsed state of accordion button
-    )
-    ACCORDION_BODY = "accordion-body"  # Content inside accordion
-
-
-class BS5Nav(Enum):
+    COLLAPSE_MULTI = "multi-collapse"  # Accordion collapse container
+   
+class Nav(Enum):
     NAV = "nav"  # Base nav component
     NAV_ITEM = "nav-item"  # Nav item container
     NAV_LINK = "nav-link"  # Nav link
@@ -347,7 +338,9 @@ class Table(Enum):
     TABLE_GROUP_DIVIDER = "table-group-divider"
     SPINNER_GROW_SM = "spinner-grow spinner-grow-sm"  # Small growing spinner
 
-
+class Breadcrumb(Enum):
+    BASE = "breadcrumb"
+    ITEM="breadcrumb-item"
 class Components:
     PROGRESSBAR = ProgressBar
     SPINNER = Spinner
@@ -358,7 +351,7 @@ class Components:
     CARDS = Cards
     DROPDOWNS = Dropdowns
     COLLAPSE = Collapse
-    BS5NAV = BS5Nav
+    NAV = Nav
     NAVBAR = Navbar
     CAROUSEL = Carousel
     MODAL = Modal
@@ -369,7 +362,7 @@ class Components:
     DARKMODE = DarkMode
     TABLE = Table
     BADGE = Badge
-
+    BREADCRUMB = Breadcrumb
     @property
     def values_as_list(self):
         vals = []
@@ -382,7 +375,7 @@ class Components:
         vals.extend([x.value for x in self.CARDS])
         vals.extend([x.value for x in self.DROPDOWNS])
         vals.extend([x.value for x in self.COLLAPSE])
-        vals.extend([x.value for x in self.BS5NAV])
+        vals.extend([x.value for x in self.NAV])
         vals.extend([x.value for x in self.NAVBAR])
         vals.extend([x.value for x in self.CAROUSEL])
         vals.extend([x.value for x in self.MODAL])
@@ -393,4 +386,5 @@ class Components:
         vals.extend([x.value for x in self.DARKMODE])
         vals.extend([x.value for x in self.TABLE])
         vals.extend([x.value for x in self.BADGE])
+        vals.extend([x.value for x in self.BREADCRUMB])
         return vals

@@ -75,7 +75,7 @@ def component(config: ComponentConfig) -> Component:
         s_data=config.state_config.s_data,
         d_data=config.state_config.d_data,
         strict=config.state_config.strict,
-        require_props_definition=config.state_config.require_props,
+        # require_props_definition=config.state_config.require_props,
         **config.state_config.props,
     )
 

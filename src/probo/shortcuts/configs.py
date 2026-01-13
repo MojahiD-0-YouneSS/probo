@@ -112,7 +112,6 @@ class ComponentConfig:
 
     name: str
     template: str
-
     # Composition
     state_config: StateConfig = field(default_factory=StateConfig)
     style_config: StyleConfig = field(default_factory=StyleConfig)

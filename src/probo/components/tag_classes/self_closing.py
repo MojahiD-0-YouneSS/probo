@@ -1,11 +1,12 @@
 from probo.components.elements import Element
 from probo.components.base import BaseHTMLElement
+from probo.components.node import ElementNodeMixin
 
 # --- Specific HTML Self-Closing Element Classes ---
 # These classes use the `Element` helper class and are designed for self-closing tags.
 
 
-class DOCTYPE(BaseHTMLElement):
+class DOCTYPE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DOCTYPE HTML <!> line break element (self-closing)."""
 
     def __init__(self, content=None, **kwargs):
@@ -15,7 +16,7 @@ class DOCTYPE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).doctype().element
 
 
-class AREA(BaseHTMLElement):
+class AREA(BaseHTMLElement,ElementNodeMixin,):
     """Represents an AREA HTML <area> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -25,7 +26,7 @@ class AREA(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).area().element
 
 
-class BASE(BaseHTMLElement):
+class BASE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BASE HTML <base> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -35,7 +36,7 @@ class BASE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).base().element
 
 
-class BR(BaseHTMLElement):
+class BR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BR HTML <br> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -45,7 +46,7 @@ class BR(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).br().element
 
 
-class COL(BaseHTMLElement):
+class COL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an COL HTML <col> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -55,7 +56,7 @@ class COL(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).col().element
 
 
-class EMBED(BaseHTMLElement):
+class EMBED(BaseHTMLElement,ElementNodeMixin,):
     """Represents an EMBED HTML <embed> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -65,7 +66,7 @@ class EMBED(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).embed().element
 
 
-class HR(BaseHTMLElement):
+class HR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an HR HTML <hr> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -75,7 +76,7 @@ class HR(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).hr().element
 
 
-class IMG(BaseHTMLElement):
+class IMG(BaseHTMLElement,ElementNodeMixin,):
     """Represents an IMG HTML <img> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -85,7 +86,7 @@ class IMG(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).img().element
 
 
-class INPUT(BaseHTMLElement):
+class INPUT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an INPUT HTML <input> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -95,7 +96,7 @@ class INPUT(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).input().element
 
 
-class LINK(BaseHTMLElement):
+class LINK(BaseHTMLElement,ElementNodeMixin,):
     """Represents an LINK HTML <link> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -105,7 +106,7 @@ class LINK(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).link().element
 
 
-class META(BaseHTMLElement):
+class META(BaseHTMLElement,ElementNodeMixin,):
     """Represents an META HTML <meta> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -115,7 +116,7 @@ class META(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).meta().element
 
 
-class PARAM(BaseHTMLElement):
+class PARAM(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PARAM HTML <param> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -125,7 +126,7 @@ class PARAM(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).param().element
 
 
-class SOURCE(BaseHTMLElement):
+class SOURCE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SOURCE HTML <source> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -135,7 +136,7 @@ class SOURCE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).source().element
 
 
-class TRACK(BaseHTMLElement):
+class TRACK(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TRACK HTML <track> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -145,7 +146,7 @@ class TRACK(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).track().element
 
 
-class WBR(BaseHTMLElement):
+class WBR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an WBR HTML <wbr> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -155,7 +156,7 @@ class WBR(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).wbr().element
 
 
-class PATH(BaseHTMLElement):
+class PATH(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PATH HTML <path> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -165,7 +166,7 @@ class PATH(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).path().element
 
 
-class CIRCLE(BaseHTMLElement):
+class CIRCLE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an CIRCLE HTML <circle> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -175,7 +176,7 @@ class CIRCLE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).circle().element
 
 
-class RECT(BaseHTMLElement):
+class RECT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an RECT HTML <rect> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -185,7 +186,7 @@ class RECT(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).rect().element
 
 
-class LINE(BaseHTMLElement):
+class LINE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an LINE HTML <line> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -195,7 +196,7 @@ class LINE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).line().element
 
 
-class POLYLINE(BaseHTMLElement):
+class POLYLINE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an POLYLINE HTML <polyline> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -205,7 +206,7 @@ class POLYLINE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).polyline().element
 
 
-class POLYGON(BaseHTMLElement):
+class POLYGON(BaseHTMLElement,ElementNodeMixin,):
     """Represents an POLYGON HTML <polygon> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -215,7 +216,7 @@ class POLYGON(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).polygon().element
 
 
-class USE(BaseHTMLElement):
+class USE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an USE HTML <use> line break element (self-closing)."""
 
     def __init__(self, **kwargs):
@@ -225,7 +226,7 @@ class USE(BaseHTMLElement):
         return Element().set_attrs(**self.attributes).use().element
 
 
-class STOP(BaseHTMLElement):
+class STOP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an STOP HTML <stop> line break element (self-closing)."""
 
     def __init__(self, **kwargs):

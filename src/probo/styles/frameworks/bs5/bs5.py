@@ -2,7 +2,7 @@ from probo.styles.frameworks.bs5.layout import Layout
 from probo.styles.frameworks.bs5.typography import Typography
 from probo.styles.frameworks.bs5.forms import Form
 from probo.styles.frameworks.bs5.utilities import Utilities
-from probo.styles.frameworks.bs5.components.comp_enum import Components
+from probo.styles.frameworks.bs5.comp_enum import Components
 from typing import Optional
 from enum import Enum
 
@@ -33,12 +33,12 @@ class PropsProxy:
         self.parent = parent
         self.enums = BS5_PROPS_AS_LIST
         self.kls_value = None
-        self.__getattr__(attr)
+        self.get_attr(attr)
 
-    def __getattr__(self, attr):
+    def get_attr(self, attr):
         og_attr = attr.replace("_", "-")
         enum_cls = (
-            og_attr if og_attr in self.enums else None
+            og_attr if og_attr in set(self.enums) else None
         )  # print(f'{og_attr} not fond in {self.enums}')
         self.kls_value = enum_cls
 
@@ -78,7 +78,6 @@ class BS5ElementStyle:
     def render(self):
         return " ".join(self.classes)
 
-
 class BS5Element:
     """
     A dedicated builder for Bootstrap 5 elements.
@@ -89,7 +88,7 @@ class BS5Element:
         self, tag: str, content: str = "", classes: Optional[list] = None, **attrs
     ):
         self.tag = tag
-        self.content = content
+        self.content = content.render()  if hasattr(content, "render") else content
         # Ensure classes is a list, avoiding shared mutable defaults
         self.classes = (
             [c for c in classes if c is not None] if classes is not None else []
@@ -101,7 +100,7 @@ class BS5Element:
         self.classes.extend(new_classes)
         return self
 
-    def include(self, *content):
+    def include(self, *content,first=False):
         """
         Adds content to the element.
         If content is another BS5Element, it renders it.
@@ -114,7 +113,10 @@ class BS5Element:
                 rendered_content.append(str(item))
 
         # Append to existing content
-        self.content += "".join(rendered_content)
+        if first:
+            self.content = "".join(rendered_content)+self.content
+        else:
+            self.content += "".join(rendered_content)
         return self
 
     def render(self) -> str:
@@ -132,7 +134,7 @@ class BS5Element:
         # Delegate to the Core Engine
         from probo.components.elements import Element
 
-        return Element(tag=self.tag, content=self.content, **self.attrs).element
+        return Element(tag=self.tag, content=str(self.content), **self.attrs).element
 
 
 class BS5:

@@ -74,6 +74,7 @@ class Component:
             >>> css -> span {font-weight:bold;}
     """
 
+
     _registry = {}  # Global component registry
 
     def __init__(
@@ -92,12 +93,10 @@ class Component:
             k: TemplateResolver(v).template_resolver() for k, v in elements.items()
         }
 
-        if template:
+        if isinstance(template,str):
             self.template_obj = TemplateResolver(tmplt_str=template, load_it=True)
         else:
-            self.template_obj = (
-                None  # TemplateResolver(tmplt_str=template, load_it=True)
-            )
+            self.template_obj = template
 
         self.is_root_element: bool = False
         self.root_element_tag = None
@@ -211,7 +210,7 @@ class Component:
                 self.comp_state.props.update(override_props)  # not quite
             self.comp_state.state_errors = None
 
-        template = str(self.template_obj.tmplt_str)
+        template = self.template_obj.render() if hasattr(self.template_obj,'render') else str(self.template_obj.tmplt_str)
         if self.children:
             template += "".join(list(self.children.values()))
 

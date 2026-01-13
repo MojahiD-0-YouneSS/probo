@@ -1,11 +1,12 @@
 from probo.components.elements import Element
 from probo.components.base import BaseHTMLElement
+from probo.components.node import ElementNodeMixin
 
 # --- Specific HTML Block Element Classes (accepting content and attributes) ---
 # These classes now use the `Element` helper class as per your blueprint.
 
 
-class A(BaseHTMLElement):
+class A(BaseHTMLElement,ElementNodeMixin,):
     """Represents an A HTML <a> element."""
 
     def __init__(self, *content, **attrs):
@@ -24,7 +25,7 @@ class A(BaseHTMLElement):
         )
 
 
-class ABBR(BaseHTMLElement):
+class ABBR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an ABBR HTML <abbr> element."""
 
     def __init__(self, *content, **attrs):
@@ -43,7 +44,7 @@ class ABBR(BaseHTMLElement):
         )
 
 
-class ADDRESS(BaseHTMLElement):
+class ADDRESS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an ADDRESS HTML <address> element."""
 
     def __init__(self, *content, **attrs):
@@ -62,7 +63,7 @@ class ADDRESS(BaseHTMLElement):
         )
 
 
-class ARTICLE(BaseHTMLElement):
+class ARTICLE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an ARTICLE HTML <article> element."""
 
     def __init__(self, *content, **attrs):
@@ -81,7 +82,7 @@ class ARTICLE(BaseHTMLElement):
         )
 
 
-class ASIDE(BaseHTMLElement):
+class ASIDE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an ASIDE HTML <aside> element."""
 
     def __init__(self, *content, **attrs):
@@ -100,7 +101,7 @@ class ASIDE(BaseHTMLElement):
         )
 
 
-class AUDIO(BaseHTMLElement):
+class AUDIO(BaseHTMLElement,ElementNodeMixin,):
     """Represents an AUDIO HTML <audio> element."""
 
     def __init__(self, *content, **attrs):
@@ -119,7 +120,7 @@ class AUDIO(BaseHTMLElement):
         )
 
 
-class B(BaseHTMLElement):
+class B(BaseHTMLElement,ElementNodeMixin,):
     """Represents an B HTML <b> element."""
 
     def __init__(self, *content, **attrs):
@@ -138,7 +139,7 @@ class B(BaseHTMLElement):
         )
 
 
-class BDI(BaseHTMLElement):
+class BDI(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BDI HTML <bdi> element."""
 
     def __init__(self, *content, **attrs):
@@ -157,7 +158,7 @@ class BDI(BaseHTMLElement):
         )
 
 
-class BDO(BaseHTMLElement):
+class BDO(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BDO HTML <bdo> element."""
 
     def __init__(self, *content, **attrs):
@@ -176,7 +177,7 @@ class BDO(BaseHTMLElement):
         )
 
 
-class BLOCKQUOTE(BaseHTMLElement):
+class BLOCKQUOTE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BLOCKQUOTE HTML <blockquote> element."""
 
     def __init__(self, *content, **attrs):
@@ -195,7 +196,7 @@ class BLOCKQUOTE(BaseHTMLElement):
         )
 
 
-class BODY(BaseHTMLElement):
+class BODY(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BODY HTML <body> element."""
 
     def __init__(self, *content, **attrs):
@@ -214,7 +215,7 @@ class BODY(BaseHTMLElement):
         )
 
 
-class BUTTON(BaseHTMLElement):
+class BUTTON(BaseHTMLElement,ElementNodeMixin,):
     """Represents an BUTTON HTML <button> element."""
 
     def __init__(self, *content, **attrs):
@@ -233,7 +234,7 @@ class BUTTON(BaseHTMLElement):
         )
 
 
-class CANVAS(BaseHTMLElement):
+class CANVAS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an CANVAS HTML <canvas> element."""
 
     def __init__(self, *content, **attrs):
@@ -252,7 +253,7 @@ class CANVAS(BaseHTMLElement):
         )
 
 
-class CAPTION(BaseHTMLElement):
+class CAPTION(BaseHTMLElement,ElementNodeMixin,):
     """Represents an CAPTION HTML <caption> element."""
 
     def __init__(self, *content, **attrs):
@@ -271,7 +272,7 @@ class CAPTION(BaseHTMLElement):
         )
 
 
-class CITE(BaseHTMLElement):
+class CITE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an CITE HTML <cite> element."""
 
     def __init__(self, *content, **attrs):
@@ -290,7 +291,7 @@ class CITE(BaseHTMLElement):
         )
 
 
-class CODE(BaseHTMLElement):
+class CODE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an CODE HTML <code> element."""
 
     def __init__(self, *content, **attrs):
@@ -309,7 +310,7 @@ class CODE(BaseHTMLElement):
         )
 
 
-class COLGROUP(BaseHTMLElement):
+class COLGROUP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an COLGROUP HTML <colgroup> element."""
 
     def __init__(self, *content, **attrs):
@@ -328,7 +329,7 @@ class COLGROUP(BaseHTMLElement):
         )
 
 
-class DATA(BaseHTMLElement):
+class DATA(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DATA HTML <data> element."""
 
     def __init__(self, *content, **attrs):
@@ -347,7 +348,7 @@ class DATA(BaseHTMLElement):
         )
 
 
-class DATALIST(BaseHTMLElement):
+class DATALIST(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DATALIST HTML <datalist> element."""
 
     def __init__(self, *content, **attrs):
@@ -366,7 +367,7 @@ class DATALIST(BaseHTMLElement):
         )
 
 
-class DD(BaseHTMLElement):
+class DD(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DD HTML <dd> element."""
 
     def __init__(self, *content, **attrs):
@@ -385,7 +386,7 @@ class DD(BaseHTMLElement):
         )
 
 
-class DEL(BaseHTMLElement):
+class DEL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DEL HTML <del> element."""
 
     def __init__(self, *content, **attrs):
@@ -404,7 +405,7 @@ class DEL(BaseHTMLElement):
         )
 
 
-class DETAILS(BaseHTMLElement):
+class DETAILS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DETAILS HTML <details> element."""
 
     def __init__(self, *content, **attrs):
@@ -423,7 +424,7 @@ class DETAILS(BaseHTMLElement):
         )
 
 
-class DFN(BaseHTMLElement):
+class DFN(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DFN HTML <dfn> element."""
 
     def __init__(self, *content, **attrs):
@@ -442,7 +443,7 @@ class DFN(BaseHTMLElement):
         )
 
 
-class DIALOG(BaseHTMLElement):
+class DIALOG(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DIALOG HTML <dialog> element."""
 
     def __init__(self, *content, **attrs):
@@ -461,7 +462,7 @@ class DIALOG(BaseHTMLElement):
         )
 
 
-class DIV(BaseHTMLElement):
+class DIV(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DIV HTML <div> element."""
 
     def __init__(self, *content, **attrs):
@@ -480,7 +481,7 @@ class DIV(BaseHTMLElement):
         )
 
 
-class DL(BaseHTMLElement):
+class DL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DL HTML <dl> element."""
 
     def __init__(self, *content, **attrs):
@@ -499,7 +500,7 @@ class DL(BaseHTMLElement):
         )
 
 
-class DT(BaseHTMLElement):
+class DT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DT HTML <dt> element."""
 
     def __init__(self, *content, **attrs):
@@ -518,7 +519,7 @@ class DT(BaseHTMLElement):
         )
 
 
-class EM(BaseHTMLElement):
+class EM(BaseHTMLElement,ElementNodeMixin,):
     """Represents an EM HTML <em> element."""
 
     def __init__(self, *content, **attrs):
@@ -537,7 +538,7 @@ class EM(BaseHTMLElement):
         )
 
 
-class FIELDSET(BaseHTMLElement):
+class FIELDSET(BaseHTMLElement,ElementNodeMixin,):
     """Represents an FIELDSET HTML <fieldset> element."""
 
     def __init__(self, *content, **attrs):
@@ -556,7 +557,7 @@ class FIELDSET(BaseHTMLElement):
         )
 
 
-class FIGCAPTION(BaseHTMLElement):
+class FIGCAPTION(BaseHTMLElement,ElementNodeMixin,):
     """Represents an FIGCAPTION HTML <figcaption> element."""
 
     def __init__(self, *content, **attrs):
@@ -575,7 +576,7 @@ class FIGCAPTION(BaseHTMLElement):
         )
 
 
-class FIGURE(BaseHTMLElement):
+class FIGURE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an FIGURE HTML <figure> element."""
 
     def __init__(self, *content, **attrs):
@@ -594,7 +595,7 @@ class FIGURE(BaseHTMLElement):
         )
 
 
-class FOOTER(BaseHTMLElement):
+class FOOTER(BaseHTMLElement,ElementNodeMixin,):
     """Represents an FOOTER HTML <footer> element."""
 
     def __init__(self, *content, **attrs):
@@ -613,7 +614,7 @@ class FOOTER(BaseHTMLElement):
         )
 
 
-class FORM(BaseHTMLElement):
+class FORM(BaseHTMLElement,ElementNodeMixin,):
     """Represents an FORM HTML <form> element."""
 
     def __init__(self, *content, **attrs):
@@ -632,7 +633,7 @@ class FORM(BaseHTMLElement):
         )
 
 
-class H1(BaseHTMLElement):
+class H1(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H1 HTML <h1> element."""
 
     def __init__(self, *content, **attrs):
@@ -651,7 +652,7 @@ class H1(BaseHTMLElement):
         )
 
 
-class H2(BaseHTMLElement):
+class H2(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H2 HTML <h2> element."""
 
     def __init__(self, *content, **attrs):
@@ -670,7 +671,7 @@ class H2(BaseHTMLElement):
         )
 
 
-class H3(BaseHTMLElement):
+class H3(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H3 HTML <h3> element."""
 
     def __init__(self, *content, **attrs):
@@ -689,7 +690,7 @@ class H3(BaseHTMLElement):
         )
 
 
-class H4(BaseHTMLElement):
+class H4(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H4 HTML <h4> element."""
 
     def __init__(self, *content, **attrs):
@@ -708,7 +709,7 @@ class H4(BaseHTMLElement):
         )
 
 
-class H5(BaseHTMLElement):
+class H5(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H5 HTML <h5> element."""
 
     def __init__(self, *content, **attrs):
@@ -727,7 +728,7 @@ class H5(BaseHTMLElement):
         )
 
 
-class H6(BaseHTMLElement):
+class H6(BaseHTMLElement,ElementNodeMixin,):
     """Represents an H6 HTML <h6> element."""
 
     def __init__(self, *content, **attrs):
@@ -746,7 +747,7 @@ class H6(BaseHTMLElement):
         )
 
 
-class HEAD(BaseHTMLElement):
+class HEAD(BaseHTMLElement,ElementNodeMixin,):
     """Represents an HEAD HTML <head> element."""
 
     def __init__(self, *content, **attrs):
@@ -765,7 +766,7 @@ class HEAD(BaseHTMLElement):
         )
 
 
-class HEADER(BaseHTMLElement):
+class HEADER(BaseHTMLElement,ElementNodeMixin,):
     """Represents an HEADER HTML <header> element."""
 
     def __init__(self, *content, **attrs):
@@ -784,7 +785,7 @@ class HEADER(BaseHTMLElement):
         )
 
 
-class HGROUP(BaseHTMLElement):
+class HGROUP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an HGROUP HTML <hgroup> element."""
 
     def __init__(self, *content, **attrs):
@@ -803,7 +804,7 @@ class HGROUP(BaseHTMLElement):
         )
 
 
-class HTML(BaseHTMLElement):
+class HTML(BaseHTMLElement,ElementNodeMixin,):
     """Represents an HTML HTML <html> element."""
 
     def __init__(self, *content, **attrs):
@@ -822,7 +823,7 @@ class HTML(BaseHTMLElement):
         )
 
 
-class I(BaseHTMLElement):
+class I(BaseHTMLElement,ElementNodeMixin,):
     """Represents an I HTML <i> element."""
 
     def __init__(self, *content, **attrs):
@@ -841,7 +842,7 @@ class I(BaseHTMLElement):
         )
 
 
-class IFRAME(BaseHTMLElement):
+class IFRAME(BaseHTMLElement,ElementNodeMixin,):
     """Represents an IFRAME HTML <iframe> element."""
 
     def __init__(self, *content, **attrs):
@@ -860,7 +861,7 @@ class IFRAME(BaseHTMLElement):
         )
 
 
-class INS(BaseHTMLElement):
+class INS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an INS HTML <ins> element."""
 
     def __init__(self, *content, **attrs):
@@ -879,7 +880,7 @@ class INS(BaseHTMLElement):
         )
 
 
-class KBD(BaseHTMLElement):
+class KBD(BaseHTMLElement,ElementNodeMixin,):
     """Represents an KBD HTML <kbd> element."""
 
     def __init__(self, *content, **attrs):
@@ -898,7 +899,7 @@ class KBD(BaseHTMLElement):
         )
 
 
-class LABEL(BaseHTMLElement):
+class LABEL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an LABEL HTML <label> element."""
 
     def __init__(self, *content, **attrs):
@@ -917,7 +918,7 @@ class LABEL(BaseHTMLElement):
         )
 
 
-class LEGEND(BaseHTMLElement):
+class LEGEND(BaseHTMLElement,ElementNodeMixin,):
     """Represents an LEGEND HTML <legend> element."""
 
     def __init__(self, *content, **attrs):
@@ -936,7 +937,7 @@ class LEGEND(BaseHTMLElement):
         )
 
 
-class LI(BaseHTMLElement):
+class LI(BaseHTMLElement,ElementNodeMixin,):
     """Represents an LI HTML <li> element."""
 
     def __init__(self, *content, **attrs):
@@ -955,7 +956,7 @@ class LI(BaseHTMLElement):
         )
 
 
-class MAIN(BaseHTMLElement):
+class MAIN(BaseHTMLElement,ElementNodeMixin,):
     """Represents an MAIN HTML <main> element."""
 
     def __init__(self, *content, **attrs):
@@ -974,7 +975,7 @@ class MAIN(BaseHTMLElement):
         )
 
 
-class MATH(BaseHTMLElement):
+class MATH(BaseHTMLElement,ElementNodeMixin,):
     """Represents an MATH HTML <math> element."""
 
     def __init__(self, *content, **attrs):
@@ -993,7 +994,7 @@ class MATH(BaseHTMLElement):
         )
 
 
-class MAP(BaseHTMLElement):
+class MAP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an MAP HTML <map> element."""
 
     def __init__(self, *content, **attrs):
@@ -1012,7 +1013,7 @@ class MAP(BaseHTMLElement):
         )
 
 
-class MARK(BaseHTMLElement):
+class MARK(BaseHTMLElement,ElementNodeMixin,):
     """Represents an MARK HTML <mark> element."""
 
     def __init__(self, *content, **attrs):
@@ -1031,7 +1032,7 @@ class MARK(BaseHTMLElement):
         )
 
 
-class MENU(BaseHTMLElement):
+class MENU(BaseHTMLElement,ElementNodeMixin,):
     """Represents an MENU HTML <menu> element."""
 
     def __init__(self, *content, **attrs):
@@ -1050,7 +1051,7 @@ class MENU(BaseHTMLElement):
         )
 
 
-class METER(BaseHTMLElement):
+class METER(BaseHTMLElement,ElementNodeMixin,):
     """Represents an METER HTML <meter> element."""
 
     def __init__(self, *content, **attrs):
@@ -1069,7 +1070,7 @@ class METER(BaseHTMLElement):
         )
 
 
-class NAV(BaseHTMLElement):
+class NAV(BaseHTMLElement,ElementNodeMixin,):
     """Represents an NAV HTML <nav> element."""
 
     def __init__(self, *content, **attrs):
@@ -1088,7 +1089,7 @@ class NAV(BaseHTMLElement):
         )
 
 
-class NOSCRIPT(BaseHTMLElement):
+class NOSCRIPT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an NOSCRIPT HTML <noscript> element."""
 
     def __init__(self, *content, **attrs):
@@ -1107,7 +1108,7 @@ class NOSCRIPT(BaseHTMLElement):
         )
 
 
-class OBJECT(BaseHTMLElement):
+class OBJECT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an OBJECT HTML <object> element."""
 
     def __init__(self, *content, **attrs):
@@ -1126,7 +1127,7 @@ class OBJECT(BaseHTMLElement):
         )
 
 
-class OL(BaseHTMLElement):
+class OL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an OL HTML <ol> element."""
 
     def __init__(self, *content, **attrs):
@@ -1145,7 +1146,7 @@ class OL(BaseHTMLElement):
         )
 
 
-class OPTGROUP(BaseHTMLElement):
+class OPTGROUP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an OPTGROUP HTML <optgroup> element."""
 
     def __init__(self, *content, **attrs):
@@ -1164,7 +1165,7 @@ class OPTGROUP(BaseHTMLElement):
         )
 
 
-class OPTION(BaseHTMLElement):
+class OPTION(BaseHTMLElement,ElementNodeMixin,):
     """Represents an OPTION HTML <option> element."""
 
     def __init__(self, *content, **attrs):
@@ -1183,7 +1184,7 @@ class OPTION(BaseHTMLElement):
         )
 
 
-class OUTPUT(BaseHTMLElement):
+class OUTPUT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an OUTPUT HTML <output> element."""
 
     def __init__(self, *content, **attrs):
@@ -1202,7 +1203,7 @@ class OUTPUT(BaseHTMLElement):
         )
 
 
-class P(BaseHTMLElement):
+class P(BaseHTMLElement,ElementNodeMixin,):
     """Represents an P HTML <p> element."""
 
     def __init__(self, *content, **attrs):
@@ -1221,7 +1222,7 @@ class P(BaseHTMLElement):
         )
 
 
-class PORTAL(BaseHTMLElement):
+class PORTAL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PORTAL HTML <portal> element."""
 
     def __init__(self, *content, **attrs):
@@ -1240,7 +1241,7 @@ class PORTAL(BaseHTMLElement):
         )
 
 
-class PICTURE(BaseHTMLElement):
+class PICTURE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PICTURE HTML <picture> element."""
 
     def __init__(self, *content, **attrs):
@@ -1259,7 +1260,7 @@ class PICTURE(BaseHTMLElement):
         )
 
 
-class PRE(BaseHTMLElement):
+class PRE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PRE HTML <pre> element."""
 
     def __init__(self, *content, **attrs):
@@ -1278,7 +1279,7 @@ class PRE(BaseHTMLElement):
         )
 
 
-class PROGRESS(BaseHTMLElement):
+class PROGRESS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an PROGRESS HTML <progress> element."""
 
     def __init__(self, *content, **attrs):
@@ -1297,7 +1298,7 @@ class PROGRESS(BaseHTMLElement):
         )
 
 
-class Q(BaseHTMLElement):
+class Q(BaseHTMLElement,ElementNodeMixin,):
     """Represents an Q HTML <q> element."""
 
     def __init__(self, *content, **attrs):
@@ -1316,7 +1317,7 @@ class Q(BaseHTMLElement):
         )
 
 
-class RP(BaseHTMLElement):
+class RP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an RP HTML <rp> element."""
 
     def __init__(self, *content, **attrs):
@@ -1335,7 +1336,7 @@ class RP(BaseHTMLElement):
         )
 
 
-class RT(BaseHTMLElement):
+class RT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an RT HTML <rt> element."""
 
     def __init__(self, *content, **attrs):
@@ -1354,7 +1355,7 @@ class RT(BaseHTMLElement):
         )
 
 
-class RUBY(BaseHTMLElement):
+class RUBY(BaseHTMLElement,ElementNodeMixin,):
     """Represents an RUBY HTML <ruby> element."""
 
     def __init__(self, *content, **attrs):
@@ -1373,7 +1374,7 @@ class RUBY(BaseHTMLElement):
         )
 
 
-class S(BaseHTMLElement):
+class S(BaseHTMLElement,ElementNodeMixin,):
     """Represents an S HTML <s> element."""
 
     def __init__(self, *content, **attrs):
@@ -1392,7 +1393,7 @@ class S(BaseHTMLElement):
         )
 
 
-class SAMP(BaseHTMLElement):
+class SAMP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SAMP HTML <samp> element."""
 
     def __init__(self, *content, **attrs):
@@ -1411,7 +1412,7 @@ class SAMP(BaseHTMLElement):
         )
 
 
-class SCRIPT(BaseHTMLElement):
+class SCRIPT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SCRIPT HTML <script> element."""
 
     def __init__(self, *content, **attrs):
@@ -1430,7 +1431,7 @@ class SCRIPT(BaseHTMLElement):
         )
 
 
-class SEARCH(BaseHTMLElement):
+class SEARCH(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SEARCH HTML <search> element."""
 
     def __init__(self, *content, **attrs):
@@ -1449,7 +1450,7 @@ class SEARCH(BaseHTMLElement):
         )
 
 
-class SECTION(BaseHTMLElement):
+class SECTION(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SECTION HTML <section> element."""
 
     def __init__(self, *content, **attrs):
@@ -1468,7 +1469,7 @@ class SECTION(BaseHTMLElement):
         )
 
 
-class SELECT(BaseHTMLElement):
+class SELECT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SELECT HTML <select> element."""
 
     def __init__(self, *content, **attrs):
@@ -1487,7 +1488,7 @@ class SELECT(BaseHTMLElement):
         )
 
 
-class SLOT(BaseHTMLElement):
+class SLOT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SLOT HTML <slot> element."""
 
     def __init__(self, *content, **attrs):
@@ -1506,7 +1507,7 @@ class SLOT(BaseHTMLElement):
         )
 
 
-class SMALL(BaseHTMLElement):
+class SMALL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SMALL HTML <small> element."""
 
     def __init__(self, *content, **attrs):
@@ -1525,7 +1526,7 @@ class SMALL(BaseHTMLElement):
         )
 
 
-class SPAN(BaseHTMLElement):
+class SPAN(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SPAN HTML <span> element."""
 
     def __init__(self, *content, **attrs):
@@ -1544,7 +1545,7 @@ class SPAN(BaseHTMLElement):
         )
 
 
-class STRONG(BaseHTMLElement):
+class STRONG(BaseHTMLElement,ElementNodeMixin,):
     """Represents an STRONG HTML <strong> element."""
 
     def __init__(self, *content, **attrs):
@@ -1563,7 +1564,7 @@ class STRONG(BaseHTMLElement):
         )
 
 
-class STYLE(BaseHTMLElement):
+class STYLE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an STYLE HTML <style> element."""
 
     def __init__(self, *content, **attrs):
@@ -1582,7 +1583,7 @@ class STYLE(BaseHTMLElement):
         )
 
 
-class SUB(BaseHTMLElement):
+class SUB(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SUB HTML <sub> element."""
 
     def __init__(self, *content, **attrs):
@@ -1601,7 +1602,7 @@ class SUB(BaseHTMLElement):
         )
 
 
-class SUMMARY(BaseHTMLElement):
+class SUMMARY(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SUMMARY HTML <summary> element."""
 
     def __init__(self, *content, **attrs):
@@ -1620,7 +1621,7 @@ class SUMMARY(BaseHTMLElement):
         )
 
 
-class SUP(BaseHTMLElement):
+class SUP(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SUP HTML <sup> element."""
 
     def __init__(self, *content, **attrs):
@@ -1639,7 +1640,7 @@ class SUP(BaseHTMLElement):
         )
 
 
-class SVG(BaseHTMLElement):
+class SVG(BaseHTMLElement,ElementNodeMixin,):
     """Represents an SVG HTML <svg> element."""
 
     def __init__(self, *content, **attrs):
@@ -1658,7 +1659,7 @@ class SVG(BaseHTMLElement):
         )
 
 
-class TABLE(BaseHTMLElement):
+class TABLE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TABLE HTML <table> element."""
 
     def __init__(self, *content, **attrs):
@@ -1677,7 +1678,7 @@ class TABLE(BaseHTMLElement):
         )
 
 
-class TBODY(BaseHTMLElement):
+class TBODY(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TBODY HTML <tbody> element."""
 
     def __init__(self, *content, **attrs):
@@ -1696,7 +1697,7 @@ class TBODY(BaseHTMLElement):
         )
 
 
-class TD(BaseHTMLElement):
+class TD(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TD HTML <td> element."""
 
     def __init__(self, *content, **attrs):
@@ -1715,7 +1716,7 @@ class TD(BaseHTMLElement):
         )
 
 
-class TEMPLATE(BaseHTMLElement):
+class TEMPLATE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TEMPLATE HTML <template> element."""
 
     def __init__(self, *content, **attrs):
@@ -1734,7 +1735,7 @@ class TEMPLATE(BaseHTMLElement):
         )
 
 
-class TEXTAREA(BaseHTMLElement):
+class TEXTAREA(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TEXTAREA HTML <textarea> element."""
 
     def __init__(self, *content, **attrs):
@@ -1753,7 +1754,7 @@ class TEXTAREA(BaseHTMLElement):
         )
 
 
-class TFOOT(BaseHTMLElement):
+class TFOOT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TFOOT HTML <tfoot> element."""
 
     def __init__(self, *content, **attrs):
@@ -1772,7 +1773,7 @@ class TFOOT(BaseHTMLElement):
         )
 
 
-class TH(BaseHTMLElement):
+class TH(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TH HTML <th> element."""
 
     def __init__(self, *content, **attrs):
@@ -1791,7 +1792,7 @@ class TH(BaseHTMLElement):
         )
 
 
-class THEAD(BaseHTMLElement):
+class THEAD(BaseHTMLElement,ElementNodeMixin,):
     """Represents an THEAD HTML <thead> element."""
 
     def __init__(self, *content, **attrs):
@@ -1810,7 +1811,7 @@ class THEAD(BaseHTMLElement):
         )
 
 
-class TIME(BaseHTMLElement):
+class TIME(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TIME HTML <time> element."""
 
     def __init__(self, *content, **attrs):
@@ -1829,7 +1830,7 @@ class TIME(BaseHTMLElement):
         )
 
 
-class TITLE(BaseHTMLElement):
+class TITLE(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TITLE HTML <title> element."""
 
     def __init__(self, *content, **attrs):
@@ -1848,7 +1849,7 @@ class TITLE(BaseHTMLElement):
         )
 
 
-class TR(BaseHTMLElement):
+class TR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TR HTML <tr> element."""
 
     def __init__(self, *content, **attrs):
@@ -1867,7 +1868,7 @@ class TR(BaseHTMLElement):
         )
 
 
-class U(BaseHTMLElement):
+class U(BaseHTMLElement,ElementNodeMixin,):
     """Represents an U HTML <u> element."""
 
     def __init__(self, *content, **attrs):
@@ -1886,7 +1887,7 @@ class U(BaseHTMLElement):
         )
 
 
-class UL(BaseHTMLElement):
+class UL(BaseHTMLElement,ElementNodeMixin,):
     """Represents an UL HTML <ul> element."""
 
     def __init__(self, *content, **attrs):
@@ -1905,7 +1906,7 @@ class UL(BaseHTMLElement):
         )
 
 
-class VAR(BaseHTMLElement):
+class VAR(BaseHTMLElement,ElementNodeMixin,):
     """Represents an VAR HTML <var> element."""
 
     def __init__(self, *content, **attrs):
@@ -1924,7 +1925,7 @@ class VAR(BaseHTMLElement):
         )
 
 
-class VIDEO(BaseHTMLElement):
+class VIDEO(BaseHTMLElement,ElementNodeMixin,):
     """Represents an VIDEO HTML <video> element."""
 
     def __init__(self, *content, **attrs):
@@ -1943,7 +1944,7 @@ class VIDEO(BaseHTMLElement):
         )
 
 
-class G(BaseHTMLElement):
+class G(BaseHTMLElement,ElementNodeMixin,):
     """Represents an G HTML <g> element."""
 
     def __init__(self, *content, **attrs):
@@ -1962,7 +1963,7 @@ class G(BaseHTMLElement):
         )
 
 
-class DEFS(BaseHTMLElement):
+class DEFS(BaseHTMLElement,ElementNodeMixin,):
     """Represents an DEFS HTML <defs> element."""
 
     def __init__(self, *content, **attrs):
@@ -1981,7 +1982,7 @@ class DEFS(BaseHTMLElement):
         )
 
 
-class TEXT(BaseHTMLElement):
+class TEXT(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TEXT HTML <text> element."""
 
     def __init__(self, *content, **attrs):
@@ -2000,7 +2001,7 @@ class TEXT(BaseHTMLElement):
         )
 
 
-class TSPAN(BaseHTMLElement):
+class TSPAN(BaseHTMLElement,ElementNodeMixin,):
     """Represents an TSPAN HTML <tspan> element."""
 
     def __init__(self, *content, **attrs):

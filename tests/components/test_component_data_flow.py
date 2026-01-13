@@ -148,7 +148,6 @@ def test_dynamic_data_processor_hook():
 
     # 3. DynamicData Instance
     dd = DynamicData(data_obj=raw_user, processor=user_processor)
-    print("dd.get_data()", dd.dynamic_data)
     # 4. Component Setup
     es = ElementState(element="span", d_state="full_name")
 
@@ -195,7 +194,6 @@ def test_change_skin_scenarios():
     comp.set_root_element("section", Id="main")
 
     comp.change_skin(background_color="black")  # Root style
-    print([x.render() for x in comp.active_css_rules])
     _, css = comp.render()
 
     assert "background-color:black" in css

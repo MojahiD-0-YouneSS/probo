@@ -58,6 +58,7 @@ class ComponentState:
         self.strict = strict
         self.state_errors = None
         self.incoming_props = incoming_props or {}
+        self._should_render=True
         if elements_states:
             self.use_state()
 
@@ -91,6 +92,7 @@ class ComponentState:
         Checks if local requirements (self.props) match the global context (incoming_props).
         Returns True if valid, False if mismatch found.
         """
+        self._should_render=True
         if not self.props:
             return True  # No requirements, always valid
         if not self.props and not self.incoming_props:
@@ -128,10 +130,17 @@ class ComponentState:
         """
         Replace <$ s="..." d='None' i='None'>...</$> in children content with dynamic slot content
         """
-        self.validate_global_props()
-        if self.state_errors and self.strict:
-            raise ValueError(f"[probo Strict]⚠️ Rendering Blocked: {self.state_errors}")
-
+        props_check=self.validate_global_props()
+        print(props_check)
+        print(self.props)
+        print(self.incoming_props)
+        if not props_check:
+            if self.strict:
+                raise ValueError(f"[probo Strict]⚠️ Rendering Blocked: {self.state_errors}")
+            else:
+                self._should_render=False
+                return self
+                
         for el in self.elements_states:
             data = self._determine_state(el.s_state, el.d_state)
             rsolved_data = self.resolve_props(data)
@@ -151,18 +160,21 @@ class ComponentState:
 
     def resolved_template(self, template: str) -> str:
         self.use_state()
-
-        for k, el in self.resolved_state_elements.items():
-            if el.placeholder in template:
-                if el.state_placeholder is None or self.state_errors:
-                    # template = template.replace(el.placeholder, '')
-                    template = re.sub(re.escape(el.placeholder), "", template)
-                else:
-                    # template = template.replace(el.placeholder, el.state_placeholder)
-                    template = re.sub(
-                        re.escape(el.placeholder), el.state_placeholder, template
-                    )
-
+        if hasattr(template,'render'):
+            template=template.render()
+        if not self._should_render:
+            return str()
+        if self.resolved_state_elements:
+            for k, el in self.resolved_state_elements.items():
+                if el.placeholder in template:
+                    if el.state_placeholder is None or self.state_errors:
+                        # template = template.replace(el.placeholder, '')
+                        template = re.sub(re.escape(el.placeholder), "", template)
+                    else:
+                        # template = template.replace(el.placeholder, el.state_placeholder)
+                        template = re.sub(
+                            re.escape(el.placeholder), el.state_placeholder, template
+                        )
         return self.remove_state_tag(template)
 
 
