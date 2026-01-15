@@ -4,14 +4,15 @@ from probo.styles.frameworks.bs5.bs5 import BS5Element
 
 class BS5Collapse(BS5Component):
     
-    def __init__(self,content, is_multicollapse=False, **attrs):
-        self.attrs = attrs 
+    def __init__(self,content, is_multicollapse=False, render_constraints=None, **attrs):
+        self.attrs = attrs
+        self.render_constraints=render_constraints
         self.content = content 
         # self.template = self._render_comp()
         self.collapse_classes = [Collapse.COLLAPSE.value,(Collapse.COLLAPSE_MULTI.value if is_multicollapse else '')]
         self.trigger=None
         self.tag = 'div'
-        super().__init__(name='BS5-collapse', props={}, state=None)
+        super().__init__(name='BS5-collapse',state_props=self.render_constraints)
     def add_link_trigger(self,content,classes,**attrs):
         link = BS5Element(
             'a',

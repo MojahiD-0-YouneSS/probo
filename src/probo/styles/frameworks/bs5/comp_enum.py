@@ -8,22 +8,19 @@ class ProgressBar(Enum):
     PROGRESS_BAR_STRIPED = "progress-bar-striped"  # Adds stripes
     PROGRESS_BAR_ANIMATED = "progress-bar-animated"
 
-
 class Spinner(Enum):
     SPINNER_BORDER = "spinner-border"  # Default border spinner
     SPINNER_BORDER_SM = "spinner-border spinner-border-sm"  # Small border spinner
     SPINNER_GROW = "spinner-grow"  # Growing spinner
     SPINNER_GROW_SM = "spinner-grow spinner-grow-sm"  # Small growing spinner
 
-
 class Pagination(Enum):
     PAGINATION = "pagination"  # Pagination container
-    PAGINATION_LG = "pagination pagination-lg"  # Large pagination
-    PAGINATION_SM = "pagination pagination-sm"  # Small pagination
+    PAGINATION_LG = "pagination-lg"  # Large pagination
+    PAGINATION_SM = "pagination-sm"  # Small pagination
 
     PAGE_ITEM = "page-item"  # Wrapper for each page link
     PAGE_LINK = "page-link"  # Actual page link
-
 
 class Accordion(Enum):
     BASE = "accordion"
@@ -33,7 +30,6 @@ class Accordion(Enum):
     COLLAPSE = "accordion-collapse"
     FLUSH = "accordion-flush"
     BODY = "accordion-body"
-
 
 class Alert(Enum):
     BASE = "alert"
@@ -49,7 +45,6 @@ class Alert(Enum):
     LINK = "alert-link"
     HEADING = "alert-heading"  # Adds heading to alert
 
-
 class Badge(Enum):
     BASE = "badge"
     PRIMARY = "badge-primary"
@@ -60,7 +55,6 @@ class Badge(Enum):
     DANGER = "badge-danger"
     LIGHT = "badge-light"
     DARK = "badge-dark"
-
 
 class Lists(Enum):
     """
@@ -105,7 +99,6 @@ class Lists(Enum):
     LIST_GROUP_ITEM_LIGHT = "list-group-item-light"
     LIST_GROUP_ITEM_DARK = "list-group-item-dark"
 
-
 class Cards(Enum):
     CARD = "card"  # Card container
     CARD_BODY = "card-body"  # Card body container
@@ -128,7 +121,6 @@ class Cards(Enum):
     CARD_ROUNDED = "rounded"  # Rounded corners for card image or card
     CARD_SHADOW = "shadow"  # Add shadow to the card
 
-
 class Dropdowns(Enum):
     DROPDOWN = "dropdown"  # Dropdown container
     DROPDOWN_TOGGLE = "dropdown-toggle"  # Toggle button for dropdown
@@ -144,7 +136,6 @@ class Dropdowns(Enum):
     DROPDOWN_LG = "dropdown-menu-lg"  # Large dropdown menu size
     DROPDOWN_XL = "dropdown-menu-xl"  # Extra large dropdown menu size
 
-
 class Collapse(Enum):
     COLLAPSE = "collapse"  # Collapse container (hidden content)
     COLLAPSE_SHOW = "show"  # Show collapsed content
@@ -157,13 +148,12 @@ class Nav(Enum):
     NAV_LINK = "nav-link"  # Nav link
     NAV_LINK_ACTIVE = "nav-link active"  # Active nav link
     NAV_FILL = "nav-fill"  # Nav fills the width
-    NAV_JUSTIFY = "nav-justified"  # Nav justified
+    NAV_JUSTIFYIED = "nav-justified"  # Nav justified
     NAV_TABS = "nav-tabs"  # Tabs style navigation
     NAV_PILLS = "nav-pills"  # Pills style navigation
     TAB_CONTENT = "tab-content"  # Container for tab content
     TAB_PANE = "tab-pane"  # Single tab content pane
     TAB_PANE_ACTIVE = "tab-pane active"  # Active tab pane
-
 
 class Navbar(Enum):
     NAVBAR = "navbar"  # Base navbar component
@@ -185,21 +175,19 @@ class Navbar(Enum):
     NAVBAR_LIGHT = "navbar-light"  # Light color scheme for navbar
     NAVBAR_DARK = "navbar-dark"  # Dark color scheme for navbar
 
-
 class Carousel(Enum):
     CAROUSEL = "carousel"  # Base carousel container
     CAROUSEL_SLIDE = "slide"  # Carousel with slide animation
     CAROUSEL_FADE = "carousel-fade"  # Carousel with fade animation
     CAROUSEL_INNER = "carousel-inner"  # Wrapper for carousel items
-    CAROUSEL_ITEM = "carousel-item"  # Individual carousel item
-    CAROUSEL_ITEM_ACTIVE = "carousel-item"  # Active carousel item
+    CAROUSEL_ITEM = "carousel-item"  # Active carousel item
+    CAROUSEL_DARK = "carousel-dark"  #dark carousel
     CAROUSEL_CONTROL_PREV = "carousel-control-prev"  # Previous control
     CAROUSEL_CONTROL_NEXT = "carousel-control-next"  # Next control
     CAROUSEL_CONTROL_PREV_ICON = "carousel-control-prev-icon"  # Previous icon
     CAROUSEL_CONTROL_NEXT_ICON = "carousel-control-next-icon"  # Next icon
     CAROUSEL_INDICATORS = "carousel-indicators"  # Carousel indicators container
     CAROUSEL_INDICATOR = "carousel-indicator"  # Individual indicator (usually a button)
-
 
 class Modal(Enum):
     MODAL = "modal"  # Modal container
@@ -209,11 +197,10 @@ class Modal(Enum):
     MODAL_TITLE = "modal-title"  # Modal title text
     MODAL_BODY = "modal-body"  # Modal body section
     MODAL_FOOTER = "modal-footer"  # Modal footer section
-    MODAL_FADE = "modal fade"  # Modal with fade effect
+    MODAL_FADE = "modal fade"  #  Modal with fade effect
     MODAL_SHOW = "modal show"  # Modal shown state
     MODAL_BACKDROP = "modal-backdrop"  # Modal backdrop overlay
     BUTTON_CLOSE = "btn-close"  # Close button for modal
-
 
 class Popover(Enum):
     POPOVER = "popover"  # Popover container
@@ -224,28 +211,14 @@ class Popover(Enum):
     POPOVER_LEFT = "popover bs-popover-start"  # Popover positioned on left/start
     POPOVER_RIGHT = "popover bs-popover-end"  # Popover positioned on right/end
 
-
 class Toast(Enum):
     TOAST = "toast"  # Toast container
     TOAST_HEADER = "toast-header"  # Header section of toast
     TOAST_BODY = "toast-body"  # Body/content section of toast
     TOAST_CONTAINER = "toast-container"  # Container for toasts
-    TOAST_POSITION_TOP_START = (
-        "toast-container position-fixed top-0 start-0 p-3"  # Toast container top left
-    )
-    TOAST_POSITION_TOP_END = (
-        "toast-container position-fixed top-0 end-0 p-3"  # Toast container top right
-    )
-    TOAST_POSITION_BOTTOM_START = "toast-container position-fixed bottom-0 start-0 p-3"  # Toast container bottom left
-    TOAST_POSITION_BOTTOM_END = "toast-container position-fixed bottom-0 end-0 p-3"  # Toast container bottom right
-
 
 class Scrollspy(Enum):
     SCROLLSPY = "scrollspy"  # Enable scrollspy behavior
-    DATA_SPY = "data-bs-spy"  # Scrollspy data attribute
-    DATA_TARGET = "data-bs-target"  # Scrollspy target attribute
-    DATA_OFFSET = "data-bs-offset"  # Scrollspy offset attribute
-
 
 class Offcanvas(Enum):
     OFFCANVAS = "offcanvas"  # Main offcanvas container
@@ -256,12 +229,6 @@ class Offcanvas(Enum):
     OFFCANVAS_HEADER = "offcanvas-header"  # Header of offcanvas
     OFFCANVAS_TITLE = "offcanvas-title"  # Title in header
     OFFCANVAS_BODY = "offcanvas-body"  # Body content of offcanvas
-    BTN_CLOSE = "btn-close"  # Close button inside offcanvas
-    BTN_CLOSE_WHITE = "btn-close-white"  # White variant close button
-    DATA_BS_TOGGLE = "data-bs-toggle"  # Attribute for toggle action
-    DATA_BS_TARGET = "data-bs-target"  # Target offcanvas element
-    ARIA_CONTROLS = "aria-controls"  # Accessibility control attribute
-
 
 class DarkMode(Enum):
     BODY_DARK = "bg-dark text-white"
@@ -300,7 +267,6 @@ class Table(Enum):
     These are used for styling tables.
     """
 
-    BASE = "table"  # Striped table rows
     STRIPED = "table-striped"  # Striped table rowsk
     BORDERED = "table-bordered"  # Bordered table
     BORDERLESS = "table-borderless"  # Borderless table
@@ -323,20 +289,13 @@ class Table(Enum):
     LG = f"table-{Breakpoint.LG.value}"  #  table for large screens
     XL = f"table-{Breakpoint.XL.value}"  #  table for extra large screens
     XXL = f"table-{Breakpoint.XXL.value}"  #  table for extra extra large screens
-    RESPONSIVE_SM = (
-        f"table-responsive-{Breakpoint.SM.value}"  # Responsive table for small screens
-    )
-    RESPONSIVE_MD = (
-        f"table-responsive-{Breakpoint.MD.value}"  # Responsive table for large screens
-    )
-    RESPONSIVE_LG = (
-        f"table-responsive-{Breakpoint.LG.value}"  # Responsive table for large screens
-    )
+    RESPONSIVE_SM = f"table-responsive-{Breakpoint.SM.value}"  # Responsive table for small screens
+    RESPONSIVE_MD = f"table-responsive-{Breakpoint.MD.value}"  # Responsive table for large screens
+    RESPONSIVE_LG = f"table-responsive-{Breakpoint.LG.value}"  # Responsive table for large screens)
     RESPONSIVE_XL = f"table-responsive-{Breakpoint.XL.value}"  # Responsive table for extra large screens
     RESPONSIVE_XXL = f"table-responsive-{Breakpoint.XXL.value}"  # Responsive table for extra extra large screens
     CAPTION = "caption-top"
     TABLE_GROUP_DIVIDER = "table-group-divider"
-    SPINNER_GROW_SM = "spinner-grow spinner-grow-sm"  # Small growing spinner
 
 class Breadcrumb(Enum):
     BASE = "breadcrumb"

@@ -2,7 +2,6 @@ from enum import Enum
 
 # from tempo.styles.frameworks.bs5.bs5
 
-
 class DataBSAttribute(Enum):
     DATA_BS = [
         "data-bs-toggle",
@@ -35,7 +34,6 @@ class DataBSAttribute(Enum):
         "data-bs-autohide",
         "data-bs-target",
     ]
-
 
 class AriaAttribute(Enum):
     ARIA_ATTRIBUTE = [
@@ -89,7 +87,6 @@ class AriaAttribute(Enum):
         "aria-valuetext",
     ]
 
-
 class VoidTags(Enum):
     VOID_TAGS = [
         "area",
@@ -106,7 +103,6 @@ class VoidTags(Enum):
         "track",
         "wbr",
     ]
-
 
 class GlobalAttribute(Enum):
     GLOBAL_ATTRIBUTE = [
@@ -134,7 +130,6 @@ class GlobalAttribute(Enum):
         "role",
         "type",
     ]
-
 
 class EventAttribute(Enum):
     EVENT_ATTRIBUTE = [
@@ -184,7 +179,6 @@ class EventAttribute(Enum):
         "onwheel",
     ]
 
-
 class AllVisibleAttribute(Enum):
     VISIBLE_ATTRIBUTE = [
         "id",
@@ -215,7 +209,6 @@ class AllVisibleAttribute(Enum):
         "wrap",
     ]
 
-
 class NotSupportedInHtml5(Enum):
     NOT_SUPPORTED_IN_HTML5 = [
         "align",
@@ -229,7 +222,6 @@ class NotSupportedInHtml5(Enum):
         "text",
         "vlink",
     ]
-
 
 class AttributeValue(Enum):
     """Class to validate HTML attributes and their values."""
@@ -553,6 +545,7 @@ class AttributeValue(Enum):
             "content-type",
             "default-style",
             "refresh",
+            "content-language",
         ],
         "id": "any",
         "in": ["SourceGraphic", "SourceAlpha", "BackgroundImage", "BackgroundAlpha", "FillPaint", "StrokePaint"],
@@ -1467,7 +1460,6 @@ class AttributeValue(Enum):
         ],
     }
 
-
 ATTR_CLUSTER = set(
     GlobalAttribute.GLOBAL_ATTRIBUTE.value
     + EventAttribute.EVENT_ATTRIBUTE.value
@@ -1475,7 +1467,6 @@ ATTR_CLUSTER = set(
     + AriaAttribute.ARIA_ATTRIBUTE.value
     + DataBSAttribute.DATA_BS.value
 )
-
 
 class ElementAttribute(Enum):
     ELEMENT_ATTRIBUTE = {
@@ -1723,7 +1714,6 @@ class ElementAttribute(Enum):
         'y2': ['<line>', '<linearGradient>'],
     }
 
-
 class Tag(Enum):
     DOCTYPE = ("!DOCTYPE html", {"void": True})
     A = ("a", {"void": False})
@@ -1926,7 +1916,6 @@ class Tag(Enum):
         except KeyError:
             return default
 
-
 class ElementAttributeValidator:
     """Class to validate HTML attributes for elements.
     This class checks if the provided attributes are valid for a given HTML element."""
@@ -1955,6 +1944,7 @@ class ElementAttributeValidator:
 
         for raw_key, value in self.raw_attrs.items():
             # 1. NORMALIZE KEY (class_ -> class, aria_hidden -> aria-hidden)
+
             if len(raw_key) >1:
                 key = raw_key[0].lower()+raw_key[1:].strip().replace("_", "-")
             else:

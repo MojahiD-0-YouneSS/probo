@@ -59,6 +59,10 @@ class ElementAttributeManipulator:
         else:
             self.attrs[self._normalize_attr_key(key)] = str(value)
         return self
+    def set_bulk_attr(self, **attrs) -> Self:
+        for key, value in attrs.items():
+            self.set_attr(key,value)
+        return self
 
     def get_attr(self, key: str, default=None) -> str:
         return self.attrs.get(self._normalize_attr_key(key), default)
@@ -114,6 +118,54 @@ class ElementAttributeManipulator:
                 key, val = item.split(":", 1)
                 result[key.strip()] = val.strip()
         return result
+
+class ComponentAttrManager(ElementAttributeManipulator):
+    """
+    Manages the default attributes for a Component's root element.
+    """
+    # The actual storage
+    def __init__(self,**childern):
+        self.childern = childern
+        self.root={}
+        self.attrs = {}
+
+    def add_child(self,name,**attrs):
+        self.childern[name]=attrs
+        return self
+
+    def update(self,name, **kwargs):
+        """
+        Bulk update attributes from kwargs.
+        Handles class merging intelligently if 'class' is passed.
+        """
+        for k, v in kwargs.items():
+            clean_key = self._normalize_key(k)
+
+            if clean_key == 'class':
+                # If updating class, use add_class logic to merge, or overwrite?
+                # Usually update() implies overwrite or merge.
+                # Let's support space-separated string merging for safety.
+                if isinstance(v, str):
+                    self.add_class(*v.split())
+                elif isinstance(v, (list, tuple)):
+                    self.add_class(*v)
+            else:
+                self.attrs[clean_key] = v
+        if self.childern.get(name,None):
+            self.childer[name].update(self.attrs)
+        else:
+            self.childer[name]=self.attrs
+        self.clear()
+        return self
+
+    def clear(self):
+        """Wipes all attributes."""
+        self.attrs.clear()
+        return self
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Returns the raw dictionary for rendering."""
+        return self.childern
 
 class BaseHTMLElement(ABC):
     """

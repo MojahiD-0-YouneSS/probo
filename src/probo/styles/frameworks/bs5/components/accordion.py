@@ -10,6 +10,7 @@ class BS5Accordion(BS5Component):
         self.variant = variant
         self.accordion_items = list(accordion_items)
         self.render_constraints=render_constraints
+
         super().__init__(name='BS5-accordion', state_props=self.render_constraints)
 
     def add_accordion_item(self,accordion_header:str,header_id:str,accordion_body:str,body_id:str):
@@ -51,9 +52,11 @@ class BS5Accordion(BS5Component):
         item.include(item_header,item_body)
         self.accordion_items.append(item.render())
         return self
+
     def before_render(self,*args,**kwargs):
         self.include_content_parts(*self.accordion_items)
         return self
+
     def _render_comp(self):
         btn_grp = BS5Element(
             self.tag,

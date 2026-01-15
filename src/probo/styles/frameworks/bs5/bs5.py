@@ -3,6 +3,7 @@ from probo.styles.frameworks.bs5.typography import Typography
 from probo.styles.frameworks.bs5.forms import Form
 from probo.styles.frameworks.bs5.utilities import Utilities
 from probo.styles.frameworks.bs5.comp_enum import Components
+from probo.components.base import ElementAttributeManipulator
 from typing import Optional
 from enum import Enum
 
@@ -94,13 +95,14 @@ class BS5Element:
             [c for c in classes if c is not None] if classes is not None else []
         )
         self.attrs = attrs
+        self.attr_manager = ElementAttributeManipulator(self.attrs)
 
     def add(self, *new_classes: str):
         """Fluent API to add Bootstrap classes."""
         self.classes.extend(new_classes)
         return self
 
-    def include(self, *content,first=False):
+    def include(self, *content,first=False,override=False):
         """
         Adds content to the element.
         If content is another BS5Element, it renders it.
@@ -113,7 +115,9 @@ class BS5Element:
                 rendered_content.append(str(item))
 
         # Append to existing content
-        if first:
+        if override:
+            self.content = "".join(rendered_content)
+        elif first and not override:
             self.content = "".join(rendered_content)+self.content
         else:
             self.content += "".join(rendered_content)

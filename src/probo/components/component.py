@@ -2,6 +2,7 @@ from probo.components.elements import Element
 from probo.components.state.component_state import (
     ComponentState,
 )
+from probo.components.base import ComponentAttrManager
 from probo.styles.elements import (
     ComponentStyle,
     element_style_state,
@@ -92,7 +93,7 @@ class Component:
         self.children_info = {
             k: TemplateResolver(v).template_resolver() for k, v in elements.items()
         }
-
+        self.attr_manager = ComponentAttrManager()
         if isinstance(template,str):
             self.template_obj = TemplateResolver(tmplt_str=template, load_it=True)
         else:

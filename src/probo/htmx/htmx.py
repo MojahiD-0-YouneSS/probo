@@ -8,8 +8,9 @@ from probo.htmx.htmx_enum import (
     HxParams,
     HxSyncStrategy,
 )
-from probo.components.elements import Element
 from probo.utility import render_attributes as r
+from probo.components.elements import Element
+from probo.components.base import ElementAttributeManipulator
 
 HTMX_CDN_URL = "https://unpkg.com/htmx.org@1.9.10"
 
@@ -63,7 +64,6 @@ class Ajax:
     def get_values(self):
         return self.AJAX_HX_DICT
 
-
 class HTMXElement(Ajax):
     """
     Represents a single HTMX configuration.
@@ -114,6 +114,7 @@ class HTMXElement(Ajax):
         self.element_tag = element_tag
         self.content = content or str()
         self.template_info = template_info or dict()
+        self.attr_manager = ElementAttributeManipulator(self.hx_attrs)
         super().__init__()
 
         if template_info and template_info.get("tags", []):

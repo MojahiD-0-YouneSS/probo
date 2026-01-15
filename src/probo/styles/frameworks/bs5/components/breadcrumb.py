@@ -12,38 +12,47 @@ class BS5Breadcrumb(BS5Component):
         </ol>
     </nav>
     '''
-    def __init__(self, *urls,**attrs):
+    def __init__(self, *urls,url_dict=None,render_constraints=None,**attrs):
+        self.url_dict:dict=url_dict or {}
         self.attrs = attrs
         self.urls=urls
+        self.render_constraints=render_constraints or {}
         # self.template = self._render_comp()
         self.breadcrum_classes = [Breadcrumb.BASE.value]
         self.tag = 'ol'
         self.nav_attrs={'aria-label': "breadcrumb"}
-        super().__init__(name='BS5-breadcrum', props={}, state=None)
-    
-     
-    def element_as_btn(self,tag):
-        self.tag = tag
-        self.template.tag=tag
-        return self
-    
+        super().__init__(name='BS5-breadcrum', state_props=self.render_constraints)
+
     def _render_comp(self):
+        links_dict = {}
         if self.urls:
+            links_dict = {link:'#' for link in self.urls[0:-1]}
+        if self.url_dict:
+            links_dict = self.url_dict
+        if links_dict:
+
             links = [ BS5Element(
-                'li',link,
+                'li',BS5Element(
+                    'a',link_name,href=link_url).render(),
                 classes=[Breadcrumb.ITEM.value],
-            ) for link in self.urls]
-            links[0].classes.append('active')
-            links[0].attrs.update({'aria-current':"page"})
+            ) for link_name,link_url in links_dict.items()]
+            links.append(
+                BS5Element(
+                    'li', self.urls[-1],
+                    classes=[Breadcrumb.ITEM.value],
+                )
+            )
+            links[-1].classes.append('active')
+            links[-1].attrs.update({'aria-current': "page"})
         else:
             links = []
-        button = BS5Element(
+        breadcrum = BS5Element(
             self.tag,
-            classes=self.breadcrum_classes,**self.attrs
+            classes=self.breadcrum_classes, **self.attrs
         )
-        btn.include(links)
+        breadcrum.include(*links)
         nav = BS5Element(
             'nav',
             **self.nav_attrs
         )
-        return nav.include(button)
+        return nav.include(breadcrum)

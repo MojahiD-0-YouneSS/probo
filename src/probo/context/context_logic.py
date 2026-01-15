@@ -280,7 +280,6 @@ class TemplateProcessor:
         """
         return f" {{{{ {expression} }}}}"
 
-
 def loop(data, renderer):
     """
     Iterates over data and generates elements using a renderer function.
@@ -323,7 +322,6 @@ def loop(data, renderer):
                 # For lists/ints, pass the single item: renderer(item)
                 results.append(renderer(item))
     return results
-
 
 class TemplateComponentMap:
     """Template Components Map is the cordinator that serves the right component to spesific view"""
@@ -371,7 +369,6 @@ class TemplateComponentMap:
             self.url_name_comp[url_name] = component_name
         return self
 
-
 @dataclass
 class StaticData:
     """
@@ -391,7 +388,6 @@ class StaticData:
             Any: The value associated with the key, or None if not found.
         """
         return self.static_data.get(Value, None)
-
 
 @dataclass
 class DynamicData:

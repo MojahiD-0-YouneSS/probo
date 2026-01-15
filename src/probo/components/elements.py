@@ -190,6 +190,9 @@ class Element:
         self.attrs = attributes
         return self
 
+    def render(self):
+        return self.element
+
     def set_content(self, content: str, extend=False):
         """
         Set the content for the element.

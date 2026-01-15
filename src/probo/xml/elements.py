@@ -1,5 +1,5 @@
 from typing import Any, Union, List, Optional
-
+from probo.components.base import ElementAttributeManipulator
 
 class XMLElement:
     """
@@ -17,7 +17,7 @@ class XMLElement:
         self.content = content
         self.attrs = attrs
         self.children = []
-
+        self.attr_manager = ElementAttributeManipulator(self.attrs)
         # Handle initial content if it's a list
         if isinstance(content, list):
             self.children.extend(content)

@@ -1,7 +1,7 @@
 from probo.styles.frameworks.bs5.components.base import BS5Component
 from probo.styles.frameworks.bs5.comp_enum import Modal
 from probo.styles.frameworks.bs5.bs5 import BS5Element
-class BS5Modal():
+class BS5Modal(BS5Component):
     '''<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open modal for @mdo</button>
 
     <div class="modal" id="exampleModal">
@@ -21,21 +21,23 @@ class BS5Modal():
     </div>
     </div>'''
     
-    def __init__(self, content, **attrs):
+    def __init__(self, content,render_constraints=None, **attrs):
         self.attrs = attrs
         self.content=content
         self.modal_parts=[]
+        self.render_constraints=render_constraints
         # self.template = self._render_comp()
-        self.modal_classes = [Modal.BASE.value]
+        self.modal_classes = [Modal.MODAL.value]
         self.tag = 'div'
-
-        super().__init__(name='BS5-button', props={}, state=None)
+        self.triggers=[]
+        super().__init__(name='BS5-button', state_props=self.render_constraints)
     
     def add_trigger_btn(self,content,**attrs):
         trigger_btn = BS5Element(
             'button',
             content,
-            classes=self.btn_classes,
+            classes=self.modal_classes,
+            data_bs_toggle = "modal",
             **attrs
         )
         self.triggers.append(trigger_btn)
@@ -67,17 +69,21 @@ class BS5Modal():
     def add_modal_footer(self,content,**attrs):
         modal_footer = BS5Element(
             'div',
-            header_content,
+            content,
             classes=[Modal.MODAL_FOOTER.value],
             **attrs
         )
         self.modal_parts.append(modal_footer.render())
-        return self 
+        return self
+
+    def before_render(self, **props):
+        self.include_content_parts(*self.modal_parts)
+
     def _render_comp(self):
         self.content+=''.join(self.modal_parts)
         button = BS5Element(
             self.tag,
             self.content,
-            classes=self.btn_classes,**self.attrs
+            classes=self.modal_classes,**self.attrs
         )
         return button

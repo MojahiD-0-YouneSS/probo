@@ -1,4 +1,4 @@
-from probo.styles.frameworks.bs5.components import (
+from probo.styles.frameworks.bs5.components.accordion import (
     BS5Accordion,
 )
 

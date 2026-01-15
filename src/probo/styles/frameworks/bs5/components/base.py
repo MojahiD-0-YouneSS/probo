@@ -19,11 +19,14 @@ class BS5Component(BaseComponent):
     """
     Base class for all Bootstrap 5 components.
     """
+
     def __init__(self,name: str, state_props: dict = None,  props: dict = None,):
+
         # 1. Set the Tag (Allow override, fallback to default)
         self.DEFAULT_BS5_VARIANTS=[]
         self.STATE=None
         self.children=[]
+        self.DEFAULT_ATTRS = {}
         if self.STATE == 'dynamic':
             raise ValueError("Dynamic components require a state object.")
         self.template = self._render_comp()
@@ -33,7 +36,7 @@ class BS5Component(BaseComponent):
         if isinstance(state_props,dict):
             state=ComponentState(**state_props)
         super().__init__(name=name, state=state, template=self.template, props=props)
-    
+
     def include_env_props(self,**props):
         self.props.update(props)
         return self

@@ -131,9 +131,7 @@ class ComponentState:
         Replace <$ s="..." d='None' i='None'>...</$> in children content with dynamic slot content
         """
         props_check=self.validate_global_props()
-        print(props_check)
-        print(self.props)
-        print(self.incoming_props)
+
         if not props_check:
             if self.strict:
                 raise ValueError(f"[probo Strict]⚠️ Rendering Blocked: {self.state_errors}")
