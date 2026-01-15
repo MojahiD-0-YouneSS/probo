@@ -11,12 +11,12 @@ import subprocess
 from rich.panel import Panel
 from rich.syntax import Syntax
 from probo.terminal.app_generator import (
-    create_mui_dj_structure,
+    create_probo_dj_structure,
     create_hacksoft_structure,
 )
 
 app = typer.Typer(
-    help="MUI: The declarative rendering engine for Django.", add_completion=False
+    help="PROBO: The declarative rendering engine for Django.", add_completion=False
 )
 console = Console()
 VERSION = "1.0.0"
@@ -24,7 +24,7 @@ VERSION = "1.0.0"
 
 def load_tcm_registry(path: Path):
     """
-    Dynamically loads the 'mui_tcm.py' file from the user's project.
+    Dynamically loads the 'probo_tcm.py' file from the user's project.
     Returns the 'tcm' object containing the registered components.
     """
     if not path.exists():
@@ -37,7 +37,7 @@ def load_tcm_registry(path: Path):
     sys.path.append(str(Path.cwd()))
 
     try:
-        spec = spec_from_file_location("mui_tcm", path)
+        spec = spec_from_file_location("probo_tcm", path)
         module = module_from_spec(spec)
         spec.loader.exec_module(module)
 
@@ -46,8 +46,8 @@ def load_tcm_registry(path: Path):
                 f"[red] Error: '{path}' exists but does not export a 'tcm' object.[/red]"
             )
             raise typer.Exit(code=1)
-
         return module.tcm
+
     except Exception as e:
         console.print(f"[red] Error loading registry: {e}[/red]")
         raise typer.Exit(code=1)
@@ -59,18 +59,18 @@ def load_tcm_registry(path: Path):
 class DjangoStructure(str, Enum):
     BASE = "base"  # Standard Django (MVT)
     HACKSOFT = "hacksoft"  # Domain-Driven (Services/Selectors)
-    MUI_DJ = "mui-dj"  # Enterprise (Split Views/Forms + Root Utils)
+    PROBO_DJ = "probo-dj"  # Enterprise (Split Views/Forms + Root Utils)
 
 
 # ==============================================================================
-#  1. PURE MUI PROJECT (Standalone)
+#  1. PURE PROBO PROJECT (Standalone)
 # ==============================================================================
 
 
 @app.command("init")
 def init(name: str):
     """
-    Scaffold a pure 'MUI Project' (Standalone / Static Site).
+    Scaffold a pure 'PROBO Project' (Standalone / Static Site).
     Best for prototyping, landing pages, or HTMX-only sites.
     """
     project_dir = Path.cwd() / name
@@ -92,9 +92,9 @@ if __name__ == "__main__":
     )
 
     # 2. The Registry
-    (project_dir / "mui_tcm.py").write_text(
+    (project_dir / "probo_tcm.py").write_text(
         """
-from mui import TemplateComponentMap
+from probo import TemplateComponentMap
 tcm = TemplateComponentMap()
 # from components.pages import HomePage
 # tcm.register(home=HomePage)
@@ -111,8 +111,8 @@ tcm = TemplateComponentMap()
     (project_dir / "assets").mkdir()
     (project_dir / "dist").mkdir()  # Output folder
 
-    console.print(f"[green]✨ Pure MUI Project '{name}' initialized![/green]")
-    console.print(f"[dim]Run 'cd {name}' then 'mui shell' to start building.[/dim]")
+    console.print(f"[green]✨ Pure PROBO Project '{name}' initialized![/green]")
+    console.print(f"[dim]Run 'cd {name}' then 'probo shell' to start building.[/dim]")
 
 
 # ==============================================================================
@@ -127,11 +127,11 @@ def startapp(
         DjangoStructure.BASE,
         "--structure",
         "-s",
-        help="Choose architecture: 'base' (Standard), 'hacksoft' (DDD), or 'mui-dj' (Enterprise).",
+        help="Choose architecture: 'base' (Standard), 'hacksoft' (DDD), or 'probo-dj' (Enterprise).",
     ),
 ):
     """
-    Create a Django app with MUI scaffolding.
+    Create a Django app with PROBO scaffolding.
     """
     # 1. Run standard Django command
     try:
@@ -143,16 +143,16 @@ def startapp(
         return
 
     app_dir = Path.cwd() / name
-    # 2. Common MUI Layer (All structures get this)
+    # 2. Common PROBO Layer (All structures get this)
     components_dir = app_dir / "components"
     components_dir.mkdir(parents=True, exist_ok=True)
     (components_dir / "__init__.py").touch()
-    (app_dir / "mui_tcm.py").write_text("""
-from mui import TemplateComponentMap
+    (app_dir / "probo_tcm.py").write_text("""
+from probo import TemplateComponentMap
 
 from django.http import HttpResponse
 from django.template import Template, RequestContext
-def render_mui(request, *raw_template_strings,**context):
+def render_probo(request, *raw_template_strings,**context):
     ''' use this to desplay html string as safe html and use it as django's render '''
     raw_template_string = ''.join(raw_template_strings)
     context = RequestContext(request, context)
@@ -169,22 +169,22 @@ tcm = TemplateComponentMap() #mapper of component objects
         create_hacksoft_structure(app_dir)
         console.print(f"[green]✨ Created App '{name}' (HackSoft Style)[/green]")
 
-    elif structure == DjangoStructure.MUI_DJ:
-        create_mui_dj_structure(app_dir, name)
-        console.print(f"[green]✨ Created App '{name}' (MUI-DJ Enterprise)[/green]")
+    elif structure == DjangoStructure.PROBO_DJ:
+        create_probo_dj_structure(app_dir, name)
+        console.print(f"[green]✨ Created App '{name}' (PROBO-DJ Enterprise)[/green]")
 
     else:
         console.print(f"[green]✨ Created App '{name}' (Base Style)[/green]")
 
     # Visual Confirmation
     console.print("   + components/")
-    console.print("   + mui_tcm.py")
+    console.print("   + probo_tcm.py")
 
 
 @app.command("build:css")
 def build_css(
     registry_path: Path = typer.Option(
-        "mui_tcm.py", help="Path to the TCM registry file"
+        "probo_tcm.py", help="Path to the TCM registry file"
     ),
     output: Path = typer.Option(
         "static/css/style.css", help="Output path for the CSS file"
@@ -241,7 +241,7 @@ def build_css(
 @app.command("build:html")
 def build_html(
     registry_path: Path = typer.Option(
-        "mui_tcm.py", help="Path to the TCM registry file"
+        "probo_tcm.py", help="Path to the TCM registry file"
     ),
     output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),
 ):
@@ -267,7 +267,7 @@ def build_html(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{name} - MUI Static Build</title>
+    <title>{name} - PROBO Static Build</title>
     <style>
         {css_output}
     </style>
@@ -296,7 +296,7 @@ def build_html(
 @app.command("preview")
 def preview_component(
     component_name: str,
-    registry_path: Path = typer.Option("mui_tcm.py", help="Path to the TCM registry"),
+    registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry"),
 ):
     """
     Renders a specific component, saves it to a temporary file,
@@ -343,7 +343,7 @@ def preview_component(
         # 4. Save to Temp File (The Logic from your 'build_logic')
         import tempfile
 
-        fd, path = tempfile.mkstemp(suffix=".html", prefix=f"mui_{component_name}_")
+        fd, path = tempfile.mkstemp(suffix=".html", prefix=f"probo_{component_name}_")
 
         with os.fdopen(fd, "w") as tmp:
             tmp.write(full_page)
@@ -364,10 +364,10 @@ def preview_component(
 @app.command("shell")
 def shell():
     """
-    Starts an interactive Python shell with MUI pre-loaded and Rich styling.
+    Starts an interactive Python shell with PROBO pre-loaded and Rich styling.
     """
     user_ns = {}
-    exec("from mui import *", user_ns)
+    exec("from probo import *", user_ns)
 
     def displayhook(value):
         if value is None:
@@ -389,13 +389,13 @@ def shell():
     sys.displayhook = displayhook
 
     banner_text = """
-    [bold green]MUI Interactive Shell v1.0[/bold green]
+    [bold green]PROBO Interactive Shell v1.0[/bold green]
     [yellow]• Standard:[/yellow]  div('Hello', id='main')
     [yellow]• Shorthand:[/yellow] emmet('div #main .container -c Content')
     [yellow]• Logic:[/yellow]     loop(5, hr())
     [italic]Type [red]exit()[/red] to quit.[/italic]"""
 
-    console.print(Panel(banner_text, title="MUI Console", expand=False))
+    console.print(Panel(banner_text, title="PROBO Console", expand=False))
 
     # user_ns = locals()
     console.print(f"[bold blue]Context:[/bold blue] {os.getcwd()}")
@@ -411,7 +411,7 @@ def version():
     """Show the current version."""
     # This replaces your 'show_version' method
     console.print(
-        f"[bold cyan]Mastodon UI (mui)[/bold cyan] version [yellow]{VERSION}[/yellow]"
+        f"[bold cyan]Mastodon UI (probo)[/bold cyan] version [yellow]{VERSION}[/yellow]"
     )
 
 
