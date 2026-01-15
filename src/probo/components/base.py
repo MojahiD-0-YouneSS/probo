@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
 
-from typing import Dict, Union, Self
+from typing import Dict, Union, Self,Any
 
 class ElementAttributeManipulator:
     def __init__(self, attr_dict=None,**kwargs):
