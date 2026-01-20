@@ -15,7 +15,7 @@ class BS5Button(BS5Component):
         self.tag = 'button'
         if self.size in ['sm','lg']:
             self.btn_classes.append(Button.get(size))
-        super().__init__(name='BS5-button', state_props=self.render_constaints,)
+        super().__init__(name='BS5-Button', state_props=self.render_constaints,)
     
     @property    
     def lg(self):
@@ -32,11 +32,12 @@ class BS5Button(BS5Component):
     
     
     def _render_comp(self):
-        
+        attrs = {'Type': 'button', }
+        attrs.update(self.attrs)
         button = BS5Element(
             self.tag,
             self.content,
-            classes=self.btn_classes,**self.attrs
+            classes=self.btn_classes,**attrs
         )
         return button
 
@@ -129,10 +130,12 @@ class BS5ButtonGroup(BS5Component):
         return self
     
     def _render_comp(self):
+        attrs = {'Type':'button',}
+        attrs.update(self.attrs)
         btn_grp = BS5Element(
             self.tag,
             ''.join(self.btns),
-            classes=self.btn_group_classes,**self.attrs
+            classes=self.btn_group_classes,**attrs
         )
         return btn_grp
     

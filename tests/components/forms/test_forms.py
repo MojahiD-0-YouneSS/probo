@@ -42,7 +42,7 @@ def test_declarative_form_style_1_variables():
         username_field,
         bio_field,
         password_field,
-        method="post",
+        method="POST",
         csrf_token="manual-token-87566462464",
     )
 

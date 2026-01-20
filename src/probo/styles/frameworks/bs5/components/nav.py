@@ -42,9 +42,7 @@ class BS5Nav(BS5Component):
                 'a',
                 content,classes=['nav-link',],**attrs
         )
-        item.attr_manager.set_bulk_attr(
 
-        )
         if active:
             item.classes.append('active')
             item.attr_manager.set_attr('aria-current',"page")

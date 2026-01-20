@@ -120,12 +120,16 @@ class ProboFormField:
         tag_name: str = None,
         field_label: str = "",
         content: str = "",
+        label_attr:dict[str,str]=None,
         dj_field=None,
+        wraper_func=None,
         **attrs: dict[str, str],
     ):
         self.content = content
+        self.wraper_func = wraper_func
         self.field_label = field_label
         self.attrs = attrs
+        self.label_attr = label_attr or {}
         self.tag_name = tag_name
         self.widget_info: dict[str, str] = dict()
         self.form_field = str()
@@ -137,7 +141,7 @@ class ProboFormField:
 
         if tag_name:
             info = self._make_info(
-                self.attrs, self.field_label, {"for": attrs.get("id", None)}, content
+                self.attrs, self.field_label, {"for": attrs.get("id", None),**self.label_attr}, content
             )
             self._field_build(tag_name, **info)
 
@@ -178,13 +182,13 @@ class ProboFormField:
                 else tag_method(tag_content, **tag_attrs)
             )
             if not label_string:
-                self.widget_info[f"{input_id}-{tag}"] = tag_string
+                self.widget_info[f"{input_id}-{tag}"] = self.wraper_func(tag_string) if callable(self.wraper_func) else tag_string
             else:
                 label_attrs = info.get("label_attrs", {}) or {}
                 if not label_attrs and input_id:
                     label_attrs["for"] = input_id
                 self.widget_info[f"{input_id}-{tag}"] = (
-                    label(label_string, **label_attrs) + tag_string
+                    self.wraper_func(label(label_string, **label_attrs) + tag_string) if callable(self.wraper_func) else label(label_string, **label_attrs) + tag_string
                 )
         return self
 
@@ -332,6 +336,14 @@ class ProboFormField:
 
         return self._field_build("output", **info)
 
+    def add_custom_field(self,*field_string,skip_wraper=False):
+        field_string = ''.join(field_string)
+        if skip_wraper:
+            self.widget_info['custm-field'] = field_string
+        else:
+            self.widget_info['custm-field'] = self.wraper_func(field_string) if callable(self.wraper_func) else field_string
+        return self
+
     def render(
         self,
     ) -> str:
@@ -348,7 +360,7 @@ class ProboFormField:
                     div(str(e), Class="invalid-feedback")
                     for e in self.dj_field_info[tag]["errors"]
                 ]
-                errors_html = div(*err_list, class_="errors")
+                errors_html = div(*err_list, Class="errors")
                 state_error = {
                     "field_errors": errors_html,
                 }
@@ -408,18 +420,28 @@ class ProboForm:
         use_htmx: bool = True,
         form_class: Any = None,
         form_declaration: Optional[str] = None,
+        override_button=False,
+        override_button_attrs=None,
         csrf_token: str = None,
+            **attrs
     ):
         self.form_class = form_class
         self.request_data = request_data
         self.request_form_bool: bool = bool(request_data)
         self.is_handled = False
         self.use_htmx = use_htmx
+        self.method = method if method else request_data.request_method if request_data else 'GET'
+        self.action = action
+        self.attrs={'action': self.action,
+             'method': self.method.lower(),
+             'enctype': "multipart/form-data",
+             }
+        self.attrs.update(attrs)
+        self.override_button =override_button
+        self.override_button_attrs =override_button_attrs
         self.handler = None
         self.is_valid = False
         self.form_declaration = form_declaration
-        self.method = method or request_data.request_method
-        self.action = action
         self.manual = manual
         self.submit_btn = None
         self._manual_csrf = csrf_token
@@ -428,8 +450,6 @@ class ProboForm:
             self.form_class = (
                 self.request_data.form_class if not self.form_class else self.form_class
             )
-            if self.request_data.is_valid():
-                self.is_valid = self.validate()
 
     def get_csrf_token(self):
         if self._manual_csrf:
@@ -452,20 +472,19 @@ class ProboForm:
                 fields_html.append(mff.render())
         if self.form_declaration:
             fields_html.append(self.form_declaration)
-        submit_btn = button("Submit", type="submit", class_="btn btn-primary")
-        """ if self.is_valid and self.form_declaration :
-            
-            return form(''.join([x.form_field for x in self.form_declaration])+button('submit', Type='submit'),action=self.action, method=self.method)
-        else:
-            return form(str(self.request_data.form)+button('submit', Type='submit'), action=self.action, method=self.method)
-        """
+        submit_btn=''
+        if not self.override_button :
+            if self.override_button_attrs:
+                submit_btn = button("Submit", **self.override_button_attrs)
+            else:
+                submit_btn = button("Submit", type="submit", Class="btn btn-lg")
+
         return form(
             csrf_field,
             *fields_html,
             submit_btn,
-            action=self.action,
-            method=self.method.lower(),
-            enctype="multipart/form-data",  # Safe default
+             **self.attrs,# Safe default
+
         )
 
     def save_to_db(

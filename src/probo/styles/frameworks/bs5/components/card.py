@@ -43,9 +43,9 @@ class BS5Card(BS5Component):
         body = BS5Element(
             'div',
             card_body,
-            classes=[Cards.CARD_BODY.value],
+            classes=[Cards.CARD_BODY.value],**attrs
         )
-        body.include(''.join(self.body_children))
+        body.include(*self.body_children)
         if self.card_body and not override:
             self.card_body+=body.render()
         else:
@@ -56,18 +56,24 @@ class BS5Card(BS5Component):
         header = BS5Element(
             'div',
             card_header,
-            classes=[Cards.CARD_HEADER.value],
+            classes=[Cards.CARD_HEADER.value],**attrs
         )
-        self.card_header=header.render()
+        if self.card_header and not override:
+            self.card_header += header.render()
+        else:
+            self.card_header = header.render()
         return self
 
     def add_card_footer(self, card_footer,override=False,**attrs):
         footer = BS5Element(
             'div',
             card_footer,
-            classes=[Cards.CARD_FOOTER.value],
+            classes=[Cards.CARD_FOOTER.value],**attrs
         )
-        self.card_footer=footer.render()
+        if self.card_footer and not override:
+            self.card_footer += footer.render()
+        else:
+            self.card_footer = footer.render()
         return self
     
     def add_card_image(self,src_url,override=False,**attrs):
@@ -75,20 +81,17 @@ class BS5Card(BS5Component):
             'img',
             classes=[(Cards.CARD_IMG_BOTTOM.value if self.is_image_bottom else Cards.CARD_IMG_TOP.value)],src=src_url
         )
-        self.card_image=img.render()
+        if self.card_image and not override:
+            self.card_image += img.render()
+        else:
+            self.card_image = img.render()
         return self
 
     def before_render(self, **props):
-        if self.card_header:
-            self.add_card_header(str(self.card_header),override=True)
-        if self.card_image:
-            self.add_card_image(str(self.card_image),override=True)
+
         if self.card_body:
-            self.add_card_body(str(self.card_body),override=True)
-            if not self.body_children:
-                self.body_children.append(self.card_body)
-        if self.card_footer:
-            self.add_card_footer(str(self.card_footer),override=True)
+             if not self.body_children:
+                 self.body_children.append(self.card_body)
 
         if self.is_image_bottom:
             parts = [x  for x in [self.card_header,*self.body_children,self.card_footer,self.card_image]if x is not None]
@@ -97,8 +100,25 @@ class BS5Card(BS5Component):
         self.include_content_parts(*parts)
 
     def _render_comp(self):
+        if self.card_header:
+            self.add_card_header(self.card_header, override=True)
+        if self.card_image:
+            self.add_card_image(self.card_image, override=True)
+        if self.card_body:
+            self.add_card_body(self.card_body, override=True)
+
+        if self.card_footer:
+            self.add_card_footer(self.card_footer, override=True)
+
+        if self.is_image_bottom:
+            parts = [x for x in [self.card_header, *self.body_children, self.card_footer, self.card_image] if
+                     x is not None]
+        else:
+            parts = [x for x in [self.card_header, self.card_image, *self.body_children, self.card_footer] if
+                     x is not None]
         card = BS5Element(
             self.tag,
+            ''.join(parts),
             classes=self.card_classes,**self.attrs
         )
         return card
@@ -113,6 +133,7 @@ class BS5CardGroup(BS5Component):
         self.card_classes = [Cards.CARD_GROUP.value]
         self.tag = 'div'
         super().__init__(name='BS5-card', state_props=self.render_constraints)
+
     def add_card(self,card_header=None,card_image=None, card_body=None,card_footer=None, **attrs):
         card = BS5Card(card_header=card_header,card_image=card_image, card_body=card_body,card_footer=card_footer, **attrs).render()
         self.cards.append(card) 
@@ -121,6 +142,7 @@ class BS5CardGroup(BS5Component):
     def before_render(self, **props):
         self.include_content_parts(*self.cards)
         return
+
     def _render_comp(self):
         card_group_content = ''.join(([x.render() if hasattr(x,'render') else str(x) for x in self.cards]))
         card_group = BS5Element(

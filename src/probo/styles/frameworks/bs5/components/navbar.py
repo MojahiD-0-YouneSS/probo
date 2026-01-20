@@ -7,10 +7,11 @@ class BS5NavBar(BS5Component):
     
     '''
     
-    def __init__(self, *content,render_constraints=None, **attrs):
+    def __init__(self, *content,render_constraints=None,wraper_func=None, **attrs):
         self.attrs = attrs
+        self.wraper_func=wraper_func
         self.render_constraints=render_constraints
-        self.content=''.join(content)
+        self.content="".join([x.render() if hasattr(x,'render') else x for x in content])
         self.navbar_items=list()
         # self.template = self._render_comp()
         self.navbar_classes = [Navbar.NAVBAR.value]
@@ -38,7 +39,7 @@ class BS5NavBar(BS5Component):
     def _render_comp(self):
         nav = BS5Element(
             self.tag,
-            self.content,
+            (self.wraper_func(self.content) if callable(self.wraper_func) else self.content),
             classes=self.navbar_classes,**self.attrs
         )
         return nav

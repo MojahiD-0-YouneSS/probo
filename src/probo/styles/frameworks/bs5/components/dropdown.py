@@ -4,11 +4,12 @@ from probo.styles.frameworks.bs5.bs5 import BS5Element
 
 class BS5Dropdown(BS5Component):
     ''''''
-    def __init__(self,render_constraints=None,is_btn_group=False, **attrs):
+    def __init__(self,render_constraints=None,is_btn_group=False,escape_btn=False, **attrs):
         self.attrs = attrs
         self.is_btn_group=is_btn_group
         self.render_constraints=render_constraints
         self.dropdown_btn = None
+        self.escape_btn = escape_btn
         self.dropdown_menu = None
         self.tag = 'div'
         super().__init__(name='BS5-dropdown', state_props=self.render_constraints)
@@ -24,24 +25,36 @@ class BS5Dropdown(BS5Component):
         )
         self.dropdown_btn=btn.render()
         return self
-    def add_menu(self,*items_content,**attrs):
+    def add_menu(self,*items_content,items_attrs=None,**attrs):
+        '''items_attrs must be {index[int]:attrs_dict,}'''
+
         menu = BS5Element(
             'ul',
             classes=[Dropdowns.DROPDOWN_MENU.value,],
             **attrs
         )
-        items = [
-            BS5Element(
-            'li',
-            content,
-            classes=[Dropdowns.DROPDOWN_ITEM.value,],
-        ) for content in items_content]
+        if items_attrs:
+
+            items = [
+                BS5Element(
+                'li',
+                content,
+                classes=[Dropdowns.DROPDOWN_ITEM.value,],
+                **items_attrs[indx]
+            ) for indx,content in enumerate(items_content)]
+        else:
+            items = [
+                BS5Element(
+                'li',
+                content,
+                classes=[Dropdowns.DROPDOWN_ITEM.value,],
+            ) for content in items_content]
         menu.include(*items)
         self.dropdown_menu =menu.render()
         return self
 
     def before_render(self, **props):
-        if self.dropdown_btn:
+        if self.dropdown_btn and not self.escape_btn:
             self.include_content_parts(self.dropdown_btn,first=True)
         if self.dropdown_menu:
             self.include_content_parts(self.dropdown_menu)

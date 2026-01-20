@@ -21,16 +21,16 @@ class BS5Modal(BS5Component):
     </div>
     </div>'''
     
-    def __init__(self, content,render_constraints=None, **attrs):
+    def __init__(self, render_constraints=None, **attrs):
         self.attrs = attrs
-        self.content=content
+
         self.modal_parts=[]
         self.render_constraints=render_constraints
         # self.template = self._render_comp()
         self.modal_classes = [Modal.MODAL.value]
         self.tag = 'div'
         self.triggers=[]
-        super().__init__(name='BS5-button', state_props=self.render_constraints)
+        super().__init__(name='BS5-Modal', state_props=self.render_constraints)
     
     def add_trigger_btn(self,content,**attrs):
         trigger_btn = BS5Element(
@@ -42,8 +42,7 @@ class BS5Modal(BS5Component):
         )
         self.triggers.append(trigger_btn)
         return self
-    
-    
+
     def add_modal_header(self,other_content,title=None,**attrs):
         header_content = ''
         if title:
@@ -55,8 +54,16 @@ class BS5Modal(BS5Component):
             classes=[Modal.MODAL_HEADER.value],
             **attrs
         )
+        btn_close = BS5Element(
+            'button',
+            Type="button",
+            Class="btn-close",
+            data_bs_dismiss="modal",
+        )
+        modal_header.include(btn_close)
         self.modal_parts.append(modal_header.render())
         return self 
+
     def add_modal_body(self,content,**attrs):
         modal_body = BS5Element(
             'div',
@@ -66,6 +73,7 @@ class BS5Modal(BS5Component):
         )
         self.modal_parts.append(modal_body.render())
         return self 
+
     def add_modal_footer(self,content,**attrs):
         modal_footer = BS5Element(
             'div',
@@ -77,13 +85,21 @@ class BS5Modal(BS5Component):
         return self
 
     def before_render(self, **props):
-        self.include_content_parts(*self.modal_parts)
+        moal_dailog = BS5Element(
+            'div',
+            BS5Element(
+                'div',
+            ''.join(self.modal_parts),
+            classes=[Modal.MODAL_CONTENT.value]
+        ),
+        classes = [Modal.MODAL_DIALOG.value]
+        )
+        self.include_content_parts(moal_dailog)
 
     def _render_comp(self):
-        self.content+=''.join(self.modal_parts)
+
         button = BS5Element(
             self.tag,
-            self.content,
             classes=self.modal_classes,**self.attrs
         )
         return button
