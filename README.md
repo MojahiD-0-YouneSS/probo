@@ -1,10 +1,10 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
+<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src=".docs//assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
+![alt text](./docs/assets/images/mastodon_ui.ico "Probo UI Logo")
 
-<p align="center">
-<img src="./assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
+<p align="center"> 
+<img src="./docs/assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
+
 </p>
-
-[![Discord](https://img.shields.io/discord/jnZRbVasgd?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](YOUR_INVITE_LINK)
 
 # 🐘 Probo UI
 
