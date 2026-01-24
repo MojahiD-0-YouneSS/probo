@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>xml - Probo UI</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "xml";
+        var mkdocs_page_input_path = "reference\\probo\\xml\\xml.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Components</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Xml</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../elements/">elements</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">xml</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#probo.xml.xml">xml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#probo.xml.xml.HtmlToXmlConverter">HtmlToXmlConverter</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Xml</li>
+      <li class="breadcrumb-item active">xml</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\xml\xml.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="xml">xml</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.xml.xml"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.xml.xml.HtmlToXmlConverter" class="doc doc-heading">
+            <code>HtmlToXmlConverter</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A class to convert HTML strings to XML, designed with web framework
+functionalities in mind.</p>
+<p>Features:
+- Robust HTML parsing using BeautifulSoup.
+- Conversion to a well-formed XML structure.
+- Simple templating for data rendering (e.g., {{ variable }}).
+- Chaining methods for a fluent API.
+- Error handling for malformed HTML.
+- Pretty printing for XML output.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HtmlToXmlConverter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to convert HTML strings to XML, designed with web framework</span>
+<span class="sd">    functionalities in mind.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">    - Robust HTML parsing using BeautifulSoup.</span>
+<span class="sd">    - Conversion to a well-formed XML structure.</span>
+<span class="sd">    - Simple templating for data rendering (e.g., {{ variable }}).</span>
+<span class="sd">    - Chaining methods for a fluent API.</span>
+<span class="sd">    - Error handling for malformed HTML.</span>
+<span class="sd">    - Pretty printing for XML output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the converter with an optional HTML string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            html_string (str): The initial HTML string to process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">html_string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads a new HTML string into the converter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            html_string (str): The HTML string to load.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">html_string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reset parsed soup</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reset XML root</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the data context for rendering HTML templates.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (dict): A dictionary of data to be used for templating.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the HTML string by replacing placeholders with data from the</span>
+<span class="sd">        context. This is a simple templating mechanism.</span>
+
+<span class="sd">        Placeholders are in the format {{ variable_name }}.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No HTML string loaded to render.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">rendered_html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">placeholder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;{{\s*&quot;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\s*}}&quot;</span>
+            <span class="n">rendered_html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">placeholder</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">rendered_html</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">rendered_html</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal method to parse the HTML string using BeautifulSoup.</span>
+<span class="sd">        Handles basic parsing errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No HTML string provided for parsing.&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Using &#39;html.parser&#39; for general HTML, &#39;lxml&#39; or &#39;html5lib&#39;</span>
+            <span class="c1"># can be more robust for very malformed HTML if available.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error parsing HTML: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_xml_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soup_tag</span><span class="p">:</span> <span class="n">Tag</span><span class="p">,</span> <span class="n">parent_xml_element</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recursively builds XML elements from BeautifulSoup tags.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            soup_tag (bs4.Tag): The BeautifulSoup tag to convert.</span>
+<span class="sd">            parent_xml_element (xml.etree.ElementTree.Element): The parent</span>
+<span class="sd">                                                                XML element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create the XML element with the tag name</span>
+        <span class="n">xml_element</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent_xml_element</span><span class="p">,</span> <span class="n">soup_tag</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Add attributes</span>
+        <span class="k">for</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">soup_tag</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># BeautifulSoup returns attribute values as lists for multi-valued</span>
+            <span class="c1"># attributes like &#39;class&#39;. Join them for XML.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">xml_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xml_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="c1"># Process children (text and nested tags)</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">soup_tag</span><span class="o">.</span><span class="n">contents</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">NavigableString</span><span class="p">):</span>
+                <span class="c1"># If it&#39;s a string, append it as text to the current XML element</span>
+                <span class="c1"># Strip whitespace from text nodes to avoid empty text nodes</span>
+                <span class="c1"># unless they contain significant content.</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">child</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">xml_element</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">xml_element</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">xml_element</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="n">text</span>  <span class="c1"># Append if text already exists</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Tag</span><span class="p">):</span>
+                <span class="c1"># If it&#39;s another tag, recurse</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_build_xml_element</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">xml_element</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretty_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the loaded and potentially rendered HTML to an XML string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pretty_print (bool): If True, the XML output will be</span>
+<span class="sd">                                 formatted with indentation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The XML representation of the HTML.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no HTML string is loaded.</span>
+<span class="sd">            RuntimeError: If there&#39;s an error during HTML parsing or XML conversion.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No HTML string loaded. Use load_html() first.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Ensure HTML is parsed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_html</span><span class="p">()</span>
+
+        <span class="c1"># Create a dummy root element for the XML tree if HTML has multiple top-level elements</span>
+        <span class="c1"># or if we want a consistent root.</span>
+        <span class="c1"># In a real framework, you might decide on a specific root element like &lt;document&gt; or &lt;template&gt;.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">)</span>  <span class="c1"># Using &#39;root&#39; as a generic container</span>
+
+        <span class="c1"># Iterate through the top-level children of the parsed HTML body</span>
+        <span class="c1"># or the entire soup if no body is found (e.g., for fragments)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
+            <span class="n">elements_to_convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">contents</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Handle cases where HTML might be a fragment without &lt;body&gt;</span>
+            <span class="n">elements_to_convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">contents</span>
+
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements_to_convert</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Tag</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_build_xml_element</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">NavigableString</span><span class="p">):</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+                    <span class="c1"># If top-level text, add it to the root&#39;s text or create a text element</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="n">text</span>  <span class="c1"># Append if text already exists</span>
+
+        <span class="c1"># Convert ElementTree to string</span>
+        <span class="k">if</span> <span class="n">pretty_print</span><span class="p">:</span>
+            <span class="c1"># Use minidom for pretty printing as ET&#39;s tostring is basic</span>
+            <span class="n">rough_string</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">reparsed</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">rough_string</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">reparsed</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- Framework-like Extension Points ---</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Placeholder for XML validation (e.g., against an XSD schema).</span>
+<span class="sd">        In a real framework, this would involve more complex logic.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if XML is valid (conceptually), False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No XML generated yet to validate.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># For demonstration, we&#39;ll just check if it&#39;s not empty</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># Simple check if root has children</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pretty_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the generated XML to a file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filepath (str): The path to the file where XML will be saved.</span>
+<span class="sd">            pretty_print (bool): If True, saves with pretty indentation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_xml</span><span class="p">()</span>
+
+        <span class="n">xml_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_xml</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="n">pretty_print</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xml_string</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;XML successfully saved to </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving XML to file: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">html_string</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the converter with an optional HTML string.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>html_string</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The initial HTML string to process.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the converter with an optional HTML string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        html_string (str): The initial HTML string to process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">html_string</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.load_html" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load_html</span><span class="p">(</span><span class="n">html_string</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Loads a new HTML string into the converter.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>html_string</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTML string to load.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>HtmlToXmlConverter</code></b>(                  <code><a class="autorefs autorefs-internal" title="HtmlToXmlConverter (probo.xml.xml.HtmlToXmlConverter)" href="#probo.xml.xml.HtmlToXmlConverter">HtmlToXmlConverter</a></code>
+)              –
+              <div class="doc-md-description">
+                <p>The instance of the converter for chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads a new HTML string into the converter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        html_string (str): The HTML string to load.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">html_string</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reset parsed soup</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reset XML root</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Renders the HTML string by replacing placeholders with data from the
+context. This is a simple templating mechanism.</p>
+<p>Placeholders are in the format {{ variable_name }}.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>HtmlToXmlConverter</code></b>(                  <code><a class="autorefs autorefs-internal" title="HtmlToXmlConverter (probo.xml.xml.HtmlToXmlConverter)" href="#probo.xml.xml.HtmlToXmlConverter">HtmlToXmlConverter</a></code>
+)              –
+              <div class="doc-md-description">
+                <p>The instance of the converter for chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the HTML string by replacing placeholders with data from the</span>
+<span class="sd">    context. This is a simple templating mechanism.</span>
+
+<span class="sd">    Placeholders are in the format {{ variable_name }}.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No HTML string loaded to render.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="n">rendered_html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;{{\s*&quot;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\s*}}&quot;</span>
+        <span class="n">rendered_html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">placeholder</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">rendered_html</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span> <span class="o">=</span> <span class="n">rendered_html</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.save_xml" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">save_xml</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Saves the generated XML to a file.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>filepath</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The path to the file where XML will be saved.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>pretty_print</code></b>
+                  (<code><span title="bool">bool</span></code>, default:
+                      <code>False</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>If True, saves with pretty indentation.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">save_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pretty_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Saves the generated XML to a file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filepath (str): The path to the file where XML will be saved.</span>
+<span class="sd">        pretty_print (bool): If True, saves with pretty indentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_xml</span><span class="p">()</span>
+
+    <span class="n">xml_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_xml</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="n">pretty_print</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xml_string</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;XML successfully saved to </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving XML to file: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.to_xml" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">to_xml</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Converts the loaded and potentially rendered HTML to an XML string.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>pretty_print</code></b>
+                  (<code><span title="bool">bool</span></code>, default:
+                      <code>False</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>If True, the XML output will be
+                 formatted with indentation.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The XML representation of the HTML.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no HTML string is loaded.</p>
+              </div>
+            </li>
+            <li>
+                  <code><span title="RuntimeError">RuntimeError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If there's an error during HTML parsing or XML conversion.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretty_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts the loaded and potentially rendered HTML to an XML string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pretty_print (bool): If True, the XML output will be</span>
+<span class="sd">                             formatted with indentation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The XML representation of the HTML.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no HTML string is loaded.</span>
+<span class="sd">        RuntimeError: If there&#39;s an error during HTML parsing or XML conversion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_string</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No HTML string loaded. Use load_html() first.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Ensure HTML is parsed</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_html</span><span class="p">()</span>
+
+    <span class="c1"># Create a dummy root element for the XML tree if HTML has multiple top-level elements</span>
+    <span class="c1"># or if we want a consistent root.</span>
+    <span class="c1"># In a real framework, you might decide on a specific root element like &lt;document&gt; or &lt;template&gt;.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">)</span>  <span class="c1"># Using &#39;root&#39; as a generic container</span>
+
+    <span class="c1"># Iterate through the top-level children of the parsed HTML body</span>
+    <span class="c1"># or the entire soup if no body is found (e.g., for fragments)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
+        <span class="n">elements_to_convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">contents</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Handle cases where HTML might be a fragment without &lt;body&gt;</span>
+        <span class="n">elements_to_convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_soup</span><span class="o">.</span><span class="n">contents</span>
+
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements_to_convert</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Tag</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_build_xml_element</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">NavigableString</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+                <span class="c1"># If top-level text, add it to the root&#39;s text or create a text element</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="n">text</span>  <span class="c1"># Append if text already exists</span>
+
+    <span class="c1"># Convert ElementTree to string</span>
+    <span class="k">if</span> <span class="n">pretty_print</span><span class="p">:</span>
+        <span class="c1"># Use minidom for pretty printing as ET&#39;s tostring is basic</span>
+        <span class="n">rough_string</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">reparsed</span> <span class="o">=</span> <span class="n">minidom</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">rough_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reparsed</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;unicode&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.validate_xml" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">validate_xml</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Placeholder for XML validation (e.g., against an XSD schema).
+In a real framework, this would involve more complex logic.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>bool</code></b>(                  <code><span title="bool">bool</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>True if XML is valid (conceptually), False otherwise.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Placeholder for XML validation (e.g., against an XSD schema).</span>
+<span class="sd">    In a real framework, this would involve more complex logic.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if XML is valid (conceptually), False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No XML generated yet to validate.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># For demonstration, we&#39;ll just check if it&#39;s not empty</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_root</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># Simple check if root has children</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.xml.xml.HtmlToXmlConverter.with_data" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">with_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sets the data context for rendering HTML templates.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>data</code></b>
+                  (<code><span title="dict">dict</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>A dictionary of data to be used for templating.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>HtmlToXmlConverter</code></b>(                  <code><a class="autorefs autorefs-internal" title="HtmlToXmlConverter (probo.xml.xml.HtmlToXmlConverter)" href="#probo.xml.xml.HtmlToXmlConverter">HtmlToXmlConverter</a></code>
+)              –
+              <div class="doc-md-description">
+                <p>The instance of the converter for chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\xml\xml.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">with_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;HtmlToXmlConverter&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the data context for rendering HTML templates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (dict): A dictionary of data to be used for templating.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HtmlToXmlConverter: The instance of the converter for chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_data_context</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../elements/" class="btn btn-neutral float-left" title="elements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../elements/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>props - Probo UI</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "props";
+        var mkdocs_page_input_path = "reference\\probo\\components\\state\\props.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Components</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../../attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" >State</a>
+    <ul class="current">
+                <li class="toctree-l4"><a class="reference internal" href="../component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4 current"><a class="reference internal current" href="#">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item">State</li>
+      <li class="breadcrumb-item active">props</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\components\state\props.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="props">props</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.components.state.props"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.state.props.StateProps" class="doc doc-heading">
+            <code>StateProps</code>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A dataclass that holds a set of declarative rules (constraints)
+to validate against a component's incoming props.</p>
+<p>If all rules pass, the element is rendered.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\state\props.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StateProps</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A dataclass that holds a set of declarative rules (constraints)</span>
+<span class="sd">    to validate against a component&#39;s incoming props.</span>
+
+<span class="sd">    If all rules pass, the element is rendered.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Rule: Checks if props[key] == required_value</span>
+    <span class="c1"># Example: {&#39;status&#39;: &#39;published&#39;, &#39;is_active&#39;: True}</span>
+    <span class="n">prop_equals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="c1"># Rule: Checks if props[key] is IN allowed_values</span>
+    <span class="c1"># Example: {&#39;user_role&#39;: [&#39;admin&#39;, &#39;editor&#39;]}</span>
+    <span class="n">prop_is_in</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="c1"># Rule: Checks if props[key] is &quot;truthy&quot; (not None, False, 0, &quot;&quot;, [])</span>
+    <span class="c1"># Example: [&#39;user&#39;, &#39;items_list&#39;]</span>
+    <span class="n">prop_is_truthy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="c1"># Rule: Checks if props[key] (an object) has the listed attributes</span>
+    <span class="c1"># Example: {&#39;user&#39;: [&#39;is_staff&#39;, &#39;email&#39;]}</span>
+    <span class="n">prop_has_attributes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="c1"># Rule: Checks if props[&#39;user&#39;] has a specific Django permission</span>
+    <span class="c1"># Example: &quot;app_label.can_edit_post&quot;</span>
+    <span class="n">has_permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="n">s_props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="n">element_state_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="n">required</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="n">display_it</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prom</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_props</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prom</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render_as_dict</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;prop_equals&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_equals</span><span class="p">,</span>
+            <span class="s2">&quot;prop_is_in&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_is_in</span><span class="p">,</span>
+            <span class="s2">&quot;prop_is_truthy&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_is_truthy</span><span class="p">,</span>
+            <span class="s2">&quot;prop_has_attributes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_has_attributes</span><span class="p">,</span>
+            <span class="s2">&quot;has_permissions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_permissions</span><span class="p">,</span>
+            <span class="s2">&quot;s_props&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_props</span><span class="p">,</span>
+            <span class="s2">&quot;element_state_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_state_id</span><span class="p">,</span>
+            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span><span class="p">,</span>
+            <span class="s2">&quot;display_it&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_it</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatePropsValidator</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StatePropsValidator</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.state.props.StatePropsValidator" class="doc doc-heading">
+            <code>StatePropsValidator</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Processes the rules defined in a StateProps object
+against a component's final props dictionary.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\state\props.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">StatePropsValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Processes the rules defined in a StateProps object</span>
+<span class="sd">    against a component&#39;s final props dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules</span><span class="p">:</span> <span class="s2">&quot;StateProps&quot;</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">props</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the component&#39;s props satisfy ALL defined rules.</span>
+<span class="sd">        Returns True if all constraints pass, False otherwise.</span>
+
+<span class="sd">        &#39;props&#39; is the dictionary containing all component data,</span>
+<span class="sd">        including &#39;user&#39;, &#39;session&#39;, etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">display_it</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># We run each check. If any single check fails, we stop</span>
+        <span class="c1"># and return False immediately.</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_equals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_equals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_is_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_truthy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_is_truthy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_has_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_has_attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_permissions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">has_permissions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_s_props</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">s_props</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If all checks passed</span>
+            <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># --- Private Logic Methods ---</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic for: prop_equals&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rules_dict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">required_value</span> <span class="ow">in</span> <span class="n">rules_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The required prop doesn&#39;t even exist</span>
+                <span class="k">if</span> <span class="n">props</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="n">required_value</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The value does not match</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># All checks passed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_is_in</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">rules_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]],</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic for: prop_is_in&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rules_dict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">allowed_values</span> <span class="ow">in</span> <span class="n">rules_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allowed_values</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                    <span class="c1"># Rule is misconfigured, fail safely</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The required prop doesn&#39;t exist</span>
+                <span class="k">if</span> <span class="n">props</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_values</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The value is not in the allowed list</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># All checks passed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_truthy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic for: prop_is_truthy&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rules_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">rules_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The required prop doesn&#39;t exist</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">props</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="c1"># Fails if prop is None, False, 0, &quot;&quot;, [], {}, etc.</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># All checks passed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_has_attributes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">rules_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic for: prop_has_attributes&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rules_dict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">required_attrs</span> <span class="ow">in</span> <span class="n">rules_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The required prop (object) doesn&#39;t exist</span>
+
+                <span class="n">obj_to_check</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">attr_name</span> <span class="ow">in</span> <span class="n">required_attrs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj_to_check</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># The object is missing a required attribute</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># All checks passed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_permissions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">permission_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic for: has_permission&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">permission_list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># No permission rule was defined, so it passes</span>
+
+        <span class="c1"># To check permissions, we MUST have a &#39;user&#39; object in props</span>
+        <span class="k">if</span> <span class="s2">&quot;user&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">props</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Cannot check permissions without a user</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Check if the user object is a valid Django user (or mock)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;has_perm&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Not a valid user object</span>
+
+        <span class="c1"># The final check against Django&#39;s permission system</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">has_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span> <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permission_list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># User has the permission</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_s_props</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">s_props</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># return self.props.items() &lt;= props.items()</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">__exists_in_dict</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">props</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="c1"># Check key</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">status</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># Check nested dict</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Check nested key or nested value</span>
+                    <span class="n">status</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">valid_props</span><span class="p">(</span><span class="n">props</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="ow">in</span> <span class="n">props</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s_props</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">__exists_in_dict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s_props</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+
+        <span class="k">return</span> <span class="n">valid_props</span><span class="p">(</span><span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.state.props.StatePropsValidator.is_valid" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">is_valid</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Checks if the component's props satisfy ALL defined rules.
+Returns True if all constraints pass, False otherwise.</p>
+<p>'props' is the dictionary containing all component data,
+including 'user', 'session', etc.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\state\props.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if the component&#39;s props satisfy ALL defined rules.</span>
+<span class="sd">    Returns True if all constraints pass, False otherwise.</span>
+
+<span class="sd">    &#39;props&#39; is the dictionary containing all component data,</span>
+<span class="sd">    including &#39;user&#39;, &#39;session&#39;, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">display_it</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># We run each check. If any single check fails, we stop</span>
+    <span class="c1"># and return False immediately.</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_equals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_equals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_is_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_is_in</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_truthy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_is_truthy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_has_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">prop_has_attributes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_permissions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">has_permissions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_s_props</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">s_props</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># If all checks passed</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../component_state/" class="btn btn-neutral float-left" title="component_state"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../tag_classes/block_tags/" class="btn btn-neutral float-right" title="block_tags">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../component_state/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../tag_classes/block_tags/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

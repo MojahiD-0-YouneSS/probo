@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>django - Probo UI</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "django";
+        var mkdocs_page_input_path = "reference\\probo\\context\\django.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Components</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../components/node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../components/tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Context</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">django</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#probo.context.django">django</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#probo.context.django.DjangoComponent">DjangoComponent</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#probo.context.django.DjangoComponentTools">DjangoComponentTools</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Context</li>
+      <li class="breadcrumb-item active">django</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\context\django.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="django">django</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.context.django"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.context.django.DjangoComponent" class="doc doc-heading">
+            <code>DjangoComponent</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A declarative builder for Django Templates.
+Allows defining 'extends', 'blocks', raw template strings, and variables in Python.</p>
+<p>This class is framework-agnostic at import time. Actual rendering
+requires Django to be installed and configured in the execution environment.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\context\django.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DjangoComponent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A declarative builder for Django Templates.</span>
+<span class="sd">    Allows defining &#39;extends&#39;, &#39;blocks&#39;, raw template strings, and variables in Python.</span>
+
+<span class="sd">    This class is framework-agnostic at import time. Actual rendering</span>
+<span class="sd">    requires Django to be installed and configured in the execution environment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">template_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extends</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the DjangoComponent builder.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_string (str, optional): The base raw template content.</span>
+<span class="sd">            context (Dict[str, Any], optional): Initial context dictionary.</span>
+<span class="sd">            extends (str, optional): The parent template to extend.</span>
+<span class="sd">            **kwargs: Additional variables to be added to the context.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span> <span class="o">=</span> <span class="n">template_string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span> <span class="o">=</span> <span class="n">extends</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Store variables passed as kwargs for substitution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">extends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the parent template (e.g. &#39;base.html&#39;).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_name (str): The name/path of the parent template.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DjangoComponent: Self, for method chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span> <span class="o">=</span> <span class="n">template_name</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a named block to the template: {% block name %}...{% endblock %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): The name of the block.</span>
+<span class="sd">            content (str): The content to insert into the block.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DjangoComponent: Self, for method chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets context variables for the template.</span>
+<span class="sd">        These are merged into the context at render time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Key-value pairs representing template variables.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DjangoComponent: Self, for method chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compiles internal variable syntax into valid Django Template syntax.</span>
+<span class="sd">        Converts &lt;$probo-var name=&#39;variable_name&#39;/&gt;  --&gt;  {{ variable_name }}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            source (str): The template string containing internal variable placeholders.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The template string with valid Django variable tags.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Regex matches &lt;$probo-var name=&#39;...&#39;/&gt; or name=&quot;...&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&lt;\$probo-var\s+name=[&#39;</span><span class="se">\&quot;</span><span class="s2">](.*?)[&#39;</span><span class="se">\&quot;</span><span class="s2">]\s*/&gt;&quot;</span>
+
+        <span class="c1"># Replace matches with Django variable syntax {{ ... }}</span>
+        <span class="n">compiled_source</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;{{\1}}&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">compiled_source</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the final raw Django Template string by assembling extensions, blocks, and content.</span>
+
+<span class="sd">        It combines:</span>
+<span class="sd">        1. The {% extends %} tag (if present).</span>
+<span class="sd">        2. All defined blocks.</span>
+<span class="sd">        3. Any raw template content.</span>
+<span class="sd">        4. Variable syntax translation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The complete, renderable Django template source string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 1. Extends</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% extends &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span><span class="si">}</span><span class="s2">&#39; %</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># 2. Blocks (If extending) or Raw Content (If not)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% block </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="se">{{</span><span class="s2">% endblock %</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Append raw template content if not just blocks</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span><span class="p">)</span>
+
+        <span class="n">raw_source</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+        <span class="c1"># 3. Apply Variable Substitution (probo -&gt; Django syntax)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_vars</span><span class="p">(</span><span class="n">raw_source</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the constructed template using Django.</span>
+
+<span class="sd">        This method compiles the source and returns it as a string.</span>
+<span class="sd">        Note: This currently returns the *source* string, but in a real Django environment,</span>
+<span class="sd">        this would likely interact with `django.template.Template` and `Context`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The final template source string (ready for Django engine processing).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_source</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">source</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">template_string</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extends</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the DjangoComponent builder.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>template_string</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The base raw template content.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>context</code></b>
+                  (<code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Initial context dictionary.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>extends</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The parent template to extend.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>**kwargs</code></b>
+              –
+              <div class="doc-md-description">
+                <p>Additional variables to be added to the context.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">template_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extends</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the DjangoComponent builder.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template_string (str, optional): The base raw template content.</span>
+<span class="sd">        context (Dict[str, Any], optional): Initial context dictionary.</span>
+<span class="sd">        extends (str, optional): The parent template to extend.</span>
+<span class="sd">        **kwargs: Additional variables to be added to the context.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span> <span class="o">=</span> <span class="n">template_string</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span> <span class="o">=</span> <span class="n">extends</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Store variables passed as kwargs for substitution</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">kwargs</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.add_block" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_block</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds a named block to the template: {% block name %}...{% endblock %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The name of the block.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The content to insert into the block.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>DjangoComponent</code></b>              –
+              <div class="doc-md-description">
+                <p>Self, for method chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds a named block to the template: {% block name %}...{% endblock %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): The name of the block.</span>
+<span class="sd">        content (str): The content to insert into the block.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DjangoComponent: Self, for method chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.build_source" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">build_source</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Constructs the final raw Django Template string by assembling extensions, blocks, and content.</p>
+<p>It combines:
+1. The {% extends %} tag (if present).
+2. All defined blocks.
+3. Any raw template content.
+4. Variable syntax translation.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The complete, renderable Django template source string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs the final raw Django Template string by assembling extensions, blocks, and content.</span>
+
+<span class="sd">    It combines:</span>
+<span class="sd">    1. The {% extends %} tag (if present).</span>
+<span class="sd">    2. All defined blocks.</span>
+<span class="sd">    3. Any raw template content.</span>
+<span class="sd">    4. Variable syntax translation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The complete, renderable Django template source string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># 1. Extends</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% extends &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span><span class="si">}</span><span class="s2">&#39; %</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. Blocks (If extending) or Raw Content (If not)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% block </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="se">{{</span><span class="s2">% endblock %</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Append raw template content if not just blocks</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw_template</span><span class="p">)</span>
+
+    <span class="n">raw_source</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+    <span class="c1"># 3. Apply Variable Substitution (probo -&gt; Django syntax)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_vars</span><span class="p">(</span><span class="n">raw_source</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.extends" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">extends</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sets the parent template (e.g. 'base.html').</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>template_name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The name/path of the parent template.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>DjangoComponent</code></b>              –
+              <div class="doc-md-description">
+                <p>Self, for method chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">extends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the parent template (e.g. &#39;base.html&#39;).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template_name (str): The name/path of the parent template.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DjangoComponent: Self, for method chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">extends_from</span> <span class="o">=</span> <span class="n">template_name</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Renders the constructed template using Django.</p>
+<p>This method compiles the source and returns it as a string.
+Note: This currently returns the <em>source</em> string, but in a real Django environment,
+this would likely interact with <code>django.template.Template</code> and <code>Context</code>.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The final template source string (ready for Django engine processing).</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the constructed template using Django.</span>
+
+<span class="sd">    This method compiles the source and returns it as a string.</span>
+<span class="sd">    Note: This currently returns the *source* string, but in a real Django environment,</span>
+<span class="sd">    this would likely interact with `django.template.Template` and `Context`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The final template source string (ready for Django engine processing).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_source</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">source</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponent.set_variables" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_variables</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sets context variables for the template.
+These are merged into the context at render time.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>**kwargs</code></b>
+              –
+              <div class="doc-md-description">
+                <p>Key-value pairs representing template variables.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>DjangoComponent</code></b>              –
+              <div class="doc-md-description">
+                <p>Self, for method chaining.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets context variables for the template.</span>
+<span class="sd">    These are merged into the context at render time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        **kwargs: Key-value pairs representing template variables.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DjangoComponent: Self, for method chaining.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.context.django.DjangoComponentTools" class="doc doc-heading">
+            <code>DjangoComponentTools</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TemplateProcessor (probo.context.context_logic.TemplateProcessor)" href="../context_logic/#probo.context.context_logic.TemplateProcessor">TemplateProcessor</a></code></p>
+
+
+
+        <p>Helper methods to generate Django Template Language (DTL) syntax blocks.
+Inherited by DjangoComponent to provide a fluent API for template logic.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\context\django.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DjangoComponentTools</span><span class="p">(</span><span class="n">TemplateProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper methods to generate Django Template Language (DTL) syntax blocks.</span>
+<span class="sd">    Inherited by DjangoComponent to provide a fluent API for template logic.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">If</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">else_content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">elif_blocks</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a standard Django IF block: {% if condition %}...{% endif %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            condition (str): The boolean expression to evaluate (e.g., &quot;user.is_authenticated&quot;).</span>
+<span class="sd">            content (str): The template content to render if the condition is true.</span>
+<span class="sd">            else_content (str, optional): The content for the {% else %} block.</span>
+<span class="sd">            **elif_blocks: Key-value pairs where keys are conditions and values are content for {% elif %} blocks.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The fully formatted Django template string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">if_true</span><span class="p">(</span>
+            <span class="n">condition</span><span class="p">,</span>
+            <span class="n">content</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="s2">&quot;django&quot;</span><span class="p">,</span>
+            <span class="n">else_statement</span><span class="o">=</span><span class="n">else_content</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">elif_blocks</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">For</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">iterable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">empty_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django FOR loop: {% for item in iterable %}...{% endfor %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item (str): The variable name for the current item in the loop.</span>
+<span class="sd">            iterable (str): The collection or iterable to loop over.</span>
+<span class="sd">            content (str): The template content to repeat for each item.</span>
+<span class="sd">            empty_content (str, optional): Content to render in the {% empty %} block if the iterable is empty.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The fully formatted Django template string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">for_loop</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">iterable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">content</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="s2">&quot;django&quot;</span><span class="p">,</span>
+            <span class="n">empty_content</span><span class="o">=</span><span class="n">empty_content</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">Var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django variable tag: {{ variable_name }}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            variable_name (str): The name of the variable to output.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The formatted variable string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">With</span><span class="p">(</span><span class="n">assignments</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django WITH block: {% with x=1 y=2 %}...{% endwith %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            assignments (str): The variable assignments (e.g., &quot;total=business.employees.count&quot;).</span>
+<span class="sd">            content (str): The content where these variables are available.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The formatted with-block string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% with </span><span class="si">{</span><span class="n">assignments</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}\n</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="se">\n{{</span><span class="s2">% endwith %</span><span class="se">}}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Comment</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django comment block: {# comment #}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            content (str): The text content of the comment.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The formatted comment string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2"># </span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2"> #</span><span class="se">}}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Include</span><span class="p">(</span><span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">with_args</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django INCLUDE tag: {% include &#39;name&#39; %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            template_name (str): The path/name of the template to include.</span>
+<span class="sd">            with_args (str, optional): Additional context variables to pass (e.g., &quot;arg=value&quot;).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The formatted include tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot; with </span><span class="si">{</span><span class="n">with_args</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">with_args</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% include &#39;</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s2">&#39;</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Csrf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the Django CSRF token tag: {% csrf_token %}</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The csrf token tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;{</span><span class="si">% c</span><span class="s2">srf_token %}&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Load</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Django LOAD tag: {% load library %}</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            library (str): The name of the template library to load (e.g., &quot;static&quot;).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The formatted load tag.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% load </span><span class="si">{</span><span class="n">library</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.Comment" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Comment</span><span class="p">(</span><span class="n">content</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django comment block: {# comment #}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The text content of the comment.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The formatted comment string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Comment</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django comment block: {# comment #}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        content (str): The text content of the comment.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The formatted comment string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2"># </span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2"> #</span><span class="se">}}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.Csrf" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Csrf</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates the Django CSRF token tag: {% csrf_token %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The csrf token tag.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Csrf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates the Django CSRF token tag: {% csrf_token %}</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The csrf token tag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;{</span><span class="si">% c</span><span class="s2">srf_token %}&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.For" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">For</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">empty_content</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django FOR loop: {% for item in iterable %}...{% endfor %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>item</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The variable name for the current item in the loop.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>iterable</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The collection or iterable to loop over.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The template content to repeat for each item.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>empty_content</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Content to render in the {% empty %} block if the iterable is empty.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The fully formatted Django template string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">For</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">iterable</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">empty_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django FOR loop: {% for item in iterable %}...{% endfor %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item (str): The variable name for the current item in the loop.</span>
+<span class="sd">        iterable (str): The collection or iterable to loop over.</span>
+<span class="sd">        content (str): The template content to repeat for each item.</span>
+<span class="sd">        empty_content (str, optional): Content to render in the {% empty %} block if the iterable is empty.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The fully formatted Django template string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">for_loop</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">iterable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">,</span>
+        <span class="n">style</span><span class="o">=</span><span class="s2">&quot;django&quot;</span><span class="p">,</span>
+        <span class="n">empty_content</span><span class="o">=</span><span class="n">empty_content</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.If" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">If</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">else_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">elif_blocks</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a standard Django IF block: {% if condition %}...{% endif %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>condition</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The boolean expression to evaluate (e.g., "user.is_authenticated").</p>
+              </div>
+            </li>
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The template content to render if the condition is true.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>else_content</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The content for the {% else %} block.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>**elif_blocks</code></b>
+              –
+              <div class="doc-md-description">
+                <p>Key-value pairs where keys are conditions and values are content for {% elif %} blocks.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The fully formatted Django template string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">If</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">else_content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">elif_blocks</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a standard Django IF block: {% if condition %}...{% endif %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        condition (str): The boolean expression to evaluate (e.g., &quot;user.is_authenticated&quot;).</span>
+<span class="sd">        content (str): The template content to render if the condition is true.</span>
+<span class="sd">        else_content (str, optional): The content for the {% else %} block.</span>
+<span class="sd">        **elif_blocks: Key-value pairs where keys are conditions and values are content for {% elif %} blocks.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The fully formatted Django template string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">if_true</span><span class="p">(</span>
+        <span class="n">condition</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">,</span>
+        <span class="n">style</span><span class="o">=</span><span class="s2">&quot;django&quot;</span><span class="p">,</span>
+        <span class="n">else_statement</span><span class="o">=</span><span class="n">else_content</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">elif_blocks</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.Include" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Include</span><span class="p">(</span><span class="n">template_name</span><span class="p">,</span> <span class="n">with_args</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django INCLUDE tag: {% include 'name' %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>template_name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The path/name of the template to include.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>with_args</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Additional context variables to pass (e.g., "arg=value").</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The formatted include tag.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Include</span><span class="p">(</span><span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">with_args</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django INCLUDE tag: {% include &#39;name&#39; %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template_name (str): The path/name of the template to include.</span>
+<span class="sd">        with_args (str, optional): Additional context variables to pass (e.g., &quot;arg=value&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The formatted include tag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot; with </span><span class="si">{</span><span class="n">with_args</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">with_args</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% include &#39;</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s2">&#39;</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.Load" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Load</span><span class="p">(</span><span class="n">library</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django LOAD tag: {% load library %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>library</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The name of the template library to load (e.g., "static").</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The formatted load tag.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Load</span><span class="p">(</span><span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django LOAD tag: {% load library %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        library (str): The name of the template library to load (e.g., &quot;static&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The formatted load tag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% load </span><span class="si">{</span><span class="n">library</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.Var" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Var</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django variable tag: {{ variable_name }}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>variable_name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The name of the variable to output.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The formatted variable string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">Var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django variable tag: {{ variable_name }}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        variable_name (str): The name of the variable to output.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The formatted variable string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_variable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.context.django.DjangoComponentTools.With" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">With</span><span class="p">(</span><span class="n">assignments</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generates a Django WITH block: {% with x=1 y=2 %}...{% endwith %}</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>assignments</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The variable assignments (e.g., "total=business.employees.count").</p>
+              </div>
+            </li>
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The content where these variables are available.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>str</code></b>(                  <code><span title="str">str</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>The formatted with-block string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\context\django.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@staticmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">With</span><span class="p">(</span><span class="n">assignments</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a Django WITH block: {% with x=1 y=2 %}...{% endwith %}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        assignments (str): The variable assignments (e.g., &quot;total=business.employees.count&quot;).</span>
+<span class="sd">        content (str): The content where these variables are available.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The formatted with-block string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">% with </span><span class="si">{</span><span class="n">assignments</span><span class="si">}</span><span class="s2"> %</span><span class="se">}}\n</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="se">\n{{</span><span class="s2">% endwith %</span><span class="se">}}</span><span class="s2">&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../context_logic/" class="btn btn-neutral float-left" title="context_logic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../htmx/htmx/" class="btn btn-neutral float-right" title="htmx">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../context_logic/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../htmx/htmx/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

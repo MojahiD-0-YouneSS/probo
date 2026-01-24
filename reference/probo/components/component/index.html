@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>component - Probo UI</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "component";
+        var mkdocs_page_input_path = "reference\\probo\\components\\component.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Components</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../base/">base</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">component</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#probo.components.component">component</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#probo.components.component.Component">Component</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Components</li>
+      <li class="breadcrumb-item active">component</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\components\component.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="component">component</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.components.component"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.component.Component" class="doc doc-heading">
+            <code>Component</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>The base class for all UI components in PROBO.
+Orchestrates state management, template rendering, and JIT CSS compilation.</p>
+<p>This class acts as the conductor, coordinating the Body (Template/Elements),
+the Brain (ComponentState), and the Skin (JIT CSS). It supports lifecycle
+hooks, skin swapping, and root element proxying.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>Unique identifier for the component registry. Used for debugging and hydration.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>state</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="ComponentState (probo.components.state.component_state.ComponentState)" href="../state/component_state/#probo.components.state.component_state.ComponentState">ComponentState</a></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The state manager containing static/dynamic data and logic gates.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>template</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code><span title="str">str</span>()</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The raw HTML string containing element state placeholders.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>props</code></b>
+                  (<code><span title="dict">dict</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>context or configuration properties passed to the component.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>**elements</code></b>
+                  (<code><span title="dict">dict</span></code>, default:
+                      <code>{}</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Child components or template fragments keyed by name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Attributes:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The component's registry name.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>comp_state</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="ComponentState (probo.components.state.component_state.ComponentState)" href="../state/component_state/#probo.components.state.component_state.ComponentState">ComponentState</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The internal state manager.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>active_css_rules</code></b>
+                  (<code><span title="List">List</span>[<a class="autorefs autorefs-internal" title="CssRule (probo.styles.elements.CssRule)" href="../../styles/plain_css/#probo.styles.plain_css.CssRule">CssRule</a>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The list of CSS rules currently applied.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>default_css_rules</code></b>
+                  (<code><span title="List">List</span>[<a class="autorefs autorefs-internal" title="CssRule (probo.styles.elements.CssRule)" href="../../styles/plain_css/#probo.styles.plain_css.CssRule">CssRule</a>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The baseline CSS rules (used for resetting skins).</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>        <p>Example:</p>
+<pre><code>static:
+
+    &gt;&gt;&gt; # Define template
+    &gt;&gt;&gt; template_string = div(span('hello',strong('world!')),)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Define Component
+    &gt;&gt;&gt; comp = Component("UserBadge",template_string)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt;  #set root element
+    &gt;&gt;&gt;  comp.set_root_element('section',Id='root',Class='root-class')
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Apply Style
+    &gt;&gt;&gt; comp.load_css_rules(span=CssRule(font_weight="bold"))
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Render
+    &gt;&gt;&gt; html, css = comp.render()
+    &gt;&gt;&gt; html -&gt; &lt;section id="root" class="root-class"&gt;&lt;span&gt;hello&lt;strong&gt;world!&lt;/strong&gt;&lt;/span&gt;&lt;/section&gt;
+    &gt;&gt;&gt; css -&gt; span {font-weight:bold;}
+
+state defined:
+    &gt;&gt;&gt; # Define State
+    &gt;&gt;&gt; es = ElementState('span', d_state='username')
+    &gt;&gt;&gt; template_string = div(span('User:',strong(es.placeholder)),)
+    &gt;&gt;&gt; state = ComponentState(d_data={'username': 'Admin'}, es)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Define Component
+    &gt;&gt;&gt; comp = Component("UserBadge", state=state, template=template_string)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Apply Style
+    &gt;&gt;&gt; comp.load_css_rules(span=CssRule(font_weight="bold"))
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # Render
+    &gt;&gt;&gt; html, css = comp.render()
+    &gt;&gt;&gt; html -&gt; &lt;section id="root" class="root-class"&gt;&lt;span&gt;User:&lt;strong&gt;&lt;span&gt;Admin&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/section&gt;
+    &gt;&gt;&gt; css -&gt; span {font-weight:bold;}
+</code></pre>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\component.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Component</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The base class for all UI components in PROBO.</span>
+<span class="sd">    Orchestrates state management, template rendering, and JIT CSS compilation.</span>
+
+<span class="sd">    This class acts as the conductor, coordinating the Body (Template/Elements),</span>
+<span class="sd">    the Brain (ComponentState), and the Skin (JIT CSS). It supports lifecycle</span>
+<span class="sd">    hooks, skin swapping, and root element proxying.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Unique identifier for the component registry. Used for debugging and hydration.</span>
+<span class="sd">        state (ComponentState, optional): The state manager containing static/dynamic data and logic gates.</span>
+<span class="sd">        template (str, optional): The raw HTML string containing element state placeholders.</span>
+<span class="sd">        props (dict, optional):  context or configuration properties passed to the component.</span>
+<span class="sd">        **elements (dict): Child components or template fragments keyed by name.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): The component&#39;s registry name.</span>
+<span class="sd">        comp_state (ComponentState): The internal state manager.</span>
+<span class="sd">        active_css_rules (List[CssRule]): The list of CSS rules currently applied.</span>
+<span class="sd">        default_css_rules (List[CssRule]): The baseline CSS rules (used for resetting skins).</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        static:</span>
+
+<span class="sd">            &gt;&gt;&gt; # Define template</span>
+<span class="sd">            &gt;&gt;&gt; template_string = div(span(&#39;hello&#39;,strong(&#39;world!&#39;)),)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Define Component</span>
+<span class="sd">            &gt;&gt;&gt; comp = Component(&quot;UserBadge&quot;,template_string)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt;  #set root element</span>
+<span class="sd">            &gt;&gt;&gt;  comp.set_root_element(&#39;section&#39;,Id=&#39;root&#39;,Class=&#39;root-class&#39;)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Apply Style</span>
+<span class="sd">            &gt;&gt;&gt; comp.load_css_rules(span=CssRule(font_weight=&quot;bold&quot;))</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Render</span>
+<span class="sd">            &gt;&gt;&gt; html, css = comp.render()</span>
+<span class="sd">            &gt;&gt;&gt; html -&gt; &lt;section id=&quot;root&quot; class=&quot;root-class&quot;&gt;&lt;span&gt;hello&lt;strong&gt;world!&lt;/strong&gt;&lt;/span&gt;&lt;/section&gt;</span>
+<span class="sd">            &gt;&gt;&gt; css -&gt; span {font-weight:bold;}</span>
+
+<span class="sd">        state defined:</span>
+<span class="sd">            &gt;&gt;&gt; # Define State</span>
+<span class="sd">            &gt;&gt;&gt; es = ElementState(&#39;span&#39;, d_state=&#39;username&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; template_string = div(span(&#39;User:&#39;,strong(es.placeholder)),)</span>
+<span class="sd">            &gt;&gt;&gt; state = ComponentState(d_data={&#39;username&#39;: &#39;Admin&#39;}, es)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Define Component</span>
+<span class="sd">            &gt;&gt;&gt; comp = Component(&quot;UserBadge&quot;, state=state, template=template_string)</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Apply Style</span>
+<span class="sd">            &gt;&gt;&gt; comp.load_css_rules(span=CssRule(font_weight=&quot;bold&quot;))</span>
+<span class="sd">            &gt;&gt;&gt;</span>
+<span class="sd">            &gt;&gt;&gt; # Render</span>
+<span class="sd">            &gt;&gt;&gt; html, css = comp.render()</span>
+<span class="sd">            &gt;&gt;&gt; html -&gt; &lt;section id=&quot;root&quot; class=&quot;root-class&quot;&gt;&lt;span&gt;User:&lt;strong&gt;&lt;span&gt;Admin&lt;/span&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/section&gt;</span>
+<span class="sd">            &gt;&gt;&gt; css -&gt; span {font-weight:bold;}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">_registry</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Global component registry</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">ComponentState</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(),</span>
+        <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">elements</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">k</span><span class="p">:</span> <span class="n">TemplateResolver</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">template_resolver</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_manager</span> <span class="o">=</span> <span class="n">ComponentAttrManager</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">template</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span> <span class="o">=</span> <span class="n">TemplateResolver</span><span class="p">(</span><span class="n">tmplt_str</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">load_it</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span> <span class="o">=</span> <span class="n">template</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_root_element</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">props</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span> <span class="o">=</span> <span class="n">state</span> <span class="ow">or</span> <span class="n">ComponentState</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_css_rules</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmp_style</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_registry</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>  <span class="c1"># Auto-register</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_init</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lifecycle Hook: Called after initialization. Override to add setup logic.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">before_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lifecycle Hook: Called before render. Override to modify state/props dynamically.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves a registered component by name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">ComponentState</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Registers a new component instance.&quot;&quot;&quot;</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_registry</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">comp</span>
+        <span class="k">return</span> <span class="n">comp</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_root_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Defines a wrapper element for the component.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_root_element</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_root_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a CSS class to the root element.&quot;&quot;&quot;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># simple check to avoid duplicates or extra spaces</span>
+        <span class="k">if</span> <span class="n">class_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_root_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the ID of the root element.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_id</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">:</span> <span class="s2">&quot;str|Component&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a child component or string content.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">child</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">child</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">child</span><span class="o">.</span><span class="n">render</span><span class="p">()})</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">child_obj</span> <span class="o">=</span> <span class="n">TemplateResolver</span><span class="p">(</span>
+                    <span class="n">tmplt_str</span><span class="o">=</span><span class="n">child</span><span class="p">,</span> <span class="n">load_it</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">template_resolver</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">children_info</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child_obj</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid child type or no name&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">sub_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Embeds another component inside this one.&quot;&quot;&quot;</span>
+
+        <span class="n">render_result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">render_result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">html</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">render_result</span>
+            <span class="c1"># Note: You might want to bubble up the CSS here too,</span>
+            <span class="c1"># but for now we just store HTML</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">component</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">html</span><span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">component</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">render_result</span><span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">props</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">override_props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">force_state</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">add_to_global</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compiles the component into final HTML and CSS.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (html_string, css_string) or str: html_string (if no CSS)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_render</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="n">override_props</span> <span class="ow">or</span> <span class="p">{}))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">override_props</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">add_to_global</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">override_props</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">force_state</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">override_props</span>  <span class="c1"># not quite</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">override_props</span><span class="p">)</span>  <span class="c1"># not quite</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">state_errors</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="p">,</span><span class="s1">&#39;render&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="o">.</span><span class="n">tmplt_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="n">template</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">incoming_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span>  <span class="c1"># not quite</span>
+
+        <span class="n">final_template</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">resolved_template</span><span class="p">(</span><span class="n">template</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_root_element</span><span class="p">:</span>
+            <span class="n">final_template</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+                <span class="n">content</span><span class="o">=</span><span class="n">final_template</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">build_tag</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">:</span>
+            <span class="n">valid_css</span> <span class="o">=</span> <span class="n">element_style_state</span><span class="p">(</span>
+                <span class="n">final_template</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">resolved_state_elements</span><span class="p">,</span>
+                <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmp_style</span> <span class="o">=</span> <span class="n">ComponentStyle</span><span class="p">(</span><span class="n">final_template</span><span class="p">,</span> <span class="o">*</span><span class="n">valid_css</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">final_template</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmp_style</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">final_template</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_skin</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">Self</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">root_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">root_attr_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">root_css</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;CssSelector&quot;</span><span class="p">,</span> <span class="s2">&quot;CssRule&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a new skin (CSS rules) to the component.</span>
+<span class="sd">        Supports Dictionaries, other Components, Theme lists, and Root kwargs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_rules</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># --- CASE 1: Dictionary {selector: {prop: val}} ---</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">new_rules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+
+        <span class="c1"># --- CASE 2: Component Inheritance ---</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;active_css_rules&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">,</span> <span class="nb">list</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">)</span>
+        <span class="c1"># --- CASE 3: Root Inheritance (kwargs) ---</span>
+        <span class="k">if</span> <span class="n">root_css</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">root_attr</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span> <span class="ow">and</span> <span class="n">root_attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="n">root_attr</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;true&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr_value</span> <span class="k">else</span> <span class="n">root_attr_value</span>
+                    <span class="p">)</span>
+                    <span class="n">new_rules</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">root_attr</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">root_css</span>
+            <span class="c1"># Auto-detect if no explicit root_attr provided</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                        <span class="n">root_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">elif</span> <span class="s2">&quot;class&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                        <span class="c1"># root_attr the first class</span>
+                        <span class="n">root_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                <span class="c1"># Fallback to tag</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="p">:</span>
+                    <span class="n">root_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span>
+
+            <span class="n">new_rules</span><span class="p">[</span><span class="n">root_attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">root_css</span>
+
+        <span class="c1"># Set the new skin dictionary.</span>
+        <span class="c1"># Note: We assign the DICT, not .values(), because render() calls .keys() on it.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span> <span class="o">=</span> <span class="n">SelectorRuleBridge</span><span class="o">.</span><span class="n">make_bridge_list</span><span class="p">(</span><span class="n">new_rules</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_css_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">css</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads initial CSS rules into the component.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">css</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">default_css_rules</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">SelectorRuleBridge</span><span class="o">.</span><span class="n">make_bridge_list</span><span class="p">(</span><span class="n">css</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_css_rules</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.add_child" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_child</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds a child component or string content.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">:</span> <span class="s2">&quot;str|Component&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a child component or string content.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">child</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">child</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">child</span><span class="o">.</span><span class="n">render</span><span class="p">()})</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">child_obj</span> <span class="o">=</span> <span class="n">TemplateResolver</span><span class="p">(</span>
+                <span class="n">tmplt_str</span><span class="o">=</span><span class="n">child</span><span class="p">,</span> <span class="n">load_it</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">template_resolver</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">children_info</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">child_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid child type or no name&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.add_root_class" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_root_class</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds a CSS class to the root element.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_root_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a CSS class to the root element.&quot;&quot;&quot;</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># simple check to avoid duplicates or extra spaces</span>
+    <span class="k">if</span> <span class="n">class_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.before_render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">before_render</span><span class="p">(</span><span class="o">**</span><span class="n">props</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Lifecycle Hook: Called before render. Override to modify state/props dynamically.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">before_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">props</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lifecycle Hook: Called before render. Override to modify state/props dynamically.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.change_skin" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">change_skin</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_attr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_attr_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">root_css</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Applies a new skin (CSS rules) to the component.
+Supports Dictionaries, other Components, Theme lists, and Root kwargs.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">change_skin</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">Self</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">root_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">root_attr_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">root_css</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;CssSelector&quot;</span><span class="p">,</span> <span class="s2">&quot;CssRule&quot;</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies a new skin (CSS rules) to the component.</span>
+<span class="sd">    Supports Dictionaries, other Components, Theme lists, and Root kwargs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_rules</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># --- CASE 1: Dictionary {selector: {prop: val}} ---</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">new_rules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+
+    <span class="c1"># --- CASE 2: Component Inheritance ---</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;active_css_rules&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">,</span> <span class="nb">list</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">)</span>
+    <span class="c1"># --- CASE 3: Root Inheritance (kwargs) ---</span>
+    <span class="k">if</span> <span class="n">root_css</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root_attr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span> <span class="ow">and</span> <span class="n">root_attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="n">root_attr</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;true&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr_value</span> <span class="k">else</span> <span class="n">root_attr_value</span>
+                <span class="p">)</span>
+                <span class="n">new_rules</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">root_attr</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">root_css</span>
+        <span class="c1"># Auto-detect if no explicit root_attr provided</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                    <span class="n">root_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">elif</span> <span class="s2">&quot;class&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">:</span>
+                    <span class="c1"># root_attr the first class</span>
+                    <span class="n">root_attr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Fallback to tag</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">root_attr</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="p">:</span>
+                <span class="n">root_attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span>
+
+        <span class="n">new_rules</span><span class="p">[</span><span class="n">root_attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">root_css</span>
+
+    <span class="c1"># Set the new skin dictionary.</span>
+    <span class="c1"># Note: We assign the DICT, not .values(), because render() calls .keys() on it.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span> <span class="o">=</span> <span class="n">SelectorRuleBridge</span><span class="o">.</span><span class="n">make_bridge_list</span><span class="p">(</span><span class="n">new_rules</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.get" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves a registered component by name.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves a registered component by name.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.load_css_rules" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load_css_rules</span><span class="p">(</span><span class="o">**</span><span class="n">css</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Loads initial CSS rules into the component.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load_css_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">css</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads initial CSS rules into the component.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">css</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_css_rules</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">SelectorRuleBridge</span><span class="o">.</span><span class="n">make_bridge_list</span><span class="p">(</span><span class="n">css</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_css_rules</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.on_init" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">on_init</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Lifecycle Hook: Called after initialization. Override to add setup logic.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">on_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lifecycle Hook: Called after initialization. Override to add setup logic.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.register" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Registers a new component instance.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">ComponentState</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">elements</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Registers a new component instance.&quot;&quot;&quot;</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">props</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">_registry</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">comp</span>
+    <span class="k">return</span> <span class="n">comp</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.render" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">render</span><span class="p">(</span><span class="n">override_props</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_to_global</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compiles the component into final HTML and CSS.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>tuple</code></b>(                  <code><span title="str">str</span> | <span title="tuple">tuple</span></code>
+)              –
+              <div class="doc-md-description">
+                <p>(html_string, css_string) or str: html_string (if no CSS)</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">override_props</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">force_state</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">add_to_global</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compiles the component into final HTML and CSS.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (html_string, css_string) or str: html_string (if no CSS)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">before_render</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="n">override_props</span> <span class="ow">or</span> <span class="p">{}))</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">override_props</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">add_to_global</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">override_props</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">force_state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">props</span> <span class="o">=</span> <span class="n">override_props</span>  <span class="c1"># not quite</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">override_props</span><span class="p">)</span>  <span class="c1"># not quite</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">state_errors</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="p">,</span><span class="s1">&#39;render&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_obj</span><span class="o">.</span><span class="n">tmplt_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="n">template</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">incoming_props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">props</span>  <span class="c1"># not quite</span>
+
+    <span class="n">final_template</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">resolved_template</span><span class="p">(</span><span class="n">template</span><span class="p">))</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_root_element</span><span class="p">:</span>
+        <span class="n">final_template</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">final_template</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">build_tag</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">:</span>
+        <span class="n">valid_css</span> <span class="o">=</span> <span class="n">element_style_state</span><span class="p">(</span>
+            <span class="n">final_template</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comp_state</span><span class="o">.</span><span class="n">resolved_state_elements</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmp_style</span> <span class="o">=</span> <span class="n">ComponentStyle</span><span class="p">(</span><span class="n">final_template</span><span class="p">,</span> <span class="o">*</span><span class="n">valid_css</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">final_template</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmp_style</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">final_template</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.set_root_element" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_root_element</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Defines a wrapper element for the component.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_root_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines a wrapper element for the component.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">root_element_tag</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_root_element</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.set_root_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_root_id</span><span class="p">(</span><span class="n">element_id</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sets the ID of the root element.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_root_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets the ID of the root element.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">root_element_attrs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element_id</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.component.Component.sub_component" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">sub_component</span><span class="p">(</span><span class="n">component</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Embeds another component inside this one.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\component.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sub_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">Self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embeds another component inside this one.&quot;&quot;&quot;</span>
+
+    <span class="n">render_result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">render_result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">html</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">render_result</span>
+        <span class="c1"># Note: You might want to bubble up the CSS here too,</span>
+        <span class="c1"># but for now we just store HTML</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">component</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">html</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_css_rules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">active_css_rules</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">component</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">render_result</span><span class="p">})</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">props</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../base/" class="btn btn-neutral float-left" title="base"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../elements/" class="btn btn-neutral float-right" title="elements">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../base/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../elements/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

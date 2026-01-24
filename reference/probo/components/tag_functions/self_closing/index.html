@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>self_closing - Probo UI</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "self_closing";
+        var mkdocs_page_input_path = "reference\\probo\\components\\tag_functions\\self_closing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Components</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../../attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" >Tag functions</a>
+    <ul class="current">
+                <li class="toctree-l4"><a class="reference internal" href="../block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4 current"><a class="reference internal current" href="#">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item">Tag functions</li>
+      <li class="breadcrumb-item active">self_closing</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\components\tag_functions\self_closing.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="self_closing">self_closing</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.components.tag_functions.self_closing"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.Input" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">Input</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <input/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">Input</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;input/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">INPUT</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.area" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">area</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <area/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;area/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">AREA</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.base" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">base</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <base/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">base</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;base/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">BASE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.br" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">br</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <br/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">br</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;br/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">BR</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.circle" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">circle</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <circle/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">circle</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;circle/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">CIRCLE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.col" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">col</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <col/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">col</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;col/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">COL</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.doctype" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">doctype</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML &lt;!DOCTYPE&gt; line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">doctype</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;!DOCTYPE&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">DOCTYPE</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.embed" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">embed</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <embed/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">embed</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;embed/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">EMBED</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.hr" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">hr</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <hr/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hr</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;hr/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">HR</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.img" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">img</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <img/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">img</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;img/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">IMG</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.line" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">line</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <line/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">line</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;line/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">LINE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.link" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">link</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <link/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">link</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;link/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">LINK</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.meta" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">meta</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <meta/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">meta</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;meta/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">META</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.param" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">param</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <param/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">param</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;param/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">PARAM</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.path" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">path</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <path/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;path/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">PATH</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.polygon" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">polygon</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <polygon/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">polygon</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;polygon/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">POLYGON</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.polyline" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">polyline</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <polyline/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">polyline</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;polyline/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">POLYLINE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.rect" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">rect</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <rect/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">rect</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;rect/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">RECT</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.source" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">source</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <source/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;source/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">SOURCE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.stop" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">stop</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <stop/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;stop/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">STOP</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.track" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">track</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <track/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;track/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">TRACK</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.use" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">use</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <use/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">use</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;use/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">USE</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.tag_functions.self_closing.wbr" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">wbr</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Represents an HTML <wbr/> line break element (self-closing).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\tag_functions\self_closing.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">wbr</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HTML &lt;wbr/&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">self_closing</span><span class="o">.</span><span class="n">WBR</span><span class="p">(</span><span class="o">**</span><span class="n">attrs</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../block_tags/" class="btn btn-neutral float-left" title="block_tags"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../context/context_logic/" class="btn btn-neutral float-right" title="context_logic">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../block_tags/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../context/context_logic/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Probo UI (PUI) v1.1.0 Documentation - Probo UI</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Probo UI (PUI) v1.1.0 Documentation";
+        var mkdocs_page_input_path = "simple_doc.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Probo</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../reference/probo/utility/">utility</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Components</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/components/attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/components/base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/components/component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/components/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/components/node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../reference/probo/components/tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reference/probo/xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Probo UI (PUI) v1.1.0 Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/simple_doc.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="probo-ui-pui-v110-documentation">Probo UI (PUI) v1.1.0 Documentation</h1>
+<p>Probo allows you to build type-safe, server-side rendered HTML components in Python with built-in state management and JIT CSS generation.</p>
+<h2 id="1-basic-html-generation-functional-api">1. Basic HTML Generation (Functional API)</h2>
+<p>The simplest way to use Probo is through its functional tags. This replaces writing raw HTML strings.</p>
+<p>Goal: Create the "Logo Section" from your example.</p>
+<pre><code class="language-python">from probo import div, img, h2, span
+
+def logo_component():
+    return div(
+        img(
+            src=&quot;./user/Images/logo.jpg&quot;, 
+            alt=&quot;logo&quot;, 
+            width=&quot;80px&quot;,
+        ),
+        h2(
+            span(&quot;CLUB&quot;), 
+            &quot;BAC&quot;,
+        ),
+        Class=&quot;log_logo&quot;,
+    )
+
+# Render to string
+print(logo_component())
+
+
+Output:
+
+&lt;div class=&quot;log_logo&quot;&gt;
+    &lt;img src=&quot;./user/Images/logo.jpg&quot; alt=&quot;logo&quot; width=&quot;80px&quot; /&gt;
+    &lt;h2&gt;&lt;span&gt;CLUB&lt;/span&gt;BAC&lt;/h2&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="2-the-component-class-static">2. The Component Class (Static)</h2>
+<p>For reusable UI parts, use the Component class. This allows you to manage templates and CSS boundaries.</p>
+<p>Goal: Create the "Sign Up Form" container.</p>
+<pre><code class="language-python">from probo.components.component import Component
+from probo import div, form, h2, Input, button
+
+
+# 1. Define the internal structure (template)
+# The template is built using functional HTML helpers
+def signup_template():
+    return form(
+        h2(&quot;Sign Up&quot;),
+        # Name fields
+        div(
+            Input(type=&quot;text&quot;, placeholder=&quot;First Name&quot;, required=True),
+            Input(type=&quot;text&quot;, placeholder=&quot;Last Name&quot;, required=True),
+            Class=&quot;input-box1&quot;,
+        ),
+        # Submit button
+        button(
+            &quot;Sign Up&quot;,
+            type=&quot;submit&quot;,
+            Class=&quot;btn&quot;,
+            onclick=&quot;login()&quot;,
+        ),
+    )
+
+
+# 2. Create the Component
+# The template is passed as rendered HTML
+signup_comp = Component(
+    name=&quot;SignUpCard&quot;,
+    template=signup_template(),
+)
+
+
+# 3. Set a root element (optional)
+signup_comp.set_root_element(
+    &quot;div&quot;,
+    Class=&quot;sign&quot;,
+)
+
+
+# 4. Render
+html = signup_comp.render()
+print(html)
+</code></pre>
+<h2 id="3-adding-state-dynamic-components">3. Adding State (Dynamic Components)</h2>
+<p>Probo Components become powerful when you add State. This allows you to inject data dynamically without string formatting hacks.</p>
+<p>Goal: Make the "Welcome" header dynamic.</p>
+<h2 id="step-1-define-element-state">Step 1: Define Element State</h2>
+<p><code>ElementState</code> is used to create <strong>smart placeholders</strong> inside templates.
+During rendering, each placeholder is replaced with data resolved
+from the component state.</p>
+<pre><code class="language-python">from probo.components.state import ElementState
+from probo import h1, span
+
+# 1. Define Element States
+
+# Resolve value from static state (s_data[&quot;club_name&quot;])
+es_club_name = ElementState(
+    &quot;span&quot;,
+    s_state=&quot;club_name&quot;,
+    Class=&quot;highlight&quot;,
+)
+
+# Resolve value from dynamic state (d_data[&quot;welcome_msg&quot;])
+# If missing, the element will not be rendered
+es_message = ElementState(
+    &quot;h1&quot;,
+    d_state=&quot;welcome_msg&quot;,
+    strict_dynamic=True,
+)
+
+# Resolve value using both static and dynamic state
+# Priority: d_state &gt; s_state
+# If strict_dynamic=True and d_state is missing, the element is skipped
+es_message_both = ElementState(
+    &quot;h1&quot;,
+    s_state=&quot;welcome_fallback&quot;,
+    d_state=&quot;welcome_override&quot;,
+    strict_dynamic=True,
+)
+
+</code></pre>
+<h2 id="step-2-create-component-state">Step 2: Create Component State</h2>
+<p>The <code>ComponentState</code> acts as the "brain" of the component.
+It holds static and dynamic data and resolves which values are injected
+into each <code>ElementState</code> during rendering.</p>
+<pre><code class="language-python">from probo.components.state import ComponentState
+
+# 2. Define Component State
+state = ComponentState(
+    # Register ElementState instances
+    es_club_name,
+    es_message,
+    es_message_both,
+
+    # Static Data (Defaults / Fallbacks)
+    s_data={
+        &quot;club_name&quot;: &quot;The Biologists in Action Club&quot;,
+    },
+
+    # Dynamic Data (e.g. from a view or database)
+    d_data={
+        &quot;welcome_msg&quot;: &quot;Jack the admin says: Welcome !!&quot;,
+    },
+)
+
+</code></pre>
+<h2 id="step-3-wire-it-together">Step 3: Wire it Together</h2>
+<p>We construct the template using placeholders generated by <code>ElementState</code>.
+Each <code>ElementState.placeholder</code> is replaced with resolved data during render.</p>
+<pre><code class="language-python">from probo.components.component import Component
+from probo.components.state import ElementState, ComponentState
+from probo import section
+
+# 1. Define Element States
+es_message = ElementState(
+    &quot;h1&quot;,
+    d_state=&quot;welcome_msg&quot;,
+    strict_dynamic=True,
+)
+
+es_message_both = ElementState(
+    &quot;h1&quot;,
+    s_state=&quot;welcome_fallback&quot;,
+    d_state=&quot;welcome_override&quot;,
+    strict_dynamic=True,
+)
+
+es_club_name = ElementState(
+    &quot;span&quot;,
+    s_state=&quot;club_name&quot;,
+    Class=&quot;highlight&quot;,
+)
+
+# 2. Create Component State (data + element bindings)
+state = ComponentState(
+    es_message,
+    es_message_both,
+    es_club_name,
+    s_data={
+        &quot;club_name&quot;: &quot;The Biologists in Action Club&quot;,
+        &quot;welcome_fallback&quot;: &quot;Welcome!&quot;,
+    },
+    d_data={
+        &quot;welcome_msg&quot;: &quot;Jack the admin says: Welcome !!&quot;,
+    },
+)
+
+# 3. Build Template using placeholders
+template_str = section(
+    es_message.placeholder,
+    es_message_both.placeholder,
+    es_club_name.placeholder,
+    Class=&quot;page&quot;,
+)
+
+# 4. Initialize Component
+page_component = Component(
+    name=&quot;HomePage&quot;,
+    template=template_str,
+    state=state,
+)
+
+# 5. Render
+html = page_component.render()
+print(html)
+
+</code></pre>
+<h2 id="4-styling-jit-css">4. Styling (JIT CSS)</h2>
+<p>Styling support in Probo UI is currently <strong>experimental</strong> and <strong>not yet connected
+to the HTML rendering pipeline</strong>.</p>
+<p>While low-level CSS building blocks such as <code>CssRule</code> exist, they are <strong>not
+automatically injected</strong> into the rendered output of <code>Component</code> or <code>Template</code>.</p>
+<p>As a result, CSS rules defined in Python are <strong>not applied to the final HTML</strong>
+at this stage.</p>
+<pre><code class="language-python">from probo.styles.plain_css import CssRule
+
+# CssRule objects represent validated CSS declarations
+btn_style = CssRule(
+    background_color=&quot;blue&quot;,
+    color=&quot;white&quot;,
+)
+
+input_style = CssRule(
+    padding=&quot;40px&quot;,
+    margin_bottom=&quot;10px&quot;,
+)
+
+# Note:
+# These rules are currently not applied automatically during render.
+# Styling APIs are under active development.
+</code></pre>
+<h2 id="5-full-architecture-example-the-shortcut">5. Full Architecture Example (The "shortcut")</h2>
+<p>For the best developer experience, use the shortcut to wire everything in one go.</p>
+<pre><code class="language-python">from probo.shortcuts import (
+    component, 
+    ComponentConfig, 
+    StateConfig, 
+    StyleConfig, 
+    ElementStateConfig
+)
+
+from probo import div, form
+
+def build_signup_page():
+    # 1. Logic
+    title_state = ElementStateConfig(
+        tag='h2', 
+        s_state='form_title',
+    )
+
+
+    state_config = StateConfig(
+        s_data={
+            'form_title': 'Join the Club',
+        },
+        elements_state_config=[
+            title_state,
+        ],
+    )
+
+    # 2. Style
+    style_config = StyleConfig(
+        css = {
+            '.sign': {
+                'background': '#fff',
+                'padding': '2px',
+            },
+            # Since no input element exists in the template,
+            # this rule will be skipped automatically
+            'input': {
+                'width': '100%', 
+                'padding': '10px',
+            }, 
+        }
+    )
+
+    # 3. Component Configuration
+    config = ComponentConfig(
+        name=&quot;SignUpPage&quot;,
+        template=div(
+            title_state.config_id,
+            form('some form'),
+            Class=&quot;sign&quot;,
+        ),
+        state_config=state_config,
+        style_config=style_config,
+    )
+    # 4. Build Component
+    return component(config)
+
+print(build_signup_page())
+
+(
+    '&lt;div class=&quot;sign&quot;&gt;&lt;form&gt;some form&lt;/form&gt;&lt;/div&gt;', 
+    '.sign { background:#fff; padding:2px; }'
+)
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

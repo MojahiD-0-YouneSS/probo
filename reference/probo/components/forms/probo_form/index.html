@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>probo_form - Probo UI</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "probo_form";
+        var mkdocs_page_input_path = "reference\\probo\\components\\forms\\probo_form.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Components</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../../attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../node/">node</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" >Forms</a>
+    <ul class="current">
+                <li class="toctree-l4 current"><a class="reference internal current" href="#">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag classes</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_classes/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item">Forms</li>
+      <li class="breadcrumb-item active">probo_form</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\components\forms\probo_form.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="probo_form">probo_form</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.components.forms.probo_form"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.forms.probo_form.ProboForm" class="doc doc-heading">
+            <code>ProboForm</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>The orchestrator for rendering HTML forms.
+Manages CSRF tokens, field iteration, and validation integration.</p>
+<p>This class acts as the bridge between Django's backend form handling (via RDT)
+and probo's frontend rendering. It supports both automatic rendering of Django forms
+and manual construction of forms for static sites or other frameworks.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>action</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The URL to submit the form to (e.g., "/login/").</p>
+              </div>
+            </li>
+            <li>
+              <b><code>*form_field_declarations</code></b>
+                  (<code><span title="tuple">tuple</span>[<a class="autorefs autorefs-internal" title="ProboFormField (probo.components.forms.probo_form.ProboFormField)" href="#probo.components.forms.probo_form.ProboFormField">ProboFormField</a>]</code>, default:
+                      <code>()</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Variable length list of manual field declarations.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>request_data</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="RequestDataTransformer (probo.request.transformer.RequestDataTransformer)" href="../../../request/transformer/#probo.request.transformer.RequestDataTransformer">RequestDataTransformer</a></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The RDT instance wrapping the Django request. Required for auto-magic mode.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>method</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>HTTP method (e.g., "post", "get"). If None, defaults based on context.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>manual</code></b>
+                  (<code><span title="bool">bool</span></code>, default:
+                      <code>False</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>If True, bypasses RDT and uses manually provided fields/tokens. Defaults to False.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>use_htmx</code></b>
+                  (<code><span title="bool">bool</span></code>, default:
+                      <code>True</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>If True, prepares the form for HTMX injection. Defaults to True.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>form_class</code></b>
+                  (<code><span title="typing.Any">Any</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The Django Form class (used for validation logic if RDT is present).</p>
+              </div>
+            </li>
+            <li>
+              <b><code>form_declaration</code></b>
+                  (<code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Optional identifier or string representation for the form declaration.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>csrf_token</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Manual CSRF token string. Used if RDT is missing or in manual mode.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Attributes:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>handler</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="FormHandler (probo.request.transformer.FormHandler)" href="../../../request/transformer/#probo.request.transformer.FormHandler">FormHandler</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The business logic handler for saving/validating data.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<h3 id="probo.components.forms.probo_form.ProboForm--django-mode-auto">Django Mode (Auto)</h3>
+<p>rdt = RequestDataTransformer(request, MyForm)
+form = ProboForm(action=".", request_data=rdt)
+html = form.render()</p>
+<h3 id="probo.components.forms.probo_form.ProboForm--manual-mode">Manual Mode</h3>
+<p>email_field = ProboFormField("input", 'email to contact with',Type="email",value="",name="email",)
+form = ProboForm("/search",email_field, method="get", manual=True, csrf_token="xyz")
+html = form.render()
+html -&gt; <form action="/search"  method="get"><input type="hidden" value="xyz"/><label for="email">email to contact with</label><input type="email" name="email" value=""/></p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ProboForm</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The orchestrator for rendering HTML forms.</span>
+<span class="sd">    Manages CSRF tokens, field iteration, and validation integration.</span>
+
+<span class="sd">    This class acts as the bridge between Django&#39;s backend form handling (via RDT)</span>
+<span class="sd">    and probo&#39;s frontend rendering. It supports both automatic rendering of Django forms</span>
+<span class="sd">    and manual construction of forms for static sites or other frameworks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        action (str): The URL to submit the form to (e.g., &quot;/login/&quot;).</span>
+<span class="sd">        *form_field_declarations (tuple[ProboFormField]): Variable length list of manual field declarations.</span>
+<span class="sd">        request_data (RequestDataTransformer, optional): The RDT instance wrapping the Django request. Required for auto-magic mode.</span>
+<span class="sd">        method (str, optional): HTTP method (e.g., &quot;post&quot;, &quot;get&quot;). If None, defaults based on context.</span>
+<span class="sd">        manual (bool, optional): If True, bypasses RDT and uses manually provided fields/tokens. Defaults to False.</span>
+<span class="sd">        use_htmx (bool, optional): If True, prepares the form for HTMX injection. Defaults to True.</span>
+<span class="sd">        form_class (Any, optional): The Django Form class (used for validation logic if RDT is present).</span>
+<span class="sd">        form_declaration (Optional[str], optional): Optional identifier or string representation for the form declaration.</span>
+<span class="sd">        csrf_token (str, optional): Manual CSRF token string. Used if RDT is missing or in manual mode.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        handler (FormHandler): The business logic handler for saving/validating data.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Django Mode (Auto)</span>
+<span class="sd">        &gt;&gt;&gt; rdt = RequestDataTransformer(request, MyForm)</span>
+<span class="sd">        &gt;&gt;&gt; form = ProboForm(action=&quot;.&quot;, request_data=rdt)</span>
+<span class="sd">        &gt;&gt;&gt; html = form.render()</span>
+<span class="sd">        &gt;&gt;&gt; # Manual Mode</span>
+<span class="sd">        &gt;&gt;&gt; email_field = ProboFormField(&quot;input&quot;, &#39;email to contact with&#39;,Type=&quot;email&quot;,value=&quot;&quot;,name=&quot;email&quot;,)</span>
+<span class="sd">        &gt;&gt;&gt; form = ProboForm(&quot;/search&quot;,email_field, method=&quot;get&quot;, manual=True, csrf_token=&quot;xyz&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; html = form.render()</span>
+<span class="sd">        &gt;&gt;&gt; html -&gt; &lt;form action=&quot;/search&quot;  method=&quot;get&quot;&gt;&lt;input type=&quot;hidden&quot; value=&quot;xyz&quot;/&gt;&lt;label for=&quot;email&quot;&gt;email to contact with&lt;/label&gt;&lt;input type=&quot;email&quot; name=&quot;email&quot; value=&quot;&quot;/&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">form_field_declarations</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">ProboFormField</span><span class="p">],</span>
+        <span class="n">request_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RequestDataTransformer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">manual</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_htmx</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">form_class</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">form_declaration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">override_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">override_button_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">csrf_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">attrs</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span> <span class="o">=</span> <span class="n">form_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span> <span class="o">=</span> <span class="n">request_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_form_bool</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">request_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_handled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_htmx</span> <span class="o">=</span> <span class="n">use_htmx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span> <span class="k">if</span> <span class="n">method</span> <span class="k">else</span> <span class="n">request_data</span><span class="o">.</span><span class="n">request_method</span> <span class="k">if</span> <span class="n">request_data</span> <span class="k">else</span> <span class="s1">&#39;GET&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span>
+             <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+             <span class="s1">&#39;enctype&#39;</span><span class="p">:</span> <span class="s2">&quot;multipart/form-data&quot;</span><span class="p">,</span>
+             <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">override_button</span> <span class="o">=</span><span class="n">override_button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">override_button_attrs</span> <span class="o">=</span><span class="n">override_button_attrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handler</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form_declaration</span> <span class="o">=</span> <span class="n">form_declaration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">manual</span> <span class="o">=</span> <span class="n">manual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">submit_btn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_manual_csrf</span> <span class="o">=</span> <span class="n">csrf_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">form_field_declarations</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">manual</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="o">.</span><span class="n">form_class</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_csrf_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manual_csrf</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manual_csrf</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="o">.</span><span class="n">get_csrf_token</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_csrf_token</span><span class="p">()</span>
+        <span class="n">csrf_field</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;hidden&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;csrfmiddlewaretoken&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
+        <span class="n">fields_html</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
+            <span class="c1"># Iterate over the Django Form Fields</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
+                <span class="c1"># Wrap each Django field in MFF and render</span>
+                <span class="n">mff</span> <span class="o">=</span> <span class="n">ProboFormField</span><span class="p">(</span><span class="n">dj_field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+                <span class="n">fields_html</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mff</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_declaration</span><span class="p">:</span>
+            <span class="n">fields_html</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">form_declaration</span><span class="p">)</span>
+        <span class="n">submit_btn</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">override_button</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">override_button_attrs</span><span class="p">:</span>
+                <span class="n">submit_btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Submit&quot;</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">override_button_attrs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">submit_btn</span> <span class="o">=</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Submit&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="p">,</span> <span class="n">Class</span><span class="o">=</span><span class="s2">&quot;btn btn-lg&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">form</span><span class="p">(</span>
+            <span class="n">csrf_field</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">fields_html</span><span class="p">,</span>
+            <span class="n">submit_btn</span><span class="p">,</span>
+             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span><span class="c1"># Safe default</span>
+
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_db</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_form_bool</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handler</span> <span class="o">=</span> <span class="n">FormHandler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_handled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handler</span><span class="o">.</span><span class="n">form_handling</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_handled</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.forms.probo_form.ProboFormField" class="doc doc-heading">
+            <code>ProboFormField</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A declarative renderer for individual form fields.
+Bridging Django BoundFields with probo Elements.</p>
+<p>This class handles the extraction of widget attributes (type, class, choices)
+from Django fields and renders them into semantic HTML using probo's functional tags.
+It supports both automatic extraction (from Django) and manual declaration (for static forms).</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>tag_name</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The HTML tag name (e.g., 'input', 'select', 'textarea').</p>
+              </div>
+            </li>
+            <li>
+              <b><code>field_label</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The text label for the field. Defaults to "".</p>
+              </div>
+            </li>
+            <li>
+              <b><code>content</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Inner content for the element (used for textareas or custom containers). Defaults to "".</p>
+              </div>
+            </li>
+            <li>
+              <b><code>dj_field</code></b>
+                  (<code><span title="BoundField">BoundField</span></code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>A Django BoundField object. If provided, attributes are extracted automatically.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>**attrs</code></b>
+                  (<code><span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>, default:
+                      <code>{}</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Additional HTML attributes (e.g., id, class, placeholder, required).</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Attributes:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>info</code></b>
+                  (<code><span title="dict">dict</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The normalized dictionary containing tag type, attributes, value, and choices.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<h3 id="probo.components.forms.probo_form.ProboFormField--automatic-django">Automatic (Django)</h3>
+<p>mff = ProboFormField(dj_field=form['username'])</p>
+<h3 id="probo.components.forms.probo_form.ProboFormField--manual">Manual</h3>
+<p>mff = ProboFormField(
+...     tag_name='input',
+...     type='email',
+...     name='email',
+...     field_label='Email Address'
+... )
+print(mff.render())</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>        <p><label>Email Address</label><input type="email" name="email"/></p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ProboFormField</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A declarative renderer for individual form fields.</span>
+<span class="sd">    Bridging Django BoundFields with probo Elements.</span>
+
+<span class="sd">    This class handles the extraction of widget attributes (type, class, choices)</span>
+<span class="sd">    from Django fields and renders them into semantic HTML using probo&#39;s functional tags.</span>
+<span class="sd">    It supports both automatic extraction (from Django) and manual declaration (for static forms).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tag_name (str, optional): The HTML tag name (e.g., &#39;input&#39;, &#39;select&#39;, &#39;textarea&#39;).</span>
+<span class="sd">        field_label (str, optional): The text label for the field. Defaults to &quot;&quot;.</span>
+<span class="sd">        content (str, optional): Inner content for the element (used for textareas or custom containers). Defaults to &quot;&quot;.</span>
+<span class="sd">        dj_field (BoundField, optional): A Django BoundField object. If provided, attributes are extracted automatically.</span>
+<span class="sd">        **attrs: Additional HTML attributes (e.g., id, class, placeholder, required).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        info (dict): The normalized dictionary containing tag type, attributes, value, and choices.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Automatic (Django)</span>
+<span class="sd">        &gt;&gt;&gt; mff = ProboFormField(dj_field=form[&#39;username&#39;])</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Manual</span>
+<span class="sd">        &gt;&gt;&gt; mff = ProboFormField(</span>
+<span class="sd">        ...     tag_name=&#39;input&#39;,</span>
+<span class="sd">        ...     type=&#39;email&#39;,</span>
+<span class="sd">        ...     name=&#39;email&#39;,</span>
+<span class="sd">        ...     field_label=&#39;Email Address&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; print(mff.render())</span>
+<span class="sd">       &lt;label&gt;Email Address&lt;/label&gt;&lt;input type=&quot;email&quot; name=&quot;email&quot;/&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tag_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">field_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">label_attr</span><span class="p">:</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">dj_field</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">wraper_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span> <span class="o">=</span> <span class="n">wraper_func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field_label</span> <span class="o">=</span> <span class="n">field_label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_attr</span> <span class="o">=</span> <span class="n">label_attr</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag_name</span> <span class="o">=</span> <span class="n">tag_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form_field</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dj_field</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dj_field</span> <span class="o">=</span> <span class="p">(</span><span class="n">dj_field</span><span class="p">,)</span>
+        <span class="k">if</span> <span class="n">dj_field</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">include_dj_field</span><span class="p">(</span><span class="n">dj_field</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">tag_name</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_label</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;for&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">label_attr</span><span class="p">},</span> <span class="n">content</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_info</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">label_attr</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;attrs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+            <span class="s2">&quot;label_string&quot;</span><span class="p">:</span> <span class="n">label_string</span><span class="p">,</span>
+            <span class="s2">&quot;label_attr &quot;</span><span class="p">:</span> <span class="n">label_attr</span><span class="p">,</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_field_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">):</span>
+        <span class="n">tag_info_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">Input</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+            <span class="s2">&quot;textarea&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">textarea</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">select</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;fieldset&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">fieldset</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;datalist&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">datalist</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">output</span><span class="p">,</span> <span class="s2">&quot;void&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="p">}</span>
+        <span class="n">valid_tag</span> <span class="o">=</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tag_info_dict</span>
+        <span class="k">if</span> <span class="n">valid_tag</span><span class="p">:</span>
+            <span class="n">tag_method</span> <span class="o">=</span> <span class="n">tag_info_dict</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;method&quot;</span><span class="p">]</span>
+            <span class="n">tag_void</span> <span class="o">=</span> <span class="n">tag_info_dict</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;void&quot;</span><span class="p">]</span>
+            <span class="n">tag_content</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">tag_attrs</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="n">input_id</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">label_string</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;label_string&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">tag_string</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">tag_method</span><span class="p">(</span><span class="o">**</span><span class="n">tag_attrs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tag_void</span>
+                <span class="k">else</span> <span class="n">tag_method</span><span class="p">(</span><span class="n">tag_content</span><span class="p">,</span> <span class="o">**</span><span class="n">tag_attrs</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">label_string</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">input_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">(</span><span class="n">tag_string</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">)</span> <span class="k">else</span> <span class="n">tag_string</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label_attrs</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;label_attrs&quot;</span><span class="p">,</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">label_attrs</span> <span class="ow">and</span> <span class="n">input_id</span><span class="p">:</span>
+                    <span class="n">label_attrs</span><span class="p">[</span><span class="s2">&quot;for&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_id</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">input_id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">label_string</span><span class="p">,</span> <span class="o">**</span><span class="n">label_attrs</span><span class="p">)</span> <span class="o">+</span> <span class="n">tag_string</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">)</span> <span class="k">else</span> <span class="n">label</span><span class="p">(</span><span class="n">label_string</span><span class="p">,</span> <span class="o">**</span><span class="n">label_attrs</span><span class="p">)</span> <span class="o">+</span> <span class="n">tag_string</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">include_dj_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dj_field</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dj_field</span><span class="p">,</span> <span class="s2">&quot;field&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dj_field</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="s2">&quot;widget&quot;</span><span class="p">):</span>
+            <span class="n">field_info</span> <span class="o">=</span> <span class="n">get_widget_info</span><span class="p">(</span><span class="n">dj_field</span><span class="p">)</span>
+            <span class="n">tag</span> <span class="o">=</span> <span class="n">field_info</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_info</span>
+
+            <span class="n">dj_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;attrs&quot;</span><span class="p">]</span>
+            <span class="n">dj_label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span>
+                <span class="n">dj_attrs</span><span class="p">,</span>
+                <span class="n">dj_label</span><span class="p">,</span>
+                <span class="p">{</span><span class="s2">&quot;for&quot;</span><span class="p">:</span> <span class="n">dj_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)},</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;MFF expects a Django Field or a Dict.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dj_field</span> <span class="o">=</span> <span class="p">(</span><span class="n">dj_field</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_input</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">input_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &lt;label for=&quot;xyz&quot;&gt;...&lt;/label&gt;</span>
+<span class="sd">        &lt;input type=&quot;...&quot; id=&quot;xyz&quot; name=&quot;xyz&quot;&gt;</span>
+<span class="sd">        if</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span>
+            <span class="n">input_attrs</span><span class="p">,</span>
+            <span class="n">label_string</span><span class="p">,</span>
+            <span class="n">label_attrs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_textarea</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">textarea_content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">textarea_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">_defaults</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;textarea_rows&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;textarea_cols&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">_defaults</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">textarea_attrs</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">_defaults</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">textarea_content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;textarea&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_select_option</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">option_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">selected_options_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">select_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;option&quot;&quot;&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">option</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">selected_options_indexes</span>
+                <span class="k">else</span> <span class="n">option</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">option_values</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">select_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_select_optgroup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">optgroups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">selected_options_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">select_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;option&quot;&quot;&quot;</span>
+
+        <span class="n">optgroup_content</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optgroups</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="n">optgroup_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">option</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">selected_options_indexes</span>
+                        <span class="k">else</span> <span class="n">option</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">y</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">optgroup</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">})</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">optgroup_content</span><span class="p">,</span> <span class="n">optgroups</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">select_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_field_set</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">legend_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">form_elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">fieldset_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">legend</span><span class="p">(</span><span class="n">legend_content</span><span class="p">),</span> <span class="o">*</span><span class="n">form_elements</span><span class="p">])</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">fieldset_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;fieldset&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_data_list</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">option_value_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">data_list_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">option</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">option_value_list</span><span class="p">])</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">data_list_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;datalist&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_output</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">output_attrs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">output_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_custom_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">field_string</span><span class="p">,</span><span class="n">skip_wraper</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">field_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">field_string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">skip_wraper</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">[</span><span class="s1">&#39;custm-field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_string</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">[</span><span class="s1">&#39;custm-field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">(</span><span class="n">field_string</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wraper_func</span><span class="p">)</span> <span class="k">else</span> <span class="n">field_string</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">widget_info</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">state_error</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;field_errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="p">:</span>
+            <span class="n">tag</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
+                <span class="n">err_list</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">div</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">Class</span><span class="o">=</span><span class="s2">&quot;invalid-feedback&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dj_field_info</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span>
+                <span class="p">]</span>
+                <span class="n">errors_html</span> <span class="o">=</span> <span class="n">div</span><span class="p">(</span><span class="o">*</span><span class="n">err_list</span><span class="p">,</span> <span class="n">Class</span><span class="o">=</span><span class="s2">&quot;errors&quot;</span><span class="p">)</span>
+                <span class="n">state_error</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;field_errors&quot;</span><span class="p">:</span> <span class="n">errors_html</span><span class="p">,</span>
+                <span class="p">}</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="n">ElementState</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">s_state</span><span class="o">=</span><span class="s2">&quot;field_errors&quot;</span><span class="p">)</span>
+        <span class="n">error_string</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">change_state</span><span class="p">(</span>
+                <span class="n">state_error</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">state_placeholder</span>
+            <span class="ow">or</span> <span class="nb">str</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form_field</span> <span class="o">=</span> <span class="n">fields</span> <span class="o">+</span> <span class="n">error_string</span>
+        <span class="k">return</span> <span class="n">fields</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.forms.probo_form.ProboFormField.add_input" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_input</span><span class="p">(</span><span class="n">label_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">input_attrs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p><label for="xyz">...</label>
+<input type="..." id="xyz" name="xyz">
+if</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_input</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">input_attrs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &lt;label for=&quot;xyz&quot;&gt;...&lt;/label&gt;</span>
+<span class="sd">    &lt;input type=&quot;...&quot; id=&quot;xyz&quot; name=&quot;xyz&quot;&gt;</span>
+<span class="sd">    if</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span>
+        <span class="n">input_attrs</span><span class="p">,</span>
+        <span class="n">label_string</span><span class="p">,</span>
+        <span class="n">label_attrs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.forms.probo_form.ProboFormField.add_select_optgroup" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_select_optgroup</span><span class="p">(</span><span class="n">optgroups</span><span class="p">,</span> <span class="n">selected_options_indexes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">select_attrs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>option</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_select_optgroup</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">optgroups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">selected_options_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">select_attrs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;option&quot;&quot;&quot;</span>
+
+    <span class="n">optgroup_content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optgroups</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">optgroup_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">option</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">selected_options_indexes</span>
+                    <span class="k">else</span> <span class="n">option</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">y</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">optgroup</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">})</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">optgroup_content</span><span class="p">,</span> <span class="n">optgroups</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">select_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.components.forms.probo_form.ProboFormField.add_select_option" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_select_option</span><span class="p">(</span><span class="n">option_values</span><span class="p">,</span> <span class="n">selected_options_indexes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">select_attrs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>option</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_select_option</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">option_values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">selected_options_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">select_attrs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;option&quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">option</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">selected_options_indexes</span>
+            <span class="k">else</span> <span class="n">option</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">option_values</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_info</span><span class="p">(</span><span class="n">select_attrs</span><span class="p">,</span> <span class="n">label_string</span><span class="p">,</span> <span class="n">label_attrs</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_build</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">info</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="probo.components.forms.probo_form.get_widget_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_widget_info</span><span class="p">(</span><span class="n">django_bound_field</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Analyzes a Django BoundField and returns a clean dictionary
+of tag type, attributes, and values.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\probo\components\forms\probo_form.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_widget_info</span><span class="p">(</span><span class="n">django_bound_field</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyzes a Django BoundField and returns a clean dictionary</span>
+<span class="sd">    of tag type, attributes, and values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">widget</span> <span class="o">=</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">widget</span>
+    <span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+
+    <span class="c1"># 1. Base Attributes</span>
+    <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">html_name</span>
+    <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">id_for_label</span>
+
+    <span class="c1"># 2. Value Handling</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="c1"># 3. Required Handling</span>
+    <span class="k">if</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">required</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;required&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># 4. Tag Determination logic</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;input&quot;</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Check for Select</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="s2">&quot;allow_multiple_selected&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;select&quot;</span>
+        <span class="n">choices</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="n">widget</span><span class="o">.</span><span class="n">allow_multiple_selected</span><span class="p">:</span>
+            <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;multiple&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Check for Textarea</span>
+    <span class="k">elif</span> <span class="n">widget</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;Textarea&quot;</span><span class="p">:</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;textarea&quot;</span>
+        <span class="c1"># Textarea content is value, not attribute</span>
+        <span class="k">if</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Check for Input Type</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="s2">&quot;input_type&quot;</span><span class="p">):</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">input_type</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span>
+        <span class="s2">&quot;attrs&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">val</span><span class="p">,</span>
+        <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="n">choices</span><span class="p">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">django_bound_field</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+        <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">django_bound_field</span><span class="o">.</span><span class="n">errors</span><span class="p">),</span>
+    <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../node/" class="btn btn-neutral float-left" title="node"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../state/component_state/" class="btn btn-neutral float-right" title="component_state">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../node/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../state/component_state/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

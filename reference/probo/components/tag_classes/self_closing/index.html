@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../../img/favicon.ico" />
+    <title>self_closing - Probo UI</title>
+    <link rel="stylesheet" href="../../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "self_closing";
+        var mkdocs_page_input_path = "reference\\probo\\components\\tag_classes\\self_closing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../../.." class="icon icon-home"> Probo UI
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Probo</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../../utility/">utility</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >Components</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../../attributes/">attributes</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../base/">base</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../component/">component</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../node/">node</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Forms</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../forms/probo_form/">probo_form</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >State</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/component_state/">component_state</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../state/props/">props</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" >Tag classes</a>
+    <ul class="current">
+                <li class="toctree-l4"><a class="reference internal" href="../block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4 current"><a class="reference internal current" href="#">self_closing</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Tag functions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/block_tags/">block_tags</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../tag_functions/self_closing/">self_closing</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Context</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/context_logic/">context_logic</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../context/django/">django</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Htmx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx/">htmx</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../htmx/htmx_enum/">htmx_enum</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Request</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/props/">props</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/request_context/">request_context</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../request/transformer/">transformer</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Shortcuts</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/configs/">configs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts/">shortcuts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../shortcuts/shortcuts_utils/">shortcuts_utils</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Styles</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/css_enum/">css_enum</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/plain_css/">plain_css</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../styles/utils/">utils</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >Frameworks</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" >Bs5</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Templates</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/default_templates/">default_templates</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../templates/resolver/">resolver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Terminal</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/app_generator/">app_generator</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/cli/">cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../terminal/emmet/">emmet</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Xml</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/elements/">elements</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../xml/xml/">xml</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../..">Probo UI</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item">Probo</li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item">Tag classes</li>
+      <li class="breadcrumb-item active">self_closing</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/src\probo\components\tag_classes\self_closing.py" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="self_closing">self_closing</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="probo.components.tag_classes.self_closing"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.AREA" class="doc doc-heading">
+            <code>AREA</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an AREA HTML <area> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AREA</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an AREA HTML &lt;area&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.BASE" class="doc doc-heading">
+            <code>BASE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an BASE HTML <base> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BASE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an BASE HTML &lt;base&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.BR" class="doc doc-heading">
+            <code>BR</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an BR HTML <br> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BR</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an BR HTML &lt;br&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">br</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.CIRCLE" class="doc doc-heading">
+            <code>CIRCLE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an CIRCLE HTML <circle> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CIRCLE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an CIRCLE HTML &lt;circle&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">circle</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.COL" class="doc doc-heading">
+            <code>COL</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an COL HTML <col> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">COL</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an COL HTML &lt;col&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">col</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.DOCTYPE" class="doc doc-heading">
+            <code>DOCTYPE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an DOCTYPE HTML &lt;!&gt; line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DOCTYPE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an DOCTYPE HTML &lt;!&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">doctype</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.EMBED" class="doc doc-heading">
+            <code>EMBED</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an EMBED HTML <embed> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">EMBED</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an EMBED HTML &lt;embed&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">embed</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.HR" class="doc doc-heading">
+            <code>HR</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an HR HTML <hr> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HR</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an HR HTML &lt;hr&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">hr</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.IMG" class="doc doc-heading">
+            <code>IMG</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an IMG HTML <img> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IMG</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an IMG HTML &lt;img&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">img</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.INPUT" class="doc doc-heading">
+            <code>INPUT</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an INPUT HTML <input> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">INPUT</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an INPUT HTML &lt;input&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.LINE" class="doc doc-heading">
+            <code>LINE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an LINE HTML <line> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LINE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an LINE HTML &lt;line&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">line</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.LINK" class="doc doc-heading">
+            <code>LINK</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an LINK HTML <link> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LINK</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an LINK HTML &lt;link&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">link</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.META" class="doc doc-heading">
+            <code>META</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an META HTML <meta> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">META</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an META HTML &lt;meta&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">meta</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.PARAM" class="doc doc-heading">
+            <code>PARAM</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an PARAM HTML <param> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PARAM</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an PARAM HTML &lt;param&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">param</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.PATH" class="doc doc-heading">
+            <code>PATH</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an PATH HTML <path> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PATH</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an PATH HTML &lt;path&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.POLYGON" class="doc doc-heading">
+            <code>POLYGON</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an POLYGON HTML <polygon> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">POLYGON</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an POLYGON HTML &lt;polygon&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">polygon</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.POLYLINE" class="doc doc-heading">
+            <code>POLYLINE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an POLYLINE HTML <polyline> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">POLYLINE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an POLYLINE HTML &lt;polyline&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">polyline</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.RECT" class="doc doc-heading">
+            <code>RECT</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an RECT HTML <rect> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RECT</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an RECT HTML &lt;rect&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.SOURCE" class="doc doc-heading">
+            <code>SOURCE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an SOURCE HTML <source> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SOURCE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an SOURCE HTML &lt;source&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">source</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.STOP" class="doc doc-heading">
+            <code>STOP</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an STOP HTML <stop> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">STOP</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an STOP HTML &lt;stop&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.TRACK" class="doc doc-heading">
+            <code>TRACK</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an TRACK HTML <track> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TRACK</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an TRACK HTML &lt;track&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">track</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.USE" class="doc doc-heading">
+            <code>USE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an USE HTML <use> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">USE</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an USE HTML &lt;use&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">use</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="probo.components.tag_classes.self_closing.WBR" class="doc doc-heading">
+            <code>WBR</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="BaseHTMLElement (probo.components.base.BaseHTMLElement)" href="../../base/#probo.components.base.BaseHTMLElement">BaseHTMLElement</a></code>, <code><a class="autorefs autorefs-internal" title="ElementNodeMixin (probo.components.node.ElementNodeMixin)" href="../../node/#probo.components.node.ElementNodeMixin">ElementNodeMixin</a></code></p>
+
+
+
+        <p>Represents an WBR HTML <wbr> line break element (self-closing).</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>src\probo\components\tag_classes\self_closing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WBR</span><span class="p">(</span><span class="n">BaseHTMLElement</span><span class="p">,</span><span class="n">ElementNodeMixin</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an WBR HTML &lt;wbr&gt; line break element (self-closing).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Self-closing tags don&#39;t have content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_attrs</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span><span class="o">.</span><span class="n">wbr</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../block_tags/" class="btn btn-neutral float-left" title="block_tags"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../tag_functions/block_tags/" class="btn btn-neutral float-right" title="block_tags">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/MojahiD-0-YouneSS/probo-ui" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../block_tags/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../tag_functions/block_tags/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../../..";</script>
+    <script src="../../../../../js/theme_extra.js"></script>
+    <script src="../../../../../js/theme.js"></script>
+      <script src="../../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
