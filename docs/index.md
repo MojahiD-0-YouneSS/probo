@@ -1,29 +1,10 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
-<p align="center"> 
-<img src="./assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
-
-</p>
-
 # 🐘 Probo UI
 
-A Python-Native Template Rendering Framework and Meta-framework for Django.
-Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
+A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
-## 📣 Version 1.1.1 is Live!
+## 📣 Version 1.2.1 is Live!
 
-Probo UI has officially reached stable v1 status. It is a backend-first framework that transforms Python objects into performant HTML/CSS, creating a seamless bridge between Django's backend logic and the frontend interface.
-
-## 📚 Read the Full Sample Documentation (v1.0)
-
-### Click the link above for deep dives into : <a href="./simple_doc.md">view sample documentation</a>
-
-The Component Architecture: Brain (State) / Body (Elements) / Skin (Style).
-
-Shortcuts for building complex UIs.
-
-Probo Forms: Automatic Django Form rendering.
-
-JIT Styling: How the CSS engine works.
+Probo UI has officially reached stable v1.2 status. It is a backend-first framework.
 
 ## ⚡ Purpose & Philosophy
 
@@ -39,25 +20,53 @@ Probo UI solves this by bringing the Frontend into Python:
 
 🔌 Django Native: Deep integration with Django Forms and Requests via the RDT (Request Data Transformer).
 
-
-
 # 📦 Installation
 
 ```bash 
-pip install probo-ui
+        pip install probo-ui
 ```
 
 # 🚀 Quick Example
 
-Here is how you build a reusable, styled component using the Flow API:
+Here is how you build a reusable component:
 
 ```python
+from probo import (
+    li,div,h1,ul,strong,
+)
 def user_card(username):
-    # 1. Define Logic (The Brain)
-    # "Look for 'name' in dynamic data. If missing, don't render."
-    user_id = 'User_789xyz1323'
+    user_id = f'User_789{username}1323'
     user_info = {'practical-info':['python','javascript','docker','django']}
-    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,)
+    li_el = [li(info) for info in user_info['practical-info']]
+    # 2. Build Component (Structure + Style + Data)
+    card = div(
+        h1(username,strong(user_id)),
+        ul(*li_el)
+        Class='card',
+        style='color:red;'
+    )
+    return card
+
+# Render it
+html= user_card("Admin")
+print(html)
+# Output: 
+# <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
+```
+in case of permission
+```python
+from probo.components import (
+    Component,ComponentState, ElementState,StateProps,
+)
+from probo import (
+    div,h1,strong,ul,
+)
+
+def user_card(username):
+    props = StateProps(required=True,prop_equal_to={'username':'admin'})
+    user_id = f'User_789{username}1323'
+    user_info = {'practical-info':['python','javascript','docker','django']}
+    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,props=props,)
     user_comp_state = ComponentState(
         d_data=user_info,
         li_el,
@@ -65,9 +74,13 @@ def user_card(username):
     # 2. Build Component (Structure + Style + Data)
     card = Component(
         name="UserCard",
-        template=f"<div class='card'>{h1(username,strong(user_id))+ul(li_el.placeholder)}</div>",
+        template=div(
+            h1(username,strong(user_id)),
+            ul(li_el.placeholder)},
+            Class='card'),
         # Inject Data
         state=user_comp_state,
+        props={'username':username}
     )
 
     return card
@@ -75,6 +88,10 @@ def user_card(username):
 # Render it
 html= user_card("Admin").render()
 print(html)
+# Output: 
+# <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul></ul></div>
+html2= user_card("admin").render()
+print(html2)
 # Output: 
 # <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
