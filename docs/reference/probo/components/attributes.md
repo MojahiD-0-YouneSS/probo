@@ -1,0 +1,3 @@
+# attributes
+
+::: probo.components.attributes

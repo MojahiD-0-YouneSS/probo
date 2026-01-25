@@ -1,0 +1,3 @@
+# component
+
+::: probo.components.component

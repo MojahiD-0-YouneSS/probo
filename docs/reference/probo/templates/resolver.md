@@ -1,0 +1,3 @@
+# resolver
+
+::: probo.templates.resolver

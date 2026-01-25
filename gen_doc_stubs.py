@@ -1,24 +1,34 @@
-import mkdocs_gen_files
+import sys
 from pathlib import Path
 
+# 1. Define source and output paths
 src_root = Path("src")
+docs_root = Path("docs/reference") # We will write real files here
 
+# 2. Loop through every Python file
 for path in src_root.rglob("*.py"):
+    
     if path.name == "__init__.py":
         continue
 
-    # Path relative to src (e.g. "probo/utility.py")
+    # Calculate paths
     relative_path = path.relative_to(src_root)
+    doc_path = docs_root / relative_path.with_suffix(".md")
     
-    # Doc file location (e.g. "reference/probo/utility.md")
-    doc_path = Path("reference", relative_path).with_suffix(".md")
-    
-    # Python import path (e.g. "probo.utility" instead of "src.probo.utility")
-    # ✅ FIX: We use relative_path here so "src" is NOT included in the dot notation
+    # Calculate Python import identifier (e.g., probo.components.button)
+    # We strip "src" from the path logic here if your package is just "probo" inside src
     ident = ".".join(relative_path.with_suffix("").parts)
 
-    with mkdocs_gen_files.open(doc_path, "w") as f:
-        f.write(f"# {path.stem}\n\n")
-        f.write(f"::: {ident}")
+    # 3. SAFETY CHECK: Only create the file if it DOES NOT exist.
+    #    This ensures we never overwrite your manual edits.
+    if not doc_path.exists():
+        
+        # Create directories if needed
+        doc_path.parent.mkdir(parents=True, exist_ok=True)
 
-    mkdocs_gen_files.set_edit_path(doc_path, path)
+        with open(doc_path, "w", encoding="utf-8") as f:
+            f.write(f"# {path.stem}\n\n")
+            # This is the "Magic Line" that pulls live docs from Python
+            f.write(f"::: {ident}\n")
+            
+        print(f"Created new doc stub: {doc_path}")

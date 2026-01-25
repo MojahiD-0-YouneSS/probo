@@ -1,0 +1,3 @@
+# configs
+
+::: probo.shortcuts.configs
