@@ -6,6 +6,25 @@ A Python-Native server-side Template Rendering Framework and Meta-framework for 
 
 Probo UI has officially reached stable v1.2 status. It is a backend-first framework.
 
+    ```python
+    from probo import (
+        div, span
+    )
+
+    div(
+        span("Hello, Probo",Class='badge')
+    )
+    ```
+
+## Why Probo?
+
+- use your python skill in making dynamic UI templates.
+- Explicit, readable ad reusable layout
+- Easier refactoring than HTML templates (it's python)
+- IDE-friendly & type-safe
+
+*For the deeper reasoning behind these choices, see Purpose & Philosophy ↓*
+
 ## ⚡ Purpose & Philosophy
 
 Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.
@@ -95,4 +114,6 @@ print(html2)
 # Output: 
 # <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
+[ Get Started → ]
+
 💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.

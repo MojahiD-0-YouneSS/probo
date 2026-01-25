@@ -1,4 +1,5 @@
 site_name: Probo UI
+site_description: “Type-safe Python UI framework for Django”
 site_url: '' #https://example.com/probo-ui
 repo_url: https://github.com/MojahiD-0-YouneSS/probo-ui
 edit_uri: edit/main/docs/
