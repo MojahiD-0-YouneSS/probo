@@ -366,41 +366,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#version-111-is-live" class="md-nav__link">
+  <a href="#version-121-is-live" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📣 Version 1.1.1 is Live!
+        📣 Version 1.2.1 is Live!
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-the-full-sample-documentation-v10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Read the Full Sample Documentation (v1.0)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📚 Read the Full Sample Documentation (v1.0)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#click-the-link-above-for-deep-dives-into-view-sample-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Click the link above for deep dives into : view sample documentation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3233,41 +3205,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#version-111-is-live" class="md-nav__link">
+  <a href="#version-121-is-live" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📣 Version 1.1.1 is Live!
+        📣 Version 1.2.1 is Live!
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-the-full-sample-documentation-v10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Read the Full Sample Documentation (v1.0)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📚 Read the Full Sample Documentation (v1.0)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#click-the-link-above-for-deep-dives-into-view-sample-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Click the link above for deep dives into : view sample documentation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3302,23 +3246,10 @@
   
 
 
-<p><a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a></p>
-<p align="center"> 
-<img src="./assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
-
-</p>
-
 <h1 id="probo-ui">🐘 Probo UI</h1>
-<p>A Python-Native Template Rendering Framework and Meta-framework for Django.
-Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.</p>
-<h2 id="version-111-is-live">📣 Version 1.1.1 is Live!</h2>
-<p>Probo UI has officially reached stable v1 status. It is a backend-first framework that transforms Python objects into performant HTML/CSS, creating a seamless bridge between Django's backend logic and the frontend interface.</p>
-<h2 id="read-the-full-sample-documentation-v10">📚 Read the Full Sample Documentation (v1.0)</h2>
-<h3 id="click-the-link-above-for-deep-dives-into-view-sample-documentation">Click the link above for deep dives into : <a href="./simple_doc.md">view sample documentation</a></h3>
-<p>The Component Architecture: Brain (State) / Body (Elements) / Skin (Style).</p>
-<p>Shortcuts for building complex UIs.</p>
-<p>Probo Forms: Automatic Django Form rendering.</p>
-<p>JIT Styling: How the CSS engine works.</p>
+<p>A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.</p>
+<h2 id="version-121-is-live">📣 Version 1.2.1 is Live!</h2>
+<p>Probo UI has officially reached stable v1.2 status. It is a backend-first framework.</p>
 <h2 id="purpose-philosophy">⚡ Purpose &amp; Philosophy</h2>
 <p>Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.</p>
 <p>Probo UI solves this by bringing the Frontend into Python:</p>
@@ -3327,16 +3258,45 @@ Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No te
 <p>🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.</p>
 <p>🔌 Django Native: Deep integration with Django Forms and Requests via the RDT (Request Data Transformer).</p>
 <h1 id="installation">📦 Installation</h1>
-<pre><code class="language-bash">pip install probo-ui
+<pre><code class="language-bash">        pip install probo-ui
 </code></pre>
 <h1 id="quick-example">🚀 Quick Example</h1>
-<p>Here is how you build a reusable, styled component using the Flow API:</p>
-<pre><code class="language-python">def user_card(username):
-    # 1. Define Logic (The Brain)
-    # &quot;Look for 'name' in dynamic data. If missing, don't render.&quot;
-    user_id = 'User_789xyz1323'
+<p>Here is how you build a reusable component:</p>
+<pre><code class="language-python">from probo import (
+    li,div,h1,ul,strong,
+)
+def user_card(username):
+    user_id = f'User_789{username}1323'
     user_info = {'practical-info':['python','javascript','docker','django']}
-    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,)
+    li_el = [li(info) for info in user_info['practical-info']]
+    # 2. Build Component (Structure + Style + Data)
+    card = div(
+        h1(username,strong(user_id)),
+        ul(*li_el)
+        Class='card',
+        style='color:red;'
+    )
+    return card
+
+# Render it
+html= user_card(&quot;Admin&quot;)
+print(html)
+# Output: 
+# &lt;div class='card'&gt;&lt;h1&gt;Admin&lt;strong&gt;User_789xyz1323&lt;/strong&gt;&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;python&lt;/li&gt;&lt;li&gt;javascript&lt;/li&gt;&lt;li&gt;docker&lt;/li&gt;&lt;li&gt;django&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+</code></pre>
+<p>in case of permission</p>
+<pre><code class="language-python">from probo.components import (
+    Component,ComponentState, ElementState,StateProps,
+)
+from probo import (
+    div,h1,strong,ul,
+)
+
+def user_card(username):
+    props = StateProps(required=True,prop_equal_to={'username':'admin'})
+    user_id = f'User_789{username}1323'
+    user_info = {'practical-info':['python','javascript','docker','django']}
+    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,props=props,)
     user_comp_state = ComponentState(
         d_data=user_info,
         li_el,
@@ -3344,9 +3304,13 @@ Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No te
     # 2. Build Component (Structure + Style + Data)
     card = Component(
         name=&quot;UserCard&quot;,
-        template=f&quot;&lt;div class='card'&gt;{h1(username,strong(user_id))+ul(li_el.placeholder)}&lt;/div&gt;&quot;,
+        template=div(
+            h1(username,strong(user_id)),
+            ul(li_el.placeholder)},
+            Class='card'),
         # Inject Data
         state=user_comp_state,
+        props={'username':username}
     )
 
     return card
@@ -3354,6 +3318,10 @@ Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No te
 # Render it
 html= user_card(&quot;Admin&quot;).render()
 print(html)
+# Output: 
+# &lt;div class='card'&gt;&lt;h1&gt;Admin&lt;strong&gt;User_789xyz1323&lt;/strong&gt;&lt;/h1&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;
+html2= user_card(&quot;admin&quot;).render()
+print(html2)
 # Output: 
 # &lt;div class='card'&gt;&lt;h1&gt;Admin&lt;strong&gt;User_789xyz1323&lt;/strong&gt;&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;python&lt;/li&gt;&lt;li&gt;javascript&lt;/li&gt;&lt;li&gt;docker&lt;/li&gt;&lt;li&gt;django&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 </code></pre>
