@@ -1,6 +1,6 @@
 # 🐘 Probo UI
 
-A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
+A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
 ## 📣 Version 1.2.1 is Live!
 
@@ -10,10 +10,7 @@ Probo UI has officially reached stable v1.2 status. It is a backend-first framew
     from probo import (
         div, span
     )
-
-    div(
-        span("Hello, Probo",Class='badge')
-    )
+    div(span("Hello, Probo",Class='badge'))
     ```
 
 ## Why Probo?
@@ -114,6 +111,7 @@ print(html2)
 # Output: 
 # <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
-[ Get Started → ]
+
+[🚀 Get Started](user_guide.md)
 
 💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.
