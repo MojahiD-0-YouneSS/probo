@@ -6,6 +6,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="“Type-safe Python UI framework for Django”">
+      
       
       
       
@@ -370,6 +372,17 @@
     <span class="md-ellipsis">
       
         📣 Version 1.2.1 is Live!
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-probo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Probo?
       
     </span>
   </a>
@@ -3216,6 +3229,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#why-probo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Probo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#purpose-philosophy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3250,6 +3274,24 @@
 <p>A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.</p>
 <h2 id="version-121-is-live">📣 Version 1.2.1 is Live!</h2>
 <p>Probo UI has officially reached stable v1.2 status. It is a backend-first framework.</p>
+<pre><code>```python
+from probo import (
+    div, span
+)
+
+div(
+    span("Hello, Probo",Class='badge')
+)
+```
+</code></pre>
+<h2 id="why-probo">Why Probo?</h2>
+<ul>
+<li>use your python skill in making dynamic UI templates.</li>
+<li>Explicit, readable ad reusable layout</li>
+<li>Easier refactoring than HTML templates (it's python)</li>
+<li>IDE-friendly &amp; type-safe</li>
+</ul>
+<p><em>For the deeper reasoning behind these choices, see Purpose &amp; Philosophy ↓</em></p>
 <h2 id="purpose-philosophy">⚡ Purpose &amp; Philosophy</h2>
 <p>Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.</p>
 <p>Probo UI solves this by bringing the Frontend into Python:</p>
@@ -3325,6 +3367,7 @@ print(html2)
 # Output: 
 # &lt;div class='card'&gt;&lt;h1&gt;Admin&lt;strong&gt;User_789xyz1323&lt;/strong&gt;&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;python&lt;/li&gt;&lt;li&gt;javascript&lt;/li&gt;&lt;li&gt;docker&lt;/li&gt;&lt;li&gt;django&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
 </code></pre>
+<p>[ Get Started → ]</p>
 <p>💬 Community &amp; Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.</p>
 
 
