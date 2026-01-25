@@ -11,9 +11,7 @@ Probo UI has officially reached stable v1.2 status. It is a backend-first framew
         div, span
     )
 
-    div(
-        span("Hello, Probo",Class='badge')
-    )
+    div(span("Hello, Probo",Class='badge'))
     ```
 
 ## Why Probo?
@@ -114,6 +112,6 @@ print(html2)
 # Output: 
 # <div class='card'><h1>Admin<strong>User_789xyz1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
-[ Get Started → ]
+[ 🚀 Get Started → ](user_guide.md)
 
 💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.
