@@ -130,8 +130,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts_utils">shortcuts_utils</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts_utils.make_es_from_esc">make_es_from_esc</a>
-    </li>
     </ul>
                 </li>
     </ul>
@@ -217,7 +215,12 @@
 
 
 
-<a id="probo.shortcuts.shortcuts_utils"></a>
+<h2 id="probo.shortcuts.shortcuts_utils" class="doc doc-heading">
+            <code>probo.shortcuts.shortcuts_utils</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -243,10 +246,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts_utils.make_es_from_esc" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts_utils.make_es_from_esc" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">make_es_from_esc</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -254,31 +257,6 @@
         <p>Helper to create ElementState from ElementStateConfig.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts_utils.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_es_from_esc</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ElementStateConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ElementState</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to create ElementState from ElementStateConfig.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">ElementState</span><span class="p">(</span>
-        <span class="n">element</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
-        <span class="n">s_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">s_state</span><span class="p">,</span>
-        <span class="n">d_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">d_state</span><span class="p">,</span>
-        <span class="n">c_state</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">c_state</span><span class="p">,</span>
-        <span class="n">hide_dynamic</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">hide_dynamic</span><span class="p">,</span>
-        <span class="n">is_void_element</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">is_void_element</span><span class="p">,</span>
-        <span class="n">attrs</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>

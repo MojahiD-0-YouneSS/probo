@@ -138,14 +138,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.styles.elements">elements</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.styles.elements.ComponentStyle">ComponentStyle</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.styles.elements.SelectorRuleBridge">SelectorRuleBridge</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.styles.elements.element_style">element_style</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.styles.elements.element_style_state">element_style_state</a>
-    </li>
     </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../plain_css/">plain_css</a>
@@ -223,7 +215,12 @@
 
 
 
-<a id="probo.styles.elements"></a>
+<h2 id="probo.styles.elements" class="doc doc-heading">
+            <code>probo.styles.elements</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -249,11 +246,11 @@
 
 
 
-<h2 id="probo.styles.elements.ComponentStyle" class="doc doc-heading">
+<h3 id="probo.styles.elements.ComponentStyle" class="doc doc-heading">
             <code>ComponentStyle</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -271,129 +268,6 @@ args:
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ComponentStyle</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class to represent the css style of a Component object.</span>
-<span class="sd">    args:</span>
-<span class="sd">        template: a html representation to validate selectors against</span>
-<span class="sd">        *css: the css is tuple of SelectorRuleBridge objects</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">Css_rule</span> <span class="o">=</span> <span class="n">CssRule</span>
-    <span class="n">Css_animatable</span> <span class="o">=</span> <span class="n">CssAnimatable</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">css</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">css_rules</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">&quot;SelectorRuleBridge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">css</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template_representation</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">template</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">template_info</span> <span class="o">=</span> <span class="n">CssSelector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">)</span><span class="o">.</span><span class="n">template_info</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">link_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmp_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">cmp_str</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_string</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_style_tag</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="n">container</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_validate_css</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span> <span class="k">for</span> <span class="n">bridge</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_rules</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">with_style_tag</span><span class="p">:</span>
-            <span class="n">as_string</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template_representation</span> <span class="o">=</span> <span class="n">container</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">as_string</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_representation</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">probo.components.tag_functions.block_tags</span><span class="w"> </span><span class="kn">import</span> <span class="n">style</span>
-
-            <span class="k">return</span> <span class="p">(</span>
-                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_representation</span><span class="p">)</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">with_style_tag</span>
-                <span class="k">else</span> <span class="n">style</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_representation</span><span class="p">))</span>
-            <span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_css</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bridge</span><span class="p">):</span>
-        <span class="n">s</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">bridge</span><span class="o">.</span><span class="n">selector_str</span><span class="p">,</span> <span class="n">bridge</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">probo.utility</span><span class="w"> </span><span class="kn">import</span> <span class="n">exists_in_dict</span>
-
-        <span class="k">if</span> <span class="s2">&quot;_$_&quot;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="n">exists_in_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_info</span><span class="p">,</span> <span class="n">ss</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">))</span>
-                    <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_$_&quot;</span><span class="p">)</span>
-                <span class="p">]</span>
-            <span class="p">):</span>
-                <span class="n">selectors</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_$_&quot;</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid selectors&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">exists_in_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_info</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-                <span class="n">selectors</span> <span class="o">=</span> <span class="n">s</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid selectors&quot;</span><span class="p">)</span>
-        <span class="c1"># css_rules = f&quot;{&#39; &#39;.join([ c for cr in self.css_rules])}&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">selectors</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -421,7 +295,7 @@ args:
 
 
 
-<h2 id="probo.styles.elements.SelectorRuleBridge" class="doc doc-heading">
+<h3 id="probo.styles.elements.SelectorRuleBridge" class="doc doc-heading">
             <code>SelectorRuleBridge</code>
 
 
@@ -429,7 +303,7 @@ args:
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -445,179 +319,6 @@ Binds a specific Selector to a specific Rule definition and unifizes  CssSelecto
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SelectorRuleBridge</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    The atomic unit of the Style Engine.</span>
-<span class="sd">    Binds a specific Selector to a specific Rule definition and unifizes  CssSelectort and CssRule objects</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">CssSelector</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-    <span class="n">rule</span><span class="p">:</span> <span class="n">CssRule</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Automatically runs after the object is created.</span>
-<span class="sd">        Ensures self.selector is normalized to a CssSelector object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">make_selector_obj</span><span class="p">()</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">selector_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper to get the raw string for lxml/cssselect.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="s2">&quot;render&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">make_selector_obj</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">CssSelector</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">sel_obj</span> <span class="o">=</span> <span class="n">CssSelector</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resolve_complex_selector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">):</span>
-                <span class="n">sel_obj</span><span class="o">.</span><span class="n">add_selector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">selector</span> <span class="o">=</span> <span class="n">sel_obj</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;selector must be str or CssSelector&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the full CSS block for this bridge.</span>
-<span class="sd">        Example: .btn { color: red; }</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># CssRule.render_declarations() is assumed to return just the body &quot;prop: val;&quot;</span>
-        <span class="c1"># If CssRule.render() includes selectors, we might need to adjust CssRule</span>
-        <span class="c1"># or just use the rule&#39;s properties here.</span>
-
-        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">body</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selector_str</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># No styles to render</span>
-
-    <span class="c1"># f&#39;{k.strip(&#39;:&#39;)}:{v.strip(&#39;;&#39;)};\n&#39;.replace(&#39;_&#39;,&#39;-&#39;)</span>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">make_bridge_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;SelectorRuleBridge&quot;</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Factory: Converts a User Dictionary into a Strict List of Bridges.</span>
-<span class="sd">        Preserves insertion order (Python 3.7+ dicts are ordered).</span>
-
-<span class="sd">        Input: { CssSelector(&#39;.btn&#39;): CssRule(color=&#39;red&#39;) }</span>
-<span class="sd">        Output: [SRB(selector=..., rule=...)]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">bridges</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">sel</span><span class="p">,</span> <span class="n">rule_def</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="c1"># 1. Normalize Rule</span>
-            <span class="c1"># If user passed a dict {&#39;color&#39;: &#39;red&#39;}, wrap it in CssRule</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule_def</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="n">final_rule</span> <span class="o">=</span> <span class="n">CssRule</span><span class="p">(</span><span class="o">**</span><span class="n">rule_def</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule_def</span><span class="p">,</span> <span class="n">CssRule</span><span class="p">):</span>
-                <span class="n">final_rule</span> <span class="o">=</span> <span class="n">rule_def</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">continue</span>  <span class="c1"># Skip invalid</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">CssSelector</span><span class="p">):</span>
-                <span class="n">sel_obj</span> <span class="o">=</span> <span class="n">CssSelector</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resolve_complex_selector</span><span class="p">(</span><span class="n">sel</span><span class="p">):</span>
-                    <span class="n">sel_obj</span><span class="o">.</span><span class="n">add_selector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="c1"># 2. Create Bridge</span>
-            <span class="n">bridges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">sel_obj</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">final_rule</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">bridges</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -633,14 +334,14 @@ Binds a specific Selector to a specific Rule definition and unifizes  CssSelecto
 
 
 
-<h3 id="probo.styles.elements.SelectorRuleBridge.selector_str" class="doc doc-heading">
+<h4 id="probo.styles.elements.SelectorRuleBridge.selector_str" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">selector_str</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -657,10 +358,10 @@ Binds a specific Selector to a specific Rule definition and unifizes  CssSelecto
 <div class="doc doc-object doc-function">
 
 
-<h3 id="probo.styles.elements.SelectorRuleBridge.__post_init__" class="doc doc-heading">
+<h4 id="probo.styles.elements.SelectorRuleBridge.__post_init__" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">__post_init__</span><span class="p">()</span></code>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -669,21 +370,6 @@ Binds a specific Selector to a specific Rule definition and unifizes  CssSelecto
 Ensures self.selector is normalized to a CssSelector object.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Automatically runs after the object is created.</span>
-<span class="sd">    Ensures self.selector is normalized to a CssSelector object.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">make_selector_obj</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -691,14 +377,14 @@ Ensures self.selector is normalized to a CssSelector object.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="probo.styles.elements.SelectorRuleBridge.make_bridge_list" class="doc doc-heading">
+<h4 id="probo.styles.elements.SelectorRuleBridge.make_bridge_list" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">make_bridge_list</span><span class="p">(</span><span class="n">source</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
   </span>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -709,69 +395,6 @@ Preserves insertion order (Python 3.7+ dicts are ordered).</p>
 Output: [SRB(selector=..., rule=...)]</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">make_bridge_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;SelectorRuleBridge&quot;</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Factory: Converts a User Dictionary into a Strict List of Bridges.</span>
-<span class="sd">    Preserves insertion order (Python 3.7+ dicts are ordered).</span>
-
-<span class="sd">    Input: { CssSelector(&#39;.btn&#39;): CssRule(color=&#39;red&#39;) }</span>
-<span class="sd">    Output: [SRB(selector=..., rule=...)]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">bridges</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">sel</span><span class="p">,</span> <span class="n">rule_def</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="c1"># 1. Normalize Rule</span>
-        <span class="c1"># If user passed a dict {&#39;color&#39;: &#39;red&#39;}, wrap it in CssRule</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule_def</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">final_rule</span> <span class="o">=</span> <span class="n">CssRule</span><span class="p">(</span><span class="o">**</span><span class="n">rule_def</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule_def</span><span class="p">,</span> <span class="n">CssRule</span><span class="p">):</span>
-            <span class="n">final_rule</span> <span class="o">=</span> <span class="n">rule_def</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">continue</span>  <span class="c1"># Skip invalid</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">CssSelector</span><span class="p">):</span>
-            <span class="n">sel_obj</span> <span class="o">=</span> <span class="n">CssSelector</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resolve_complex_selector</span><span class="p">(</span><span class="n">sel</span><span class="p">):</span>
-                <span class="n">sel_obj</span><span class="o">.</span><span class="n">add_selector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="c1"># 2. Create Bridge</span>
-        <span class="n">bridges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">selector</span><span class="o">=</span><span class="n">sel_obj</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">final_rule</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">bridges</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -779,10 +402,10 @@ Output: [SRB(selector=..., rule=...)]</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="probo.styles.elements.SelectorRuleBridge.render" class="doc doc-heading">
+<h4 id="probo.styles.elements.SelectorRuleBridge.render" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">render</span><span class="p">()</span></code>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -791,37 +414,6 @@ Output: [SRB(selector=..., rule=...)]</p>
 Example: .btn { color: red; }</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders the full CSS block for this bridge.</span>
-<span class="sd">    Example: .btn { color: red; }</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># CssRule.render_declarations() is assumed to return just the body &quot;prop: val;&quot;</span>
-    <span class="c1"># If CssRule.render() includes selectors, we might need to adjust CssRule</span>
-    <span class="c1"># or just use the rule&#39;s properties here.</span>
-
-    <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">body</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">selector_str</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># No styles to render</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -839,10 +431,10 @@ Example: .btn { color: red; }</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.styles.elements.element_style" class="doc doc-heading">
+<h3 id="probo.styles.elements.element_style" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">element_style</span><span class="p">(</span><span class="n">with_style_attr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">prop_val</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -850,35 +442,6 @@ Example: .btn { color: red; }</p>
         <p>A function to represent inline styles for an HTML element.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">element_style</span><span class="p">(</span>
-    <span class="n">with_style_attr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">prop_val</span><span class="p">,</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function to represent inline styles for an HTML element.&quot;&quot;&quot;</span>
-    <span class="n">style_string</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">;&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">CssRule</span><span class="p">(</span><span class="o">**</span><span class="n">prop_val</span><span class="p">)</span><span class="o">.</span><span class="n">declarations</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
-        <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="n">with_style_attr</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;style=&quot;</span><span class="si">{</span><span class="n">style_string</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">style_string</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -886,10 +449,10 @@ Example: .btn { color: red; }</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.styles.elements.element_style_state" class="doc doc-heading">
+<h3 id="probo.styles.elements.element_style_state" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">element_style_state</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">rslvd_el</span><span class="p">,</span> <span class="o">*</span><span class="n">css</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -911,121 +474,6 @@ Example: .btn { color: red; }</p>
     → Keep it</p>
 </details>
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\elements.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">element_style_state</span><span class="p">(</span>
-    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">rslvd_el</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>  <span class="c1"># Dict[str, ElementState]</span>
-    <span class="o">*</span><span class="n">css</span><span class="p">:</span> <span class="n">SelectorRuleBridge</span><span class="p">,</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validate CSS selectors against the rendered template and element state.</span>
-
-<span class="sd">    Cases:</span>
-<span class="sd">        Case 2 (Error Thrower):</span>
-<span class="sd">            - Selector state is managed (in rslvd_el)</span>
-<span class="sd">            - BUT selector does NOT exist in final template</span>
-<span class="sd">            → Skip it.</span>
-
-<span class="sd">        Case 1:</span>
-<span class="sd">            - Managed AND present in template</span>
-<span class="sd">            → Keep it</span>
-
-<span class="sd">        Case 3:</span>
-<span class="sd">            - Not managed</span>
-<span class="sd">            → Keep it</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Pair selectors with css blocks</span>
-    <span class="c1"># selectors: (&quot;h1.big&quot;, &quot;a.btn&quot;)</span>
-    <span class="c1"># css: {&quot;h1_big&quot;: {&quot;color&quot;:&quot;red&quot;}, &quot;a_btn&quot;: {&quot;font&quot;:&quot;12px&quot;}}</span>
-
-    <span class="n">valid_css</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">css</span><span class="p">:</span>
-        <span class="n">selector</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">resolve_complex_selector</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">selector_str</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
-        <span class="p">]</span>
-        <span class="n">exists_in_template</span> <span class="o">=</span> <span class="n">_check_selector_in_template_re</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
-        <span class="c1"># Check if selector is managed in rslvd_el</span>
-        <span class="n">is_managed</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">any</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="p">(</span>
-                        <span class="nb">all</span><span class="p">([</span><span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">attrs</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selector</span><span class="p">])</span>
-                        <span class="ow">or</span> <span class="nb">all</span><span class="p">([</span><span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selector</span><span class="p">])</span>
-                    <span class="p">)</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">display_it</span>
-                    <span class="k">else</span> <span class="kc">True</span>
-                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rslvd_el</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-                <span class="p">]</span>
-            <span class="p">)</span>
-            <span class="k">if</span> <span class="n">rslvd_el</span>
-            <span class="k">else</span> <span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="c1"># --- Case 2: ERROR THROWER ---</span>
-        <span class="k">if</span> <span class="n">is_managed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">exists_in_template</span><span class="p">:</span>
-            <span class="k">continue</span>  <span class="c1"># skip it entirely</span>
-        <span class="k">if</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">css</span><span class="p">:</span>
-            <span class="n">valid_css</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">valid_css</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>

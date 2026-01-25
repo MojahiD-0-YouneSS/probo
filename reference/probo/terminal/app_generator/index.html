@@ -162,10 +162,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.terminal.app_generator">app_generator</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.terminal.app_generator.create_hacksoft_structure">create_hacksoft_structure</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.terminal.app_generator.create_probo_dj_structure">create_probo_dj_structure</a>
-    </li>
     </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../cli/">cli</a>
@@ -219,7 +215,12 @@
 
 
 
-<a id="probo.terminal.app_generator"></a>
+<h2 id="probo.terminal.app_generator" class="doc doc-heading">
+            <code>probo.terminal.app_generator</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -245,10 +246,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.terminal.app_generator.create_hacksoft_structure" class="doc doc-heading">
+<h3 id="probo.terminal.app_generator.create_hacksoft_structure" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">create_hacksoft_structure</span><span class="p">(</span><span class="n">app_dir</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -256,23 +257,6 @@
         <p>Services (Write) + Selectors (Read).</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\terminal\app_generator.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_hacksoft_structure</span><span class="p">(</span><span class="n">app_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Services (Write) + Selectors (Read).&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;services&quot;</span><span class="p">,</span> <span class="s2">&quot;selectors&quot;</span><span class="p">]:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">app_dir</span> <span class="o">/</span> <span class="n">folder</span>
-        <span class="n">d</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
-        <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -280,10 +264,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.terminal.app_generator.create_probo_dj_structure" class="doc doc-heading">
+<h3 id="probo.terminal.app_generator.create_probo_dj_structure" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">create_probo_dj_structure</span><span class="p">(</span><span class="n">app_dir</span><span class="p">,</span> <span class="n">app_name</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -291,59 +275,6 @@
         <p>The Full Enterprise Stack.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\terminal\app_generator.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_probo_dj_structure</span><span class="p">(</span><span class="n">app_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The Full Enterprise Stack.&quot;&quot;&quot;</span>
-    <span class="c1"># 1. Deep Layer Separation</span>
-    <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;services&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">app_name</span><span class="si">}</span><span class="s2">_service.py&quot;</span><span class="p">,</span> <span class="s2">&quot;systems/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;selectors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="s2">&quot;selectors.py&quot;</span><span class="p">],</span>
-        <span class="c1"># Split Views &amp; Forms into Admin/Client</span>
-        <span class="s2">&quot;forms&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="s2">&quot;admin_forms/&quot;</span><span class="p">,</span> <span class="s2">&quot;client_forms/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;views&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="s2">&quot;admin_views/&quot;</span><span class="p">,</span> <span class="s2">&quot;client_views/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;urls&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="s2">&quot;admin_urls.py&quot;</span><span class="p">,</span> <span class="s2">&quot;client_urls.py&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">,</span> <span class="s2">&quot;service_exception.py&quot;</span><span class="p">],</span>
-    <span class="p">}</span>
-
-    <span class="k">for</span> <span class="n">folder</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">folder_path</span> <span class="o">=</span> <span class="n">app_dir</span> <span class="o">/</span> <span class="n">folder</span>
-        <span class="n">folder_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
-                <span class="p">(</span><span class="n">folder_path</span> <span class="o">/</span> <span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="p">(</span><span class="n">folder_path</span> <span class="o">/</span> <span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
-
-    <span class="c1"># 2. Root Utilities</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;signals.py&quot;</span><span class="p">,</span> <span class="s2">&quot;dependencies.py&quot;</span><span class="p">,</span> <span class="s2">&quot;tasks.py&quot;</span><span class="p">]:</span>
-        <span class="p">(</span><span class="n">app_dir</span> <span class="o">/</span> <span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>

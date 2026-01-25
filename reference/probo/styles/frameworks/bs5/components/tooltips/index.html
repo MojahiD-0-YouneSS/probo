@@ -214,7 +214,12 @@
 
 
 
-<a id="probo.styles.frameworks.bs5.components.tooltips"></a>
+<h2 id="probo.styles.frameworks.bs5.components.tooltips" class="doc doc-heading">
+            <code>probo.styles.frameworks.bs5.components.tooltips</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -240,11 +245,11 @@
 
 
 
-<h2 id="probo.styles.frameworks.bs5.components.tooltips.BS5Tooltips" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.components.tooltips.BS5Tooltips" class="doc doc-heading">
             <code>BS5Tooltips</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -263,71 +268,6 @@ that displays the tooltip on hover/focus.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\components\tooltips.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BS5Tooltips</span><span class="p">(</span><span class="n">BS5Component</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bootstrap 5 Tooltip component.</span>
-<span class="sd">    Actually creates the *trigger* element (usually a button or link)</span>
-<span class="sd">    that displays the tooltip on hover/focus.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">placement</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="p">,</span> <span class="n">render_constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_constraints</span> <span class="o">=</span> <span class="n">render_constraints</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">content</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">=</span><span class="n">title</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">placement</span> <span class="o">=</span> <span class="n">placement</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tooltips_classes</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BS5-Tooltips&#39;</span><span class="p">,</span> <span class="n">state_props</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_constraints</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_render_comp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Base BS5Component logic expects this to return the BS5Element to render</span>
-        <span class="n">tooltip_attrs</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;data-bs-toggle&#39;</span><span class="p">:</span> <span class="s1">&#39;tooltip&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;data-bs-placement&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">placement</span><span class="p">,</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-            <span class="c1"># Accessible name if not provided</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;button&#39;</span><span class="p">:</span>
-            <span class="n">tooltip_attrs</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">=</span> <span class="s1">&#39;button&#39;</span>
-
-        <span class="n">root</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="n">classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tooltips_classes</span><span class="p">,</span> <span class="o">**</span><span class="n">tooltip_attrs</span><span class="p">)</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">attr_manager</span><span class="o">.</span><span class="n">set_bulk_attr</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">root</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

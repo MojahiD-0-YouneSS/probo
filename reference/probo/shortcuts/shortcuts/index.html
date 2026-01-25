@@ -128,30 +128,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts">shortcuts</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.component">component</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.custom">custom</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.datatable">datatable</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.document">document</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.head_seo">head_seo</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.iterator">iterator</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.layout">layout</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.probo_form">probo_form</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.semantic_layout">semantic_layout</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.set_data">set_data</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.theme">theme</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.shortcuts.xml">xml</a>
-    </li>
     </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../shortcuts_utils/">shortcuts_utils</a>
@@ -239,7 +215,12 @@
 
 
 
-<a id="probo.shortcuts.shortcuts"></a>
+<h2 id="probo.shortcuts.shortcuts" class="doc doc-heading">
+            <code>probo.shortcuts.shortcuts</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -265,10 +246,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.component" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.component" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">component</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -277,113 +258,6 @@
 Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">component</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ComponentConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    a shortcut to Builds a Component from a Configuration Object.</span>
-<span class="sd">    Handles State, Styles (CSS/BS5), and Structure in one pass.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># 1. Build State (The Brain)</span>
-    <span class="c1"># We unpack the specific StateConfig dataclass</span>
-    <span class="n">es_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">esc</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">state_config</span><span class="o">.</span><span class="n">elements_state_config</span><span class="p">:</span>
-        <span class="n">es</span> <span class="o">=</span> <span class="n">make_es_from_esc</span><span class="p">(</span><span class="n">esc</span><span class="p">)</span>
-        <span class="n">es_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">esc</span><span class="o">.</span><span class="n">config_id</span><span class="p">,</span> <span class="n">es</span><span class="o">.</span><span class="n">placeholder</span><span class="p">)</span>
-
-    <span class="n">state_obj</span> <span class="o">=</span> <span class="n">ComponentState</span><span class="p">(</span>
-        <span class="o">*</span><span class="n">es_list</span><span class="p">,</span>  <span class="c1"># ElementStates are passed as *args to CS</span>
-        <span class="n">s_data</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">state_config</span><span class="o">.</span><span class="n">s_data</span><span class="p">,</span>
-        <span class="n">d_data</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">state_config</span><span class="o">.</span><span class="n">d_data</span><span class="p">,</span>
-        <span class="n">strict</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">state_config</span><span class="o">.</span><span class="n">strict</span><span class="p">,</span>
-        <span class="c1"># require_props_definition=config.state_config.require_props,</span>
-        <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">state_config</span><span class="o">.</span><span class="n">props</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="c1"># 2. Initialize Component (The Structure)</span>
-    <span class="n">comp</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-        <span class="n">template</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">template</span><span class="p">),</span>
-        <span class="n">state</span><span class="o">=</span><span class="n">state_obj</span><span class="p">,</span>
-        <span class="o">*</span><span class="n">config</span><span class="o">.</span><span class="n">children</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">props</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="c1"># 3. Apply Styles (The Skin)</span>
-    <span class="n">style_conf</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">style_config</span>
-
-    <span class="c1"># A. JIT CSS Rules</span>
-    <span class="k">if</span> <span class="n">style_conf</span><span class="o">.</span><span class="n">css</span><span class="p">:</span>
-        <span class="c1"># change_skin handles dicts or lists of rules automatically</span>
-        <span class="n">comp</span><span class="o">.</span><span class="n">load_css_rules</span><span class="p">(</span><span class="o">**</span><span class="n">style_conf</span><span class="o">.</span><span class="n">css</span><span class="p">)</span>
-
-    <span class="c1"># B. Root Element Styles (kwargs)</span>
-    <span class="k">if</span> <span class="n">style_conf</span><span class="o">.</span><span class="n">root_css</span><span class="p">:</span>
-        <span class="n">comp</span><span class="o">.</span><span class="n">change_skin</span><span class="p">(</span><span class="n">root_css</span><span class="o">=</span><span class="n">style_conf</span><span class="o">.</span><span class="n">root_css</span><span class="p">)</span>
-
-    <span class="c1"># C. Bootstrap 5 Classes</span>
-    <span class="k">if</span> <span class="n">style_conf</span><span class="o">.</span><span class="n">root_bs5_classes</span><span class="p">:</span>
-        <span class="n">bs5_string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">style_conf</span><span class="o">.</span><span class="n">root_bs5_classes</span><span class="p">)</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">root_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">root_attrs</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">bs5_string</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">root_element</span><span class="p">:</span>
-        <span class="n">comp</span><span class="o">.</span><span class="n">set_root_element</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">root_element</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">root_attrs</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">comp</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -391,10 +265,10 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.custom" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.custom" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">custom</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">is_void_element</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -402,25 +276,6 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
         <p>Creates a custom HTML tag string immediately.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">custom</span><span class="p">(</span><span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_void_element</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a custom HTML tag string immediately.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="n">Element</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">custom_element</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span> <span class="n">is_void_element</span><span class="o">=</span><span class="n">is_void_element</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">stringify_element</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">element</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -428,10 +283,10 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.datatable" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.datatable" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">datatable</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -439,51 +294,6 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
         <p>Generates a clean HTML Table.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">datatable</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">TableConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a clean HTML Table.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Header</span>
-    <span class="n">th_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;th&gt;</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/th&gt;&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-    <span class="n">thead</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;thead&gt;&lt;tr&gt;</span><span class="si">{</span><span class="n">th_str</span><span class="si">}</span><span class="s2">&lt;/tr&gt;&lt;/thead&gt;&quot;</span>
-
-    <span class="c1"># Body</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-        <span class="c1"># Handle dict access or object attribute access</span>
-        <span class="n">td_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">td_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;td&gt;</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&lt;/td&gt;&quot;</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;tr&gt;</span><span class="si">{</span><span class="n">td_str</span><span class="si">}</span><span class="s2">&lt;/tr&gt;&quot;</span><span class="p">)</span>
-
-    <span class="n">tbody</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;tbody&gt;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/tbody&gt;&quot;</span>
-
-    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;table class=&quot;</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">table_class</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">thead</span><span class="si">}{</span><span class="n">tbody</span><span class="si">}</span><span class="s1">&lt;/table&gt;&#39;</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -491,10 +301,10 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.document" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.document" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">document</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -503,59 +313,6 @@ Handles State, Styles (CSS/BS5), and Structure in one pass.</p>
 Wires up Head + Body + Layout.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">document</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">PageConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assembles a full HTML Document Template.</span>
-<span class="sd">    Wires up Head + Body + Layout.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># 1. Build Head</span>
-    <span class="n">head_obj</span> <span class="o">=</span> <span class="n">head_seo</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">head_config</span><span class="p">)</span>
-
-    <span class="c1"># 2. Prepare Body</span>
-    <span class="c1"># If body is a Component or Config, render it to string/html</span>
-    <span class="n">body_content</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">body</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">body_content</span><span class="p">,</span> <span class="s2">&quot;render&quot;</span><span class="p">):</span>
-        <span class="n">body_content</span> <span class="o">=</span> <span class="n">body_content</span><span class="o">.</span><span class="n">render</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="c1"># 3. Assemble Template</span>
-    <span class="c1"># We use a standard layout where &#39;main&#39; is the body slot</span>
-    <span class="n">slots</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="n">body_content</span><span class="p">}</span>
-
-    <span class="c1"># If PageConfig has layout info (optional future expansion), handle here</span>
-    <span class="c1"># For now, standard document structure</span>
-
-    <span class="n">tmpl</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">slots</span><span class="p">)</span>
-    <span class="n">tmpl</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">head_obj</span>
-
-    <span class="k">return</span> <span class="n">tmpl</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -563,10 +320,10 @@ Wires up Head + Body + Layout.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.head_seo" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.head_seo" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">head_seo</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -574,107 +331,6 @@ Wires up Head + Body + Layout.</p>
         <p>Constructs a fully populated Head object with SEO metadata.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">head_seo</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">HeadConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Head</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructs a fully populated Head object with SEO metadata.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">head</span> <span class="o">=</span> <span class="n">Head</span><span class="p">()</span>
-
-    <span class="c1"># 1. Essentials</span>
-    <span class="n">head</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">charset</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">charset</span><span class="p">)</span>
-    <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;viewport&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">viewport</span><span class="p">)</span>
-
-    <span class="c1"># 2. SEO Config (If present)</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">seo</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">seo</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">keywords</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">keywords</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">canonical_url</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_link</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s2">&quot;canonical&quot;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">canonical_url</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">robots</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;robots&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">robots</span><span class="p">)</span>
-
-        <span class="c1"># Social (Open Graph)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">og_title</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="nb">property</span><span class="o">=</span><span class="s2">&quot;og:title&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">og_title</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">og_type</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="nb">property</span><span class="o">=</span><span class="s2">&quot;og:type&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">og_type</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">og_image</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="nb">property</span><span class="o">=</span><span class="s2">&quot;og:image&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">og_image</span><span class="p">)</span>
-
-        <span class="c1"># Twitter</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">twitter_card</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;twitter:card&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">twitter_card</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">twitter_creator</span><span class="p">:</span>
-            <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;twitter:creator&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">twitter_creator</span><span class="p">)</span>
-
-    <span class="c1"># 3. Assets</span>
-    <span class="k">for</span> <span class="n">css</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">css_links</span><span class="p">:</span>
-        <span class="n">head</span><span class="o">.</span><span class="n">register_link</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">css</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">js</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">js_scripts</span><span class="p">:</span>
-        <span class="n">head</span><span class="o">.</span><span class="n">register_script</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">js</span><span class="p">,</span> <span class="n">defer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># 4. Extra Meta</span>
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">extra_meta</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">head</span><span class="o">.</span><span class="n">register_meta</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">head</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -682,10 +338,10 @@ Wires up Head + Body + Layout.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.iterator" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.iterator" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">iterator</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -693,27 +349,6 @@ Wires up Head + Body + Layout.</p>
         <p>shortcut Generates a list of items wrapped in a container.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">iterator</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ListConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    shortcut Generates a list of items wrapped in a container.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rendered</span> <span class="o">=</span> <span class="n">loop</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">item_renderer</span><span class="p">)</span>
-
-    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="s2">&quot;render&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rendered</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">custom</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">wrapper_tag</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">wrapper_attrs</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -721,10 +356,10 @@ Wires up Head + Body + Layout.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.layout" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.layout" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">layout</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -734,49 +369,6 @@ Wires up Header, Footer, Sidebar, and a Main Content Wrapper.
 Returns a Template object ready for .swap_component().</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">layout</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">LayoutConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    a shortcut Generates a Reusable sementic Layout Template.</span>
-<span class="sd">    Wires up Header, Footer, Sidebar, and a Main Content Wrapper.</span>
-<span class="sd">    Returns a Template object ready for .swap_component().</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">wrapper_tag</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">wrapper_tag</span>
-    <span class="n">wrapper_attrs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">wrapper_attrs</span>
-    <span class="n">wrapper_index</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">wrapper_index</span>
-
-    <span class="c1"># Default content for slots if not provided during swap</span>
-    <span class="n">defaults</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">defaults</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">custom</span><span class="p">(</span><span class="n">wrapper_tag</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="o">**</span><span class="n">wrapper_attrs</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">layout_slots</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">wrapper_index</span><span class="p">:</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">layout_slots</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">wrapper_index</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
-
-    <span class="n">template_slots</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;layout_slots&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">layout_slots</span><span class="p">),</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">template_slots</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -784,10 +376,10 @@ Returns a Template object ready for .swap_component().</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.probo_form" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.probo_form" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">probo_form</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -795,37 +387,6 @@ Returns a Template object ready for .swap_component().</p>
         <p>a shortcut Builds a Form (Django or Manual).</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">probo_form</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">FormConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;a shortcut Builds a Form (Django or Manual).&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">request</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">form_class</span><span class="p">:</span>
-        <span class="n">rdt</span> <span class="o">=</span> <span class="n">RequestDataTransformer</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">form_class</span><span class="p">)</span>
-        <span class="n">mf</span> <span class="o">=</span> <span class="n">ProboForm</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="n">request_data</span><span class="o">=</span><span class="n">rdt</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">mf</span> <span class="o">=</span> <span class="n">ProboForm</span><span class="p">(</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">action</span><span class="p">,</span>
-            <span class="o">*</span><span class="n">config</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span>
-            <span class="n">method</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-            <span class="n">manual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">csrf_token</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">csrf_token</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">mf</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -833,10 +394,10 @@ Returns a Template object ready for .swap_component().</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.semantic_layout" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.semantic_layout" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">semantic_layout</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -846,65 +407,6 @@ Wires up Header, Footer, Sidebar, and a Main Content Wrapper.
 Returns a Template object ready for .swap_component().</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">semantic_layout</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">SemanticLayoutConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    a shortcut Generates a Reusable sementic Layout Template.</span>
-<span class="sd">    Wires up Header, Footer, Sidebar, and a Main Content Wrapper.</span>
-<span class="sd">    Returns a Template object ready for .swap_component().</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">header</span>
-    <span class="n">footer</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">footer</span>
-    <span class="n">sidebar</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">sidebar</span>
-
-    <span class="n">sections</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-    <span class="n">articles</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">articles</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-
-    <span class="c1"># The main content wrapper configuration</span>
-    <span class="c1"># e.g. &lt;main id=&quot;content&quot;&gt; or &lt;div class=&quot;container&quot;&gt;</span>
-    <span class="n">wrapper_tag</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">wrapper_tag</span>
-    <span class="n">wrapper_attrs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">wrapper_attrs</span>
-
-    <span class="c1"># Default content for slots if not provided during swap</span>
-    <span class="n">defaults</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">defaults</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">custom</span><span class="p">(</span><span class="n">wrapper_tag</span><span class="p">,</span> <span class="n">sections</span> <span class="o">+</span> <span class="n">articles</span><span class="p">,</span> <span class="o">**</span><span class="n">wrapper_attrs</span><span class="p">)</span>
-    <span class="n">template_slots</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span> <span class="ow">or</span> <span class="n">defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;sidebar&quot;</span><span class="p">:</span> <span class="n">sidebar</span> <span class="ow">or</span> <span class="n">defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sidebar&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
-        <span class="s2">&quot;footer&quot;</span><span class="p">:</span> <span class="n">footer</span> <span class="ow">or</span> <span class="n">defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;footer&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">template_slots</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -912,10 +414,10 @@ Returns a Template object ready for .swap_component().</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.set_data" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.set_data" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">set_data</span><span class="p">(</span><span class="o">*</span><span class="n">variables</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -923,15 +425,6 @@ Returns a Template object ready for .swap_component().</p>
         <p>Creates a custom HTML tag string immediately.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_data</span><span class="p">(</span><span class="o">*</span><span class="n">variables</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a custom HTML tag string immediately.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">Element</span><span class="p">()</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="o">*</span><span class="n">variables</span><span class="p">)</span><span class="o">.</span><span class="n">stringify_element</span><span class="p">()</span><span class="o">.</span><span class="n">element</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -939,10 +432,10 @@ Returns a Template object ready for .swap_component().</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.theme" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.theme" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">theme</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -951,45 +444,6 @@ Returns a Template object ready for .swap_component().</p>
 Returns the raw CSS string.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">theme</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">ThemeConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates the :root CSS variables block.</span>
-<span class="sd">    Returns the raw CSS string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">css_vars</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">css_vars</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;--color-</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">typography</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">css_vars</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;--font-</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">spacing</span><span class="p">:</span>
-        <span class="n">css_vars</span><span class="p">[</span><span class="s2">&quot;--spacing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">spacing</span>
-
-    <span class="c1"># Return the rendered CSS rule string</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;:root </span><span class="si">{</span><span class="n">CssRule</span><span class="p">(</span><span class="o">**</span><span class="n">css_vars</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -997,10 +451,10 @@ Returns the raw CSS string.</p>
 <div class="doc doc-object doc-function">
 
 
-<h2 id="probo.shortcuts.shortcuts.xml" class="doc doc-heading">
+<h3 id="probo.shortcuts.shortcuts.xml" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">xml</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></code>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1008,41 +462,6 @@ Returns the raw CSS string.</p>
         <p>shortcut to Generates an XML Document or Fragment.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\shortcuts\shortcuts.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">xml</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">XmlConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    shortcut to Generates an XML Document or Fragment.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">content</span>
-
-    <span class="c1"># Auto-convert Dict to XML nodes</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">custom</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-
-    <span class="c1"># Wrap in CDATA if requested</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">is_cdata</span><span class="p">:</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;![CDATA[</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2">]]&gt;&quot;</span>
-
-    <span class="n">root</span> <span class="o">=</span> <span class="n">custom</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">root_tag</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">declaration</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>

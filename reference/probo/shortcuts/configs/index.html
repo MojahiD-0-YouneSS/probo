@@ -126,32 +126,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs">configs</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.ComponentConfig">ComponentConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.ElementStateConfig">ElementStateConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.FormConfig">FormConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.LayoutConfig">LayoutConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.ListConfig">ListConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.PageConfig">PageConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.SEOConfig">SEOConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.SemanticLayoutConfig">SemanticLayoutConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.StateConfig">StateConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.StyleConfig">StyleConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.TableConfig">TableConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.ThemeConfig">ThemeConfig</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.shortcuts.configs.XmlConfig">XmlConfig</a>
-    </li>
     </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../shortcuts/">shortcuts</a>
@@ -241,7 +215,12 @@
 
 
 
-<a id="probo.shortcuts.configs"></a>
+<h2 id="probo.shortcuts.configs" class="doc doc-heading">
+            <code>probo.shortcuts.configs</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -267,7 +246,7 @@
 
 
 
-<h2 id="probo.shortcuts.configs.ComponentConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.ComponentConfig" class="doc doc-heading">
             <code>ComponentConfig</code>
 
 
@@ -275,7 +254,7 @@
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -287,7 +266,7 @@ Defines the Component's Identity, Structure, State, and Style.
 usage:
 from probo.shortcuts import Flow
 from probo.shortcuts.configs import ComponentConfig, StateConfig, StyleConfig, ElementState</p>
-<h3 id="probo.shortcuts.configs.ComponentConfig--1-define-the-config">1. Define the Config</h3>
+<h4 id="probo.shortcuts.configs.ComponentConfig--1-define-the-config">1. Define the Config</h4>
 <p>card_config = ComponentConfig(
     name="UserCard",
     template="<div id='card'> &lt;$ ... $&gt; </div>",</p>
@@ -307,11 +286,11 @@ style=StyleConfig(
 )
 </code></pre>
 <p>)</p>
-<h3 id="probo.shortcuts.configs.ComponentConfig--2-build">2. Build</h3>
+<h4 id="probo.shortcuts.configs.ComponentConfig--2-build">2. Build</h4>
 <p>comp = Flow.component(card_config)</p>
-<h3 id="probo.shortcuts.configs.ComponentConfig--3-render">3. Render</h3>
-<h3 id="probo.shortcuts.configs.ComponentConfig--result">Result: <div id='card' class='card shadow-sm p-3'>...</div></h3>
-<h3 id="probo.shortcuts.configs.ComponentConfig--css-card-border-1px-solid-black">CSS: #card { border: 1px solid black; }</h3>
+<h4 id="probo.shortcuts.configs.ComponentConfig--3-render">3. Render</h4>
+<h4 id="probo.shortcuts.configs.ComponentConfig--result">Result: <div id='card' class='card shadow-sm p-3'>...</div></h4>
+<h4 id="probo.shortcuts.configs.ComponentConfig--css-card-border-1px-solid-black">CSS: #card { border: 1px solid black; }</h4>
 <p>comp.render()</p>
 <p>This architecture is scalable, type-safe, and supports your specific requirement of mixing JIT CSS with Bootstrap classes seamlessly.</p>
 
@@ -321,113 +300,6 @@ style=StyleConfig(
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ComponentConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Master Configuration.</span>
-<span class="sd">    Defines the Component&#39;s Identity, Structure, State, and Style.</span>
-<span class="sd">    usage:</span>
-<span class="sd">    from probo.shortcuts import Flow</span>
-<span class="sd">    from probo.shortcuts.configs import ComponentConfig, StateConfig, StyleConfig, ElementState</span>
-
-<span class="sd">    # 1. Define the Config</span>
-<span class="sd">    card_config = ComponentConfig(</span>
-<span class="sd">        name=&quot;UserCard&quot;,</span>
-<span class="sd">        template=&quot;&lt;div id=&#39;card&#39;&gt; &lt;$ ... $&gt; &lt;/div&gt;&quot;,</span>
-
-<span class="sd">        # Define Elements &amp; Data</span>
-<span class="sd">        elements=[ElementState(&#39;span&#39;, d_state=&#39;username&#39;)],</span>
-<span class="sd">        state=StateConfig(</span>
-<span class="sd">            d_data={&#39;username&#39;: &#39;Youness&#39;},</span>
-<span class="sd">            strict=True</span>
-<span class="sd">        ),</span>
-
-<span class="sd">        # Define Styles (CSS + Bootstrap)</span>
-<span class="sd">        style=StyleConfig(</span>
-<span class="sd">            # Custom JIT CSS</span>
-<span class="sd">            css={&#39;#card&#39;: {&#39;border&#39;: &#39;1px solid black&#39;}},</span>
-<span class="sd">            # Bootstrap Classes for the root</span>
-<span class="sd">            bs5_classes=[&#39;card&#39;, &#39;shadow-sm&#39;, &#39;p-3&#39;]</span>
-<span class="sd">        )</span>
-<span class="sd">    )</span>
-
-<span class="sd">    # 2. Build</span>
-<span class="sd">    comp = Flow.component(card_config)</span>
-
-<span class="sd">    # 3. Render</span>
-<span class="sd">    # Result: &lt;div id=&#39;card&#39; class=&#39;card shadow-sm p-3&#39;&gt;...&lt;/div&gt;</span>
-<span class="sd">    # CSS: #card { border: 1px solid black; }</span>
-<span class="sd">    comp.render()</span>
-
-<span class="sd">    This architecture is scalable, type-safe, and supports your specific requirement of mixing JIT CSS with Bootstrap classes seamlessly.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">template</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="c1"># Composition</span>
-    <span class="n">state_config</span><span class="p">:</span> <span class="n">StateConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StateConfig</span><span class="p">)</span>
-    <span class="n">style_config</span><span class="p">:</span> <span class="n">StyleConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StyleConfig</span><span class="p">)</span>
-    <span class="n">children</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span>
-    <span class="p">)</span>  <span class="c1"># Child Components or Elements</span>
-    <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># Incoming Props</span>
-    <span class="n">root_element</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Default root element tag</span>
-    <span class="n">root_attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># Attributes for root</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -455,7 +327,7 @@ style=StyleConfig(
 
 
 
-<h2 id="probo.shortcuts.configs.ElementStateConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.ElementStateConfig" class="doc doc-heading">
             <code>ElementStateConfig</code>
 
 
@@ -463,7 +335,7 @@ style=StyleConfig(
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -478,55 +350,6 @@ style=StyleConfig(
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ElementStateConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for Individual Elements within a Component.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">config_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">)</span>
-    <span class="n">s_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-    <span class="n">d_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-    <span class="n">c_state</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-    <span class="n">is_custom</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">props</span><span class="p">:</span> <span class="n">StateProps</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StateProps</span><span class="p">)</span>
-    <span class="n">bind_to</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-    <span class="n">i_state</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">hide_dynamic</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">is_void_element</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">config_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">==</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config_id</span><span class="si">}</span><span class="s2">&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -554,7 +377,7 @@ style=StyleConfig(
 
 
 
-<h2 id="probo.shortcuts.configs.FormConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.FormConfig" class="doc doc-heading">
             <code>FormConfig</code>
 
 
@@ -562,7 +385,7 @@ style=StyleConfig(
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -577,57 +400,6 @@ style=StyleConfig(
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">FormConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for Forms (Connecting the Bridge).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;post&quot;</span>
-
-    <span class="c1"># Mode A: Django Integration</span>
-    <span class="n">request</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># The Django request object</span>
-    <span class="n">form_class</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># The Django Form Class</span>
-
-    <span class="c1"># Mode B: Manual</span>
-    <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># List of ProboFormField</span>
-    <span class="n">csrf_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__on_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span><span class="p">:</span>
-            <span class="c1"># Ensure fields are ProboFormField instances</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">field</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">ProboFormField</span><span class="p">)</span> <span class="k">else</span> <span class="n">ProboFormField</span><span class="p">(</span><span class="o">**</span><span class="n">field</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
-            <span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -655,7 +427,7 @@ style=StyleConfig(
 
 
 
-<h2 id="probo.shortcuts.configs.LayoutConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.LayoutConfig" class="doc doc-heading">
             <code>LayoutConfig</code>
 
 
@@ -663,7 +435,7 @@ style=StyleConfig(
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -679,43 +451,6 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">LayoutConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for a Reusable Page Layout.</span>
-<span class="sd">    Example: A Dashboard Layout with fixed Sidebar and Header.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Fixed Regions (Components or HTML strings)</span>
-    <span class="n">layout_slots</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-
-    <span class="c1"># The main content wrapper configuration</span>
-    <span class="c1"># e.g. &lt;main id=&quot;content&quot;&gt; or &lt;div class=&quot;container&quot;&gt;</span>
-    <span class="n">wrapper_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;main&quot;</span>
-    <span class="n">wrapper_attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">wrapper_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-    <span class="c1"># Default content for slots if not provided during swap</span>
-    <span class="n">defaults</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -743,7 +478,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.ListConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.ListConfig" class="doc doc-heading">
             <code>ListConfig</code>
 
 
@@ -751,7 +486,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -767,35 +502,6 @@ Replaces manual loop() calls.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ListConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for Repeated Elements (Collections).</span>
-<span class="sd">    Replaces manual loop() calls.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span>  <span class="c1"># The data source</span>
-    <span class="n">wrapper_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;div&quot;</span>  <span class="c1"># e.g., &#39;ul&#39;, &#39;div&#39;</span>
-    <span class="n">wrapper_attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="c1"># The Renderer: A function that takes an item and returns an Element/String</span>
-    <span class="n">item_renderer</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -823,7 +529,7 @@ Replaces manual loop() calls.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.PageConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.PageConfig" class="doc doc-heading">
             <code>PageConfig</code>
 
 
@@ -831,7 +537,7 @@ Replaces manual loop() calls.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -846,35 +552,6 @@ Replaces manual loop() calls.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">PageConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for a Full HTML Document.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">head_config</span><span class="p">:</span> <span class="n">HeadConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HeadConfig</span><span class="p">)</span>
-
-    <span class="c1"># The body content. Can be a string, a Component, or a ComponentConfig</span>
-    <span class="n">body</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Component</span><span class="p">,</span> <span class="n">ComponentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">layout_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;LayoutConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;SemanticLayoutConfig&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;en&quot;</span>
-    <span class="n">doc_type_func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">doctype</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -902,7 +579,7 @@ Replaces manual loop() calls.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.SEOConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.SEOConfig" class="doc doc-heading">
             <code>SEOConfig</code>
 
 
@@ -910,7 +587,7 @@ Replaces manual loop() calls.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -925,55 +602,6 @@ Replaces manual loop() calls.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SEOConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Advanced Meta Tags for Social Media (Open Graph, Twitter) and Search.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Standard</span>
-    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">keywords</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="n">canonical_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">robots</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;index, follow&quot;</span>
-
-    <span class="c1"># Open Graph (Facebook/LinkedIn)</span>
-    <span class="n">og_title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Defaults to page title if None</span>
-    <span class="n">og_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;website&quot;</span>
-    <span class="n">og_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">og_image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">og_site_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="c1"># Twitter Card</span>
-    <span class="n">twitter_card</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;summary_large_image&quot;</span>
-    <span class="n">twitter_site</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># @username</span>
-    <span class="n">twitter_creator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1001,7 +629,7 @@ Replaces manual loop() calls.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.SemanticLayoutConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.SemanticLayoutConfig" class="doc doc-heading">
             <code>SemanticLayoutConfig</code>
 
 
@@ -1009,7 +637,7 @@ Replaces manual loop() calls.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1025,53 +653,6 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">SemanticLayoutConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for a Reusable Page Layout.</span>
-<span class="sd">    Example: A Dashboard Layout with fixed Sidebar and Header.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Fixed Regions (Components or HTML strings)</span>
-    <span class="n">header</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">footer</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">sidebar</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="n">sections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">articles</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="c1"># The main content wrapper configuration</span>
-    <span class="c1"># e.g. &lt;main id=&quot;content&quot;&gt; or &lt;div class=&quot;container&quot;&gt;</span>
-    <span class="n">wrapper_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;main&quot;</span>
-    <span class="n">wrapper_attrs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="c1"># Default content for slots if not provided during swap</span>
-    <span class="n">defaults</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1099,7 +680,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.StateConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.StateConfig" class="doc doc-heading">
             <code>StateConfig</code>
 
 
@@ -1107,7 +688,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1122,35 +703,6 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">StateConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configures the &#39;Brain&#39; (Data &amp; Logic).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">s_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">d_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">elements_state_config</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ElementStateConfig</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="c1"># Flags</span>
-    <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">require_props</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1178,7 +730,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.StyleConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.StyleConfig" class="doc doc-heading">
             <code>StyleConfig</code>
 
 
@@ -1186,7 +738,7 @@ Example: A Dashboard Layout with fixed Sidebar and Header.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1202,41 +754,6 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">StyleConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configures the &#39;Skin&#39; (CSS &amp; Frameworks).</span>
-<span class="sd">    Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># 1. JIT CSS Rules (Dict or List of Rules)</span>
-    <span class="n">css</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">CssRule</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="c1"># 2. Root Element Overrides (Inline styles or specific ID styling)</span>
-    <span class="n">root_css</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-
-    <span class="c1"># 3. Bootstrap 5 Support</span>
-    <span class="c1"># List of classes to auto-append to the root element (e.g. [&#39;card&#39;, &#39;p-3&#39;])</span>
-    <span class="n">root_bs5_classes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1264,7 +781,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.TableConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.TableConfig" class="doc doc-heading">
             <code>TableConfig</code>
 
 
@@ -1272,7 +789,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1287,25 +804,6 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">TableConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Config for Flow.datatable.&quot;&quot;&quot;</span>
-
-    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1"># Keys to display</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>  <span class="c1"># List of dicts or objects</span>
-    <span class="n">table_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;table table-striped&quot;</span>
-    <span class="n">actions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># Edit/Delete buttons</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1333,7 +831,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.ThemeConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.ThemeConfig" class="doc doc-heading">
             <code>ThemeConfig</code>
 
 
@@ -1341,7 +839,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1356,23 +854,6 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ThemeConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Config for Flow.theme (CSS Variables).&quot;&quot;&quot;</span>
-
-    <span class="n">colors</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">typography</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.25rem&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -1400,7 +881,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-<h2 id="probo.shortcuts.configs.XmlConfig" class="doc doc-heading">
+<h3 id="probo.shortcuts.configs.XmlConfig" class="doc doc-heading">
             <code>XmlConfig</code>
 
 
@@ -1408,7 +889,7 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -1423,35 +904,6 @@ Pluggable: Can handle raw CSS, Theme Lists, or Framework classes.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\shortcuts\configs.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">XmlConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configuration for XML Data Labeling / Feeds.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">root_tag</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">content</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># Can be string, list of Elements, or Dict (for auto-conversion)</span>
-
-    <span class="c1"># XML Specifics</span>
-    <span class="n">declaration</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#39;</span>
-    <span class="n">is_cdata</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Wrap content in &lt;![CDATA[...]]&gt;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

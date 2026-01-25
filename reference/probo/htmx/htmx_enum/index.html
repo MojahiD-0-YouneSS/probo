@@ -110,8 +110,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.htmx.htmx_enum">htmx_enum</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.htmx.htmx_enum.HxAttr">HxAttr</a>
-    </li>
     </ul>
                 </li>
     </ul>
@@ -217,7 +215,12 @@
 
 
 
-<a id="probo.htmx.htmx_enum"></a>
+<h2 id="probo.htmx.htmx_enum" class="doc doc-heading">
+            <code>probo.htmx.htmx_enum</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -243,11 +246,11 @@
 
 
 
-<h2 id="probo.htmx.htmx_enum.HxAttr" class="doc doc-heading">
+<h3 id="probo.htmx.htmx_enum.HxAttr" class="doc doc-heading">
             <code>HxAttr</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -264,85 +267,6 @@
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\htmx\htmx_enum.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HxAttr</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;HTMX attributes&quot;&quot;&quot;</span>
-
-    <span class="n">BOOST</span> <span class="o">=</span> <span class="s2">&quot;hx-boost&quot;</span>
-    <span class="n">GET</span> <span class="o">=</span> <span class="s2">&quot;hx-get&quot;</span>
-    <span class="n">POST</span> <span class="o">=</span> <span class="s2">&quot;hx-post&quot;</span>
-    <span class="n">PUT</span> <span class="o">=</span> <span class="s2">&quot;hx-put&quot;</span>
-    <span class="n">PATCH</span> <span class="o">=</span> <span class="s2">&quot;hx-patch&quot;</span>
-    <span class="n">DELETE</span> <span class="o">=</span> <span class="s2">&quot;hx-delete&quot;</span>
-    <span class="n">TARGET</span> <span class="o">=</span> <span class="s2">&quot;hx-target&quot;</span>
-    <span class="n">SWAP</span> <span class="o">=</span> <span class="s2">&quot;hx-swap&quot;</span>
-    <span class="n">SWAP_OOB</span> <span class="o">=</span> <span class="s2">&quot;hx-swap-oob&quot;</span>
-    <span class="n">TRIGGER</span> <span class="o">=</span> <span class="s2">&quot;hx-trigger&quot;</span>
-    <span class="n">VALS</span> <span class="o">=</span> <span class="s2">&quot;hx-vals&quot;</span>
-    <span class="n">PARAMS</span> <span class="o">=</span> <span class="s2">&quot;hx-params&quot;</span>
-    <span class="n">CONFIRM</span> <span class="o">=</span> <span class="s2">&quot;hx-confirm&quot;</span>
-    <span class="n">PUSH_URL</span> <span class="o">=</span> <span class="s2">&quot;hx-push-url&quot;</span>
-    <span class="n">SELECT</span> <span class="o">=</span> <span class="s2">&quot;hx-select&quot;</span>
-    <span class="n">SELECT_OOB</span> <span class="o">=</span> <span class="s2">&quot;hx-select-oob&quot;</span>
-    <span class="n">SYNC</span> <span class="o">=</span> <span class="s2">&quot;hx-sync&quot;</span>
-    <span class="n">VARS</span> <span class="o">=</span> <span class="s2">&quot;hx-vars&quot;</span>
-    <span class="n">EXT</span> <span class="o">=</span> <span class="s2">&quot;hx-ext&quot;</span>
-    <span class="n">HEADERS</span> <span class="o">=</span> <span class="s2">&quot;hx-headers&quot;</span>
-    <span class="n">HISTORY</span> <span class="o">=</span> <span class="s2">&quot;hx-history&quot;</span>
-    <span class="n">HISTORY_ELT</span> <span class="o">=</span> <span class="s2">&quot;hx-history-elt&quot;</span>
-    <span class="n">INCLUDE</span> <span class="o">=</span> <span class="s2">&quot;hx-include&quot;</span>
-    <span class="n">INDICATOR</span> <span class="o">=</span> <span class="s2">&quot;hx-indicator&quot;</span>
-    <span class="n">PRESERVE</span> <span class="o">=</span> <span class="s2">&quot;hx-preserve&quot;</span>
-    <span class="n">PROMPT</span> <span class="o">=</span> <span class="s2">&quot;hx-prompt&quot;</span>
-    <span class="n">REPLACE_URL</span> <span class="o">=</span> <span class="s2">&quot;hx-replace-url&quot;</span>
-    <span class="n">REQUEST</span> <span class="o">=</span> <span class="s2">&quot;hx-request&quot;</span>
-    <span class="n">SSE</span> <span class="o">=</span> <span class="s2">&quot;hx-sse&quot;</span>
-    <span class="n">VALIDATE</span> <span class="o">=</span> <span class="s2">&quot;hx-validate&quot;</span>
-    <span class="n">WS</span> <span class="o">=</span> <span class="s2">&quot;hx-ws&quot;</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">all_attrs</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="p">]</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

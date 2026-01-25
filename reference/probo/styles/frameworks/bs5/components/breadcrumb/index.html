@@ -214,7 +214,12 @@
 
 
 
-<a id="probo.styles.frameworks.bs5.components.breadcrumb"></a>
+<h2 id="probo.styles.frameworks.bs5.components.breadcrumb" class="doc doc-heading">
+            <code>probo.styles.frameworks.bs5.components.breadcrumb</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -240,11 +245,11 @@
 
 
 
-<h2 id="probo.styles.frameworks.bs5.components.breadcrumb.BS5Breadcrumb" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.components.breadcrumb.BS5Breadcrumb" class="doc doc-heading">
             <code>BS5Breadcrumb</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -267,117 +272,6 @@
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\components\breadcrumb.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BS5Breadcrumb</span><span class="p">(</span><span class="n">BS5Component</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    &lt;nav aria-label=&quot;breadcrumb&quot;&gt;</span>
-<span class="sd">        &lt;ol class=&quot;breadcrumb&quot;&gt;</span>
-<span class="sd">            &lt;li class=&quot;breadcrumb-item active &quot;aria-current=&quot;page&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;</span>
-<span class="sd">            &lt;li class=&quot;breadcrumb-item&quot;&gt;&lt;a href=&quot;#&quot;&gt;Library&lt;/a&gt;&lt;/li&gt;</span>
-<span class="sd">            &lt;li class=&quot;breadcrumb-item &quot; &gt;Data&lt;/li&gt;</span>
-<span class="sd">        &lt;/ol&gt;</span>
-<span class="sd">    &lt;/nav&gt;</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">urls</span><span class="p">,</span><span class="n">url_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">render_constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url_dict</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="n">url_dict</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="o">=</span><span class="n">urls</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_constraints</span><span class="o">=</span><span class="n">render_constraints</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="c1"># self.template = self._render_comp()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">breadcrum_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Breadcrumb</span><span class="o">.</span><span class="n">BASE</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s1">&#39;ol&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nav_attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;aria-label&#39;</span><span class="p">:</span> <span class="s2">&quot;breadcrumb&quot;</span><span class="p">}</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BS5-breadcrum&#39;</span><span class="p">,</span> <span class="n">state_props</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_constraints</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_render_comp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="p">:</span>
-            <span class="n">links_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">link</span><span class="p">:</span><span class="s1">&#39;#&#39;</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_dict</span><span class="p">:</span>
-            <span class="n">links_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_dict</span>
-        <span class="k">if</span> <span class="n">links_dict</span><span class="p">:</span>
-
-            <span class="n">links</span> <span class="o">=</span> <span class="p">[</span> <span class="n">BS5Element</span><span class="p">(</span>
-                <span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="n">BS5Element</span><span class="p">(</span>
-                    <span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">link_name</span><span class="p">,</span><span class="n">href</span><span class="o">=</span><span class="n">link_url</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(),</span>
-                <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="n">Breadcrumb</span><span class="o">.</span><span class="n">ITEM</span><span class="o">.</span><span class="n">value</span><span class="p">],</span>
-            <span class="p">)</span> <span class="k">for</span> <span class="n">link_name</span><span class="p">,</span><span class="n">link_url</span> <span class="ow">in</span> <span class="n">links_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-            <span class="n">links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">BS5Element</span><span class="p">(</span>
-                    <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                    <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="n">Breadcrumb</span><span class="o">.</span><span class="n">ITEM</span><span class="o">.</span><span class="n">value</span><span class="p">],</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">links</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
-            <span class="n">links</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;aria-current&#39;</span><span class="p">:</span> <span class="s2">&quot;page&quot;</span><span class="p">})</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">breadcrum</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
-            <span class="n">classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">breadcrum_classes</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span>
-        <span class="p">)</span>
-        <span class="n">breadcrum</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="o">*</span><span class="n">links</span><span class="p">)</span>
-        <span class="n">nav</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-            <span class="s1">&#39;nav&#39;</span><span class="p">,</span>
-            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">nav_attrs</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">nav</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">breadcrum</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

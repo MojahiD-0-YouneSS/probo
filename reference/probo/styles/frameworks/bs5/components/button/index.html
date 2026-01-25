@@ -214,7 +214,12 @@
 
 
 
-<a id="probo.styles.frameworks.bs5.components.button"></a>
+<h2 id="probo.styles.frameworks.bs5.components.button" class="doc doc-heading">
+            <code>probo.styles.frameworks.bs5.components.button</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -240,11 +245,11 @@
 
 
 
-<h2 id="probo.styles.frameworks.bs5.components.button.BS5ButtonGroup" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.components.button.BS5ButtonGroup" class="doc doc-heading">
             <code>BS5ButtonGroup</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -259,149 +264,6 @@
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\components\button.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BS5ButtonGroup</span><span class="p">(</span><span class="n">BS5Component</span><span class="p">):</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">btns</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="n">render_constaints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_grp_cntnt</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="s2">&quot;group&quot;</span><span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="n">size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_constaints</span><span class="o">=</span><span class="n">render_constaints</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">=</span><span class="s1">&#39;div&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_group_classes</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;btn-group-vertical&quot;</span> <span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s2">&quot;vertical&quot;</span> <span class="k">else</span> <span class="s2">&quot;btn-group&quot;</span><span class="p">),]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">btns</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;sm&#39;</span><span class="p">,</span><span class="s1">&#39;lg&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">btn_group_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Button</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;group_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BS5-button-group&#39;</span><span class="p">,</span> <span class="n">state_props</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_constaints</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">lg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_group_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">LG</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">LG</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_group_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">SM</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">SM</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">before_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">include_content_parts</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">btns</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_btn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-
-        <span class="n">btn</span> <span class="o">=</span> <span class="n">BS5Button</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">btn</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
-        <span class="k">return</span> <span class="bp">self</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_check_box_btn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="n">override_input_attr</span><span class="p">:</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        &lt;input type=&quot;checkbox&quot; class=&quot;btn-check&quot; id=&quot;btncheck1&quot; autocomplete=&quot;off&quot;&gt;</span>
-<span class="sd">        &lt;label class=&quot;btn btn-outline-primary&quot; for=&quot;btncheck1&quot;&gt;Checkbox 1&lt;/label&gt;</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">override_input_attr</span><span class="p">:</span>
-            <span class="n">bs5_input_attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;for&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;autocomplete&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">}</span>
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="n">override_input_attr</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;for&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;autocomplete&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">})</span>
-            <span class="n">bs5_input_attrs</span> <span class="o">=</span> <span class="n">override_input_attr</span>
-
-        <span class="n">bs5_input</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-            <span class="s1">&#39;input&#39;</span><span class="p">,</span>
-            <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;btn-check&quot;</span><span class="p">],</span>
-            <span class="o">**</span><span class="n">bs5_input_attrs</span>
-        <span class="p">)</span>
-
-        <span class="n">btn</span> <span class="o">=</span> <span class="n">BS5Button</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-        <span class="n">btn</span><span class="o">.</span><span class="n">swap_element</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bs5_input</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="si">}{</span><span class="n">btn</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_render_comp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span><span class="s1">&#39;button&#39;</span><span class="p">,}</span>
-        <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-        <span class="n">btn_grp</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
-            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btns</span><span class="p">),</span>
-            <span class="n">classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_group_classes</span><span class="p">,</span><span class="o">**</span><span class="n">attrs</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">btn_grp</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -419,10 +281,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="probo.styles.frameworks.bs5.components.button.BS5ButtonGroup.add_check_box_btn" class="doc doc-heading">
+<h4 id="probo.styles.frameworks.bs5.components.button.BS5ButtonGroup.add_check_box_btn" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">add_check_box_btn</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">override_input_attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span></code>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -431,53 +293,6 @@
 <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label></p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\styles\frameworks\bs5\components\button.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_check_box_btn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="n">override_input_attr</span><span class="p">:</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    &lt;input type=&quot;checkbox&quot; class=&quot;btn-check&quot; id=&quot;btncheck1&quot; autocomplete=&quot;off&quot;&gt;</span>
-<span class="sd">    &lt;label class=&quot;btn btn-outline-primary&quot; for=&quot;btncheck1&quot;&gt;Checkbox 1&lt;/label&gt;</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">override_input_attr</span><span class="p">:</span>
-        <span class="n">bs5_input_attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;for&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;autocomplete&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">}</span>
-    <span class="k">else</span><span class="p">:</span>
-
-        <span class="n">override_input_attr</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;for&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span> <span class="s2">&quot;autocomplete&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">})</span>
-        <span class="n">bs5_input_attrs</span> <span class="o">=</span> <span class="n">override_input_attr</span>
-
-    <span class="n">bs5_input</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-        <span class="s1">&#39;input&#39;</span><span class="p">,</span>
-        <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;btn-check&quot;</span><span class="p">],</span>
-        <span class="o">**</span><span class="n">bs5_input_attrs</span>
-    <span class="p">)</span>
-
-    <span class="n">btn</span> <span class="o">=</span> <span class="n">BS5Button</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
-    <span class="n">btn</span><span class="o">.</span><span class="n">swap_element</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">btns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bs5_input</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="si">}{</span><span class="n">btn</span><span class="o">.</span><span class="n">render</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
@@ -495,11 +310,11 @@
 
 
 
-<h2 id="probo.styles.frameworks.bs5.components.button.BS5CloseButton" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.components.button.BS5CloseButton" class="doc doc-heading">
             <code>BS5CloseButton</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -519,61 +334,6 @@
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\components\button.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">BS5CloseButton</span><span class="p">(</span><span class="n">BS5Component</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;</span>
-<span class="sd">        &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; disabled aria-label=&quot;Close&quot;&gt;&lt;/button&gt;</span>
-
-<span class="sd">        &lt;button type=&quot;button&quot; class=&quot;btn-close btn-close-white&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;</span>
-<span class="sd">        &lt;button type=&quot;button&quot; class=&quot;btn-close btn-close-white&quot; disabled aria-label=&quot;Close&quot;&gt;&lt;/button&gt;</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="n">render_constaints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_constaints</span><span class="o">=</span><span class="n">render_constaints</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_classes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;btn-close&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;button&quot;</span><span class="p">,</span> <span class="s2">&quot;aria-label&quot;</span><span class="p">:</span> <span class="s2">&quot;Close&quot;</span><span class="p">})</span>
-        <span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s1">&#39;white&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">btn_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;btn-close-white&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s1">&#39;button&#39;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;BS5-close-button&#39;</span><span class="p">,</span>  <span class="n">state_props</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">render_constaints</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_render_comp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">button</span> <span class="o">=</span> <span class="n">BS5Element</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
-            <span class="c1"># self.content,</span>
-            <span class="n">classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_classes</span><span class="p">,</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">button</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

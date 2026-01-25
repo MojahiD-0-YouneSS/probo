@@ -213,7 +213,12 @@
 
 
 
-<a id="probo.styles.frameworks.bs5.typography"></a>
+<h2 id="probo.styles.frameworks.bs5.typography" class="doc doc-heading">
+            <code>probo.styles.frameworks.bs5.typography</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -239,11 +244,11 @@
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Abbreviation" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Abbreviation" class="doc doc-heading">
             <code>Abbreviation</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -261,25 +266,6 @@ These are used for defining abbreviations and acronyms.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Abbreviation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bootstrap Abbreviations classes.</span>
-<span class="sd">    These are used for defining abbreviations and acronyms.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">ABBREVIATION</span> <span class="o">=</span> <span class="s2">&quot;abbreviation&quot;</span>
-    <span class="n">INITIALISM</span> <span class="o">=</span> <span class="s2">&quot;initialism&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -307,11 +293,11 @@ These are used for defining abbreviations and acronyms.</p>
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Blockquote" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Blockquote" class="doc doc-heading">
             <code>Blockquote</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -329,25 +315,6 @@ Used for quoting sections of text.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Blockquote</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bootstrap Blockquote class.</span>
-<span class="sd">    Used for quoting sections of text.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">BLOCKQUOTE</span> <span class="o">=</span> <span class="s2">&quot;blockquote&quot;</span>
-    <span class="n">NAMING_A_SOURCE</span> <span class="o">=</span> <span class="s2">&quot;blockquote-footer&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -375,11 +342,11 @@ Used for quoting sections of text.</p>
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Image" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Image" class="doc doc-heading">
             <code>Image</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -397,37 +364,6 @@ These are used for styling images.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Image</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bootstrap Images classes.</span>
-<span class="sd">    These are used for styling images.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">RESPONSIVE</span> <span class="o">=</span> <span class="s2">&quot;img-fluid&quot;</span>  <span class="c1"># Responsive image</span>
-    <span class="n">THUMBNAIL</span> <span class="o">=</span> <span class="s2">&quot;img-thumbnail&quot;</span>  <span class="c1"># Thumbnail image</span>
-    <span class="n">ROUND</span> <span class="o">=</span> <span class="s2">&quot;rounded&quot;</span>  <span class="c1"># Rounded corners</span>
-    <span class="n">CIRCLE</span> <span class="o">=</span> <span class="s2">&quot;rounded-circle&quot;</span>  <span class="c1"># Circle shape</span>
-    <span class="n">FIGURE_IMG</span> <span class="o">=</span> <span class="s2">&quot;figure-img&quot;</span>
-    <span class="n">FIGURE</span> <span class="o">=</span> <span class="s2">&quot;figure&quot;</span>
-    <span class="n">CAPTION</span> <span class="o">=</span> <span class="s2">&quot;figure-caption&quot;</span>
-    <span class="n">PICTURE</span> <span class="o">=</span> <span class="s2">&quot;picture&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -455,11 +391,11 @@ These are used for styling images.</p>
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Lead" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Lead" class="doc doc-heading">
             <code>Lead</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -476,17 +412,6 @@ These are used for styling images.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Lead</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bootstrap Lead class for larger paragraph text.&quot;&quot;&quot;</span>
-
-    <span class="n">LEAD</span> <span class="o">=</span> <span class="s2">&quot;lead&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -514,11 +439,11 @@ These are used for styling images.</p>
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Text" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Text" class="doc doc-heading">
             <code>Text</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -535,97 +460,6 @@ These are used for styling images.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Text</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bootstrap Text colors and alignment.&quot;&quot;&quot;</span>
-
-    <span class="n">PRIMARY</span> <span class="o">=</span> <span class="s2">&quot;text-primary&quot;</span>
-    <span class="n">SECONDARY</span> <span class="o">=</span> <span class="s2">&quot;text-secondary&quot;</span>
-    <span class="n">SUCCESS</span> <span class="o">=</span> <span class="s2">&quot;text-success&quot;</span>
-    <span class="n">DANGER</span> <span class="o">=</span> <span class="s2">&quot;text-danger&quot;</span>
-    <span class="n">WARNING</span> <span class="o">=</span> <span class="s2">&quot;text-warning&quot;</span>
-    <span class="n">INFO</span> <span class="o">=</span> <span class="s2">&quot;text-info&quot;</span>
-    <span class="n">LIGHT</span> <span class="o">=</span> <span class="s2">&quot;text-light&quot;</span>
-    <span class="n">DARK</span> <span class="o">=</span> <span class="s2">&quot;text-dark&quot;</span>
-    <span class="n">WHITE</span> <span class="o">=</span> <span class="s2">&quot;text-white&quot;</span>
-    <span class="n">MUTED</span> <span class="o">=</span> <span class="s2">&quot;text-muted&quot;</span>
-
-    <span class="n">BG_PRIMARY</span> <span class="o">=</span> <span class="s2">&quot;text-bg-primary&quot;</span>
-    <span class="n">BG_SECONDARY</span> <span class="o">=</span> <span class="s2">&quot;text-bg-secondary&quot;</span>
-    <span class="n">BG_SUCCESS</span> <span class="o">=</span> <span class="s2">&quot;text-bg-success&quot;</span>
-    <span class="n">BG_DANGER</span> <span class="o">=</span> <span class="s2">&quot;text-bg-danger&quot;</span>
-    <span class="n">BG_WARNING</span> <span class="o">=</span> <span class="s2">&quot;text-bg-warning&quot;</span>
-    <span class="n">BG_INFO</span> <span class="o">=</span> <span class="s2">&quot;text-bg-info&quot;</span>
-    <span class="n">BG_LIGHT</span> <span class="o">=</span> <span class="s2">&quot;text-bg-light&quot;</span>
-    <span class="n">BG_DARK</span> <span class="o">=</span> <span class="s2">&quot;text-bg-dark&quot;</span>
-    <span class="n">BG_WHITE</span> <span class="o">=</span> <span class="s2">&quot;text-bg-white&quot;</span>
-    <span class="n">BG_MUTED</span> <span class="o">=</span> <span class="s2">&quot;text-bg-muted&quot;</span>
-
-    <span class="n">START</span> <span class="o">=</span> <span class="s2">&quot;text-start&quot;</span>
-    <span class="n">CENTER</span> <span class="o">=</span> <span class="s2">&quot;text-center&quot;</span>
-    <span class="n">END</span> <span class="o">=</span> <span class="s2">&quot;text-end&quot;</span>
-    <span class="n">UNDERLINE</span> <span class="o">=</span> <span class="s2">&quot;text-decoration-underline&quot;</span>
-    <span class="n">DELETED</span> <span class="o">=</span> <span class="s2">&quot;text-decoration-line-through&quot;</span>
-    <span class="n">JUSTIFY</span> <span class="o">=</span> <span class="s2">&quot;text-justify&quot;</span>  <span class="c1"># Justify text</span>
-    <span class="n">WRAP</span> <span class="o">=</span> <span class="s2">&quot;text-wrap&quot;</span>  <span class="c1"># Wrap text</span>
-    <span class="n">NO_WRAP</span> <span class="o">=</span> <span class="s2">&quot;text-nowrap&quot;</span>  <span class="c1">#</span>
-    <span class="n">NONE</span> <span class="o">=</span> <span class="s2">&quot;text-decoration-none&quot;</span>
-    <span class="n">LOWER</span> <span class="o">=</span> <span class="s2">&quot;text-lowercase&quot;</span>
-    <span class="n">UPPER</span> <span class="o">=</span> <span class="s2">&quot;text-uppercase&quot;</span>
-    <span class="n">BODY</span> <span class="o">=</span> <span class="s2">&quot;text-body&quot;</span>
-    <span class="n">BLACK_50</span> <span class="o">=</span> <span class="s2">&quot;text-black-50&quot;</span>
-    <span class="n">WHITE_50</span> <span class="o">=</span> <span class="s2">&quot;text-white-50&quot;</span>
-    <span class="n">LEFT</span> <span class="o">=</span> <span class="s2">&quot;text-left&quot;</span>
-    <span class="n">RIGHT</span> <span class="o">=</span> <span class="s2">&quot;text-right&quot;</span>
-    <span class="n">CAPITALIZE</span> <span class="o">=</span> <span class="s2">&quot;text-capitalize&quot;</span>
-    <span class="n">TRUNCATE</span> <span class="o">=</span> <span class="s2">&quot;text-truncate&quot;</span>
-    <span class="n">BREAK</span> <span class="o">=</span> <span class="s2">&quot;text-break&quot;</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -653,11 +487,11 @@ These are used for styling images.</p>
 
 
 
-<h2 id="probo.styles.frameworks.bs5.typography.Typography" class="doc doc-heading">
+<h3 id="probo.styles.frameworks.bs5.typography.Typography" class="doc doc-heading">
             <code>Typography</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -673,55 +507,6 @@ These are used for text styling and formatting.</p>
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\styles\frameworks\bs5\typography.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Typography</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bootstrap Typography classes.</span>
-<span class="sd">    These are used for text styling and formatting.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">HEADING</span> <span class="o">=</span> <span class="n">Heading</span>
-    <span class="n">TEXT</span> <span class="o">=</span> <span class="n">Text</span>
-    <span class="n">LEAD</span> <span class="o">=</span> <span class="n">Lead</span>
-    <span class="n">ABBREVIATION</span> <span class="o">=</span> <span class="n">Abbreviation</span>
-    <span class="n">BLOCK_QUOTE</span> <span class="o">=</span> <span class="n">Blockquote</span>
-    <span class="n">IMAGE</span> <span class="o">=</span> <span class="n">Image</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">values_as_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADING</span><span class="p">])</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TEXT</span><span class="p">])</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">LEAD</span><span class="p">])</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ABBREVIATION</span><span class="p">])</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">BLOCK_QUOTE</span><span class="p">])</span>
-        <span class="n">vals</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">vals</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 

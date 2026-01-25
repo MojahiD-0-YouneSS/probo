@@ -118,8 +118,6 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#probo.request.request_context">request_context</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#probo.request.request_context.ComponentRequestContext">ComponentRequestContext</a>
-    </li>
     </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../transformer/">transformer</a>
@@ -217,7 +215,12 @@
 
 
 
-<a id="probo.request.request_context"></a>
+<h2 id="probo.request.request_context" class="doc doc-heading">
+            <code>probo.request.request_context</code>
+
+
+</h2>
+
     <div class="doc doc-contents first">
 
 
@@ -243,11 +246,11 @@
 
 
 
-<h2 id="probo.request.request_context.ComponentRequestContext" class="doc doc-heading">
+<h3 id="probo.request.request_context.ComponentRequestContext" class="doc doc-heading">
             <code>ComponentRequestContext</code>
 
 
-</h2>
+</h3>
 
 
     <div class="doc doc-contents ">
@@ -263,79 +266,6 @@ that are not directly tied to a request lifecycle (e.g., static components needi
 
 
 
-              <details class="quote">
-                <summary>Source code in <code>src\probo\request\request_context.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ComponentRequestContext</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class handles injecting global/context properties into Component objects</span>
-<span class="sd">    that are not directly tied to a request lifecycle (e.g., static components needing context).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">components_objs</span><span class="p">,</span> <span class="o">**</span><span class="n">context_props</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">context_props</span> <span class="o">=</span> <span class="n">context_props</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">components_objs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">process_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_component_objs</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_props</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Applies the stored context_props (plus any extra_props) to all components.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># 1. Prepare Context (Merge defaults with extras)</span>
-        <span class="n">current_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_props</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">extra_props</span><span class="p">:</span>
-            <span class="n">current_context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_props</span><span class="p">)</span>
-
-        <span class="c1"># 2. Prepare Targets (Merge defaults with extras)</span>
-        <span class="n">targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">extra_component_objs</span><span class="p">:</span>
-            <span class="n">targets</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">extra_component_objs</span><span class="p">)</span>
-
-        <span class="c1"># 3. Apply Context to Components</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-            <span class="c1"># We assume obj has a &#39;props&#39; dictionary</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;props&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-                <span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">current_context</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span>
-</code></pre></div></td></tr></table></div>
-              </details>
 
 
 
@@ -353,10 +283,10 @@ that are not directly tied to a request lifecycle (e.g., static components needi
 <div class="doc doc-object doc-function">
 
 
-<h3 id="probo.request.request_context.ComponentRequestContext.process_components" class="doc doc-heading">
+<h4 id="probo.request.request_context.ComponentRequestContext.process_components" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">process_components</span><span class="p">(</span><span class="o">*</span><span class="n">extra_component_objs</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_props</span><span class="p">)</span></code>
 
-</h3>
+</h4>
 
 
     <div class="doc doc-contents ">
@@ -364,57 +294,6 @@ that are not directly tied to a request lifecycle (e.g., static components needi
         <p>Applies the stored context_props (plus any extra_props) to all components.</p>
 
 
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src\probo\request\request_context.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_component_objs</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_props</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Applies the stored context_props (plus any extra_props) to all components.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># 1. Prepare Context (Merge defaults with extras)</span>
-    <span class="n">current_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_props</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">extra_props</span><span class="p">:</span>
-        <span class="n">current_context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_props</span><span class="p">)</span>
-
-    <span class="c1"># 2. Prepare Targets (Merge defaults with extras)</span>
-    <span class="n">targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">extra_component_objs</span><span class="p">:</span>
-        <span class="n">targets</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">extra_component_objs</span><span class="p">)</span>
-
-    <span class="c1"># 3. Apply Context to Components</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-        <span class="c1"># We assume obj has a &#39;props&#39; dictionary</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;props&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">current_context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">processed_components</span>
-</code></pre></div></td></tr></table></div>
-            </details>
     </div>
 
 </div>
