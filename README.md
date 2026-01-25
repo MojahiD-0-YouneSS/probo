@@ -1,9 +1,6 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src=".docs//assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
-![alt text](./docs/assets/images/mastodon_ui.ico "Probo UI Logo")
-
+<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./docs/assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
 <p align="center"> 
 <img src="./docs/assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
-
 </p>
 
 # 🐘 Probo UI
