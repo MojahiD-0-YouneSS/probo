@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>component - Probo UI</title>
+    <title>Component Base Class - Probo UI</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "component";
+        var mkdocs_page_name = "Component Base Class";
         var mkdocs_page_input_path = "reference\\probo\\components\\component.md";
         var mkdocs_page_url = null;
       </script>
@@ -54,7 +54,7 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../base/">base</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">component</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Component Base Class</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#probo.components.component">component</a>
         <ul>
@@ -213,7 +213,7 @@
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">API Reference</li>
           <li class="breadcrumb-item">Components</li>
-      <li class="breadcrumb-item active">component</li>
+      <li class="breadcrumb-item active">Component Base Class</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/MojahiD-0-YouneSS/probo-ui/edit/main/docs/reference/probo/components/component.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -223,7 +223,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="component">component</h1>
+                <h1 id="component-base-class">Component Base Class</h1>
+<p>The <code>Component</code> class is the heart of Probo UI. It manages state, rendering, and context.</p>
+<hr />
 
 
 <div class="doc doc-object doc-module">
@@ -231,7 +233,7 @@
 
 
 <h2 id="probo.components.component" class="doc doc-heading">
-            <code>probo.components.component</code>
+            <code>component</code>
 
 
 </h2>
@@ -711,7 +713,20 @@ Supports Dictionaries, other Components, Theme lists, and Root kwargs.</p>
 
     </div>
 
-</div>
+</div><pre><code>  # 2. CONTENT CONTROL
+  show_source: false        # Hide the "View Source" button (keep it clean)
+  show_category_heading: true # Group things by "Methods", "Attributes", etc.
+
+  # 3. FILTERING (Pick what to show)
+  members:                  # Only show these specific methods
+    - __init__
+    - render
+    - get_context
+
+  # OR use filters (uncomment to use)
+  # filters:
+  #   - "!^_"               # Exclude anything starting with "_" (private methods)
+</code></pre>
               
             </div>
           </div><footer>
