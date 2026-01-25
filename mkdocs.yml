@@ -33,6 +33,9 @@ plugins:
       handlers:
         python:
           paths: [src]
+          options:
+            show_source: false   # <--- THIS IS THE KEY
+            show_root_heading: true
   - include-markdown
 
   - gen-files:
