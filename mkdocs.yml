@@ -4,7 +4,7 @@ repo_url: https://github.com/MojahiD-0-YouneSS/probo-ui
 edit_uri: edit/main/docs/
 
 theme:
-  name: readthedocs
+  name: material
   palette: 
     # Light mode (default)
     - scheme: default
@@ -45,4 +45,4 @@ plugins:
       nav_file: SUMMARY.md
 nav:
   - Home: index.md
-  - API Reference: reference/
+  - API Reference: reference/probo/ 
