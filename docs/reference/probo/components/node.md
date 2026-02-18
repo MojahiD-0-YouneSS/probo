@@ -1,3 +1,3 @@
 # node
 
-::: probo.components.node
+::: probo.components.node.ElementNodeMixin

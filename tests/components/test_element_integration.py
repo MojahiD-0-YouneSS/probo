@@ -65,7 +65,6 @@ class TestElementIntegration:
         inp = INPUT()
         inp.attr_manager.set_attr("required", True)
         inp.attr_manager.set_attr("disabled", True)
-        
         html = inp.render()
         # In HTML, boolean attrs often appear as just the name or name=""
         # Adjust assertion based on your render implementation

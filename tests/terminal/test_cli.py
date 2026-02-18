@@ -23,18 +23,24 @@ def test_cli_init_pure_project(tmp_path):
 
     # 1. Check Exit Code
     print(result.stdout)
+    print(tmp_path)
 
     assert result.exit_code == 0
     assert "Pure PROBO Project" in result.stdout
 
     # 2. Verify Structure
     project = tmp_path / "my_portfolio"
+    
     assert project.exists()
     assert (project / "main.py").exists()
     assert (project / "probo_tcm.py").exists()
     assert (project / "dist").exists()
-    assert (project / "assets").exists()
-    assert (project / "components" / "pages.py").exists()
+    assert (project / "static").exists()
+    assert (project / "static" / "assets").exists()
+    assert (project / "components").exists()
+    assert (project / "components" / "header.py").exists()
+    assert (project / "pages").exists()
+    assert (project / "pages" / "index.py").exists()
 
 
 def test_cli_init_duplicate_fails(tmp_path):

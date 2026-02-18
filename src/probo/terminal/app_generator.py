@@ -1,6 +1,5 @@
 # from django.core.management import call_command
 # from django.utils.text import slugify
-# List of app names to generate
 from pathlib import Path
 
 

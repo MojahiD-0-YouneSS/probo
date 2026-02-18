@@ -203,7 +203,7 @@ class ElementState:
         placeholder (str): The unique <$ ... $> string used in templates.
         state_id (str): Unique UUID for this element state.
 
-    Example:print
+    Example:
         >>> # Simple text binding
         >>> es = ElementState('span', d_state='username')
         >>>

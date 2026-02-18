@@ -155,4 +155,4 @@ def test_bs5_alert_integration_symbol_and_use():
     
     # Verify both parts exist
     assert '<symbol id="my_custom_icon"' in html
-    assert '<use xlink:href="bootstrap-icons.svg#my_custom_icon"' in html
+    assert '<use href="bootstrap-icons.svg#my_custom_icon"' in html

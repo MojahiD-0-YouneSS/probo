@@ -35,9 +35,9 @@ def test_bs5_progress_render_stacked_bars():
     prog = BS5ProgressBar(style="height:30px;")
 
     # Add bars with different colors
-    prog.add_progress_bar(width=10, class_="bg-success")
-    prog.add_progress_bar(width=20, class_="bg-warning")
-    prog.add_progress_bar(width=30, class_="bg-danger")
+    prog.add_progress_bar(width=10, Class="bg-success")
+    prog.add_progress_bar(width=20, Class="bg-warning")
+    prog.add_progress_bar(width=30, Class="bg-danger")
 
     html = prog.render()
 

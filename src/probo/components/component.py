@@ -12,7 +12,7 @@ from probo.styles.elements import (
 )
 from typing import Any, Self
 from probo.templates.resolver import TemplateResolver
-
+from typing import Any,Self,Optional
 
 class Component:
     """

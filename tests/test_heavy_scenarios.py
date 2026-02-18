@@ -189,7 +189,6 @@ def test_page_03_product_listing(shop_theme):
 
     # 3. Render
     full_html = render_shop_page("Shop", grid, shop_theme)
-    print(full_html)
     assert '<div class="product-grid row">' in full_html
     assert "Laptop" in full_html
     assert "Phone" in full_html
@@ -229,7 +228,6 @@ def test_page_04_product_details(shop_theme):
 
     # 5. Render
     full_html = render_shop_page("Super Laptop", comp.render(), shop_theme)
-    print(full_html)
     assert "<h1>Super Laptop</h1>" in full_html
     assert "$999.00" in full_html
     assert 'hx-post="/api/cart/add"' in full_html
@@ -240,10 +238,10 @@ def test_page_05_contact(shop_theme):
 
     # 1. Define Fields (MFF)
     f_name = ProboFormField(
-        tag_name="input", field_name="name", **{"type": "text", "placeholder": "Name"}
+        tag_name="input", **{"type": "text", "placeholder": "Name","name":"fullname",}
     )
     f_msg = ProboFormField(
-        tag_name="textarea", field_name="message", **{"rows": 5, "placeholder": "Msg"}
+        tag_name="textarea", **{"rows": 5, "placeholder": "Msg","name":"message"}
     )
 
     # 2. Define Form (MF)
@@ -261,8 +259,7 @@ def test_page_05_contact(shop_theme):
     content = div(h2("Get in Touch"), form.render(), Class="contact-section")
 
     full_html = render_shop_page("Contact", content, shop_theme)
-    print(full_html)
     assert 'action="/contact/send"' in full_html
-    assert 'name="name"' in full_html
+    assert 'name="fullname"' in full_html
     assert "<textarea" in full_html
     assert 'value="manual-token-x"' in full_html

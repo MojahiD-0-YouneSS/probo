@@ -27,7 +27,6 @@ from typing import (
     Optional,
 )
 
-
 def get_widget_info(django_bound_field) -> dict[str, str]:
     """
     Analyzes a Django BoundField and returns a clean dictionary
@@ -118,22 +117,23 @@ class ProboFormField:
     def __init__(
         self,
         tag_name: str = None,
-        field_label: str = "",
-        content: str = "",
+        field_label: str = None,
+        content: str = None,
         label_attr:dict[str,str]=None,
         dj_field=None,
         wraper_func=None,
         **attrs: dict[str, str],
     ):
-        self.content = content
+        self.content = content or str()
         self.wraper_func = wraper_func
-        self.field_label = field_label
+        self.field_label = field_label or str()
         self.attrs = attrs
-        self.label_attr = label_attr or {}
+        self.label_attr =  {"for": attrs.get("id"),} if attrs.get("id", None) else dict()
+        self.label_attr.update(label_attr or {})
         self.tag_name = tag_name
         self.widget_info: dict[str, str] = dict()
         self.form_field = str()
-        self.dj_field = None
+        self.dj_field = dj_field
         self.dj_field_info = dict()
         self.dj_field = (dj_field,)
         if dj_field:
@@ -141,7 +141,7 @@ class ProboFormField:
 
         if tag_name:
             info = self._make_info(
-                self.attrs, self.field_label, {"for": attrs.get("id", None),**self.label_attr}, content
+                self.attrs, self.field_label, self.label_attr, content
             )
             self._field_build(tag_name, **info)
 
@@ -154,9 +154,9 @@ class ProboFormField:
     ) -> dict[str, str]:
         return {
             "attrs": {k.lower().replace("_", "-"): v for k, v in attrs.items()},
-            "label_string": label_string,
-            "label_attr ": label_attr,
-            "content": content,
+            "label_string": label_string or str(),
+            "label_attr": label_attr or dict(),
+            "content": content or str(),
         }
 
     def _field_build(self, tag: str, **info):
@@ -184,7 +184,7 @@ class ProboFormField:
             if not label_string:
                 self.widget_info[f"{input_id}-{tag}"] = self.wraper_func(tag_string) if callable(self.wraper_func) else tag_string
             else:
-                label_attrs = info.get("label_attrs", {}) or {}
+                label_attrs = info.get("label_attr", {})
                 if not label_attrs and input_id:
                     label_attrs["for"] = input_id
                 self.widget_info[f"{input_id}-{tag}"] = (
@@ -238,8 +238,8 @@ class ProboFormField:
         **textarea_attrs,
     ):
         _defaults = {
-            "textarea_rows": 8,
-            "textarea_cols": 50,
+            "rows": 8,
+            "cols": 50,
         }
         _defaults.update(textarea_attrs)
         info = self._make_info(_defaults, label_string, label_attrs, textarea_content)

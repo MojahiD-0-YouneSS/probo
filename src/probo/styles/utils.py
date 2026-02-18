@@ -48,7 +48,6 @@ def resolve_complex_selector(selector_str: str) -> List[str]:
 
     return parts
 
-
 def selector_type_identifier(token: str) -> tuple[str, str]:
     """
     Identifies the type of a single CSS selector token.

@@ -47,3 +47,7 @@ plugins:
 nav:
   - Home: index.md
   - API Reference: reference/probo/ 
+  - User Guide: user_guide.md
+  - Tutorial: tutorial.md
+  - Development: dev_code.md
+  - Release Note: realese_note.md

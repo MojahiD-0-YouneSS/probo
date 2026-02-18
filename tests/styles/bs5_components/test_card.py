@@ -130,7 +130,7 @@ def test_bs5_card_group_fluent_add():
 
 def test_bs5_card_group_attributes():
     """4. Render group with custom attributes."""
-    group = BS5CardGroup(id="my-group", class_="mb-4")
+    group = BS5CardGroup(id="my-group", Class="mb-4")
     html = group.render()
 
     assert 'id="my-group"' in html

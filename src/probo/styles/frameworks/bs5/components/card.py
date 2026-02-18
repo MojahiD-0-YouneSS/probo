@@ -3,7 +3,19 @@ from probo.styles.frameworks.bs5.comp_enum import Cards
 from probo.styles.frameworks.bs5.bs5 import BS5Element
 
 class BS5Card(BS5Component):
-    ''''''
+    """A comprehensive manager for Bootstrap 5 Card components.
+
+    Cards provide a flexible and extensible content container with options 
+    for headers, footers, varied display modes, and internal layout sections. 
+    This class automates the assignment of 'card-body', 'card-img-top', and 
+    'card-title' utility classes.
+
+    Attributes:
+        is_image_bottom (bool): If True, renders the image at the bottom 
+            of the card using 'card-img-bottom'.
+        body_children (list): A collection of specific body elements 
+            (titles, text, links).
+    """
     
     def __init__(self, card_header=None,card_image=None, card_body=None,card_footer=None,render_constraints=None,is_image_bottom=False, **attrs):
         self.attrs = attrs
@@ -20,26 +32,51 @@ class BS5Card(BS5Component):
         super().__init__(name='BS5-card', state_props=self.render_constraints)
 
     def add_card_title(self, title:str, tag='h1',**attrs):
+        """Adds a title to the card body with the 'card-title' class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         card_title = BS5Element(tag, title, classes=['card-title'],**attrs)
         self.body_children.append(card_title.render())
         return self
 
     def add_card_sub_title(self, sub_title:str, tag='h1',**attrs):
+        """Adds a subtitle to the card body with the 'card-subtitle' class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         card_sub_title = BS5Element(tag, sub_title, classes=['card-subtitle'],**attrs)
         self.body_children.append(card_sub_title.render())
         return self
 
     def add_card_text(self, text:str, tag='p',**attrs):
+        """Adds descriptive text to the card body with the 'card-text' class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         card_text = BS5Element(tag, text, classes=['card-text'],**attrs)
         self.body_children.append(card_text.render())
         return self
 
     def add_card_link(self, link:str, tag='a',**attrs):
+        """Adds a link to the card body with the 'card-link' class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         card_link = BS5Element(tag, link, classes=['card-link'],**attrs)
         self.body_children.append(card_link.render())
         return self
 
     def add_card_body(self, card_body,override=False,**attrs):
+        """Adds a content to the card body with the class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         body = BS5Element(
             'div',
             card_body,
@@ -53,6 +90,11 @@ class BS5Card(BS5Component):
         return self
 
     def add_card_header(self, card_header,override=False,**attrs):
+        """Adds a header to the Card class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         header = BS5Element(
             'div',
             card_header,
@@ -65,6 +107,11 @@ class BS5Card(BS5Component):
         return self
 
     def add_card_footer(self, card_footer,override=False,**attrs):
+        """Adds a footer to the card class.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         footer = BS5Element(
             'div',
             card_footer,
@@ -77,9 +124,15 @@ class BS5Card(BS5Component):
         return self
     
     def add_card_image(self,src_url,override=False,**attrs):
+        """Sets or updates the main card image.
+
+        Args:
+            src_url (str): The image source path.
+            override (bool): If True, replaces the existing image.
+        """
         img = BS5Element(
             'img',
-            classes=[(Cards.CARD_IMG_BOTTOM.value if self.is_image_bottom else Cards.CARD_IMG_TOP.value)],src=src_url
+            classes=[(Cards.CARD_IMG_BOTTOM.value if self.is_image_bottom else Cards.CARD_IMG_TOP.value)],src=src_url,
         )
         if self.card_image and not override:
             self.card_image += img.render()
@@ -124,7 +177,11 @@ class BS5Card(BS5Component):
         return card
     
 class BS5CardGroup(BS5Component):
-    
+    """A layout container for grouping multiple cards with unified sizing.
+
+    In a CardGroup, cards have a constant width and height, and their 
+    footers automatically align at the bottom.
+    """
     def __init__(self, *cards, render_constraints=None,**attrs):
         self.attrs = attrs
         self.render_constraints=render_constraints
@@ -135,6 +192,11 @@ class BS5CardGroup(BS5Component):
         super().__init__(name='BS5-card', state_props=self.render_constraints)
 
     def add_card(self,card_header=None,card_image=None, card_body=None,card_footer=None, **attrs):
+        """Factory method to create and add a new card directly to the group.
+
+        Returns:
+            BS5Card: The newly created card instance.
+        """
         card = BS5Card(card_header=card_header,card_image=card_image, card_body=card_body,card_footer=card_footer, **attrs).render()
         self.cards.append(card) 
         return self
