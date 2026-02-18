@@ -7,7 +7,6 @@ from src.probo.components.forms import (
 #  TEST: Declarative Forms (No Django / Manual Mode)
 # ==============================================================================
 
-
 def test_declarative_form_style_1_variables():
     """
     Type I: Define fields as variables first, then pass to Form.
@@ -45,7 +44,7 @@ def test_declarative_form_style_1_variables():
         method="POST",
         csrf_token="manual-token-87566462464",
     )
-
+    print(username_field.render())
     # 3. Render
     html = form.render()
     # 4. Verify
@@ -64,7 +63,6 @@ def test_declarative_form_style_1_variables():
 
     # Password
     assert 'type="password"' in html
-
 
 def test_declarative_form_style_2_inline():
     """
@@ -103,13 +101,11 @@ def test_declarative_form_style_2_inline():
     assert 'type="checkbox"' in html
     assert "checked" in html
 
-
 # ... (Previous imports and tests) ...
 
 # ==============================================================================
 #  TESTS: Declarative Builder API (MFF.add_*)
 # ==============================================================================
-
 
 def test_mff_builder_input():
     """
@@ -142,7 +138,6 @@ def test_mff_builder_input():
     assert 'placeholder="john@doe.com"' in html
     assert "required" in html
 
-
 def test_mff_builder_textarea():
     """
     Test add_textarea builder method.
@@ -167,7 +162,6 @@ def test_mff_builder_textarea():
     assert 'rows="5"' in html
     assert ">This is my story.</textarea>" in html
 
-
 def test_mff_builder_select_simple():
     """
     Test add_select_option with a simple list of values.
@@ -180,7 +174,7 @@ def test_mff_builder_select_simple():
         option_values=options,
         selected_options_indexes=[1],
         label_string="Pick a Color",
-        label_attr={"for": "color_select"},
+        label_attrs={"for": "color_select"},
         name="colors",
         Id="color_select",
         size=1,
@@ -194,7 +188,6 @@ def test_mff_builder_select_simple():
     assert '<option value="Red">Red</option>' in html
     # Option 1 (Green) - Selected
     assert '<option value="Green" selected>Green</option>' in html
-
 
 def test_mff_builder_select_optgroup():
     """
@@ -223,7 +216,6 @@ def test_mff_builder_select_optgroup():
     assert '<optgroup label="Vegetables">' in html
     assert '<option value="Carrot">Carrot</option>' in html
 
-
 def test_mff_builder_fieldset():
     """
     Test add_field_set rendering a container with legend and nested elements.
@@ -249,7 +241,6 @@ def test_mff_builder_fieldset():
     # Verify nesting order
     assert html.index("<legend>") < html.index("<input")
 
-
 def test_mff_builder_datalist():
     """
     Test add_data_list for autocomplete suggestions.
@@ -271,7 +262,6 @@ def test_mff_builder_datalist():
         '<option value="Chrome"></option>' in html
     )  # Datalist options usually self-closing or empty content
     assert "</datalist>" in html
-
 
 def test_mff_builder_output():
     """

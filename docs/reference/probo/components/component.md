@@ -1,4 +1,4 @@
-# Component Base Class
+# Component
 
 The `Component` class is the heart of Probo UI. It manages state, rendering, and context.
 

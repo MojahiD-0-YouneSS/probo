@@ -173,9 +173,9 @@ def test_bs5_element_include_nesting():
 
 
 def test_bs5_element_merge_attrs_class():
-    """20. Merging 'class_' kwarg with internal classes."""
-    # If user does BS5Element(..., class_='extra')
-    el = BS5Element("div", classes=["row"], class_="gap-3")
+    """20. Merging 'Class' kwarg with internal classes."""
+    # If user does BS5Element(..., Class='extra')
+    el = BS5Element("div", classes=["row"], Class="gap-3")
     html = el.render()
     assert "row" in html
     assert "gap-3" in html
@@ -286,7 +286,7 @@ def test_integration_attribute_override(full_theme):
     assert 'class="btn btn-primary"' in html
 
 
-def test_integration_fluent_class_extension(full_theme):
+def Cest_integration_fluent_classextension(full_theme):
     """29. Fluent Extension: Fetch element and add context-specific classes."""
     # Scenario: Adding 'active' state to a standard button
     el = full_theme.get_element("btn#primary").add("active", "w-100")

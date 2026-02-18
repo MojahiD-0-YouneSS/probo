@@ -10,6 +10,7 @@ import code as python_code
 import subprocess
 from rich.panel import Panel
 from rich.syntax import Syntax
+from probo.terminal.emmet import emmet
 from probo.terminal.app_generator import (
     create_probo_dj_structure,
     create_hacksoft_structure,
@@ -19,8 +20,7 @@ app = typer.Typer(
     help="PROBO: The declarative rendering engine for Django.", add_completion=False
 )
 console = Console()
-VERSION = "1.0.0"
-
+VERSION = "1.2.0"
 
 def load_tcm_registry(path: Path):
     """
@@ -52,27 +52,82 @@ def load_tcm_registry(path: Path):
         console.print(f"[red] Error loading registry: {e}[/red]")
         raise typer.Exit(code=1)
 
+try:
+    import readline
+    import rlcompleter
+    if 'libedit' in readline.__doc__:
+        readline.parse_and_bind("bind ^I rl_complete")
+    else:
+        readline.parse_and_bind("tab: complete")
+except ImportError:
+    # On some systems (like Windows without pyreadline), this might fail
+    pass
+
+class ProboConsole(python_code.InteractiveConsole):
+    """
+    A custom Python console that intercepts input to allow 'naked' 
+    Emmet shorthand without quotes.
+    """
+    def push(self, line):
+        # 1. Look for Emmet markers: starts with a tag, contains #, ., -c, or -s
+        # We check if it's NOT already quoted and looks like shorthand
+        is_shorthand = any(marker in line for marker in [' -c ', ' -s ', ' #', ' .'])
+        
+        # Also check if it starts with a common tag followed by a space
+        common_tags = ['div', 'p', 'span', 'section', 'h1', 'h2', 'h3', 'a', 'ul', 'li']
+        starts_with_tag = any(line.strip().startswith(tag + " ") for tag in common_tags)
+
+        if (is_shorthand or starts_with_tag) and not (line.strip().startswith('"') or line.strip().startswith("'")):
+            # Auto-wrap the line in quotes so Python treats it as a string
+            line = f'"{line.strip()}"'
+        
+        # 2. Pass the (potentially modified) line to the real Python interpreter
+        return super().push(line)
+
+def save_to_dist(value, filename="index.html"):
+    """
+    Saves the rendered HTML of a component or a string to the dist/ directory.
+    """
+    dist_path = "dist"
+    if not os.path.exists(dist_path):
+        os.makedirs(dist_path)
+    
+    file_path = os.path.join(dist_path, filename)
+    
+    # Handle renderable objects or strings
+    html_content = value.render() if hasattr(value, "render") else str(value)
+    
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    
+    console.print(f"[bold green]✓[/bold green] Exported to [cyan]{file_path}[/cyan]")
 
 # --- ARCHITECTURE DEFINITIONS ---
-
 
 class DjangoStructure(str, Enum):
     BASE = "base"  # Standard Django (MVT)
     HACKSOFT = "hacksoft"  # Domain-Driven (Services/Selectors)
     PROBO_DJ = "probo-dj"  # Enterprise (Split Views/Forms + Root Utils)
 
-
 # ==============================================================================
 #  1. PURE PROBO PROJECT (Standalone)
 # ==============================================================================
 
-
 @app.command("init")
 def init(name: str):
     """
-    Scaffold a pure 'PROBO Project' (Standalone / Static Site).
+    Initializes a new Probo project directory.
+    using bottle as server via ProboRouter.
     Best for prototyping, landing pages, or HTMX-only sites.
+
+    Arguments:
+
+    name: The name of the project folder.
+
+    Actions: Creates the standard scaffold including pages/, components/, static/, and the probo_tcm.py registry.
     """
+    # project_dir_parent = Path.cwd() / name
+    # project_dir = Path.cwd() / project_dir_parent / name
     project_dir = Path.cwd() / name
     if project_dir.exists():
         console.print(f"[red]Error: Directory '{name}' already exists![/red]")
@@ -82,43 +137,63 @@ def init(name: str):
 
     # 1. The Entry Point
     (project_dir / "main.py").write_text(
-        """
-from probo.cli import build_html, build_css
+        f"""from probo.router import ProboRouter
+from probo import div, h1
+
+router = ProboRouter(app_name="{name}")
+
 if __name__ == "__main__":
-    print("Building static site...")
-    # Add build logic here
+    print("Building static {name} site...")
+    router.load_tcm()
+    @router.page("/")
+    def home_view(request,response):
+        return {{'greeting':div(
+            h1("Welcome to {name}"),
+        )}}
+    router.run(port=8080) # any port is okay :)
 """,
         encoding="utf-8",
     )
 
     # 2. The Registry
     (project_dir / "probo_tcm.py").write_text(
-        """
-from probo import TemplateComponentMap
+        """from probo.context import TemplateComponentMap
 tcm = TemplateComponentMap()
-# from components.pages import HomePage
-# tcm.register(home=HomePage)
+# example usage
+# from components.home import HomePageBanner
+# tcm.set_component(home=HomePageBanner())
 """,
         encoding="utf-8",
     )
 
+    (project_dir / "__init__.py").touch()
     # 3. The Components Layer
     (project_dir / "components").mkdir()
     (project_dir / "components" / "__init__.py").touch()
-    (project_dir / "components" / "pages.py").touch()
+    (project_dir / "components" / "header.py").touch()
+
+    (project_dir / "pages").mkdir()
+    (project_dir / "pages" / "index.py").touch()
+    (project_dir / "pages" / "__init__.py").touch()
 
     # 4. Assets
-    (project_dir / "assets").mkdir()
+    (project_dir / "static").mkdir()
+    (project_dir / "static" / "assets").mkdir()
+    (project_dir / "static" / "assets" / "style.css").write_text(
+        """
+*::before {
+  content: " "; /* Unicode for a non-breaking space */
+}""",
+        encoding="utf-8",
+    )
     (project_dir / "dist").mkdir()  # Output folder
 
     console.print(f"[green]✨ Pure PROBO Project '{name}' initialized![/green]")
-    console.print(f"[dim]Run 'cd {name}' then 'probo shell' to start building.[/dim]")
-
+    console.print(f"[dim]Run 'cd {name}' then 'probo shell' to start building static pages.[/dim]")
 
 # ==============================================================================
 #  2. DJANGO APP INTEGRATION
 # ==============================================================================
-
 
 @app.command("dj-app")
 def startapp(
@@ -131,7 +206,15 @@ def startapp(
     ),
 ):
     """
-    Create a Django app with PROBO scaffolding.
+    Create a Django app with PROBO folders.
+    Scaffolds a new application module or a specific feature set within an existing project.
+    available flags:
+        base: standard django app
+        probo-dj: standard django app + probo-ui dependencies
+        hacksoft: standard django app + hacksoft archetecture
+
+    Usage: Used to keep your project modular as it scales beyond a single pages/ directory.
+
     """
     # 1. Run standard Django command
     try:
@@ -181,19 +264,16 @@ tcm = TemplateComponentMap() #mapper of component objects
     console.print("   + components/")
     console.print("   + probo_tcm.py")
 
-
 @app.command("build:css")
-def build_css(
-    registry_path: Path = typer.Option(
-        "probo_tcm.py", help="Path to the TCM registry file"
-    ),
-    output: Path = typer.Option(
-        "static/css/style.css", help="Output path for the CSS file"
-    ),
-):
+def build_css(registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry file"),output: Path = typer.Option("static/assets/style.css", help="Output path for the CSS file"),):
     """
-    Scans all registered components, triggers JIT compilation,
-    deduplicates styles, and exports a single CSS bundle.
+    The JIT (Just-In-Time) styling engine. It scans your TCM registry to find all utilized Bootstrap utility classes and Probo-specific styles, merging them into a single optimized CSS file.
+
+    Options:
+
+    --registry-path: Path to your probo_tcm.py (Default: probo_tcm.py).
+
+    --output: The destination for the generated CSS (Default: static/css/style.css)
     """
     tcm = load_tcm_registry(registry_path)
 
@@ -238,17 +318,18 @@ def build_css(
         f"[bold green]✅ Successfully wrote {len(seen_signatures)} unique styles to {output}[/bold green]",
     )
 
-
 @app.command("build:html")
-def build_html(
-    registry_path: Path = typer.Option(
-        "probo_tcm.py", help="Path to the TCM registry file"
-    ),
-    output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),
-):
+def build_html(registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry file"), output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),):
     """
-    Renders all registered components as static HTML files.
-    Useful for prototyping or static site generation.
+   The Static Site Generation (SSG) command. It iterates through every route defined in your TCM and renders the components into standalone HTML files.
+
+    Options:
+
+    --registry-path: Path to your probo_tcm.py.
+
+    --output-dir: The directory where HTML files will be saved (Default: dist).
+
+    Outcome: A ready-to-deploy static version of your site in the /dist folder.
     """
     tcm = load_tcm_registry(registry_path)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -293,15 +374,18 @@ def build_html(
         f"[bold green]✅ Generated {count} HTML files.[/bold green]",
     )
 
-
 @app.command("preview")
-def preview_component(
-    component_name: str,
-    registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry"),
-):
+def preview_component(component_name: str, registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry"),):
     """
-    Renders a specific component, saves it to a temporary file,
-    and opens it in your default browser immediately.
+    Instantly previews a specific component in the browser without needing to navigate through the whole app.
+
+    Arguments:
+
+    component_name: The key or class name of the component in the TCM.
+
+    Options:
+
+    --registry-path: Path to the TCM registry.
     """
     # 1. Load Registry
     tcm = load_tcm_registry(registry_path)
@@ -361,19 +445,40 @@ def preview_component(
             f"Error rendering {component_name}: {e}",
         )
 
-
 @app.command("shell")
 def shell():
     """
-    Starts an interactive Python shell with PROBO pre-loaded and Rich styling.
-    """
-    user_ns = {}
-    exec("from probo import *", user_ns)
+    Launches the Probo Interactive REPL. This is a powerful environment for testing component logic.
 
+    Features:
+
+    Emmet Shorthand: Type "naked" commands like div .p-4 -c Hello to see instant HTML results.
+
+    Rich Styling: Beautifully syntax-highlighted HTML output.
+
+    Exporting: Use save(_) to dump your last rendered component into dist/index.html.
+
+    Arrow Keys: Fully supported command history and navigation.
+    """
+    user_ns = {
+        "save": save_to_dist,
+        "console": console
+    }
+    exec("from probo import *", user_ns)
+    state = {
+        "allow_emmet": True,
+        "last_rendered": []
+    }
     def displayhook(value):
+
+        if value == 'allow_emmet':
+            console.print("""[yellow]•Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]""")
+            state["allow_emmet"]=True
+            return
         if value is None:
             return
-
+        if state["allow_emmet"]:
+            value = emmet(value)
         if hasattr(value, "render"):
             html_str = value.render()
 
@@ -386,26 +491,27 @@ def shell():
 
         else:
             console.print(value)
-
+        state['last_rendered'].append(value)
+        user_ns['_'] = ''.join(state['last_rendered'])
     sys.displayhook = displayhook
-
-    banner_text = """
-    [bold green]PROBO Interactive Shell v1.0[/bold green]
+    emmet_banner = """\n[yellow]• Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]\n type ""allow_emmet" """if state["allow_emmet"] else ''
+    banner_text = f"""
+    [italic][bold green]PROBO Interactive Shell v1.0[/bold green]
     [yellow]• Standard:[/yellow]  div('Hello', id='main')
-    [yellow]• Shorthand:[/yellow] emmet('div #main .container -c Content')
-    [yellow]• Logic:[/yellow]     loop(5, hr())
-    [italic]Type [red]exit()[/red] to quit.[/italic]"""
-
+    [yellow]• Logic:[/yellow]     loop(5, hr()){emmet_banner}
+    [yellow]• Type[/yellow] [bold cyan]save(_)[/bold cyan] to export result to dist/index.html
+    [yellow]• Type[/yellow] [red]exit()[/red] to quit.[/italic]
+"""
+   
     console.print(Panel(banner_text, title="PROBO Console", expand=False))
 
-    # user_ns = locals()
     console.print(f"[bold blue]Context:[/bold blue] {os.getcwd()}")
-
+    probo_shell = ProboConsole(locals=user_ns)
+    
     try:
-        python_code.interact(banner="", local=user_ns)
+        probo_shell.interact(banner="",)
     except SystemExit:
         pass
-
 
 @app.command("version")
 def version():
@@ -415,13 +521,11 @@ def version():
         f"[bold cyan]Mastodon UI (probo)[/bold cyan] version [yellow]{VERSION}[/yellow]"
     )
 
-
 @app.command("echo")
 def echo(text: str):
     """Print arguments to the console (Debug tool)."""
     # This replaces your 'echo' method
     console.print(f"[italic blue]Echo:[/italic blue] {text}")
-
 
 def main():
     app()

@@ -9,12 +9,22 @@ from probo.styles.utils import resolve_complex_selector
 
 
 class ComponentStyle:
-    """
-    A class to represent the css style of a Component object.
-    args:
-        template: a html representation to validate selectors against
-        *css: the css is tuple of SelectorRuleBridge objects
+    """Manages scoped CSS styling with structural validation for Components.
 
+    ComponentStyle acts as a bridge between the component's HTML structure 
+    and its visual rules. It validates that CSS selectors target existing 
+    elements within the provided template, preventing broken styles.
+
+    Attributes:
+        template (str): The HTML string representation of the component.
+        css_rules (tuple): A collection of SelectorRuleBridge objects 
+            defining the styling logic.
+        template_info (dict): A pre-computed dictionary of selectors 
+            extracted from the template for fast validation.
+
+    Example:
+        >>> style = ComponentStyle(my_html, SelectorRuleBridge(".card", my_rule))
+        >>> style.render(with_style_tag=True)
     """
 
     Css_rule = CssRule
@@ -28,10 +38,37 @@ class ComponentStyle:
             self.template_info = CssSelector(self.template).template_info
 
     def link_component(self, cmp_str: str):
+        """Binds a specific HTML representation to this style for validation.
+
+        Allows for late-binding of structural templates. This is useful for 
+        applying the same logic to different instances of a component or 
+        updating the template before final CSS validation.
+
+        Args:
+            cmp_str (str): The HTML string representation of the component.
+
+        Returns:
+            Self: Returns the instance to allow for method chaining.
+        """
         self.template = cmp_str
         return self
 
     def render(self, as_string=True, with_style_tag=False):
+        """Serializes the CSS rules into a validated string or list.
+
+        This method triggers the validation pipeline for every rule bridge. 
+        If 'with_style_tag' is set, it automatically wraps the output in 
+        Probo's standard <style> tags.
+
+        Args:
+            as_string (bool): If True, joins the rules into a single string.
+                If False, returns the raw list of validated rule strings.
+            with_style_tag (bool): If True, wraps the CSS in a <style> block.
+                Forces as_string to be True.
+
+        Returns:
+            Union[str, List[str]]: The final CSS output or a list of rules.
+        """
         container = [self._validate_css(bridge) for bridge in self.css_rules]
         if with_style_tag:
             as_string = True
@@ -48,6 +85,28 @@ class ComponentStyle:
             )
 
     def _validate_css(self, bridge):
+        """Internally validates a SelectorRuleBridge against the template.
+
+        Checks the existence of CSS selectors within the template_info 
+        dictionary. Supports compound selectors using the '_$_' delimiter, 
+        which represents a CSS descendant selector (space).
+
+        Logic:
+            1. Splice selectors based on the '_$_' delimiter.
+            2. Strip '.' and '#' to check class/ID existence in template_info.
+            3. Raise ValueError if any part of the selector is missing.
+
+        Args:
+            bridge (SelectorRuleBridge): The bridge object connecting a 
+                selector string to a CssRule.
+
+        Returns:
+            str: A formatted CSS rule string (e.g., ".card .title { color: red; }").
+
+        Raises:
+            ValueError: If a selector targets an element not found in 
+                the provided template.
+        """
         s, r = bridge.selector_str, bridge.rule.render()
         from probo.utility import exists_in_dict
 
@@ -69,12 +128,32 @@ class ComponentStyle:
         # css_rules = f"{' '.join([ c for cr in self.css_rules])}"
         return f"{selectors} {r} \n"
 
-
 def element_style(
     with_style_attr=False,
     **prop_val,
 ):
-    """A function to represent inline styles for an HTML element."""
+    """Generates inline CSS strings from Python keyword arguments.
+
+    This utility converts Pythonic snake_case or standard CSS properties 
+    into a semicolon-delimited string. It leverages the CssRule engine 
+     to ensure declarations are formatted correctly.
+
+    Args:
+        with_style_attr (bool): If True, wraps the result in the HTML 
+            'style=""' attribute syntax. Defaults to False.
+        **prop_val: Arbitrary keyword arguments representing CSS 
+            properties and their values (e.g., color="red", margin_top="10px").
+
+    Returns:
+        str: A formatted CSS string or a full HTML style attribute.
+
+    Example:
+        >>> element_style(color="blue", font_size="12px")
+        'color:blue; font-size:12px;'
+        
+        >>> element_style(with_style_attr=True, display="flex")
+        'style="display:flex;"'
+    """
     style_string = (
         " ".join([f"{k}:{v};" for k, v in CssRule(**prop_val).declarations.items()])
         or ""
@@ -84,28 +163,38 @@ def element_style(
     else:
         return style_string
 
-
 @dataclass
 class SelectorRuleBridge:
-    """
+    """The atomic binding unit of the ProboUI Style Engine.
 
-    The atomic unit of the Style Engine.
-    Binds a specific Selector to a specific Rule definition and unifizes  CssSelectort and CssRule objects
+    SelectorRuleBridge unifies a target (CssSelector) with a declaration (CssRule). 
+    It ensures structural integrity by normalizing string-based selectors into 
+    objects and providing a consistent interface for the final CSS render.
+
+    Attributes:
+        selector (Union[CssSelector, str]): The CSS selector target. 
+            Normalized to CssSelector during post-initialization.
+        rule (CssRule): The declaration block containing CSS properties.
     """
 
     selector: Union[CssSelector, str]
     rule: CssRule
 
     def __post_init__(self):
-        """
-        Automatically runs after the object is created.
-        Ensures self.selector is normalized to a CssSelector object.
+        """Standardizes the selector input immediately after instantiation.
+        
+        This ensures that internal logic can always rely on the selector 
+        having a '.render()' method and participating in validation.
         """
         self.make_selector_obj()
 
     @property
     def selector_str(self) -> str:
-        """Helper to get the raw string for lxml/cssselect."""
+        """Returns the raw string representation of the selector.
+
+        Used primarily for integration with lxml, cssselect, or standard 
+        CSS output.
+        """
         if hasattr(self.selector, "render"):
             return self.selector.render()
         return str(self.selector)
@@ -113,6 +202,14 @@ class SelectorRuleBridge:
     def make_selector_obj(
         self,
     ) -> None:
+        """Normalizes the selector attribute into a CssSelector instance.
+
+        If the selector is a string, it uses 'resolve_complex_selector' to 
+        break down compound strings into a structured object.
+
+        Raises:
+            TypeError: If the selector is neither a string nor a CssSelector.
+        """
         if isinstance(self.selector, CssSelector):
             return None
         
@@ -142,12 +239,18 @@ class SelectorRuleBridge:
     # f'{k.strip(':')}:{v.strip(';')};\n'.replace('_','-')
     @classmethod
     def make_bridge_list(cls, source: Dict) -> List["SelectorRuleBridge"]:
-        """
-        Factory: Converts a User Dictionary into a Strict List of Bridges.
-        Preserves insertion order (Python 3.7+ dicts are ordered).
+        """Factory method to convert a dictionary into a list of Bridge objects.
 
-        Input: { CssSelector('.btn'): CssRule(color='red') }
-        Output: [SRB(selector=..., rule=...)]
+        This is the primary entry point for bulk style definitions. It 
+        automatically wraps dictionaries into CssRule objects and 
+        string selectors into CssSelector objects.
+
+        Args:
+            source (Dict): A mapping of selectors to rule definitions.
+                e.g., { ".btn": {"color": "red"}, "#id": my_rule_obj }
+
+        Returns:
+            List[SelectorRuleBridge]: A list of validated, ready-to-render bridges.
         """
         bridges = []
 
@@ -171,7 +274,6 @@ class SelectorRuleBridge:
 
         return bridges
 
-
 def _check_selector_in_template_re(selector: list[str], template: str) -> bool:
     """
     Uses RegEx to find if a simple selector (tag, id, or class)
@@ -192,14 +294,27 @@ def _check_selector_in_template_re(selector: list[str], template: str) -> bool:
             return False
     return False
 
-
 def element_style_state(
     template: str,
     rslvd_el: Dict[str, Any],  # Dict[str, ElementState]
     *css: SelectorRuleBridge,
 ):
-    """
-    Validate CSS selectors against the rendered template and element state.
+    """Applies and validates styles based on the resolved state of a template.
+
+    This function acts as a state-aware style applicator. It cross-references 
+    provided SelectorRuleBridge objects against the resolved element states 
+    to ensure that dynamic styling logic remains consistent with the 
+    underlying HTML structure.
+
+    Args:
+        template (str): The HTML string template to be styled.
+        rslvd_el (Dict[str, Any]): A dictionary mapping element selectors 
+            to their current State objects (ElementState).
+        *css (SelectorRuleBridge): A variable number of bridge objects 
+            defining the target selectors and their corresponding rules.
+
+    Returns:
+        str: The rendered CSS string block for the state-specific styles.
 
     Cases:
         Case 2 (Error Thrower):

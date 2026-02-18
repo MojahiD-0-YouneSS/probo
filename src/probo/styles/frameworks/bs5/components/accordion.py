@@ -3,6 +3,17 @@ from probo.styles.frameworks.bs5.bs5 import BS5Element
 from probo.styles.frameworks.bs5.comp_enum import Accordion
 
 class BS5Accordion(BS5Component):
+    """A high-level component for generating Bootstrap 5 Accordions.
+
+    This class automates the creation of multi-item collapsible containers. 
+    It manages the generation of unique IDs for parent-child relationships, 
+    ensuring that clicking a header correctly toggles the corresponding body 
+    without affecting other items.
+
+    Attributes:
+        items (list): A collection of dictionaries containing the header 
+            and body data for each accordion segment.
+    """
     def __init__(self,*accordion_items,variant='base',render_constraints=None,**attrs):
         self.attrs = attrs
         self.tag='div'
@@ -14,6 +25,18 @@ class BS5Accordion(BS5Component):
         super().__init__(name='BS5-accordion', state_props=self.render_constraints)
 
     def add_accordion_item(self,accordion_header:str,header_id:str,accordion_body:str,body_id:str):
+        """Registers a new item to be rendered within the accordion.
+
+        Args:
+            accordion_header (str): The text or HTML to display in the 
+                clickable header button.
+            header_id (str): The unique HTML ID for the header element.
+            accordion_body (str): The HTML content to display when expanded.
+            body_id (str): The unique HTML ID for the collapsible body container.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         item =  BS5Element(
            'div',
           classes=[Accordion.ITEM.value]

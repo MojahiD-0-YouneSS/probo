@@ -1,7 +1,7 @@
 from enum import Enum
+from probo.utility import EnumLookUPMixin
 
-
-class CssPropertyEnum(Enum):
+class CssPropertyEnum(EnumLookUPMixin, Enum):
     ACCENT_COLOR = "accent-color: %s"
     ALIGN_CONTENT = "align-content: %s"
     ALIGN_ITEMS = "align-items: %s"
@@ -385,8 +385,7 @@ class CssPropertyEnum(Enum):
         except KeyError:
             return cls.__DEFAULT
 
-
-class PseudoClassEnum(Enum):
+class PseudoClassEnum(EnumLookUPMixin, Enum):
     ACTIVE = ":active"
     ANY_LINK = ":any-link"
     ANYLINK = ":anylink"  # Non-standard, but sometimes used
@@ -464,8 +463,7 @@ class PseudoClassEnum(Enum):
         except KeyError:
             return default
 
-
-class PseudoElementEnum(Enum):
+class PseudoElementEnum(EnumLookUPMixin, Enum):
     AFTER = "::after"
     BACKDROP = "::backdrop"
     BEFORE = "::before"
@@ -502,8 +500,7 @@ class PseudoElementEnum(Enum):
         except KeyError:
             return default
 
-
-class CssFunctionsEnum(str, Enum):
+class CssFunctionsEnum(str, EnumLookUPMixin, Enum):
     # ex usage=CssFunctionsEnum.BLUR.value % "5px"==>  'blur(5px)'
     ACOS = "acos(%s)"
     ASIN = "asin(%s)"
@@ -593,8 +590,7 @@ class CssFunctionsEnum(str, Enum):
         except KeyError:
             return default
 
-
-class CssFontsEnum(Enum):
+class CssFontsEnum(EnumLookUPMixin, Enum):
     # --- Generic Families ---
     SERIF = "serif"
     SANS_SERIF = "sans-serif"
@@ -648,8 +644,7 @@ class CssFontsEnum(Enum):
         except KeyError:
             return default
 
-
-class CssAnimatableEnum(str, Enum):
+class CssAnimatableEnum(str, EnumLookUPMixin, Enum):
     ASPECT_RATIO = "aspect-ratio"
     BACKGROUND = "background"
     BACKGROUND_COLOR = "background-color"

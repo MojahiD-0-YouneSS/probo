@@ -65,7 +65,7 @@ class TestAttributeManipulator:
         m = ElementAttributeManipulator()
         
         m.set_attr("disabled", True)
-        assert m.get_attr("disabled") == ""  # Standard HTML behavior
+        assert m.get_attr("disabled") == "disabled"  # Standard HTML behavior
         
         m.set_attr("disabled", False)
         assert m.get_attr("disabled") is None  # Should be removed entirely

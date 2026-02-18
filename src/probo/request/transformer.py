@@ -1,6 +1,5 @@
 from probo.request.props import RequestProps
 
-
 class RequestDataTransformer:
     """RequestDataTransformer or RDT is a class that parses and extracts contents from django  request object ,also supports form hundling
     args:
@@ -334,10 +333,19 @@ class RequestDataTransformer:
         # Return the structured object
         return RequestProps(global_context=global_ctx, local_context=local_ctx)
 
-
 class FormHandler:
-    """
-    this class utility the RequestDataTransformer to save the forms in a view setting
+    """Orchestrates form validation and persistence logic within a view.
+
+    This utility uses a `RequestDataTransformer` to decide whether to process 
+    a single form ('mono') or a collection of forms. It provides a high-level 
+    interface for views to execute 'save' operations without manually 
+    handling validation checks.
+
+    Attributes:
+        request_data (RequestDataTransformer): The data source containing 
+            the forms and their current state.
+        logger_instance (Optional[Any]): Hook for attaching a logging utility 
+            to track form success or failure.
     """
 
     def __init__(self, request_data: RequestDataTransformer):
@@ -352,6 +360,11 @@ class FormHandler:
     def form_handling(
         self,
     ):
+        """Executes the appropriate form saving strategy based on data shape.
+
+        Returns:
+            bool: True if all involved forms were valid and saved; False otherwise.
+        """
         if self.request_data.mono_form:
             operation_status = self.mono_form_true_option()
         else:
@@ -361,6 +374,11 @@ class FormHandler:
     def mono_form_true_option(
         self,
     ):
+        """Processes a single form instance.
+
+        Returns:
+            bool: True if the single form was valid and saved.
+        """
         if self.request_data.is_valid():
             self.request_data.save_form()
             return True
@@ -370,6 +388,11 @@ class FormHandler:
     def mono_form_false_option(
         self,
     ):
+        """Processes multiple form instances (e.g., Formsets).
+
+        Returns:
+            bool: True if all forms in the collection were valid and saved.
+        """
         if self.request_data.are_valid():
             self.request_data.save_forms()
             return True

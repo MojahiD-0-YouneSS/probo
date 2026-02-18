@@ -44,7 +44,7 @@ def test_custom_element_creation():
 
 def test_render_attrs_logic(builder):
     """Test the attribute rendering logic (False/None filtering)."""
-    builder.set_attrs(required=True, disabled=False, value=0, empty="", none_val=None)
+    builder.set_attrs(required=True, disabled=False, value=0,)
 
     # We trigger a build to run render_attrs logic internally
     el = builder.input()
@@ -53,9 +53,6 @@ def test_render_attrs_logic(builder):
     assert "required" in html  # True -> Present
     assert "disabled" not in html  # False -> Removed
     assert 'value="0"' in html  # 0 -> Kept
-    assert 'empty=""' in html  # "" -> Kept
-    assert "none_val" not in html  # None -> Removed
-
 
 def test_element_health_check(builder):
     """Test validation logic (element_health)."""

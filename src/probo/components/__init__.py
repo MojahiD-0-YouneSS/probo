@@ -10,6 +10,14 @@ from probo.components.forms import (
 from probo.components.component import (
     Component,
 )
+from probo.components.base import (
+    BaseHTMLElement,
+    ElementAttributeManipulator,
+    ComponentAttrManager,
+)
+from probo.components.node import (
+    ElementNodeMixin,
+)
 from probo.components.attributes import (
     ElementAttributeValidator,
 )
@@ -31,4 +39,8 @@ __all__ = [
     "StateProps",
     "ProboForm",
     "ProboFormField",
+    'BaseHTMLElement',
+    'ElementAttributeManipulator',
+    'ElementNodeMixin',
+    'ComponentAttrManager',
 ]

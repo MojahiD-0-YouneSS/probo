@@ -1,8 +1,7 @@
 from enum import Enum
-
-# from tempo.styles.frameworks.bs5.bs5
-
-class DataBSAttribute(Enum):
+from typing import Any,Self,Optional
+from probo.utility import EnumLookUPMixin
+class DataBSAttribute(EnumLookUPMixin, Enum):
     DATA_BS = [
         "data-bs-toggle",
         "data-bs-dismiss",
@@ -35,7 +34,7 @@ class DataBSAttribute(Enum):
         "data-bs-target",
     ]
 
-class AriaAttribute(Enum):
+class AriaAttribute(EnumLookUPMixin, Enum):
     ARIA_ATTRIBUTE = [
         "aria-activedescendant",
         "aria-atomic",
@@ -87,7 +86,7 @@ class AriaAttribute(Enum):
         "aria-valuetext",
     ]
 
-class VoidTags(Enum):
+class VoidTags(EnumLookUPMixin, Enum):
     VOID_TAGS = [
         "area",
         "base",
@@ -104,7 +103,7 @@ class VoidTags(Enum):
         "wbr",
     ]
 
-class GlobalAttribute(Enum):
+class GlobalAttribute(EnumLookUPMixin, Enum):
     GLOBAL_ATTRIBUTE = [
         "accesskey",
         "class",
@@ -131,7 +130,7 @@ class GlobalAttribute(Enum):
         "type",
     ]
 
-class EventAttribute(Enum):
+class EventAttribute(EnumLookUPMixin, Enum):
     EVENT_ATTRIBUTE = [
         "onabort",
         "onafterprint",
@@ -179,7 +178,7 @@ class EventAttribute(Enum):
         "onwheel",
     ]
 
-class AllVisibleAttribute(Enum):
+class AllVisibleAttribute(EnumLookUPMixin, Enum):
     VISIBLE_ATTRIBUTE = [
         "id",
         "class",
@@ -209,7 +208,7 @@ class AllVisibleAttribute(Enum):
         "wrap",
     ]
 
-class NotSupportedInHtml5(Enum):
+class NotSupportedInHtml5(EnumLookUPMixin, Enum):
     NOT_SUPPORTED_IN_HTML5 = [
         "align",
         "alink",
@@ -223,8 +222,7 @@ class NotSupportedInHtml5(Enum):
         "vlink",
     ]
 
-class AttributeValue(Enum):
-    """Class to validate HTML attributes and their values."""
+class AttributeValue(EnumLookUPMixin, Enum):
 
     ATTRIBUTE_VALUE = {
         "accept": ["file_extension", "audio/*", "video/*", "image/*", "media_type"],
@@ -1460,15 +1458,7 @@ class AttributeValue(Enum):
         ],
     }
 
-ATTR_CLUSTER = set(
-    GlobalAttribute.GLOBAL_ATTRIBUTE.value
-    + EventAttribute.EVENT_ATTRIBUTE.value
-    + AllVisibleAttribute.VISIBLE_ATTRIBUTE.value
-    + AriaAttribute.ARIA_ATTRIBUTE.value
-    + DataBSAttribute.DATA_BS.value
-)
-
-class ElementAttribute(Enum):
+class ElementAttribute(EnumLookUPMixin, Enum):
     ELEMENT_ATTRIBUTE = {
         "accept": ["<input>"],
         "accept-charset": ["<form>"],
@@ -1714,7 +1704,7 @@ class ElementAttribute(Enum):
         'y2': ['<line>', '<linearGradient>'],
     }
 
-class Tag(Enum):
+class Tag(EnumLookUPMixin, Enum):
     DOCTYPE = ("!DOCTYPE html", {"void": True})
     A = ("a", {"void": False})
     ABBR = ("abbr", {"void": False})
@@ -1847,11 +1837,11 @@ class Tag(Enum):
     MARKER = ("marker", {"void": False})
     PATTERN = ("pattern", {"void": False})
     MASK = ("mask", {"void": False})
-    CLIP_PATH = ("clipPath", {"void": False})
+    CLIPPATH = ("clipPath", {"void": False})
 
     # --- Gradients ---
-    LINEAR_GRADIENT = ("linearGradient", {"void": False})
-    RADIAL_GRADIENT = ("radialGradient", {"void": False})
+    LINEARGRADIENT = ("linearGradient", {"void": False})
+    RADIALGRADIENT = ("radialGradient", {"void": False})
 
     # --- Filters (The "fe" prefix tags) ---
     FILTER = ("filter", {"void": False})
@@ -1910,17 +1900,31 @@ class Tag(Enum):
             return f"<{self.tag_name}></{self.tag_name}>"
 
     @classmethod
-    def get(cls, name, default=None):
+    def get(cls, name, default:Any=None) -> Self | Any:
         try:
-            return cls[name.upper()]
+            target = name.upper()
+            return cls[target]
         except KeyError:
             return default
 
 class ElementAttributeValidator:
-    """Class to validate HTML attributes for elements.
-    This class checks if the provided attributes are valid for a given HTML element."""
-
-    def __init__(self, element_tag: str = "", **kwargs):
+    """
+    Class to validate HTML attributes for elements.
+    This class checks if the provided attributes are valid for a given HTML element.
+    
+    Args:
+        element_tag: the element string tag used in <tag> format.
+        
+        kwargs: the attributes dictionary used as with the element tag
+    
+    Attr 1:
+       **valid_attrs**: the valid attributes dictionary that could be used with the element
+    
+    Attr 2:
+        **error_attrs**: the invalid attributes dictionary that could not be used with the element
+    
+    """
+    def __init__(self, element_tag: str = "", **kwargs:dict[str,Any]):
         self.element_tag = element_tag if element_tag else ""
         self.raw_attrs = kwargs
         self.valid_attrs = {}
@@ -1929,10 +1933,27 @@ class ElementAttributeValidator:
         # Run validation on init
         self.is_valid = self.validate()
 
+    def hydrate_validator(self,opening_tag, attrs):
+        self.element_tag=opening_tag
+        self.raw_attrs=attrs
+        return self
+    def _normalized_key(self,raw_key:str):
+        """
+        normalizes attribute name to be in render state. 
+        
+        :param self: ElementAttributeValidator.
+        :param raw_key: the attribute key passed as **kwargs to be normalized.
+        """
+        if len(raw_key) >1:
+            key = raw_key[0].lower()+raw_key[1:].strip().replace("_", "-")
+        else:
+            key = raw_key.lower().strip().replace("_", "-")
+        return key
+
     def validate(self) -> bool:
         """
-        Core Logic. Returns True if all attributes are processed successfully.
-        Populates self.valid_attrs with the final, clean dictionary.
+        Core validation Logic. Returns True if all attributes are processed successfully.
+        Populates self.valid_attrs with the final, clean dictionary.and if an invalid attributes detected ,False is returnded.
         """
         if not self.raw_attrs:
             return True
@@ -1944,31 +1965,28 @@ class ElementAttributeValidator:
 
         for raw_key, value in self.raw_attrs.items():
             # 1. NORMALIZE KEY (class_ -> class, aria_hidden -> aria-hidden)
-
-            if len(raw_key) >1:
-                key = raw_key[0].lower()+raw_key[1:].strip().replace("_", "-")
-            else:
-                key = raw_key.lower().strip().replace("_", "-")
+            key = self._normalized_key(raw_key)
 
             # --- SKIP PART 1: BOOLEANS ---
-            if isinstance(value, bool) :
-                if value is True:
+            if isinstance(value, bool) or key == value:
+                if value is True or key == value :
                     self.valid_attrs[key] = True
+                
                 # If False, we ignore it (it won't render)
                 continue
-
             # --- SKIP PART 2: WILDCARDS ---
             # Bootstrap (data-*), HTMX (hx-*), Aria (aria-*), Events (on*),
             if key.startswith(("data-", "aria-", "hx-", "on", "xml", "ng-", "v-")):
                 self.valid_attrs[key] = value
                 continue
+
             el_attr_check = el_attr_definitions.get(key, None)
             if (
-                el_attr_check and not self.element_tag in el_attr_check
+                (el_attr_check and self.element_tag )and (not self.element_tag in el_attr_check)
             ):
+                self.error_attrs.append(f"{key}='{value}'")
                 return False
-            # --- SKIP PART 3: THE CLUSTER (Fast Pass) ---
-            in_cluster = key in ATTR_CLUSTER
+            
             rule = definitions.get(key,None)
             # --- CHECK: DEFINITIONS ---
             if rule:
@@ -2001,16 +2019,14 @@ class ElementAttributeValidator:
                             )
                             all_valid = False
                             continue
+                        else:
+                            # Tag not specified in rule, be loose
+                            self.valid_attrs[key] = value
+                            continue
                     else:
-                        # Tag not specified in rule, be loose
-                        self.valid_attrs[key] = value
-                        continue
-
-            # --- FALLBACK ---
-            if in_cluster:
-                self.valid_attrs[key] = value
+                        self.error_attrs.append(f"{key}='{value}'")
+                        return False
             else:
-                # Unknown/Custom attribute -> Allow it
-                self.valid_attrs[key] = value
-
+                self.error_attrs.append(f"{key}='{value}'")
+                return False
         return all_valid

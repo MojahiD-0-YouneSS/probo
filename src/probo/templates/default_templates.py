@@ -1,4 +1,31 @@
 def base_template():
+    """Generates the primary HTML shell and boilerplate for a ProboUI application.
+
+    This function acts as the "Master Layout" or "Main Entry Point" for the 
+    application's DOM structure. It demonstrates the integration of three 
+    core ProboUI pillars:
+    1.  **Tag Functions**: Programmatic generation of HTML (head, body, nav, etc.).
+    2.  **HTMX Integration**: Declarative AJAX and partial DOM updates using `HX()` 
+        and `HXE()`.
+    3.  **Bootstrap 5 Styling**: JIT-resolved utility classes via `BS5ElementStyle`.
+
+    The template includes standard SEO meta tags, Bootstrap 5 CSS/JS CDN links, 
+    and a responsive navigation bar as a default structural example.
+
+    Detailed Workflow:
+        - **Head Generation**: Configures viewport, charset, and external assets.
+        - **Navigation Bar**: Constructs a responsive Bootstrap navbar using 
+          nested functional tags.
+        - **HTMX Trigger**: Includes an example of a `span` element utilizing 
+          HTMX for dynamic content swapping via `HXE()`.
+        - **Serialization**: Wraps the final output in a `Template` object 
+          marked as the system base.
+
+    Returns:
+        Template: A ProboUI Template object loaded with the serialized HTML 
+            and the necessary DOCTYPE declaration.
+    """
+    
     from probo.components.tag_functions import (
         meta,
         link,
