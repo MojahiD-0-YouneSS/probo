@@ -81,24 +81,35 @@ def render_attributes(tag_name:str, attrs:dict[str,Any]) -> str:
         'placeholder="Name"'
     """
 
-
     # Get defaults for this specific tag
     defaults = HTML_DEFAULTS.get(tag_name, {})
 
-    parts = [
+    # parts = [
         
-        # 1. Skip if value is strictly False or None
-        key.replace("_", "-")
-        if value is True
-        else
-        f'{key.replace("_", "-")}="{" ".join(str(v) for v in value)}"'
-        if isinstance(value, list)
-        else ''
-        if value is False or value is None or key in defaults and str(value).lower() == defaults[key]
-        else''
-        for key, value in attrs.items()
+    #     # 1. Skip if value is strictly False or None
+    #     key.replace("_", "-")
+    #     if value is True
+    #     else
+    #     f'{key.replace("_", "-")}="{" ".join(str(v) for v in value)}"'
+    #     if isinstance(value, list)
+    #     else ''
+    #     if value is False or value is None or key in defaults and str(value).lower() == defaults[key]
+    #     else''
+    #     for key, value in attrs.items()
 
+    # ]
+    parts = [
+        (
+            k
+            if v is True
+            else f'{k}="{" ".join(map(str, v))}"' if type(v) is list else f'{k}="{v}"'
+        )
+        for key, v in attrs.items()
+        if v is not False and v is not None
+        if not (key in defaults and str(v).lower() == defaults[key])
+        for k in [key.replace("_", "-") if "_" in key else key]
     ]
+        
     return " ".join(parts)
 
 class EnumLookUPMixin:
@@ -125,4 +136,3 @@ class EnumLookUPMixin:
         }
     def __iter__(self):
         return self.keys_set
-        

@@ -2,6 +2,7 @@ from probo.components.attributes import (
     ElementAttributeValidator,
     Tag,
 )
+from functools import partial
 from enum import Enum
 import tempfile
 import webbrowser
@@ -12,36 +13,58 @@ from typing import Any, Self
 
 MARKER = chr(31)
 CONTENT_MARKER = f"@probo:{MARKER}"
-Tag.thaw()
+# Tag.thaw()
+
+
 class Element:
     """A dynamic HTML element factory and renderer.
 
-    This class utilizes meta-programming to support any HTML tag as a method 
-    (e.g., `element.div()`). It handles attribute validation, content nesting 
-    using markers, and supports different output formats like lists or 
+    This class utilizes meta-programming to support any HTML tag as a method
+    (e.g., `element.div()`). It handles attribute validation, content nesting
+    using markers, and supports different output formats like lists or
     'natural' (newline-separated) strings.
 
     Attributes:
         element (Union[str, List[str]]): The rendered HTML output.
         tag (str): The current HTML tag being processed.
         content (str): Inner HTML or text content.
-        is_list (bool): If True, `element` is stored as a list of strings 
+        is_list (bool): If True, `element` is stored as a list of strings
             split by MARKER.
         is_natural (bool): If True, MARKERs are replaced by newlines.
         attrs (dict): Dictionary of HTML attributes for the current tag.
     """
-    validator = ElementAttributeValidator()
+    # __slots__ =(
+    #     'validator',
+    #     'element',
+    #     'is_list',
+    #     'is_natural',
+    #     'content',
+    #     'probo_pretty_error',
+    #     'probo_custom_attrs',
+    #     'collect_history',
+    #     'collect_to_end',
+    #     'attrs',
+    #     'tag',
+    #     'use_sibling',
+    #     'sibling_element',
+    #     'div',
+    #     'p',
+    #     'span',
+    #     'button',
+    #     'section',
+
+    # )
 
     def __init__(
         self,
-        tag:str="",
+        tag: str = "",
         content: str = "",
         is_list: bool = False,
         is_natural: bool = False,
-        collect_history:bool=False,
-        probo_pretty_error:bool=False,
-        probo_custom_attrs:bool=False,
-        **attrs:dict[str,Any],
+        collect_history: bool = False,
+        probo_pretty_error: bool = False,
+        probo_custom_attrs: bool = False,
+        **attrs: dict[str, Any],
     ):
         """Initializes the Element with configuration flags and initial data.
 
@@ -54,14 +77,15 @@ class Element:
             probo_custom_attrs: If True, skips standard HTML attribute validation.
             **attrs: Initial HTML attributes.
         """
+        self.validator = ElementAttributeValidator()
         self.element: str | list[str] = str()
         self.is_list: bool = is_list
         self.is_natural: bool = is_natural
         self.content: str = content or str()
-        self.probo_pretty_error=probo_pretty_error
-        self.probo_custom_attrs=probo_custom_attrs
-        self.collect_history=collect_history
-        self.collect_to_end=True
+        self.probo_pretty_error = probo_pretty_error
+        self.probo_custom_attrs = probo_custom_attrs
+        self.collect_history = collect_history
+        self.collect_to_end = True
         self.attrs: dict[str, str] = attrs
         self.tag = tag
         self.use_sibling = False
@@ -69,17 +93,17 @@ class Element:
         if self.tag:
             self.element = self.build_tag(Tag.get(self.tag)).replace(MARKER, "")
 
-    def __getattr__(self, name:str) -> Any:
+    def __getattr__(self, name: str) -> Any:
         """Dynamically loads and returns a handler for a requested HTML tag.
 
-        If the name corresponds to a valid HTML tag in the `Tag` registry, 
+        If the name corresponds to a valid HTML tag in the `Tag` registry,
         it creates a private handler method and attaches it to the instance.
 
         Args:
             name: The name of the HTML tag (e.g., 'div', 'section').
 
         Returns:
-            Callable: A handler function that processes the tag's content 
+            Callable: A handler function that processes the tag's content
                 and attributes.
 
         Raises:
@@ -87,27 +111,25 @@ class Element:
         """
         name = name.lower()
         self.tag = name
-        method=self._tag_loader(name)
+        method = self._tag_loader(name)
         if method:
             # return getattr(self, name)
             return method
         else:
-            raise AttributeError(
-                f"Tag '{name}' is not defined as Element method. "
-            )
- 
+            raise AttributeError(f"Tag '{name}' is not defined as Element method. ")
+
     @property
     def reset_sebling(self):
-        self.use_sibling=False
-        self.sibling_element=str()
-        self.element=str()
+        self.use_sibling = False
+        self.sibling_element = str()
+        self.element = str()
 
     def _tag_loader(self, name: str) -> bool:
 
         try:
             attr = Tag.get(name)
-            method = self.make_private_handler(attr)
-            if name == 'doctype':
+            method = partial(self._tag_func_handler,tag_enum=attr)
+            if name == "doctype":
                 method_name = name
             else:
                 method_name = attr.value[0]  # name-mangled to be private
@@ -116,171 +138,81 @@ class Element:
         except:
             return False
 
-    def make_private_handler(self, tag_enum:str)-> (...):
         # def handler(*args, reset_sibling=False,is_sibling=False,set_as_content=False,append_to_end=True,**kwargs):
         #     kwargs.update({"reset_sibling":reset_sibling,"is_sibling":is_sibling,"set_as_content":set_as_content,"append_to_end":append_to_end})
         #     return self._tag_method_core(tag_enum, args, kwargs)
-        def handler(*args, reset_sibling=False,is_sibling=False,set_as_content=False,append_to_end=True,**kwargs):
-            if is_sibling and not reset_sibling:
-                self.use_sibling=True
-            if reset_sibling:
-                self.reset_sebling
-            self.collect_to_end=append_to_end
-
-            if args or kwargs:
-                parsed = self._element_parser(*args, **kwargs)
-                attrs_dict = parsed["attrs"]
-                content = parsed["content"]
-                self.attrs.update(attrs_dict)
-                if not is_sibling and not reset_sibling and self.sibling_element and self.collect_history and not set_as_content:
-                    if self.collect_to_end:
-                        content += self.sibling_element
-                    else:
-                        content = self.sibling_element+content
-
-                    self.reset_sebling
-                
-                if self.collect_to_end:
-                    self.content += content
-                else:
-                    self.content = content+self.content
-
-            
-            string = self.build_tag(tag_enum)
-            if self.is_list:
-                self.element = string.split(MARKER)
-            else:
-                if self.is_natural:
-                    self.element = string.replace(MARKER, "\n")
-                else:
-                    self.element = string.replace(MARKER, "")
-            if self.use_sibling and self.element and not set_as_content:
-                    self.sibling_element += self.element
-            if set_as_content:
-                    
-                if self.collect_to_end:
-                    self.content += self.element
-                else:
-                    self.content = self.element + self.content
-
-            self.attrs.clear()
-            return self
-        return handler
-
-    def _tag_method_core(self, t_enum, args, kwargs) -> Self:
-        """
-        THE MONOLITH: Consolidates parsing, pipeline logic, and tag construction.
-        Reduces 268M calls to ~80M by inlining the hot-path.
-        """
-        # 1. Pipeline Flags
-        is_sib = kwargs.pop('is_sibling', False)
-        reset_sib = kwargs.pop('reset_sibling', False)
-        set_cont = kwargs.pop('set_as_content', False)
-        app_end = kwargs.pop('append_to_end', True)
-
-        if reset_sib:
-            self.use_sibling = False
-            self.sibling_element = self.element = ""
-        
-        if is_sib and not reset_sib:
+    def _tag_func_handler(
+        self,
+        *args,
+        tag_enum,
+        reset_sibling=False,
+        is_sibling=False,
+        set_as_content=False,
+        append_to_end=True,
+        **kwargs,
+    ):
+        if is_sibling and not reset_sibling:
             self.use_sibling = True
-        
-        self.collect_to_end = app_end
+        if reset_sibling:
+            self.reset_sebling
+        self.collect_to_end = append_to_end
+        self.attrs.update(kwargs)
+        if args:
+            content = self._element_parser(*args,)
+            if (
+                not is_sibling
+                and not reset_sibling
+                and self.sibling_element
+                and self.collect_history
+                and not set_as_content
+            ):
+                if self.collect_to_end:
+                    content += self.sibling_element
+                else:
+                    content = self.sibling_element + content
 
-        # 2. Optimized Content Parsing (Inlined _element_parser logic)
-        parsed_content = ""
-        if args or kwargs:
-            # Fast-path for single string content
-            if len(args) == 1 and type(args[0]) is str:
-                parsed_content = args[0]
+                self.reset_sebling
+
+            if self.collect_to_end:
+                self.content += content
             else:
-                # DSL / Mixed Parsing
-                content_parts = []
-                idx = 0
-                while idx < len(args):
-                    arg = args[idx]
-                    if type(arg) is str and arg.upper() in Tag:
-                        # Recursive DSL shorthand handling
-                        sub_tag = Tag.get(arg).value[0]
-                        sub_c = args[idx+1] if idx+1 < len(args) and type(args[idx+1]) is str else ""
-                        sub_a = args[idx+2] if idx+2 < len(args) and type(args[idx+2]) is dict else {}
-                        # Build minimal nested string
-                        parsed_content += f"<{sub_tag}>{sub_c}</{sub_tag}>"
-                        idx += 2 # Skip consumed args
-                    elif isinstance(arg, str):
-                        parsed_content += f" {arg}"
-                    elif isinstance(arg, dict):
-                        kwargs.update(arg)
-                    else:
-                        parsed_content += str(arg)
-                    idx += 1
-            
-            # History Consolidation
-            if not is_sib and not reset_sib and self.sibling_element and self.collect_history and not set_cont:
-                if self.collect_to_end: parsed_content += self.sibling_element
-                else: parsed_content = self.sibling_element + parsed_content
-                self.use_sibling = False
-                self.sibling_element = ""
+                self.content = content + self.content
 
-            if self.collect_to_end: self.content += parsed_content
-            else: self.content = parsed_content + self.content
-
-        # 3. Health & Attributes (Inlined element_health logic)
-        t_name = t_enum.value[0]
-        
-        # Attribute Rendering
-        attr_str = ""
-        if kwargs:
-            # Inline attribute loop for speed
-            for k, v in kwargs.items():
-                if k =="Class": k = "class"
-                elif k == "Id": k = "id"
-                else: k = k.replace("_", "-")
-                attr_str += f' {k}="{v}"'
-
-        # 4. Tag Construction (Inlined build_tag logic)
-        is_void = t_enum.value[1]["void"]
-        
-        if is_void:
-            tag_str = f"<{t_name}{attr_str}>" if t_name == "doctype" else f"<{t_name}{attr_str}/>"
-        else:
-            # We use MARKER as the separation point for list output
-            tag_str = f"<{t_name}{attr_str}>{MARKER}{self.content}{MARKER}</{t_name}>"
-            self.content = "" # Reset content after consumption
-
-        # 5. Output Management
+        string = self.build_tag(tag_enum)
         if self.is_list:
-            self.element = tag_str.split(MARKER)
+            self.element = string.split(MARKER)
         else:
-            sep = "\n" if self.is_natural else ""
-            self.element = tag_str.replace(MARKER, sep)
-
-        if self.use_sibling and self.element and not set_cont:
+            if self.is_natural:
+                self.element = string.replace(MARKER, "\n")
+            else:
+                self.element = string.replace(MARKER, "")
+        if self.use_sibling and self.element and not set_as_content:
             self.sibling_element += self.element
-            
-        if set_cont:
-            if self.collect_to_end: self.content += self.element
-            else: self.content = self.element + self.content
+        if set_as_content:
 
+            if self.collect_to_end:
+                self.content += self.element
+            else:
+                self.content = self.element + self.content
+
+        self.attrs.clear()
         return self
 
-    def _element_parser(self, *args, **kwargs) -> dict[str,str]:
+    def _element_parser(self, *args,) -> str:
         """Parses mixed arguments into structured HTML components.
 
-        Accepts a flexible variety of arguments to determine the tag, 
+        Accepts a flexible variety of arguments to determine the tag,
         attributes, and inner content.
 
         Args:
-            *args: Can include strings (content or tag names), dictionaries 
+            *args: Can include strings (content or tag names), dictionaries
                 (attributes), or other Element objects.
-            **kwargs: Standard HTML attributes.
-
         Returns:
-            dict: A dictionary containing 'tag', 'attrs', and 'content'.
+            dict: A dictionary containing  'content'.
         """
         if len(args) == 1 and type(args[0]) is str:
-            return {"attrs": kwargs, "content": args[0]}
-        
+            return args[0]
+
         tag = None
         attrs_dict = {}
         content = ""
@@ -288,42 +220,42 @@ class Element:
         is_sub_content = False
         sub_content = ""
 
-        
         for arg in args:
             if is_sub_content:
-                sub_content=str(arg)
-                is_sub_content=False
+                sub_content = str(arg)
+                is_sub_content = False
                 continue
-            if isinstance(arg, str) and arg in Tag.keys_set:
+            if type(arg) is str and arg in Tag.keys_set:
                 tag = Tag.get(arg)
-                is_sub_content=True
-            elif isinstance(arg, str):
-                content += f' {arg}'
-            elif isinstance(arg, dict):
+                is_sub_content = True
+            elif type(arg) is str:
+                content += f" {arg}"
+            elif type(arg) is dict:
                 attrs_dict.update(arg)
+            elif hasattr(arg,'render'):
+                content += str(arg.render())
             else:
                 content += str(arg)
         if tag:
-            netsed_el =self.custom_element(tag.value[0], sub_content, **attrs_dict).element
+
+            netsed_el = self.custom_element(
+                tag.value[0], sub_content, **attrs_dict
+            ).element
+
             if self.collect_to_end:
-               content += netsed_el
+                content += netsed_el
             else:
                 content = netsed_el + content
-            attrs_dict.clear()
-            
-        attrs_dict.update(kwargs)
-        
-        # print(content)
-        return {
-            "attrs": attrs_dict,
-            "content": content,
-        }
+        attrs_dict.clear()
 
-    def build_tag(self, tag:Tag, is_custom:bool=False) -> str:
+        # print(content)
+        return content
+
+    def build_tag(self, tag: Tag, is_custom: bool = False) -> str:
         """Constructs the physical HTML string for a given tag.
 
-        Handles the distinction between void elements (like <img/>) and 
-        standard elements (like <div>content</div>), and manages 
+        Handles the distinction between void elements (like <img/>) and
+        standard elements (like <div>content</div>), and manages
         internal MARKER placement.
 
         Args:
@@ -335,19 +267,21 @@ class Element:
         """
         tag_value = tag.value
         if not is_custom:
+
             flag = self.element_health(opening_tag=f"<{tag_value[0]}>")
+
             if isinstance(flag, str):
                 return flag
         if self.collect_history and not self.use_sibling:
             if self.collect_to_end:
-                self.content+=self.stringify_element().element
+                self.content += self.stringify_element().element
             else:
-                self.content= ''.join([self.stringify_element().element,self.content])
+                self.content = "".join([self.stringify_element().element, self.content])
         if tag_value[1]["void"]:
             if self.tag == "doctype":
                 return f"<{tag_value[0]}{self.render_attrs()}>"
             else:
-                
+
                 return f"<{tag_value[0]}{self.render_attrs()}/>"
         else:
             return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{self.render_content()}{MARKER}</{tag_value[0]}>"
@@ -356,50 +290,54 @@ class Element:
         """Render the attributes of the element as a string."""
         if not self.attrs:
             return str()
+
         attr_string = f" {render_attributes(self.tag, self.attrs)}"
         return attr_string
 
-    def conserve_probo_flags(self,) -> Self:
+    def conserve_probo_flags(
+        self,
+    ) -> Self:
         if not self.probo_custom_attrs:
-            self.probo_custom_attrs=self.attrs.get('probo_custom_attrs',False)
+            self.probo_custom_attrs = self.attrs.get("probo_custom_attrs", False)
         if not self.probo_pretty_error:
-            self.probo_pretty_error=self.attrs.get('probo_pretty_error',False)
-        self.attrs = {k:v for k,v in self.attrs.items() if k not in ['probo_pretty_error','probo_custom_attrs']}
+            self.probo_pretty_error = self.attrs.get("probo_pretty_error", False)
+        self.attrs = {
+            k: v
+            for k, v in self.attrs.items()
+            if k not in ["probo_pretty_error", "probo_custom_attrs"]
+        }
         return self
-    
-    def element_health(self, opening_tag: str) -> str|Self:
+
+    def element_health(self, opening_tag: str) -> str | Self:
         """Validates attributes against HTML standards.
 
         Args:
-            opening_tag: The string representation of the opening tag 
+            opening_tag: The string representation of the opening tag
                 for error reporting.
 
         Returns:
-            Either the self instance if valid, or a 'pretty error' HTML string 
+            Either the self instance if valid, or a 'pretty error' HTML string
             if invalid and `probo_pretty_error` is enabled.
 
         Raises:
-            ValueError: If attributes are invalid and `probo_pretty_error` 
+            ValueError: If attributes are invalid and `probo_pretty_error`
                 is False.
         """
-        if 'probo_pretty_error' in self.attrs or 'probo_custom_attrs' in self.attrs:
+        if "probo_pretty_error" in self.attrs or "probo_custom_attrs" in self.attrs:
             self.conserve_probo_flags()
         if self.probo_custom_attrs:
             return self
-        self.validator.hydrate_validator(
-            opening_tag, self.attrs
-        )
-        
-        if self.validator.is_valid or not self.attrs:
+        self.validator.hydrate_validator(opening_tag, **self.attrs)
+        if self.validator.validate() or not self.attrs:
             self.attrs = self.validator.valid_attrs
             return self
         else:
             error_attrs_string = " ".join(self.validator.error_attrs)
             if self.probo_pretty_error:
-                message = f'''<div style="color:red; border:1px solid #f00; padding:8px; margin:8px 0; background:#fee; font-family:monospace;">
+                message = f"""<div style="color:red; border:1px solid #f00; padding:8px; margin:8px 0; background:#fee; font-family:monospace;">
                     <strong>Render Error: invalid_attr for </strong> &quot;{opening_tag[1:-1]}&quot; element does <strong>not accept</strong> these attributes: &quot;{error_attrs_string}&quot;<br>
                     <strong>Element string:</strong> &quot;{opening_tag}&quot;
-                </div>'''
+                </div>"""
                 self.validator.error_attrs.clear()
                 return message
             else:
@@ -423,7 +361,7 @@ class Element:
         self.content = ""
         return content_string
 
-    def set_attrs(self, **attributes:dict[str,Any]) -> Self:
+    def set_attrs(self, **attributes: dict[str, Any]) -> Self:
         """Set attributes for the element."""
         self.attrs = attributes
         return self
@@ -436,39 +374,50 @@ class Element:
         """
         return self.element
 
-    def set_content(self, content: str, extend:bool=False) -> Self:
+    def set_content(self, content: str, extend: bool = False) -> Self:
         """
         Set the content for the element.
         """
         if self.collect_history:
-            self.content+=self.stringify_element().element
+            self.content += self.stringify_element().element
         if extend:
             self.content += content
         else:
             self.content = content
         return self
 
-    def raw(self, *string:tuple[str], inner:bool=False, is_comment:bool=False) -> Self:
+    def raw(
+        self, *string: tuple[str], inner: bool = False, is_comment: bool = False
+    ) -> Self:
         STRING = "".join(["<!--", *string, "-->"])
 
         if inner:
             self.content += "<!--" + STRING + "-->" if is_comment else STRING
 
         if self.is_list:
-            self.element.extend(
-                ["<!--", *string, "-->"]
-            ) if is_comment else self.element.extend(list(string))
+            (
+                self.element.extend(["<!--", *string, "-->"])
+                if is_comment
+                else self.element.extend(list(string))
+            )
         else:
             self.element += "<!--" + STRING + "-->" if is_comment else STRING
         return self
 
-    def set_data(self, *string:tuple[str]) -> Self:
+    def set_data(self, *string: tuple[str]) -> Self:
         self.content += " ".join(
             [f'<$probo-var name="{str(string_arg)}"/>' for string_arg in string]
         )
         return self
 
-    def custom_element(self, cstm_tag:str, content:str="", is_void_element:bool=False, **attrs:dict[str,Any]) -> Self:
+    def custom_element(
+        self,
+        cstm_tag: str,
+        content: str = "",
+        is_void_element: bool = False,
+        **attrs: dict[str, Any],
+    ) -> Self:
+        Tag.thaw()
         if cstm_tag in Tag.keys_set:
             tag = Tag.values_map[cstm_tag]
         else:
@@ -503,6 +452,7 @@ class Element:
         self,
     ):
         return str(self.stringify_element().element)
+
 
 class Head:
     """
@@ -544,9 +494,9 @@ class Head:
         """Adds an element to the head registry with intelligent overwriting.
 
         Args:
-            element: The element to add. Can be a ProboUI `Element` 
+            element: The element to add. Can be a ProboUI `Element`
                 instance or a raw string.
-            key: Optional unique identifier. If None, a key is auto-generated 
+            key: Optional unique identifier. If None, a key is auto-generated
                 based on the tag type and attributes.
 
         Returns:
@@ -624,13 +574,13 @@ class Head:
     def register_meta(self, **meta_attrs):
         """Creates and registers a <meta> tag with the specified attributes.
 
-        This method leverages the `Element` factory to build the tag and then 
-        passes it to the `add` method, where `_generate_key` ensures that 
-        unique meta tags (like 'description' or 'viewport') overwrite 
+        This method leverages the `Element` factory to build the tag and then
+        passes it to the `add` method, where `_generate_key` ensures that
+        unique meta tags (like 'description' or 'viewport') overwrite
         any existing versions.
 
         Args:
-            **meta_attrs: Attributes for the meta tag (e.g., name="description", 
+            **meta_attrs: Attributes for the meta tag (e.g., name="description",
                 content="site info").
 
         Returns:
@@ -643,12 +593,12 @@ class Head:
     def register_link(self, **link_attrs):
         """Creates and registers a <link> tag.
 
-        Commonly used for stylesheets, favicons, or canonical URLs. The 
-        registry uses the 'rel' attribute to determine if a link should 
+        Commonly used for stylesheets, favicons, or canonical URLs. The
+        registry uses the 'rel' attribute to determine if a link should
         be unique or appended.
 
         Args:
-            **link_attrs: Attributes for the link tag (e.g., rel="stylesheet", 
+            **link_attrs: Attributes for the link tag (e.g., rel="stylesheet",
                 href="/style.css").
 
         Returns:
@@ -661,12 +611,12 @@ class Head:
     def register_script(self, content="", **attrs):
         """Creates and registers a script tag.
 
-        Supports both external scripts (via 'src' attribute) and inline 
+        Supports both external scripts (via 'src' attribute) and inline
         JavaScript content.
 
         Args:
             content: The inline JavaScript code, if any. Defaults to empty.
-            **attrs: Attributes for the script tag (e.g., src="/main.js", 
+            **attrs: Attributes for the script tag (e.g., src="/main.js",
                 defer=True).
 
         Returns:
@@ -692,7 +642,7 @@ class Head:
         """Renders the final <head> block as a single HTML string.
 
         Args:
-            *extra_head_content: Optional additional elements to add 
+            *extra_head_content: Optional additional elements to add
                 immediately before rendering.
 
         Returns:
@@ -707,6 +657,7 @@ class Head:
             .element
         )
         return head_tag
+
 
 class Template:
     """
@@ -763,7 +714,7 @@ class Template:
     def swap_component(self, **kwargs):
         """Updates or replaces components in the body slots.
 
-        This is the primary method for layout inheritance, allowing you to 
+        This is the primary method for layout inheritance, allowing you to
         replace a 'main' slot while keeping the 'header' and 'footer' intact.
 
         Args:
@@ -809,8 +760,8 @@ class Template:
     def render(self) -> str:
         """Assembles the final HTML document.
 
-        Performs a render pass over all body components. If a component 
-        returns a tuple containing CSS, that CSS is automatically hoisted 
+        Performs a render pass over all body components. If a component
+        returns a tuple containing CSS, that CSS is automatically hoisted
         into the `<head>` via `register_style`.
 
         Returns:
@@ -861,7 +812,7 @@ class Template:
     def preview(self):
         """Renders the template and opens it in the system's default browser.
 
-        Creates a temporary file on disk and utilizes the `webbrowser` 
+        Creates a temporary file on disk and utilizes the `webbrowser`
         module to display the current state of the template.
         """
         html_content = self.render()

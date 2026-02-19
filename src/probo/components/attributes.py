@@ -1930,12 +1930,10 @@ class ElementAttributeValidator:
         self.valid_attrs = {}
         self.error_attrs = []
 
-        # Run validation on init
-        self.is_valid = self.validate()
-
-    def hydrate_validator(self,opening_tag, attrs):
+    def hydrate_validator(self,opening_tag, **attrs):
         self.element_tag=opening_tag
         self.raw_attrs=attrs
+        self.valid_attrs = {}
         return self
     def _normalized_key(self,raw_key:str):
         """

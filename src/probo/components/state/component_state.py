@@ -272,7 +272,7 @@ class ElementState:
             # Check if static attrs passed in __init__ are valid
             self.valid_element = ElementAttributeValidator(
                 f"<{self.element}>", **self.attrs
-            ).is_valid
+            ).validate()
         else:
             self.valid_element = True
 

@@ -44,7 +44,6 @@ def test_declarative_form_style_1_variables():
         method="POST",
         csrf_token="manual-token-87566462464",
     )
-    print(username_field.render())
     # 3. Render
     html = form.render()
     # 4. Verify

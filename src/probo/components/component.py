@@ -220,10 +220,9 @@ class Component:
         final_template = str(self.comp_state.resolved_template(template))
         if self.is_root_element:
             final_template = Element(
+                tag=self.root_element_tag,
                 content=final_template, **self.root_element_attrs
-            ).build_tag(
-                self.root_element_tag,
-            )
+            ).element
         if self.active_css_rules:
             valid_css = element_style_state(
                 final_template,
