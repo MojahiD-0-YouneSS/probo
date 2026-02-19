@@ -3,11 +3,22 @@ from probo.styles.frameworks.bs5.layout import Button
 from probo.styles.frameworks.bs5.bs5 import BS5Element
 
 class BS5Button(BS5Component):
-    
+    """A standard Bootstrap 5 Button component.
+
+    Handles variant mapping (primary, danger, etc.) and sizing logic. It 
+    automatically ensures the 'btn' base class is present and manages the 
+    'type="button"' attribute by default.
+
+    Attributes:
+        variant (str): The visual style (e.g., 'outline-primary', 'dark').
+        size (str): Button scale ('sm', 'lg', or 'default').
+        content (str): Inner text or HTML for the button.
+    """
     def __init__(self, content, variant="primary", size='default',render_constaints:dict=None, **attrs):
         self.variant = variant
         self.size = size
-        self.attrs = attrs
+        self.attrs = {'Type': 'button', }
+        self.attrs.update(attrs)
         self.content=content
         self.render_constaints=render_constaints or {}
         # self.template = self._render_comp()
@@ -29,26 +40,20 @@ class BS5Button(BS5Component):
         self.template.add(Button.SM.value)
         return self
     
-    
-    
     def _render_comp(self):
-        attrs = {'Type': 'button', }
-        attrs.update(self.attrs)
         button = BS5Element(
             self.tag,
             self.content,
-            classes=self.btn_classes,**attrs
+            classes=self.btn_classes,**self.attrs
         )
         return button
 
 class BS5CloseButton(BS5Component):
-    '''
-        <button type="button" class="btn-close" aria-label="Close"></button>
-        <button type="button" class="btn-close" disabled aria-label="Close"></button>
-    
-        <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
-        <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button>
-    '''
+    """A specialized generic close button for dismissible content.
+
+    Used primarily in Modals, Alerts, and Offcanvas components. Supports 
+    the 'white' variant for dark backgrounds.
+    """
     def __init__(self, variant="base", render_constaints=None, **attrs):
         self.variant = variant
         self.attrs = attrs
@@ -69,7 +74,14 @@ class BS5CloseButton(BS5Component):
         return button
 
 class BS5ButtonGroup(BS5Component):
-    
+    """A container for grouping multiple buttons into a single cohesive unit.
+
+    Supports horizontal and vertical orientations, as well as unified 
+    sizing for all buttons within the group.
+
+    Attributes:
+        btns (list): The collection of BS5Button instances in the group.
+    """
     def __init__(self,*btns,variant='horizontal',size='default',render_constaints=None,**attrs):
         self.btn_grp_cntnt = {}
         self.attrs = attrs
@@ -102,15 +114,20 @@ class BS5ButtonGroup(BS5Component):
         return self
 
     def add_btn(self,content, variant="primary",size='default', **attrs):
-        
+        """Appends a standard button to the group.
+
+        Returns:
+            self: Enables fluent method chaining.
+        """
         btn = BS5Button(content, variant=variant, size=size, **attrs)
         self.btns.append(btn.render())
         return self
     def add_check_box_btn(self,content, variant="primary",size='default',override_input_attr:dict[str,str]=dict(), **attrs):
-        '''
-        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-        <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
-        '''
+        """Adds a toggleable checkbox button, perfect for filtering recipe categories.
+
+        Args:
+            override_input_attr: Custom attributes for the hidden <input> element.
+        """
         if not override_input_attr:
             bs5_input_attrs = {"type": "checkbox", "id": attrs.get('for',None), "autocomplete": "off"}
         else:
@@ -124,22 +141,23 @@ class BS5ButtonGroup(BS5Component):
             **bs5_input_attrs
         )
         
-        btn = BS5Button(content, variant=variant, size=size, **attrs)
-        btn.swap_element('label')
+        btn = BS5Element('label', content, **attrs)
         self.btns.append(f'{bs5_input.render()}{btn.render()}')
         return self
     
     def _render_comp(self):
-        attrs = {'Type':'button',}
-        attrs.update(self.attrs)
         btn_grp = BS5Element(
             self.tag,
             ''.join(self.btns),
-            classes=self.btn_group_classes,**attrs
+            classes=self.btn_group_classes,**self.attrs
         )
         return btn_grp
     
 class BS5ButtonToolbar(BS5Component):
+    """A high-level container for combining multiple ButtonGroups.
+
+    Useful for complex interfaces like pagination or rich text editor controls.
+    """
     def __init__(self,*btn_grps,render_constaints=None, **attrs):
         self.btn_grps = [btn_g.render() if not isinstance(btn_g,str) else str(btn_g) for btn_g in btn_grps]
         self.attrs = attrs
@@ -150,6 +168,7 @@ class BS5ButtonToolbar(BS5Component):
         super().__init__(name='BS5-button-toolbar',  state_props=self.render_constaints)
 
     def add_btn_grp(self,btn_grp:BS5ButtonGroup):
+        """Injects an existing ButtonGroup into the toolbar."""
         self.btn_grps.append(btn_grp.render())
         return self
     def before_render(self,*args,**kwargs):

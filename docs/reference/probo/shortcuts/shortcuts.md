@@ -1,0 +1,3 @@
+# shortcuts
+
+::: probo.shortcuts.shortcuts

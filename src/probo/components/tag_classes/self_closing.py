@@ -1,7 +1,7 @@
 from probo.components.elements import Element
 from probo.components.base import BaseHTMLElement
 from probo.components.node import ElementNodeMixin
-
+from probo.components.tag_classes.block_tags import EL
 # --- Specific HTML Self-Closing Element Classes ---
 # These classes use the `Element` helper class and are designed for self-closing tags.
 
@@ -13,7 +13,7 @@ class DOCTYPE(BaseHTMLElement,ElementNodeMixin,):
         super().__init__(content, **kwargs)  # Self-closing tags don't have content
 
     def render(self):
-        return Element().set_attrs(**self.attributes).doctype().element
+        return EL.set_attrs(**self.attributes).doctype().element
 
 
 class AREA(BaseHTMLElement,ElementNodeMixin,):
@@ -21,9 +21,12 @@ class AREA(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).area().element
+        return EL.set_attrs(**self.attributes).area().element
 
 
 class BASE(BaseHTMLElement,ElementNodeMixin,):
@@ -31,9 +34,12 @@ class BASE(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).base().element
+        return EL.set_attrs(**self.attributes).base().element
 
 
 class BR(BaseHTMLElement,ElementNodeMixin,):
@@ -41,9 +47,12 @@ class BR(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).br().element
+        return EL.set_attrs(**self.attributes).br().element
 
 
 class COL(BaseHTMLElement,ElementNodeMixin,):
@@ -51,9 +60,12 @@ class COL(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).col().element
+        return EL.set_attrs(**self.attributes).col().element
 
 
 class EMBED(BaseHTMLElement,ElementNodeMixin,):
@@ -61,9 +73,12 @@ class EMBED(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).embed().element
+        return EL.set_attrs(**self.attributes).embed().element
 
 
 class HR(BaseHTMLElement,ElementNodeMixin,):
@@ -71,9 +86,12 @@ class HR(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).hr().element
+        return EL.set_attrs(**self.attributes).hr().element
 
 
 class IMG(BaseHTMLElement,ElementNodeMixin,):
@@ -81,9 +99,12 @@ class IMG(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).img().element
+        return EL.set_attrs(**self.attributes).img().element
 
 
 class INPUT(BaseHTMLElement,ElementNodeMixin,):
@@ -91,9 +112,12 @@ class INPUT(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).input().element
+        return EL.set_attrs(**self.attributes).input().element
 
 
 class LINK(BaseHTMLElement,ElementNodeMixin,):
@@ -101,9 +125,12 @@ class LINK(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).link().element
+        return EL.set_attrs(**self.attributes).link().element
 
 
 class META(BaseHTMLElement,ElementNodeMixin,):
@@ -111,9 +138,12 @@ class META(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).meta().element
+        return EL.set_attrs(**self.attributes).meta().element
 
 
 class PARAM(BaseHTMLElement,ElementNodeMixin,):
@@ -121,9 +151,12 @@ class PARAM(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).param().element
+        return EL.set_attrs(**self.attributes).param().element
 
 
 class SOURCE(BaseHTMLElement,ElementNodeMixin,):
@@ -131,9 +164,12 @@ class SOURCE(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).source().element
+        return EL.set_attrs(**self.attributes).source().element
 
 
 class TRACK(BaseHTMLElement,ElementNodeMixin,):
@@ -141,9 +177,12 @@ class TRACK(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).track().element
+        return EL.set_attrs(**self.attributes).track().element
 
 
 class WBR(BaseHTMLElement,ElementNodeMixin,):
@@ -151,86 +190,9 @@ class WBR(BaseHTMLElement,ElementNodeMixin,):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)  # Self-closing tags don't have content
+        ElementNodeMixin.__init__(self)
+        self._set_node_children([],True)
+
 
     def render(self):
-        return Element().set_attrs(**self.attributes).wbr().element
-
-
-class PATH(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an PATH HTML <path> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).path().element
-
-
-class CIRCLE(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an CIRCLE HTML <circle> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).circle().element
-
-
-class RECT(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an RECT HTML <rect> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).rect().element
-
-
-class LINE(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an LINE HTML <line> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).line().element
-
-
-class POLYLINE(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an POLYLINE HTML <polyline> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).polyline().element
-
-
-class POLYGON(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an POLYGON HTML <polygon> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).polygon().element
-
-
-class USE(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an USE HTML <use> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).use().element
-
-
-class STOP(BaseHTMLElement,ElementNodeMixin,):
-    """Represents an STOP HTML <stop> line break element (self-closing)."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)  # Self-closing tags don't have content
-
-    def render(self):
-        return Element().set_attrs(**self.attributes).stop().element
+        return EL.set_attrs(**self.attributes).wbr().element

@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "probo-ui"
-version = "1.2.0"
+version = "1.3.0"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
-description = "A declarative, type-safe ,Python-Native template Rendering Framework and Meta-framework for Django."
+description = "Python Rendered Objects for Backend-Oriented UI is A declarative, type-safe ,Python-Native template Rendering Framework and Meta-framework for Django."
 readme = "docs/simple_doc.md"
 requires-python = ">=3.9"
 license = { file="LICENSE" }
@@ -30,8 +30,10 @@ dependencies = [
     "pytest-django>=4.11.1",
     "beautifulsoup4>=4.14.2",
     "cssutils>=2.11.1",
+    "mkdocstrings[python]>=0.18",
+    "mkdocs-include-markdown-plugin>=7.2.0",
+    "mkdocs-material>=9.7.1",
 ]
-
 [tool.ruff]
 
 # Enable specific rule sets:
@@ -56,7 +58,7 @@ exclude = [
 # - Method names must be snake_case
 
 [project.urls]
-"Homepage" = "https://github.com/MojahiD-0-YouneSS/probo"
+
 "Bug Tracker" = "https://github.com/MojahiD-0-YouneSS/probo/issues"
 "Documentation" = "https://MojahiD-0-YouneSS.github.io/probo/"
 "Funding" = "https://ko-fi.com/youness_mojahid"

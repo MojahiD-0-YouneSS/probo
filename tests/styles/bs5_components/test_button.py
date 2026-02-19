@@ -145,7 +145,7 @@ def test_bs5_btn_group_render_sizing():
 def test_bs5_btn_group_render_checkbox_button():
     """4. Render checkbox button toggle inside group."""
     grp = BS5ButtonGroup()
-    grp.add_check_box_btn(content="Check me", override_input_attr={'id':'btn-check-1','autocomplete':"off"},**{'for':"btn-check-1"})
+    grp.add_check_box_btn(content="Check me", override_input_attr={'id':'btn-check-1','autocomplete':"off"},**{'for':"btn-check-1",'class':"btn btn-primary"})
     
     html = grp.render()
     # Should render <input type="checkbox" class="btn-check" ...> <label class="btn ...">...</label>

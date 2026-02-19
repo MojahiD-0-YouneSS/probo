@@ -49,7 +49,7 @@ def test_bs5_navbar_text():
 def test_bs5_navbar_custom_theme():
     """4. Render with theme classes (dark mode, background)."""
     # Helper attributes often passed to init
-    nav = BS5NavBar(class_="navbar-dark bg-primary")
+    nav = BS5NavBar(Class="navbar-dark bg-primary")
 
     html = nav.render()
 

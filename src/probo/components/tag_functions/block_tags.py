@@ -61,7 +61,7 @@ def body(*content, **attrs):
 
 def button(*content, **attrs):
     """Represents an HTML <button> element."""
-    return block_tags.BUTTON(*content, **attrs).render()
+    return block_tags.EL.button(*content, **attrs).render()
 
 
 def canvas(*content, **attrs):
@@ -126,7 +126,7 @@ def dialog(*content, **attrs):
 
 def div(*content, **attrs):
     """Represents an HTML <div> element."""
-    return block_tags.DIV(*content, **attrs).render()
+    return block_tags.EL.div(*content, **attrs).render()
 
 
 def dl(*content, **attrs):
@@ -321,7 +321,7 @@ def output(*content, **attrs):
 
 def p(*content, **attrs):
     """Represents an HTML <p> element."""
-    return block_tags.P(*content, **attrs).render()
+    return block_tags.EL.p(*content, **attrs).render()
 
 
 def portal(*content, **attrs):
@@ -406,7 +406,7 @@ def small(*content, **attrs):
 
 def span(*content, **attrs):
     """Represents an HTML <span> element."""
-    return block_tags.SPAN(*content, **attrs).render()
+    return block_tags.EL.span(*content, **attrs).render() 
 
 
 def strong(*content, **attrs):
@@ -432,12 +432,6 @@ def summary(*content, **attrs):
 def sup(*content, **attrs):
     """Represents an HTML <sup> element."""
     return block_tags.SUP(*content, **attrs).render()
-
-
-def svg(*content, **attrs):
-    """Represents an HTML <svg> element."""
-    return block_tags.SVG(*content, **attrs).render()
-
 
 def table(*content, **attrs):
     """Represents an HTML <table> element."""
@@ -512,23 +506,3 @@ def var(*content, **attrs):
 def video(*content, **attrs):
     """Represents an HTML <video> element."""
     return block_tags.VIDEO(*content, **attrs).render()
-
-
-def g(*content, **attrs):
-    """Represents an HTML <g> element."""
-    return block_tags.G(*content, **attrs).render()
-
-
-def defs(*content, **attrs):
-    """Represents an HTML <defs> element."""
-    return block_tags.DEFS(*content, **attrs).render()
-
-
-def text(*content, **attrs):
-    """Represents an HTML <text> element."""
-    return block_tags.TEXT(*content, **attrs).render()
-
-
-def tspan(*content, **attrs):
-    """Represents an HTML <tspan> element."""
-    return block_tags.TSPAN(*content, **attrs).render()

@@ -3,15 +3,26 @@ from probo.styles.frameworks.bs5.bs5 import BS5Element
 from probo.styles.frameworks.bs5.comp_enum import Breadcrumb
 
 class BS5Breadcrumb(BS5Component):
-    '''
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active "aria-current="page"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item " >Data</li>
-        </ol>
-    </nav>
-    '''
+    """A manager for Bootstrap 5 Breadcrumb navigation components.
+
+    This component generates a responsive navigation trail. It handles 
+    the creation of list items, anchor tags, and the 'active' state 
+    assignment for the final item in the sequence.
+
+    Attributes:
+        urls (list): A list of URL strings or labels to be converted into links.
+        url_dict (dict): A mapping of labels to their destination URLs 
+            (e.g., {"Home": "/", "Shop": "/shop"}).
+    Args:
+        *urls: A variable list of labels. If no url_dict is provided, 
+            these are rendered as plain text items.
+        url_dict (dict, optional): A dictionary where keys are labels 
+            and values are href paths.
+        render_constraints (Any, optional): Logical constraints for 
+            conditional rendering.
+        **attrs: Additional HTML attributes for the <nav> container.
+    
+    """
     def __init__(self, *urls,url_dict=None,render_constraints=None,**attrs):
         self.url_dict:dict=url_dict or {}
         self.attrs = attrs

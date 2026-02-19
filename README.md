@@ -1,21 +1,17 @@
-<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
-
-<p align="center">
-<img src="./assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
+<a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./docs/assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
+<p align="center"> 
+<img src="./docs/assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
 </p>
-
-[![Discord](https://img.shields.io/discord/jnZRbVasgd?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](YOUR_INVITE_LINK)
 
 # 🐘 Probo UI
 
-A Python-Native Template Rendering Framework and Meta-framework for Django.
-Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
+Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native Template Rendering Framework and Meta-framework for Django. Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
 
-## 📣 Version 1.1.1 is Live!
+## 📣 Version 1.3.0 is Live!
 
 Probo UI has officially reached stable v1 status. It is a backend-first framework that transforms Python objects into performant HTML/CSS, creating a seamless bridge between Django's backend logic and the frontend interface.
 
-## 📚 Read the Full Sample Documentation (v1.0)
+## 📚 Read the Full Sample Documentation
 
 ### Click the link above for deep dives into : <a href="./docs/simple_doc.md">view sample documentation</a>
 

@@ -379,7 +379,8 @@ def test_flow_form_manual_declarative():
     )
 
     # 3. Execute
-    html = probo_form(config)
+    pf = probo_form(config)
+    html = pf.render()
     # 4. Verify
     assert '<form action="/login" method="post"' in html
     # Verify CSRF injection
@@ -397,7 +398,8 @@ def test_flow_form_empty_safety():
     """
     config = FormConfig(action="/search", method="get")
 
-    html = probo_form(config)
+    pf = probo_form(config)
+    html = pf.render()
     assert '<form action="/search"' in html
     assert "</form>" in html
     # Even empty forms usually get a CSRF input placeholder in Manual mode

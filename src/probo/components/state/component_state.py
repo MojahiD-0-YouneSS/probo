@@ -203,7 +203,7 @@ class ElementState:
         placeholder (str): The unique <$ ... $> string used in templates.
         state_id (str): Unique UUID for this element state.
 
-    Example:print
+    Example:
         >>> # Simple text binding
         >>> es = ElementState('span', d_state='username')
         >>>
@@ -272,7 +272,7 @@ class ElementState:
             # Check if static attrs passed in __init__ are valid
             self.valid_element = ElementAttributeValidator(
                 f"<{self.element}>", **self.attrs
-            ).is_valid
+            ).validate()
         else:
             self.valid_element = True
 

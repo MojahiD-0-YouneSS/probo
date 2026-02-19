@@ -7,19 +7,18 @@ from collections.abc import Iterable
 
 class TemplateProcessor:
     """
-    A class to process only 'mui' style template blocks but with support
+    A class to process only 'probo' style template blocks but with support
     for generating Django-style template tags. Static methods are included.
     """
 
-    SUPPORTED_STYLES = ["django", "mui"]
+    SUPPORTED_STYLES = ["django", "probo"]
 
     def __init__(self, data_context: dict = None):
         """
         Initializes the processor with a global data context.
 
         Args:
-            data_context (dict, optional): A dictionary of global variables available
-                                           to all templates rendered by this instance.
+            data_context (dict, optional): A dictionary of global variables available to all templates rendered by this instance.
         """
         self._global_data_context = data_context if data_context is not None else {}
 
@@ -201,7 +200,7 @@ class TemplateProcessor:
 
     @staticmethod
     def if_true(
-        expression, if_block, style="mui", else_statement=None, **elif_statements
+        expression, if_block, style="probo", else_statement=None, **elif_statements
     ):
         """
         Generates a conditional block string in the specified style (MUI or Django).
@@ -209,14 +208,14 @@ class TemplateProcessor:
         Args:
             expression (str): The condition to evaluate (e.g., "user.is_admin").
             if_block (str): Content to render if true.
-            style (str): The syntax style to generate ("mui" or "django").
+            style (str): The syntax style to generate ("probo" or "django").
             else_statement (str, optional): Content for the else block.
             **elif_statements: Key-value pairs where key is condition and value is content for elif blocks.
 
         Returns:
             str: The formatted conditional block string.
         """
-        if style == "mui":
+        if style == "probo":
             return (
                 f"<$if {expression}>{if_block}"
                 + "".join(
@@ -244,21 +243,21 @@ class TemplateProcessor:
             return ""
 
     @staticmethod
-    def for_loop(expression, for_block, style="mui", empty_content=None):
+    def for_loop(expression, for_block, style="probo", empty_content=None):
         """
         Generates a for-loop block string in the specified style.
 
         Args:
             expression (str): The loop expression (e.g., "item in items").
             for_block (str): The content to repeat inside the loop.
-            style (str): The syntax style to generate ("mui" or "django").
+            style (str): The syntax style to generate ("probo" or "django").
             empty_content (str, optional): Content to display if the iterable is empty (Django style only).
 
         Returns:
             str: The formatted loop block string.
         """
         empty = f"{{% empty %}} {empty_content}" if empty_content else ""
-        if style == "mui":
+        if style == "probo":
             return f"<$for {expression}>{for_block}</$for>"
         elif style == "django":
             return f"{{% for {expression} %}}{for_block}{empty}{{% endfor %}}"
@@ -345,6 +344,8 @@ class TemplateComponentMap:
         """
         comp = self.url_name_comp.get(url_name, None)
         if comp:
+            if isinstance(comp,str):
+                return comp
             comp.props["request-props"] = self.r_props.get("request-props", {})
             comp.props["state-prop"] = self.r_props.get("state-prop", {})
             return comp.render()
