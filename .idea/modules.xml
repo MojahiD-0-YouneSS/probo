@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../PythonProject/.idea/PythonProject.iml" filepath="$PROJECT_DIR$/../PythonProject/.idea/PythonProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../django-abstract/.idea/django-abstract.iml" filepath="$PROJECT_DIR$/../django-abstract/.idea/django-abstract.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/probo.iml" filepath="$PROJECT_DIR$/.idea/probo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../probo_website/.idea/probo_website.iml" filepath="$PROJECT_DIR$/../probo_website/.idea/probo_website.iml" />
     </modules>
