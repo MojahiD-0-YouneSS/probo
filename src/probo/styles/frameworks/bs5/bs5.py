@@ -27,6 +27,11 @@ def _unpack_props():
 BS5_PROPS_AS_LIST = _unpack_props()
 
 class PropsProxy:
+    __slots__ = (
+        'parent',
+        'enums',
+        'kls_value',
+    )
     def __init__(self, parent, attr):
         self.parent = parent
         self.enums = BS5_PROPS_AS_LIST
@@ -51,6 +56,10 @@ class BS5ElementStyle:
         tag (str): The HTML tag associated with this style (e.g., 'div', 'button').
         classes (list[str]): A collection of resolved Bootstrap class strings.
     """
+    __slots__ = (
+        'tag',
+        'classes'
+    )
     def __init__(
         self,
         tag,
@@ -132,6 +141,12 @@ class BS5Element:
         classes (BS5ElementStyle): The style manager for Bootstrap utilities.
         content (list): A collection of child elements, strings, or components.
     """
+    __slots__ = (
+        'tag',
+        'content',
+        'classes',
+        'attrs',
+    )
     def __init__(
         self, tag: str, content: str = "", classes: Optional[list] = None, **attrs
     ):
@@ -231,7 +246,10 @@ class BS5:
         class_map (dict): A lookup table for mapping abstract keys to 
             specific Bootstrap 5 utility classes.
     """
-
+    __slots__ = (
+        'elements',
+        'registry',
+    )
     def __init__(self, **styles: BS5ElementStyle):
         self.elements = {}
         self.registry = styles

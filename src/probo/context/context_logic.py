@@ -12,7 +12,7 @@ class TemplateProcessor:
     """
 
     SUPPORTED_STYLES = ["django", "probo"]
-
+    __slots__ = ('_global_data_context')
     def __init__(self, data_context: dict = None):
         """
         Initializes the processor with a global data context.
@@ -324,7 +324,7 @@ def loop(data, renderer):
 
 class TemplateComponentMap:
     """Template Components Map is the cordinator that serves the right component to spesific view"""
-
+    __slots__ = ('url_name_comp','r_props')
     def __init__(self, r_props: dict[str, Any] = None, **url_name_comp):
         self.url_name_comp = url_name_comp
         self.r_props = r_props or {}

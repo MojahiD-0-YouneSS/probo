@@ -9,7 +9,7 @@ class DjangoComponentTools(TemplateProcessor):
     Helper methods to generate Django Template Language (DTL) syntax blocks.
     Inherited by DjangoComponent to provide a fluent API for template logic.
     """
-
+    __slots__ = ()
     def __init__(self):
         super().__init__()
 
@@ -139,7 +139,6 @@ class DjangoComponentTools(TemplateProcessor):
         """
         return f"{{% load {library} %}}"
 
-
 class DjangoComponent:
     """
     A declarative builder for Django Templates.
@@ -148,6 +147,13 @@ class DjangoComponent:
     This class is framework-agnostic at import time. Actual rendering
     requires Django to be installed and configured in the execution environment.
     """
+    __slots__ = (
+        'raw_template',
+        'context',
+        'extends_from',
+        'blocks',
+        'variables',
+    )
 
     def __init__(
         self,

@@ -120,7 +120,7 @@ from probo.components.tag_functions.self_closing import (
 )
 from probo.components.tag_functions.svg_tags import (
     g,
-    dfs,
+    defs,
     text,
     tspan,
     svg,
@@ -295,7 +295,7 @@ __all__ = [
     "wbr",
     # svg elements
     'g',
-    'dfs',
+    'defs',
     'text',
     'tspan',
     'svg',

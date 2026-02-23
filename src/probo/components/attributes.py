@@ -1924,6 +1924,12 @@ class ElementAttributeValidator:
         **error_attrs**: the invalid attributes dictionary that could not be used with the element
     
     """
+    __slots__=(
+        'element_tag',
+        'raw_attrs',
+        'valid_attrs',
+        'error_attrs',
+    )
     def __init__(self, element_tag: str = "", **kwargs:dict[str,Any]):
         self.element_tag = element_tag if element_tag else ""
         self.raw_attrs = kwargs

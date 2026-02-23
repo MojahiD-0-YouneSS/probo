@@ -30,6 +30,7 @@ class Ajax:
         AJAX_HX_DICT (Dict[str, str]): Internal storage for the mapped 
             HTMX attribute keys and their values.
     """
+    __slots__ = ('AJAX_HX_DICT')
 
     def __init__(
         self,
@@ -192,6 +193,15 @@ class HTMXElement(Ajax):
         >>> print(attrs.render())
         hx-get="/search" hx-trigger="keyup"
     """
+    __slots__ = (
+    'hx_params',
+    'hx_bool_val',
+    'hx_funcs',
+    'hx_attrs',
+    'element_tag',
+    'content',
+    'template_info',
+    )
 
     def __init__(
         self,
@@ -420,6 +430,10 @@ class HTMX:
         >>> print(bucket.elements.get("save_btn").render())
         <button hx-post="/save">click me!!</button>
     """
+    __slots__ = (
+        'elements',
+        'script_tag',
+    )
 
     def __init__(
         self,

@@ -75,7 +75,22 @@ class Component:
             >>> css -> span {font-weight:bold;}
     """
 
-
+    __slots__ = (
+        'name',
+        'index',
+        'children',
+        'children_info',
+        'attr_manager',
+        'template_obj',
+        'is_root_element',
+        'root_element_tag',
+        'root_element_attrs',
+        'props',
+        'comp_state',
+        'default_css_rules',
+        'active_css_rules',
+        'cmp_style',
+    )
     _registry = {}  # Global component registry
 
     def __init__(

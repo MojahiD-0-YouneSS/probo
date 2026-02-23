@@ -9,7 +9,10 @@ class RouterPayload:
     """
     # Simple in-memory cache for hashing. In production, use Redis or Django Cache.
     _state_cache = {}
-
+    __slots__ = (
+        'payloads',
+        'diff',
+    )
     def __init__(self, **payloads) -> None:
         """
         :param payloads: Key-value pairs where key is component ID and 

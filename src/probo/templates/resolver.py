@@ -19,6 +19,13 @@ class TemplateResolver:
         template_info (dict): A mapping of tags to their merged attribute dictionaries.
         template_tags (list): A list of all unique HTML tags found in the template.
     """
+    __slots__ = (
+        'tmplt_str',
+        'template_attributes',
+        'load_it',
+        'template_info',
+        'template_tags',
+    )
     def __init__(self, tmplt_str=None, load_it=False):
         self.tmplt_str = tmplt_str
         self.template_attributes = {}

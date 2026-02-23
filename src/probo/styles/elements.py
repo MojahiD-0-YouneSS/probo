@@ -29,7 +29,12 @@ class ComponentStyle:
 
     Css_rule = CssRule
     Css_animatable = CssAnimatable
-
+    __slots__ =(
+        'template',
+        'css_rules',
+        'template_representation',
+        'template_info',
+    )
     def __init__(self, template: str = "", *css):
         self.template = template
         self.css_rules: tuple["SelectorRuleBridge"] = css

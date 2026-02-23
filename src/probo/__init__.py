@@ -291,7 +291,7 @@ from probo.components.tag_functions import (
     wbr,
     # svg elements
     g,
-    dfs,
+    defs,
     text,
     tspan,
     svg,
@@ -651,7 +651,7 @@ __all__ = [
     "wbr",
     # svg elements
     'g',
-    'dfs',
+    'defs',
     'text',
     'tspan',
     'svg',

@@ -6,6 +6,7 @@ from probo.components.tag_classes.block_tags import EL
 class G(BaseHTMLElement, ElementNodeMixin):
     """Represents an G HTML <g> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -26,6 +27,7 @@ class G(BaseHTMLElement, ElementNodeMixin):
 class DEFS(BaseHTMLElement, ElementNodeMixin):
     """Represents an DEFS HTML <defs> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -46,6 +48,7 @@ class DEFS(BaseHTMLElement, ElementNodeMixin):
 class TEXT(BaseHTMLElement, ElementNodeMixin):
     """Represents an TEXT HTML <text> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -66,6 +69,7 @@ class TEXT(BaseHTMLElement, ElementNodeMixin):
 class TSPAN(BaseHTMLElement, ElementNodeMixin):
     """Represents an TSPAN HTML <tspan> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -86,6 +90,7 @@ class TSPAN(BaseHTMLElement, ElementNodeMixin):
 class SVG(BaseHTMLElement,ElementNodeMixin):
     """Represents an SVG HTML <svg> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -106,6 +111,7 @@ class SVG(BaseHTMLElement,ElementNodeMixin):
 class SYMBOL(BaseHTMLElement, ElementNodeMixin):
     """Represents an SYMBOL HTML <symbol> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -126,6 +132,7 @@ class SYMBOL(BaseHTMLElement, ElementNodeMixin):
 class MARKER(BaseHTMLElement, ElementNodeMixin):
     """Represents an MARKER HTML <marker> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -146,6 +153,7 @@ class MARKER(BaseHTMLElement, ElementNodeMixin):
 class PATTERN(BaseHTMLElement, ElementNodeMixin):
     """Represents an PATTERN HTML <pattern> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -166,6 +174,7 @@ class PATTERN(BaseHTMLElement, ElementNodeMixin):
 class MASK(BaseHTMLElement, ElementNodeMixin):
     """Represents an MASK HTML <mask> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -186,6 +195,7 @@ class MASK(BaseHTMLElement, ElementNodeMixin):
 class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
     """Represents an CLIPPATH HTML <clipPath> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -206,6 +216,7 @@ class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
 class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
     """Represents an LINEARGRADIENT HTML <linearGradient> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -226,6 +237,7 @@ class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
 class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
     """Represents an RADIALGRADIENT HTML <radialGradient> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -246,6 +258,7 @@ class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
 class FILTER(BaseHTMLElement, ElementNodeMixin):
     """Represents an FILTER HTML <filter> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -266,6 +279,7 @@ class FILTER(BaseHTMLElement, ElementNodeMixin):
 class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
     """Represents an FECOMPONENTTRANSFER HTML <feComponentTransfer> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -286,6 +300,7 @@ class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
 class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEDIFFUSELIGHTING HTML <feDiffuseLighting> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -306,6 +321,7 @@ class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
 class FEMERGE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEMERGE HTML <feMerge> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -326,6 +342,7 @@ class FEMERGE(BaseHTMLElement, ElementNodeMixin):
 class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
     """Represents an FESPECULARLIGHTING HTML <feSpecularLighting> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -346,6 +363,7 @@ class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
 class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
     """Represents an ANIMATEMOTION HTML <animateMotion> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -366,6 +384,7 @@ class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
 class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
     """Represents an FOREIGNOBJECT HTML <foreignObject> element."""
 
+    __slots__ = ()
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
@@ -388,6 +407,7 @@ class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
 class PATH(BaseHTMLElement, ElementNodeMixin):
     """Represents an PATH HTML <path> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -399,6 +419,7 @@ class PATH(BaseHTMLElement, ElementNodeMixin):
 class CIRCLE(BaseHTMLElement, ElementNodeMixin):
     """Represents an CIRCLE HTML <circle> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -410,6 +431,7 @@ class CIRCLE(BaseHTMLElement, ElementNodeMixin):
 class RECT(BaseHTMLElement, ElementNodeMixin):
     """Represents an RECT HTML <rect> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -421,6 +443,7 @@ class RECT(BaseHTMLElement, ElementNodeMixin):
 class LINE(BaseHTMLElement, ElementNodeMixin):
     """Represents an LINE HTML <line> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -432,6 +455,7 @@ class LINE(BaseHTMLElement, ElementNodeMixin):
 class POLYLINE(BaseHTMLElement, ElementNodeMixin):
     """Represents an POLYLINE HTML <polyline> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -443,6 +467,7 @@ class POLYLINE(BaseHTMLElement, ElementNodeMixin):
 class POLYGON(BaseHTMLElement, ElementNodeMixin):
     """Represents an POLYGON HTML <polygon> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -454,6 +479,7 @@ class POLYGON(BaseHTMLElement, ElementNodeMixin):
 class ELLIPSE(BaseHTMLElement, ElementNodeMixin):
     """Represents an ELLIPSE HTML <ellipse> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -465,6 +491,7 @@ class ELLIPSE(BaseHTMLElement, ElementNodeMixin):
 class IMAGE(BaseHTMLElement, ElementNodeMixin):
     """Represents an IMAGE HTML <image> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -476,6 +503,7 @@ class IMAGE(BaseHTMLElement, ElementNodeMixin):
 class FEBLEND(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEBLEND HTML <feBlend> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -487,6 +515,7 @@ class FEBLEND(BaseHTMLElement, ElementNodeMixin):
 class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin):
     """Represents an FECOLORMATRIX HTML <feColorMatrix> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -498,6 +527,7 @@ class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin):
 class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FECOMPOSITE HTML <feComposite> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -509,6 +539,7 @@ class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin):
 class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin):
     """Represents an FECONVOLVEMATRIX HTML <feConvolveMatrix> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -520,6 +551,7 @@ class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin):
 class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEDISPLACEMENTMAP HTML <feDisplacementMap> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -531,6 +563,7 @@ class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin):
 class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEDROPSHADOW HTML <feDropShadow> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -542,6 +575,7 @@ class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin):
 class FEFLOOD(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEFLOOD HTML <feFlood> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -553,6 +587,7 @@ class FEFLOOD(BaseHTMLElement, ElementNodeMixin):
 class FEFUNCA(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEFUNCA HTML <feFuncA> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -564,6 +599,7 @@ class FEFUNCA(BaseHTMLElement, ElementNodeMixin):
 class FEFUNCB(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEFUNCB HTML <feFuncB> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -575,6 +611,7 @@ class FEFUNCB(BaseHTMLElement, ElementNodeMixin):
 class FEFUNCG(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEFUNCG HTML <feFuncG> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -586,6 +623,7 @@ class FEFUNCG(BaseHTMLElement, ElementNodeMixin):
 class FEFUNCR(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEFUNCR HTML <feFuncR> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -597,6 +635,7 @@ class FEFUNCR(BaseHTMLElement, ElementNodeMixin):
 class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEGAUSSIANBLUR HTML <feGaussianBlur> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -608,6 +647,7 @@ class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin):
 class FEIMAGE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEIMAGE HTML <feImage> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -619,6 +659,7 @@ class FEIMAGE(BaseHTMLElement, ElementNodeMixin):
 class FEMERGENODE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEMERGENODE HTML <feMergeNode> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -630,6 +671,7 @@ class FEMERGENODE(BaseHTMLElement, ElementNodeMixin):
 class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEMORPHOLOGY HTML <feMorphology> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -641,6 +683,7 @@ class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin):
 class FEOFFSET(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEOFFSET HTML <feOffset> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -652,6 +695,7 @@ class FEOFFSET(BaseHTMLElement, ElementNodeMixin):
 class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEPOINTLIGHT HTML <fePointLight> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -663,6 +707,7 @@ class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin):
 class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin):
     """Represents an FESPOTLIGHT HTML <feSpotLight> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -674,6 +719,7 @@ class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin):
 class FETILE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FETILE HTML <feTile> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -685,6 +731,7 @@ class FETILE(BaseHTMLElement, ElementNodeMixin):
 class FETURBULENCE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FETURBULENCE HTML <feTurbulence> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -696,6 +743,7 @@ class FETURBULENCE(BaseHTMLElement, ElementNodeMixin):
 class ANIMATE(BaseHTMLElement, ElementNodeMixin):
     """Represents an ANIMATE HTML <animate> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -707,6 +755,7 @@ class ANIMATE(BaseHTMLElement, ElementNodeMixin):
 class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin):
     """Represents an ANIMATETRANSFORM HTML <animateTransform> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -718,6 +767,7 @@ class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin):
 class SET(BaseHTMLElement, ElementNodeMixin):
     """Represents an SET HTML <set> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -729,6 +779,7 @@ class SET(BaseHTMLElement, ElementNodeMixin):
 class VIEW(BaseHTMLElement, ElementNodeMixin):
     """Represents an VIEW HTML <view> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -740,6 +791,7 @@ class VIEW(BaseHTMLElement, ElementNodeMixin):
 class USE(BaseHTMLElement, ElementNodeMixin):
     """Represents an USE HTML <use> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
@@ -751,6 +803,7 @@ class USE(BaseHTMLElement, ElementNodeMixin):
 class STOP(BaseHTMLElement, ElementNodeMixin):
     """Represents an STOP HTML <stop> line break element (self-closing)."""
 
+    __slots__ = ()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)

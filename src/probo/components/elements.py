@@ -8,7 +8,7 @@ import tempfile
 import webbrowser
 import os
 from collections import OrderedDict
-from probo.utility import render_attributes
+from probo.utility import render_attributes,markup_escape
 from typing import Any, Self
 
 MARKER = chr(31)
@@ -33,27 +33,192 @@ class Element:
         is_natural (bool): If True, MARKERs are replaced by newlines.
         attrs (dict): Dictionary of HTML attributes for the current tag.
     """
-    # __slots__ =(
-    #     'validator',
-    #     'element',
-    #     'is_list',
-    #     'is_natural',
-    #     'content',
-    #     'probo_pretty_error',
-    #     'probo_custom_attrs',
-    #     'collect_history',
-    #     'collect_to_end',
-    #     'attrs',
-    #     'tag',
-    #     'use_sibling',
-    #     'sibling_element',
-    #     'div',
-    #     'p',
-    #     'span',
-    #     'button',
-    #     'section',
-
-    # )
+    __slots__ = (
+        'validator',
+        'element',
+        'is_list',
+        'is_natural',
+        'content',
+        'probo_pretty_error',
+        'probo_custom_attrs',
+        'collect_history',
+        'collect_to_end',
+        'attrs',
+        'tag',
+        'use_sibling',
+        'sibling_element',
+         "a",
+        "abbr",
+        "address",
+        "article",
+        "aside",
+        "audio",
+        "b",
+        "bdi",
+        "bdo",
+        "blockquote",
+        "body",
+        "button",
+        "canvas",
+        "caption",
+        "cite",
+        "code",
+        "colgroup",
+        "data",
+        "datalist",
+        "dd",
+        "Del",
+        "details",
+        "dfn",
+        "dialog",
+        "div",
+        "dl",
+        "dt",
+        "em",
+        "fieldset",
+        "figcaption",
+        "figure",
+        "footer",
+        "form",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "head",
+        "header",
+        "hgroup",
+        "html",
+        "i",
+        "iframe",
+        "ins",
+        "kbd",
+        "label",
+        "legend",
+        "li",
+        "main",
+        "math",
+        "map",
+        "mark",
+        "menu",
+        "meter",
+        "nav",
+        "noscript",
+        "Object",
+        "ol",
+        "optgroup",
+        "option",
+        "output",
+        "p",
+        "portal",
+        "picture",
+        "pre",
+        "progress",
+        "q",
+        "rp",
+        "rt",
+        "ruby",
+        "s",
+        "samp",
+        "script",
+        "search",
+        "section",
+        "select",
+        "slot",
+        "small",
+        "span",
+        "strong",
+        "style",
+        "sub",
+        "summary",
+        "sup",
+        "table",
+        "tbody",
+        "td",
+        "template",
+        "textarea",
+        "tfoot",
+        "th",
+        "thead",
+        "time",
+        "title",
+        "tr",
+        "u",
+        "ul",
+        "var",
+        "video",
+        # self closing functions
+        "doctype",
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+        # svg elements
+        'g',
+        'defs',
+        'text',
+        'tspan',
+        'svg',
+        'symbol',
+        'marker',
+        'pattern',
+        'mask',
+        'clippath',
+        'lineargradient',
+        'radialgradient',
+        'filter',
+        'fecomponenttransfer',
+        'fediffuselighting',
+        'femerge',
+        'fespecularlighting',
+        'animatemotion',
+        'foreignobject',
+        'path',
+        'circle',
+        'rect',
+        'line',
+        'polyline',
+        'polygon',
+        'ellipse',
+        'image',
+        'feblend',
+        'fecolormatrix',
+        'fecomposite',
+        'feconvolvematrix',
+        'fedisplacementmap',
+        'fedropshadow',
+        'feflood',
+        'fefunca',
+        'fefuncb',
+        'fefuncg',
+        'fefuncr',
+        'fegaussianblur',
+        'feimage',
+        'femergenode',
+        'femorphology',
+        'feoffset',
+        'fepointlight',
+        'fespotlight',
+        'fetile',
+        'feturbulence',
+        'animate',
+        'animatetransform',
+        'set',
+        'view',
+        'use',
+        'stop',
+    )
 
     def __init__(
         self,
@@ -123,7 +288,6 @@ class Element:
         self.use_sibling = False
         self.sibling_element = str()
         self.element = str()
-
     def _tag_loader(self, name: str) -> bool:
 
         try:
@@ -133,7 +297,7 @@ class Element:
                 method_name = name
             else:
                 method_name = attr.value[0]  # name-mangled to be private
-            setattr(self, method_name, method)
+            setattr(self, name, method)
             return method
         except:
             return False
@@ -141,6 +305,7 @@ class Element:
         # def handler(*args, reset_sibling=False,is_sibling=False,set_as_content=False,append_to_end=True,**kwargs):
         #     kwargs.update({"reset_sibling":reset_sibling,"is_sibling":is_sibling,"set_as_content":set_as_content,"append_to_end":append_to_end})
         #     return self._tag_method_core(tag_enum, args, kwargs)
+
     def _tag_func_handler(
         self,
         *args,
@@ -149,6 +314,7 @@ class Element:
         is_sibling=False,
         set_as_content=False,
         append_to_end=True,
+        escape=False,
         **kwargs,
     ):
         if is_sibling and not reset_sibling:
@@ -157,26 +323,29 @@ class Element:
             self.reset_sebling
         self.collect_to_end = append_to_end
         self.attrs.update(kwargs)
+        content=''
         if args:
             content = self._element_parser(*args,)
-            if (
-                not is_sibling
-                and not reset_sibling
-                and self.sibling_element
-                and self.collect_history
-                and not set_as_content
-            ):
-                if self.collect_to_end:
-                    content += self.sibling_element
-                else:
-                    content = self.sibling_element + content
+            if escape:
+                content=markup_escape(content)
 
-                self.reset_sebling
-
+        if (
+            not is_sibling
+            and not reset_sibling
+            and self.sibling_element
+            and self.collect_history
+            and not set_as_content
+        ):
             if self.collect_to_end:
-                self.content += content
+                content += self.sibling_element
             else:
-                self.content = content + self.content
+                content = self.sibling_element + content
+            self.reset_sebling
+
+        if self.collect_to_end:
+            self.content += content
+        else:
+            self.content = content + self.content
 
         string = self.build_tag(tag_enum)
         if self.is_list:
@@ -194,7 +363,7 @@ class Element:
                 self.content += self.element
             else:
                 self.content = self.element + self.content
-
+        self.use_sibling=False
         self.attrs.clear()
         return self
 
@@ -453,7 +622,6 @@ class Element:
     ):
         return str(self.stringify_element().element)
 
-
 class Head:
     """
     Manages the head section of an HTML document.
@@ -477,7 +645,16 @@ class Head:
         >>> output:
         <head><title>Home Page</title><meta name="description" content="Welcome"></head>
     """
-
+    __slots__ = (
+        'head_strings',
+        '_registry',
+        'meta_tags',
+        'link_tags',
+        'script_tags',
+        'style_tags',
+        'title',
+        '_var_attrs',
+    )
     def __init__(self, *head_strings):
         self.head_strings = list(head_strings)
         self._registry = OrderedDict()
@@ -658,7 +835,6 @@ class Head:
         )
         return head_tag
 
-
 class Template:
     """
     Represents a full HTML Document.
@@ -690,7 +866,12 @@ class Template:
         >>> # Render
         >>> html = layout.render()
     """
-
+    __slots__ = (
+        'separator',
+        'head',
+        '_Template__loaded_base',
+        'components',
+    )
     def __init__(self, separator: str = "\n", **components):
         """
         Initialize the template.

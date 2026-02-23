@@ -17,7 +17,17 @@ class ProboRouter:
     to resolve component-based routes and uses the Probo Template object 
     to ensure full HTML document delivery.
     """
-    
+    __slots__ = (
+        'app',
+        'secret_key',
+        'respond_type',
+        'app_name',
+        'pages_dir',
+        'routes',
+        'tcm',
+        'document_template',
+        'payload',
+    )
     def __init__(self, app_name: str = "ProboApp", pages_dir: str = "pages",secret_key=None, respond_format='txt', base_template: Template = None):
         """
         Initializes the ProboRouter.

@@ -17,7 +17,11 @@ class ComponentRequestContext:
         processed_components (List[Any]): A cache of components that have 
             already undergone context application.
     """
-
+    __slots__ =(
+        'context_props',
+        'components',
+        'processed_components',
+    )
     def __init__(self, *components_objs, **context_props):
         self.context_props = context_props
         self.components = list(components_objs)

@@ -26,6 +26,9 @@ class CssRuleValidator:
         property_value (Dict[str, Any]): A dictionary of CSS properties 
             and their values to be validated.
     """
+    __slots__ = (
+        'property_value',
+    )
     def __init__(self, **prop_val):
         self.property_value = prop_val
 
@@ -108,7 +111,7 @@ class CssRule:
         declarations (dict): A dictionary storage for validated property-value pairs.
     """
     # validator = CssRuleValidator()
-
+    __slots__ = ('declarations')
     def __init__(self, **declarations):
         self.declarations: dict = self.__check_declarations(**declarations)
 
@@ -265,6 +268,11 @@ class CssAnimatable:
         animations (list): A collection of stored animation definitions.
         validator (CssRuleValidator): Utility to verify CSS syntax integrity.
     """
+    __slots__ = (
+        'name',
+        'animations',
+        'validator',
+    )
     def __init__(self, name):
         self.name = name
         self.animations = []
@@ -332,6 +340,15 @@ class CssSelector:
     Attributes:
         selectors (list): A collection of selector fragments to be joined.
     """
+    __slots__ = (
+        'selectors',
+        '_CssSelector__template',
+        '_selector_type_maping',
+        'template_tags',
+        'template_attributes',
+        'template_info_obj',
+        'template_info',
+    )
     def __init__(self, template=None):
         self.selectors = []
         self.__template = template
@@ -675,6 +692,11 @@ class Animation:
         name (str): The identifier for the animation sequence.
         frames (dict): An internal mapping of timeline steps to CSS properties.
     """
+    __slots__ = (
+        'name',
+        'animation_body',
+        'frames',
+    )
     def __init__(
         self,
         name,
@@ -777,6 +799,16 @@ class MediaQueries:
         is_only (bool): If True, prepends the 'only' operator.
         css_rules (dict): A mapping of selectors to property-value blocks.
     """
+    __slots__ = (
+        '_MediaQueries__css_media_types',
+        '_MediaQueries__media_features',
+        'media_type',
+        'css_rules',
+        'media_values',
+        'is_not',
+        'no_media_type',
+        'is_only',
+    )
     def __init__(
         self,
         media_type,

@@ -40,7 +40,17 @@ class ComponentState:
         ... print(state.resolve_template(es.placeholder))
             <h1>Live Update</h1>
     """
-
+    __slots__ = (
+        's_data',
+        'd_data',
+        'elements_states',
+        'resolved_state_elements',
+        'props',
+        'strict',
+        'state_errors',
+        'incoming_props',
+        '_should_render',
+    )
     def __init__(
         self,
         *elements_states: tuple["ElementState"],
@@ -213,7 +223,26 @@ class ElementState:
         >>> # List rendering
         >>> es_list = ElementState('li', d_state='items', i_state=True)
     """
-
+    __slots__ =(
+        'state_id',
+        'placeholder',
+        'state_placeholder',
+        'element',
+        's_state',
+        'd_state',
+        'c_state',
+        'i_state',
+        'attrs',
+        'props',
+        'is_void_element',
+        'hide_dynamic',
+        'bind_to',
+        'is_custom',
+        'key_as_content',
+        'inner_html',
+        'is_custom',
+        'valid_element',
+    )
     def __init__(
         self,
         element,

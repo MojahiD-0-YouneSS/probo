@@ -12,7 +12,10 @@ class StatePropsValidator:
     Processes the rules defined in a StateProps object
     against a component's final props dictionary.
     """
-
+    __slots__ = (
+        'rules',
+        'props',
+    )
     def __init__(self, rules: "StateProps", props: dict) -> None:
         self.rules = rules
         self.props = props

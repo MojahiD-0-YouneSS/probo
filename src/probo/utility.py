@@ -1,4 +1,20 @@
 from typing import Any, Union, List, Self, Dict, Set
+import html
+
+# --- HIGH-SPEED CACHE ---
+_html_escape = html.escape
+MARKER = "\u200b"
+
+def markup_escape(value: Any) -> str:
+    """
+    The 'Zero-Tax' Escaper.
+    If the value is already marked as Safe, it is returned untouched.
+    Otherwise, it is escaped to prevent XSS or broken layouts.
+    """
+    if hasattr(value, 'render'):
+        value = value.render()
+    # str() call handles numbers/bools; html.escape handles the security.
+    return _html_escape(str(value))
 
 def exists_in_dict(data: dict, x:Any) -> bool:
     """Checks if processed selectors exist within a dictionary's keys or values.

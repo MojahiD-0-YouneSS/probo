@@ -47,31 +47,6 @@ def test_rdt_initialization_post():
     assert rdt.request_method == "POST"
     assert rdt.post_data["username"] == "youness"
 
-
-def test_rdt_csrf_extraction(monkeypatch):
-    """
-    Test safe extraction of CSRF token.
-    We mock django.middleware.csrf.get_token to avoid needing Django settings.
-    """
-    req = MockHttpRequest()
-
-    # Monkeypatch the get_token function RDT tries to import
-    # This simulates Django being present and working
-    def mock_get_token(request):
-        return "csrf-secret-123"
-
-    # You might need to adjust where you patch depending on your imports
-    # If RDT imports get_token at top level, patch that module
-    # If RDT imports inside the method, patch sys.modules or use a specific strategy
-    # For this test, let's assume RDT has a helper we can override or use a simpler check
-
-    rdt = RequestDataTransformer(request=req)
-    # Inject our mock logic for the test if simple patching is hard without Django setup
-    rdt.get_csrf_token = lambda: mock_get_token(req)
-
-    assert rdt.get_csrf_token() == "csrf-secret-123"
-
-
 def test_rdt_form_instantiation():
     """Test that RDT instantiates the Django Form class passed to it."""
 

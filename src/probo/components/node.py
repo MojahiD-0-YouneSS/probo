@@ -14,6 +14,7 @@ class ElementNodeMixin:
         parent (Optional[Any]): A reference to the parent node in the tree.
         __void_node (bool): Internal flag indicating if the node is a void tag.
     """
+    __slots__ = ()
 
     def __init__(self):
         self.children = []

@@ -11,6 +11,7 @@ class ElementAttributeManipulator:
     Note: 
         **kwargs often passed as copy of the variable itself that's why we passed them as dict literal.
     """
+    __slots__ = ('attrs',)
     def __init__(self, attr_dict:dict=None,**kwargs:dict[str,Any]):
         # 1. Initialize storage per instance (Fixes Shared Memory Bug)
         self.attrs: Dict[str, str] = dict() if attr_dict is None else attr_dict
@@ -271,12 +272,14 @@ class ComponentAttrManager(ElementAttributeManipulator):
     within the component's registry.
 
     Attributes:
-        childern (dict): Storage for resolved attributes indexed by child name.
+        children (dict): Storage for resolved attributes indexed by child name.
         attrs (dict): Temporary buffer for attributes being processed 
             during an `update` call.
     """
-    def __init__(self,**childern:dict[str,Any]) -> None:
-        self.childern = childern
+    __slots__ = ('attrs','root','children')
+
+    def __init__(self,**children:dict[str,Any]) -> None:
+        self.children = children
         self.root={}
         self.attrs = {}
 
@@ -290,7 +293,7 @@ class ComponentAttrManager(ElementAttributeManipulator):
         Returns:
             self: The instance of ComponentAttrManager (for chaining).
         """
-        self.childern[name]=attrs
+        self.children[name]=attrs
         return self
 
     def update(self,name:str, **kwargs:dict[str,Any]) -> Self:
@@ -329,10 +332,10 @@ class ComponentAttrManager(ElementAttributeManipulator):
                     self.add_class(*v)
             else:
                 self.attrs[clean_key] = v
-        if self.childern.get(name,None):
-            self.childern[name].update(self.attrs)
+        if self.children.get(name,None):
+            self.children[name].update(self.attrs)
         else:
-            self.childern[name]=self.attrs
+            self.children[name]=self.attrs
         self.clear()
         return self
 
@@ -352,7 +355,7 @@ class ComponentAttrManager(ElementAttributeManipulator):
             A dictionary where keys are child names and values are 
             dictionaries of HTML attributes.
         """
-        return self.childern
+        return self.children
 
 class BaseHTMLElement(ABC):
     """The abstract base class for all ProboUI HTML elements.
@@ -366,6 +369,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
+    __slots__ = ('attributes', 'content','children', 'parent','_ElementNodeMixin__void_node')
 
     def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
         """

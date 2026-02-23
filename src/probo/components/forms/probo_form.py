@@ -114,6 +114,19 @@ class ProboFormField:
        <label>Email Address</label><input type="email" name="email"/>
     """
 
+    __slots__ = (
+        'content',
+        'wraper_func',
+        'field_label',
+        'attrs',
+        'label_attr',
+        'label_attr',
+        'tag_name',
+        'widget_info',
+        'form_field',
+        'dj_field',
+        'dj_field_info',
+    )
     def __init__(
         self,
         tag_name: str = None,
@@ -135,7 +148,6 @@ class ProboFormField:
         self.form_field = str()
         self.dj_field = dj_field
         self.dj_field_info = dict()
-        self.dj_field = (dj_field,)
         if dj_field:
             self.include_dj_field(dj_field)
 
@@ -409,7 +421,25 @@ class ProboForm:
         >>> html = form.render()
         >>> html -> <form action="/search"  method="get"><input type="hidden" value="xyz"/><label for="email">email to contact with</label><input type="email" name="email" value=""/>
     """
-
+    __slots__ = (
+        'form_class',
+        'request_data',
+        'request_form_bool',
+        'is_handled',
+        'use_htmx',
+        'method',
+        'action',
+        'attrs',
+        'override_button',
+        'override_button_attrs',
+        'handler',
+        'is_valid',
+        'form_declaration',
+        'manual',
+        'submit_btn',
+        '_manual_csrf',
+        'fields',
+    )
     def __init__(
         self,
         action: str,

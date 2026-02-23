@@ -26,7 +26,24 @@ class RequestDataTransformer:
         >>>         if rdt.are_valid():
         >>>             rdt.save_forms()
     """
-
+    __slots__ = (
+        'target_data',
+        'request',
+        'form_class',
+        'errors',
+        'cleaned_data',
+        'request_method',
+        'request_user',
+        'mono_form',
+        'form',
+        'user_data',
+        'request_files',
+        'post_data',
+        'get_data',
+        'session_data',
+        'id',
+        'validations',
+    )
     def __init__(
         self, request=None, form_class=None, request_files=False, mono_form=True
     ):
@@ -347,7 +364,11 @@ class FormHandler:
         logger_instance (Optional[Any]): Hook for attaching a logging utility 
             to track form success or failure.
     """
-
+    __slots__ = (
+        'request_data',
+        'logger_instance',
+        'logger_instance_message',
+    )
     def __init__(self, request_data: RequestDataTransformer):
         """
         Initializes FormHandler with request data and operation type.

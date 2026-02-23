@@ -17,7 +17,12 @@ class HtmlToXmlConverter:
     - Error handling for malformed HTML.
     - Pretty printing for XML output.
     """
-
+    __slots__=(
+        '_html_string',
+        '_parsed_soup',
+        '_data_context',
+        '_xml_root',
+    )
     def __init__(self, html_string: str = ""):
         """
         Initializes the converter with an optional HTML string.

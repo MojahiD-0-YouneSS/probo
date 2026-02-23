@@ -6,7 +6,13 @@ class XMLElement:
     Represents a generic XML element.
     Unlike HTML, XML tags are case-sensitive and must strictly handle attributes.
     """
-
+    __slots__=(
+        'tag',
+        'content',
+        'attrs',
+        'children',
+        'attr_manager',
+    )
     def __init__(
         self,
         tag: str,
@@ -77,7 +83,7 @@ class XMLSection:
     Used to escape blocks of text that would otherwise be interpreted as markup.
     Output: <![CDATA[ ...content... ]]>
     """
-
+    __slots__ = ('content')
     def __init__(self, content: str):
         self.content = content
 
@@ -90,7 +96,7 @@ class XMLComment:
     Represents an XML comment.
     Output: <!-- ...content... -->
     """
-
+    __slots__=('content')
     def __init__(self, content: str):
         self.content = content
 
@@ -104,7 +110,10 @@ class XMLInstruction:
     Output: <?target content?>
     Example: <?xml-stylesheet type="text/xsl" href="style.xsl"?>
     """
-
+    __slots__=(
+        'target',
+        'data',
+    )
     def __init__(self, target: str, data: str = ""):
         self.target = target
         self.data = data
@@ -119,7 +128,13 @@ class XMLDocument:
     Represents a full XML document.
     Manages the Declaration (<?xml ... ?>) and the Root Element.
     """
-
+    __slots__=(
+        'root',
+        'version',
+        'encoding',
+        'standalone',
+        'instructions',
+    )
     def __init__(
         self,
         root: Optional[XMLElement] = None,
