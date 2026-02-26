@@ -46,6 +46,8 @@ def test_declarative_form_style_1_variables():
     )
     # 3. Render
     html = form.render()
+    print(username_field.render())
+    print(html)
     # 4. Verify
     # Container
     assert '<form action="/contact/submit/" method="post"' in html
@@ -89,6 +91,7 @@ def test_declarative_form_style_2_inline():
     )
 
     html = form.render()
+    print(html)
 
     # Verify Form
     assert 'action="/save/"' in html
@@ -180,6 +183,7 @@ def test_mff_builder_select_simple():
     )
 
     html = mff.render()
+    print(html)
 
     assert "<select" in html
     assert 'name="colors"' in html
@@ -209,6 +213,7 @@ def test_mff_builder_select_optgroup():
     )
 
     html = mff.render()
+    print(html)
 
     assert '<optgroup label="Fruits">' in html
     assert '<option value="Apple">Apple</option>' in html
@@ -233,6 +238,7 @@ def test_mff_builder_fieldset():
     )
 
     html = mff.render()
+    print(html)
 
     assert "<fieldset" in html
     assert "<legend>User Information</legend>" in html
@@ -255,6 +261,7 @@ def test_mff_builder_datalist():
     )
 
     html = mff.render()
+    print(html)
 
     assert '<datalist id="browsers">' in html
     assert (

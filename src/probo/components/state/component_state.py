@@ -4,6 +4,8 @@ from probo.components.attributes import ElementAttributeValidator
 import re
 from typing import Any, Self
 
+from probo.utility import ProboSourceString
+
 
 class ComponentState:
     """
@@ -183,7 +185,7 @@ class ComponentState:
                         template = re.sub(
                             re.escape(el.placeholder), el.state_placeholder, template
                         )
-        return self.remove_state_tag(template)
+        return ProboSourceString(self.remove_state_tag(template))
 
 
 class ElementState:
@@ -262,7 +264,7 @@ class ElementState:
         import uuid
 
         self.state_id = f"{element}=={uuid.uuid4().hex}"
-        self.placeholder = (
+        self.placeholder = ProboSourceString(
             Element()
             .custom_element(
                 "$",
@@ -321,7 +323,7 @@ class ElementState:
                         if not key:
                             self.state_placeholder = None
                         if self.i_state:
-                                self.state_placeholder = "".join(
+                                self.state_placeholder = ProboSourceString("".join(
                                     [
                                         Element()
                                         .custom_element(
@@ -330,7 +332,7 @@ class ElementState:
                                         .element
                                         for d in enumerate(key)
                                     ]
-                                )
+                                ))
                         else:
                             self.state_placeholder = Element().custom_element(
                                             self.element, self.inner_html(key), **self.attrs
@@ -340,7 +342,7 @@ class ElementState:
                             self.state_placeholder = None
                         elif self.d_state and self.d_state in data:
                             if self.i_state:
-                                self.state_placeholder = "".join(
+                                self.state_placeholder = ProboSourceString("".join(
                                     [
                                         Element()
                                         .custom_element(
@@ -349,9 +351,9 @@ class ElementState:
                                         .element
                                         for d in enumerate(data.get(self.d_state))
                                     ]
-                                )
+                                ))
                             else:
-                                self.state_placeholder = (
+                                self.state_placeholder = ProboSourceString(
                                     Element()
                                     .custom_element(
                                         self.element,
@@ -370,7 +372,7 @@ class ElementState:
                                 )
                         elif self.s_state in data:
                             if self.i_state:
-                                self.state_placeholder = "".join(
+                                self.state_placeholder = ProboSourceString("".join(
                                     [
                                         Element()
                                         .custom_element(
@@ -379,9 +381,9 @@ class ElementState:
                                         .element
                                         for s in enumerate(data.get(self.s_state))
                                     ]
-                                )
+                                ))
                             else:
-                                self.state_placeholder = (
+                                self.state_placeholder = ProboSourceString(
                                     Element()
                                     .custom_element(
                                         self.element,
@@ -402,7 +404,7 @@ class ElementState:
                             self.state_placeholder = None
             else:
                 target_value = data.get(self.s_state) or data.get(self.d_state)
-                self.state_placeholder = (
+                self.state_placeholder = ProboSourceString(
                     Element()
                     .custom_element(
                         self.element, **self.bind_data_to(str(target_value))
@@ -429,4 +431,4 @@ class ElementState:
             return self.attrs
 
     def render(self, **data) -> str | None:
-        return self.change_state(data).state_placeholder
+        return ProboSourceString(self.change_state(data).state_placeholder)

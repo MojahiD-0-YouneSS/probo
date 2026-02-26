@@ -6,7 +6,7 @@ div,label,Input,img,nav
 def test_card_grid_layout():
     """1. Grid of Cards."""
     cards = [BS5Card(card_body=f"Card {i}").render() for i in range(3)]
-    html = div("".join(cards), Class="row row-cols-3")
+    html = div(*cards, Class="row row-cols-3")
 
     assert 'class="row row-cols-3"' in html
     assert html.count('class="card"') == 3

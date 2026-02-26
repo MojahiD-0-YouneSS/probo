@@ -3,9 +3,21 @@
 <img src="./docs/assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
 </p>
 
+![PyPI](https://img.shields.io/pypi/v/probo-ui)
+![Python](https://img.shields.io/pypi/pyversions/probo-ui)
+![License](https://img.shields.io/github/license/MojahiD-0-YouneSS/probo)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://MojahiD-0-YouneSS.github.io/probo/)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)
+[![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
+![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
+![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
+
+
+## 📣 Version 1.3.0 is Live!
+
 # 🐘 Probo UI
 
-Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native Template Rendering Framework and Meta-framework for Django. Write Type-Safe HTML, CSS, and Logic in pure Python. No context switching. No template spaghetti.
+Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
 ## 📣 Version 1.3.0 is Live!
 

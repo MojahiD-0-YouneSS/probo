@@ -30,8 +30,8 @@ def test_initialization_vs_manual_add():
     Mockdiv_b = MockDIV()
     Mockdiv_b.add(Mockspan_b)
 
-    assert len(Mockdiv_a.children) == len(Mockdiv_b.children)
-    assert Mockdiv_a.children[0].tag == Mockdiv_b.children[0].tag
+    assert len(Mockdiv_a.node_children) == len(Mockdiv_b.node_children)
+    assert Mockdiv_a.node_children[0].tag == Mockdiv_b.node_children[0].tag
     assert Mockspan_a.parent == Mockdiv_a
     assert Mockspan_b.parent == Mockdiv_b
 
@@ -45,8 +45,8 @@ def test_mixed_content_initialization():
     )
 
     # The tree should only care about the MockSPAN node
-    assert len(container.children) == 1
-    assert isinstance(container.children[0], MockSPAN)
+    assert len(container.node_children) == 1
+    assert isinstance(container.node_children[0], MockSPAN)
     
     # But rendering should include everything
     rendered = container.render()
@@ -58,9 +58,9 @@ def test_deep_initialization_chain():
     tree = MockDIV(MockDIV(MockDIV(MockSPAN("Deep"))))
     
     # Traverse down
-    level_1 = tree.children[0]
-    level_2 = level_1.children[0]
-    level_3 = level_2.children[0]
+    level_1 = tree.node_children[0]
+    level_2 = level_1.node_children[0]
+    level_3 = level_2.node_children[0]
 
     assert level_3.get_tree_depth() == 3
     assert isinstance(level_3, MockSPAN)
@@ -75,7 +75,7 @@ def test_find_works_on_tag_classes():
 
     found = app.find(lambda n: n.attributes.get("id") == "main")
     assert found is not None
-    assert isinstance(found.children[0], MockSPAN)
+    assert isinstance(found.node_children[0], MockSPAN)
 
 # --- advanced Tests ---
 
@@ -115,19 +115,19 @@ class PATH(BaseHTMLElement, ElementNodeMixin):
 def test_void_tag_initialization():
     """1. Ensure void tags like IMG initialize without children."""
     image = IMG(src="logo.png")
-    assert len(image.children) == 0
+    assert len(image.node_children) == 0
     assert image.parent is None
 
 def test_void_tag_in_tree():
     """2. Ensure void tags can be children of standard tags."""
     container = MockDIV(IMG(src="thumb.jpg"))
-    assert isinstance(container.children[0], IMG)
-    assert container.children[0].parent == container
+    assert isinstance(container.node_children[0], IMG)
+    assert container.node_children[0].parent == container
 
 def test_void_tag_depth():
     """3. Verify depth logic works for void tags."""
     tree = MockDIV(MockDIV(IMG()))
-    assert tree.children[0].children[0].get_tree_depth() == 2
+    assert tree.node_children[0].node_children[0].get_tree_depth() == 2
 
 def test_svg_tree_structure():
     """4. Test complex SVG nesting (SVG -> G -> PATH)."""
@@ -135,13 +135,13 @@ def test_svg_tree_structure():
     icon = SVG(
         PATH(d="M10 10L20 20")
     )
-    assert len(icon.children) == 1
-    assert icon.children[0].parent == icon
+    assert len(icon.node_children) == 1
+    assert icon.node_children[0].parent == icon
 
 def test_svg_multiple_children():
     """5. SVG with multiple shapes."""
     icon = SVG(PATH(id="p1"), PATH(id="p2"))
-    assert len(icon.children) == 2
+    assert len(icon.node_children) == 2
     assert icon.find(lambda n: n.attributes.get("id") == "p2") is not None
 
 def test_illegal_nesting_logic():
@@ -149,7 +149,7 @@ def test_illegal_nesting_logic():
     (Technically possible in the tree, but should be handled in ProboUI)."""
     image = IMG()
     image.add(MockDIV())
-    assert len(image.children) == 0# The tree allows it; render() decides the output.
+    assert len(image.node_children) == 0# The tree allows it; render() decides the output.
     assert image.render() == "<img />" # The tree allows it; render() decides the output.
 
 def test_find_all_svg_paths():
@@ -174,12 +174,12 @@ def test_void_tag_sibling_migration():
     d1, d2 = MockDIV(img), MockDIV()
     d2.add(img)
     assert img.parent == d2
-    assert len(d1.children) == 1
+    assert len(d1.node_children) == 1
     img2 = IMG()
     d3, d4 = MockDIV(img2), MockDIV()
     d4.add(d3.pop(img2))
     assert img2.parent == d4
-    assert len(d3.children) == 0
+    assert len(d3.node_children) == 0
 
 def test_svg_namespace_attributes():
     """10. Test SVG specific attributes like viewBox."""
@@ -191,7 +191,7 @@ def test_br_tag_repetition():
     # Assuming BR class exists
     line_break = MockDIV("Text", MockSPAN(), MockSPAN(), "More Text")
     # Tree only tracks the 2 BR nodes
-    assert len(line_break.children) == 2
+    assert len(line_break.node_children) == 2
 
 def test_mixed_standard_and_svg_search():
     """12. Search for a specific class that exists in both HTML and SVG."""
@@ -213,7 +213,7 @@ def test_remove_svg_node():
     p = PATH()
     icon = SVG(p)
     icon.remove(p)
-    assert len(icon.children) == 0
+    assert len(icon.node_children) == 0
     assert p.parent is None
 
 def test_deep_svg_nesting_depth():
@@ -265,7 +265,7 @@ def test_void_tag_illegal_nesting_integrity():
     
     # --- Tree Check ---
     # The Mixin should still track the relationship (DOM-like behavior)
-    assert len(image.children) == 0
+    assert len(image.node_children) == 0
     assert illegal_child.parent != image
     
     # --- Search Check ---
@@ -274,7 +274,7 @@ def test_void_tag_illegal_nesting_integrity():
     assert found is None
     
     # --- Render Check (The Truth) ---
-    # The render method of IMG must be strict and ignore self.children
+    # The render method of IMG must be strict and ignore self.node_children
     rendered_html = image.render()
     # The output should be a clean void tag, ignoring the nested DIV
     assert rendered_html == '<img src="probo.png" id="hero"/>'

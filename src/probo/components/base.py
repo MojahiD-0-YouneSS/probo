@@ -369,7 +369,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
-    __slots__ = ('attributes', 'content','children', 'parent','_ElementNodeMixin__void_node')
+    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node')
 
     def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
         """

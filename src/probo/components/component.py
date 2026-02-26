@@ -3,6 +3,7 @@ from probo.components.state.component_state import (
     ComponentState,
 )
 from probo.components.base import ComponentAttrManager
+from probo.components.node import ComponentNode
 from probo.styles.elements import (
     ComponentStyle,
     element_style_state,
@@ -10,11 +11,12 @@ from probo.styles.elements import (
     CssSelector,
     SelectorRuleBridge,
 )
+from probo.utility import ProboSourceString
 from typing import Any, Self
 from probo.templates.resolver import TemplateResolver
 from typing import Any,Self,Optional
 
-class Component:
+class Component(ComponentNode):
     """
     The base class for all UI components in PROBO.
     Orchestrates state management, template rendering, and JIT CSS compilation.
@@ -94,12 +96,12 @@ class Component:
     _registry = {}  # Global component registry
 
     def __init__(
-        self,
-        name: str,
-        state: ComponentState = None,
-        template: str = str(),
-        props: dict = None,
-        **elements,
+            self,
+            name: str,
+            state: ComponentState = None,
+            template: str = str(),
+            props: dict = None,
+            **elements,
     ):
         self.name: str = name
         self.index: int = 0
@@ -120,7 +122,7 @@ class Component:
 
         self.props = props or {}
         self.comp_state = state or ComponentState()
-
+        ComponentNode.__init__(self)
         self.default_css_rules = list()
         self.active_css_rules = list()
         self.cmp_style = None
@@ -144,7 +146,7 @@ class Component:
 
     @classmethod
     def register(
-        cls, name: str, state: ComponentState = None, props: dict = None, *elements
+            cls, name: str, state: ComponentState = None, props: dict = None, *elements
     ):
         """Registers a new component instance."""
         comp = cls(name=name, template="".join(elements), state=state, props=props)
@@ -172,18 +174,19 @@ class Component:
         return self
 
     def add_child(self, child: "str|Component", name: str = None):
-        """Adds a child component or string content."""
-        if child:
-            if isinstance(child, type(self)):
-                self.children.update({child.name: child.render()})
-            elif isinstance(child, str) and name is not None:
-                child_obj = TemplateResolver(
-                    tmplt_str=child, load_it=True
-                ).template_resolver()
-                self.children[name] = child
-                self.children_info[name] = child_obj
-            else:
-                raise ValueError("invalid child type or no name")
+        if isinstance(child, type(self)):
+            child._set_parent(self)
+            self.children.update({child.name: child.render()})
+        elif hasattr(child, 'render') and name:
+            self.children.update({name: child.render()})
+        elif isinstance(child, str) and name is not None:
+            child_obj = TemplateResolver(
+                tmplt_str=child, load_it=True
+            ).template_resolver()
+            self.children[name] = child
+            self.children_info[name] = child_obj
+        else:
+            raise ValueError("invalid child type or no name")
 
         return self
 
@@ -204,10 +207,10 @@ class Component:
         return self
 
     def render(
-        self,
-        override_props: dict = None,
-        force_state: bool = False,
-        add_to_global: bool = False,
+            self,
+            override_props: dict = None,
+            force_state: bool = False,
+            add_to_global: bool = False,
     ) -> str | tuple:
         """
         Compiles the component into final HTML and CSS.
@@ -229,10 +232,12 @@ class Component:
         template = self.template_obj.render() if hasattr(self.template_obj,'render') else str(self.template_obj.tmplt_str)
         if self.children:
             template += "".join(list(self.children.values()))
+        if self.node_children:
+            template += "".join(list(self.children.values()))
 
         self.comp_state.incoming_props = self.props  # not quite
 
-        final_template = str(self.comp_state.resolved_template(template))
+        final_template =ProboSourceString( str(self.comp_state.resolved_template(template)))
         if self.is_root_element:
             final_template = Element(
                 tag=self.root_element_tag,
@@ -245,16 +250,16 @@ class Component:
                 *self.active_css_rules,
             )
             self.cmp_style = ComponentStyle(final_template, *valid_css)
-            return final_template, self.cmp_style.render()
+            return ProboSourceString(final_template), ProboSourceString(self.cmp_style.render())
         else:
-            return final_template
+            return ProboSourceString(final_template)
 
     def change_skin(
-        self,
-        source: dict["str", Any] | Self = None,
-        root_attr: str = None,
-        root_attr_value: str = None,
-        **root_css: dict["CssSelector", "CssRule"],
+            self,
+            source: dict["str", Any] | Self = None,
+            root_attr: str = None,
+            root_attr_value: str = None,
+            **root_css: dict["CssSelector", "CssRule"],
     ):
         """
         Applies a new skin (CSS rules) to the component.
@@ -268,7 +273,7 @@ class Component:
 
         # --- CASE 2: Component Inheritance ---
         elif hasattr(source, "active_css_rules") and isinstance(
-            source.active_css_rules, list
+                source.active_css_rules, list
         ):
             self.active_css_rules.extend(source.active_css_rules)
         # --- CASE 3: Root Inheritance (kwargs) ---

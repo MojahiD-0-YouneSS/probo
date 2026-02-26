@@ -26,7 +26,7 @@ from typing import (
     Any,
     Optional,
 )
-
+from probo.utility import ProboSourceString
 def get_widget_info(django_bound_field) -> dict[str, str]:
     """
     Analyzes a Django BoundField and returns a clean dictionary
@@ -267,14 +267,14 @@ class ProboFormField:
         **select_attrs,
     ):
         """option"""
-        content = " ".join(
+        content = ProboSourceString(" ".join(
             [
                 option(y, value=y, selected=True)
                 if x in selected_options_indexes
                 else option(y, value=y)
                 for x, y in enumerate(option_values)
             ]
-        )
+        ))
 
         info = self._make_info(select_attrs, label_string, label_attrs, content)
 
@@ -293,21 +293,21 @@ class ProboFormField:
         optgroup_content = []
         for x, y in enumerate(optgroups.values()):
             optgroup_content.append(
-                "".join(
+                ProboSourceString("".join(
                     [
                         option(v, value=v, selected=True)
                         if x in selected_options_indexes
                         else option(v, value=v)
                         for v in y
                     ]
-                )
+                ))
             )
-        content = "".join(
+        content = ProboSourceString("".join(
             [
                 optgroup(k, **{"label": v})
                 for k, v in zip(optgroup_content, optgroups.keys())
             ]
-        )
+        ))
         info = self._make_info(select_attrs, label_string, label_attrs, content)
 
         return self._field_build("select", **info)
@@ -320,7 +320,7 @@ class ProboFormField:
         label_attrs: str = None,
         **fieldset_attrs,
     ):
-        content = "".join([legend(legend_content), *form_elements])
+        content = ProboSourceString("".join([legend(legend_content), *form_elements]))
         info = self._make_info(fieldset_attrs, label_string, label_attrs, content)
 
         return self._field_build("fieldset", **info)
@@ -332,7 +332,7 @@ class ProboFormField:
         label_attrs: dict[str, str] = None,
         **data_list_attrs,
     ):
-        content = "".join([option(value=k) for k in option_value_list])
+        content = ProboSourceString("".join([option(value=k) for k in option_value_list]))
 
         info = self._make_info(data_list_attrs, label_string, label_attrs, content)
 
@@ -508,7 +508,7 @@ class ProboForm:
                 submit_btn = button("Submit", **self.override_button_attrs)
             else:
                 submit_btn = button("Submit", type="submit", Class="btn btn-lg")
-
+        fields_html = [ProboSourceString(x.render()) if hasattr(x,'render') else ProboSourceString(str(x)) for x in fields_html]
         return form(
             csrf_field,
             *fields_html,

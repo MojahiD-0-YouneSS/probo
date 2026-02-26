@@ -1,6 +1,7 @@
 # probo/core/tree.py
 import uuid
 from typing import List, Optional, Callable, Any, Self
+from probo.utility import ProboSourceString
 
 class ElementNodeMixin:
     """Adds hierarchical tree capabilities and traversal methods to a class.
@@ -17,7 +18,7 @@ class ElementNodeMixin:
     __slots__ = ()
 
     def __init__(self):
-        self.children = []
+        self.node_children = []
         self.parent = None
         self.__void_node = False
 
@@ -42,7 +43,11 @@ class ElementNodeMixin:
                 if isinstance(item, ElementNodeMixin):
                     self.add(item)
         cls._set_node_children = __normalize_node_children
-    
+
+    @property
+    def children_nodes(self):
+        return self.node_children
+
     def add(self, child: Any, index: Optional[int] = None) -> 'ElementNodeMixin':
         """Adds a child node and establishes the parent linkage.
 
@@ -65,9 +70,9 @@ class ElementNodeMixin:
             child.parent = self
             
         if index is None:
-            self.children.append(child)
+            self.node_children.append(child)
         else:
-            self.children.insert(index, child)
+            self.node_children.insert(index, child)
         if hasattr(self,'content'):
             self.content.append(child)
         return self
@@ -81,8 +86,8 @@ class ElementNodeMixin:
         Returns:
             The current instance for method chaining.
         """
-        if child in self.children:
-            self.children.remove(child)
+        if child in self.node_children:
+            self.node_children.remove(child)
             if hasattr(child, 'parent'):
                 child.parent = None
             if hasattr(self,'content'):
@@ -132,7 +137,7 @@ class ElementNodeMixin:
         if predicate(self):
             return self
         
-        for child in self.children:
+        for child in self.node_children:
             if hasattr(child, 'find'):
                 result = child.find(predicate)
                 if result:
@@ -152,7 +157,7 @@ class ElementNodeMixin:
         if predicate(self):
             results.append(self)
             
-        for child in self.children:
+        for child in self.node_children:
             if hasattr(child, 'find_all'):
                 results.extend(child.find_all(predicate))
         return results
@@ -229,3 +234,91 @@ class ElementNodeMixin:
             content_list[idx] = new_child
             target.content = tuple(content_list)
         return self
+
+from probo.components.base import BaseHTMLElement
+
+class ProxyElement(BaseHTMLElement, ElementNodeMixin):
+    __slots__ = ('_proxy_tag', '_logic_obj', 'render_callable')
+    def __init__(self, tag,*content,**attrs):
+        super().__init__(*content,**attrs)
+        ElementNodeMixin.__init__(self)
+        self._proxy_tag = tag
+        self._logic_obj=None
+        self.render_callable:Callable=None
+        self._set_node_children(content)
+    def load_logic(self,logic_obj):
+        self._logic_obj=logic_obj
+    def load_render_logic(self,render_logic:Callable):
+        self.render_callable=render_logic
+    def render(self):
+        if self._logic_obj and self.render_callable:
+            return ProboSourceString(self.render_callable(self._logic_obj))
+        if not self._logic_obj and self.render_callable:
+            return ProboSourceString(self.render_callable())
+        if self._logic_obj and hasattr(self._logic_obj,'render'):
+            return ProboSourceString(self._logic_obj.render())
+        from probo.components.elements import Element
+        if self._proxy_tag:
+            return Element(tag=self._proxy_tag,content=self._get_rendered_content(),**self.attributes).element
+
+class ComponentNode(ElementNodeMixin):
+    """
+    A Mixin for ProboUI Components to enable node tree capabilities.
+    Handles parent-child relationships, depth tracking, and child indexing.
+    """
+    __slots__ = ('_parent', '_node_depth', '_children_count','parent','node_children', '_ElementNodeMixin__void_node')
+
+    def __init__(self):
+        self._parent: Optional['ComponentNode'] = None
+        self._node_depth: int = 0
+        self._children_count: int = 0
+
+        ElementNodeMixin.__init__(self)
+    @property
+    def get_parent(self) -> Optional['ComponentNode']:
+        return self._parent
+
+    @property
+    def depth(self) -> int:
+        return self._node_depth
+
+    @property
+    def children_count(self) -> int:
+        """Returns the current number of registered child nodes."""
+        return self._children_count
+    @property
+    def node_children_count(self) -> int:
+        """Returns the current number of registered child nodes."""
+        return  len(self.node_children)
+
+    def _set_parent(self, parent_node: 'ComponentNode'):
+        """Internal method to link the node to the tree."""
+        if parent_node and parent_node != self:
+            self._parent = parent_node
+            self._node_depth = parent_node.depth + 1
+            # Propagate the new child count to the parent
+            parent_node._increment_children()
+
+    def _increment_children(self):
+        """Internal counter update."""
+        self._children_count += 1
+
+    def get_root(self) -> 'ComponentNode':
+        """Traverses up the tree to find the top-level component."""
+        curr = self
+        while curr._parent:
+            curr = curr._parent
+        return curr
+
+    def is_descendant_of(self, other: 'ComponentNode') -> bool:
+        """Efficiently checks hierarchy using depth."""
+        if self.depth <= other.depth:
+            return False
+        curr = self._parent
+        while curr:
+            if curr == other:
+                return True
+            if curr.depth <= other.depth:
+                break
+            curr = curr._parent
+        return False

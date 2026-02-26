@@ -32,7 +32,7 @@ def test_nesting():
     """Test that elements render children correctly recursively."""
     element = div(span("Child 1"), div("Child 2"), Class="parent")
     # Note: Your renderer likely produces minified HTML (no newlines)
-    expected = '<div class="parent"> <span>Child 1</span> <div>Child 2</div></div>'
+    expected = '<div class="parent"><span>Child 1</span><div>Child 2</div></div>'
     assert element == expected
 
 

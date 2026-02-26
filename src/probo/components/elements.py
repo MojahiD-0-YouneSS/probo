@@ -8,7 +8,7 @@ import tempfile
 import webbrowser
 import os
 from collections import OrderedDict
-from probo.utility import render_attributes,markup_escape
+from probo.utility import render_attributes, markup_escape, ProboSourceString
 from typing import Any, Self
 
 MARKER = chr(31)
@@ -314,7 +314,7 @@ class Element:
         is_sibling=False,
         set_as_content=False,
         append_to_end=True,
-        escape=False,
+        escape=True,
         **kwargs,
     ):
         if is_sibling and not reset_sibling:
@@ -325,9 +325,7 @@ class Element:
         self.attrs.update(kwargs)
         content=''
         if args:
-            content = self._element_parser(*args,)
-            if escape:
-                content=markup_escape(content)
+            content = self._element_parser(*args,escape=escape)
 
         if (
             not is_sibling
@@ -352,9 +350,9 @@ class Element:
             self.element = string.split(MARKER)
         else:
             if self.is_natural:
-                self.element = string.replace(MARKER, "\n")
+                self.element = ProboSourceString(string.replace(MARKER, "\n"))
             else:
-                self.element = string.replace(MARKER, "")
+                self.element = ProboSourceString(string.replace(MARKER, ""))
         if self.use_sibling and self.element and not set_as_content:
             self.sibling_element += self.element
         if set_as_content:
@@ -367,7 +365,7 @@ class Element:
         self.attrs.clear()
         return self
 
-    def _element_parser(self, *args,) -> str:
+    def _element_parser(self, *args,escape=True) -> str:
         """Parses mixed arguments into structured HTML components.
 
         Accepts a flexible variety of arguments to determine the tag,
@@ -380,6 +378,9 @@ class Element:
             dict: A dictionary containing  'content'.
         """
         if len(args) == 1 and type(args[0]) is str:
+            if escape:
+                arg = markup_escape(args[0])
+                return arg
             return args[0]
 
         tag = None
@@ -390,6 +391,7 @@ class Element:
         sub_content = ""
 
         for arg in args:
+
             if is_sub_content:
                 sub_content = str(arg)
                 is_sub_content = False
@@ -398,13 +400,23 @@ class Element:
                 tag = Tag.get(arg)
                 is_sub_content = True
             elif type(arg) is str:
+                if escape:
+                    arg = markup_escape(arg)
                 content += f" {arg}"
+            elif type(arg) is ProboSourceString:
+                content += arg
             elif type(arg) is dict:
                 attrs_dict.update(arg)
             elif hasattr(arg,'render'):
-                content += str(arg.render())
+                if escape:
+                    out_put = arg.render()
+                    if type(out_put) is not ProboSourceString:
+                        arg = markup_escape(out_put)
+                        content += arg
+                    else:
+                        content += out_put
             else:
-                content += str(arg)
+                content += markup_escape(str(arg))
         if tag:
 
             netsed_el = self.custom_element(
@@ -977,7 +989,7 @@ class Template:
         # html(...) wraps head and body
 
         # Note: We use your functional tags here
-        document = (
+        document = ProboSourceString(
             Element().doctype().element
             + Element()
             .set_attrs(lang="en")

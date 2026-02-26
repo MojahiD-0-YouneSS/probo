@@ -5,6 +5,11 @@ import html
 _html_escape = html.escape
 MARKER = "\u200b"
 
+class ProboSourceString(str):
+    __slots__=()
+    def __html__(self):
+        return self
+
 def markup_escape(value: Any) -> str:
     """
     The 'Zero-Tax' Escaper.

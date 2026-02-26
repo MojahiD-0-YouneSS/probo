@@ -31,28 +31,28 @@ def test_chaining_integrity():
     """Test if .add().add() actually builds a flat list of siblings."""
     parent = Node()
     parent.add(Node("a")).add(Node("b")).add(Node("c"))
-    assert len(parent.children) == 3
+    assert len(parent.node_children) == 3
 
 def test_parent_linkage(complex_tree):
     """Verify child knows its parent and parent knows its child."""
     root, body, _, _ = complex_tree
     assert body.parent == root
-    assert body in root.children
+    assert body in root.node_children
 
 def test_migration_singleton(complex_tree):
     """CRITICAL: If a node is added to a new parent, it must leave the old one."""
     root, body, main, nav = complex_tree
-    section = main.pop(main.children[0])
+    section = main.pop(main.node_children[0])
     
     nav.add(section) # Move section from main to nav
     
     assert section.parent == nav
-    assert section not in main.children
-    assert section in nav.children
+    assert section not in main.node_children
+    assert section in nav.node_children
 
 def test_depth_logic(complex_tree):
     root, _, main, _ = complex_tree
-    deep_child = main.children[0]
+    deep_child = main.node_children[0]
     assert root.get_tree_depth() == 0
     assert deep_child.get_tree_depth() == 3
 
@@ -70,11 +70,11 @@ def test_find_all_by_tag(complex_tree):
 def test_remove_orphan_logic(complex_tree):
     root, body, _, _ = complex_tree
     body.remove(root) # Attempt to remove something not there (should fail silently)
-    assert len(body.children) == 2
+    assert len(body.node_children) == 2
     
-    child = body.pop(body.children[0])
+    child = body.pop(body.node_children[0])
     assert child.parent is None
-    assert len(body.children)==1
+    assert len(body.node_children)==1
 
 def test_find_non_existent(complex_tree):
     root = complex_tree[0]
@@ -90,7 +90,7 @@ def test_self_reference_prevention():
     """Prevent a node from adding itself as a child."""
     n = Node()
     n.add(n)
-    assert len(n.children) == 0
+    assert len(n.node_children) == 0
 
 def test_complex_predicate(complex_tree):
     """Search using multiple attributes."""
@@ -114,7 +114,7 @@ def test_sibling_insertion():
     root = Node()
     root.add(Node("last"))
     root.add(Node("first"), index=0)
-    assert root.children[0].tag == "first"
+    assert root.node_children[0].tag == "first"
 
 def test_find_all_empty_tree():
     n = Node()
@@ -142,7 +142,7 @@ def test_tree_breadth_stress():
     root = Node()
     for i in range(1000):
         root.add(Node(id=str(i)))
-    assert len(root.children) == 1000
+    assert len(root.node_children) == 1000
     assert root.find(lambda n: n.id == "999") is not None
 
 def test_removing_already_removed_node():

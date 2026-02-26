@@ -45,7 +45,6 @@ def test_render_with_es_and_cs():
         es,  # Register ES with CS
         s_data={"header_text": "Hello World"},
     )
-
     # 3. Setup Component (Using placeholder in template)
     # Note: Component must know how to find es.placeholder in the template
     comp = Component(name="Main", template=div(es.placeholder), state=cs)
