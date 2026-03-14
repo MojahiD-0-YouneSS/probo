@@ -3083,6 +3083,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#probo.templates.default_templates.welcome_template_tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        welcome_template_tree
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3493,6 +3504,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#probo.templates.default_templates.welcome_template_tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        welcome_template_tree
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3557,7 +3579,7 @@
 
 
 <h3 id="probo.templates.default_templates.base_template_string" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">base_template_string</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">base_template_string</span><span class="p">(</span><span class="n">head_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">body_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overide_head</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overide_body</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">base_title</span><span class="o">=</span><span class="s1">&#39;My Project&#39;</span><span class="p">)</span></code>
 
 </h3>
 
@@ -3587,30 +3609,45 @@ and a responsive navigation bar as a default structural example.</p>
 <li><strong>Serialization</strong>: Wraps the final output in a <code>Template</code> object 
   marked as the system base.</li>
 </ul>
-</details>
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-<th>Name</th>          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-<td><code>Template</code></td>            <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>A ProboUI Template object loaded with the serialized HTML 
-and the necessary DOCTYPE declaration.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
+<p>DOCTYPE (Root)
+└── HTML [lang="en"]
+    ├── HEAD
+    │   ├── META [charset="UTF-8"]
+    │   ├── META [http-equiv="x-ua-compatible"]
+    │   ├── META [viewport]
+    │   ├── META [description]
+    │   ├── META [author]
+    │   ├── TITLE ("my project is cool")
+    │   ├── LINK [favicon]
+    │   ├── LINK [bootstrap.css]
+    │   ├── STYLE
+    │   ├── SCRIPT [htmx.js]
+    │   ├── SCRIPT [bootstrap.js]
+    │   └── SCRIPT [project.js]
+    └── BODY
+        ├── DIV [Class="mb-1"] (Navbar Wrapper)
+        │   └── NAV [Class="navbar..."]
+        │       └── DIV [Class="container-fluid"]
+        │           ├── BUTTON (Navbar Toggler)
+        │           │   └── SPAN [Class="navbar-toggler-icon"]
+        │           ├── A [Class="navbar-brand"] ("mvp_base")
+        │           └── DIV [Id="navbarSupportedContent"] (Collapse)
+        │               └── UL [Class="navbar-nav mr-auto"]
+        │                   ├── LI -&gt; A ("home")
+        │                   ├── LI -&gt; A ("about")
+        │                   └── LI -&gt; A ("log in")
+        ├── DIV [Class="container"] (Main Content Container)
+        │   └── SPAN [hx-get="/contact"] ("click me")
+        └── SCRIPT ("")</p>
+</details>        <p>Args:
+    head_list: type list[str] a list of head safe elements to be passed to head section.
+    body_list: type list[str] a list of body safe elements to be passed to body section.
+    overide_head: type bool if True, the default head block will not be rendered and only the head_list elements will be rendered in the head section.
+    overide_body: type bool if True, the default body block will not be rendered and only the body_list elements will be rendered in the body section.
+    base_title: type str the title for the HTML document.
+Returns:
+    Template: A ProboUI Template object loaded with the serialized HTML 
+        and the necessary DOCTYPE declaration.</p>
 
 
     </div>
@@ -3621,7 +3658,7 @@ and the necessary DOCTYPE declaration.</p>
 
 
 <h3 id="probo.templates.default_templates.base_template_tree" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">base_template_tree</span><span class="p">()</span></code>
+            <code class="highlight language-python"><span class="n">base_template_tree</span><span class="p">(</span><span class="n">head_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">body_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overide_head</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overide_body</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -3629,29 +3666,51 @@ and the necessary DOCTYPE declaration.</p>
     <div class="doc doc-contents ">
 
         <p>Generates the primary HTML tree shell and boilerplate for a ProboUI application.</p>
-<p>This function acts as the "Master Layout" or "Main Entry Point" for the 
-application's DOM structure. It demonstrates the integration of three 
+<p>This function acts as the "Master Layout" or "Main Entry Point" for the
+application's DOM structure. It demonstrates the integration of three
 core ProboUI pillars:
 1.  <strong>Tag Functions</strong>: Programmatic generation of HTML (head, body, nav, etc.).
-2.  <strong>HTMX Integration</strong>: Declarative AJAX and partial DOM updates using <code>HX()</code> 
+2.  <strong>HTMX Integration</strong>: Declarative AJAX and partial DOM updates using <code>HX()</code>
     and <code>HXE()</code>.
 3.  <strong>Bootstrap 5 Styling</strong>: JIT-resolved utility classes via <code>BS5ElementStyle</code>.</p>
-<p>The template includes standard SEO meta tags, Bootstrap 5 CSS/JS CDN links, 
-and a responsive navigation bar as a default structural example.</p>
+<p>The template includes standard SEO meta tags, Bootstrap 5 CSS/JS CDN links,
+and a responsive navigation bar as a default structural example.
+Args:
+    head_nodes: a list of head safe node elements to be passed to head section.
+    body_nodes: a list of body safe node elements to be passed to body section.
+    overide_head: type bool if True, the default head block will not be rendered and only the head_nodes elements will be rendered in the head section.
+    overide_body: type bool if True, the default body block will not be rendered and only the body_nodes elements will be rendered in the body section.</p>
 
 
 <details class="detailed-workflow" open>
   <summary>Detailed Workflow</summary>
   <ul>
 <li><strong>Head Generation</strong>: Configures viewport, charset, and external assets.</li>
-<li><strong>Navigation Bar</strong>: Constructs a responsive Bootstrap navbar using 
+<li><strong>Navigation Bar</strong>: Constructs a responsive Bootstrap navbar using
   nested functional tags.</li>
-<li><strong>HTMX Trigger</strong>: Includes an example of a <code>span</code> element utilizing 
+<li><strong>HTMX Trigger</strong>: Includes an example of a <code>span</code> element utilizing
   HTMX for dynamic content swapping via <code>HXE()</code>.</li>
-<li><strong>Serialization</strong>: Wraps the final output in a <code>Template</code> object 
+<li><strong>Serialization</strong>: Wraps the final output in a <code>Template</code> object
   marked as the system base.</li>
 </ul>
-</details>
+</details>        <p>BASE_TEMPLATE_TREE_MAP :
+DOCTYPE (Root)
+└── HTML [lang="en"]
+    ├── HEAD
+    │   ├── META [charset="UTF-8"]
+    │   ├── META [http-equiv="x-ua-compatible"]
+    │   ├── META [viewport]
+    │   ├── META [description]
+    │   ├── META [author]
+    │   ├── TITLE ("my project is cool")
+    │   ├── LINK [favicon]
+    │   ├── LINK [bootstrap.css]
+    │   ├── STYLE
+    │   ├── SCRIPT [htmx.js]
+    │   ├── SCRIPT [bootstrap.js]
+    │   └── SCRIPT [project.js]
+    └── BODY</p>
+
 
     <p><span class="doc-section-title">Returns:</span></p>
     <table>
@@ -3668,13 +3727,49 @@ and a responsive navigation bar as a default structural example.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>A ProboUI Template object loaded with the serialized HTML 
+                <p>A ProboUI Template object loaded with the serialized HTML
 and the necessary DOCTYPE declaration.</p>
               </div>
             </td>
           </tr>
       </tbody>
     </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="probo.templates.default_templates.welcome_template_tree" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">welcome_template_tree</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DOCTYPE (Root)
+└── HTML [lang="en"]
+    ├── HEAD (Inherited from base_template_tree)
+    │   └── STYLE (Custom .elephant-launch &amp; .card-link animations)
+    └── BODY
+        └── MAIN [style="min-height: 100vh; ..."]
+            ├── SECTION (Hero Section)
+            │   └── DIV [style="text-align: center; ..."]
+            │       ├── SPAN ("🐘") [animation="float 3s..."]
+            │       ├── H1 ("The install worked successfully!")
+            │       └── P ("You are seeing this page because...")
+            ├── SECTION (Documentation Links)
+            │   └── DIV [style="display: grid; ..."]
+            │       ├── A ("Documentation") -&gt; H2, P
+            │       ├── A ("Tutorial") -&gt; H2, P
+            │       └── A ("Community") -&gt; H2, P
+            └── FOOTER (Status Bar)
+                └── DIV [style="border-top: 1px solid..."]
+                    └── P ("Probo UI v1.3.0 — 800+ Tests Passed")</p>
 
 
     </div>

@@ -4411,11 +4411,21 @@ properties and their values (e.g., color="red", margin_top="10px").</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>str</code></td>            <td>
-                  <code><span title="str">str</span></code>
+                  <code><span title="str">str</span> | <span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
                 <p>A formatted CSS string or a full HTML style attribute.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><span title="str">str</span> | <span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>dict[str, str]: A dictionary with a single "style" key and the formatted CSS string as its value.</p>
               </div>
             </td>
           </tr>
