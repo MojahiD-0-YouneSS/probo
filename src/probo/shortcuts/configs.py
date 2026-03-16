@@ -43,11 +43,11 @@ class ElementStateConfig:
     s_state: str = field(default_factory=str)
     d_state: str = field(default_factory=str)
     c_state: str = field(default_factory=str)
-    is_custom = False
+    is_custom:bool = False
     props: StateProps = field(default_factory=StateProps)
     bind_to: str = field(default_factory=str)
-    i_state = False
-    hide_dynamic = False
+    i_state: bool = False
+    hide_dynamic: bool = False
     is_void_element: bool = False
     attrs: Dict[str, Any] = field(default_factory=dict)
 
@@ -107,14 +107,10 @@ class StyleConfig:
             appended to the root element's class attribute.
     """
 
-    # 1. JIT CSS Rules (Dict or List of Rules)
     css: Union[Dict, List[CssRule]] = field(default_factory=dict)
 
-    # 2. Root Element Overrides (Inline styles or specific ID styling)
     root_css: Dict[str, str] = field(default_factory=dict)
 
-    # 3. Bootstrap 5 Support
-    # List of classes to auto-append to the root element (e.g. ['card', 'p-3'])
     root_bs5_classes: List[str] = field(default_factory=list)
 
 @dataclass

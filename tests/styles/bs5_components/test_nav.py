@@ -11,7 +11,7 @@ def test_bs5_nav_render_basic():
 
     # Add items manually to test API
     nav.add_nav_item("Link 1")
-    nav.add_nav_link("Active Link", active=True, href="#",)
+    nav.add_nav_link("Active Link", active=True, url="#",)
 
     html = nav.render()
 
@@ -50,7 +50,7 @@ def test_bs5_nav_render_vertical():
 def test_bs5_nav_fluent_links():
     """4. Render using add_nav_link shortcut."""
     nav = BS5Nav()
-    nav.add_nav_link("Home", href="/")
+    nav.add_nav_link("Home", url="/")
     nav.add_nav_link("Disabled", Class='disabled')
 
     html = nav.render()

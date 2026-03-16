@@ -90,8 +90,8 @@ def test_tree_proxy_rendering():
     outer.add(inner)
     outer.add(P('hello'))
     rendered = outer.render()
-    print(rendered)
-    assert "<div><span>Inner</span><p>hello</p></div>" in rendered
+
+    assert '<div class="container"><span>Inner</span><p>hello</p></div>' in rendered
 
 def test_logic_reload_efficiency():
     """Ensures logic can be swapped without re-instantiating the node."""

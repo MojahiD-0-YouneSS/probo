@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
 from collections import deque
-from typing import Dict, Union, Self,Any
+from typing import Dict, Union, Self, Any
+
 class ElementAttributeManipulator:
     """
     ElementAttributeManipulator handles the core logic for attribute and class manipulation.
@@ -203,7 +204,7 @@ class ElementAttributeManipulator:
                 self.set_attr(clean_key, value)
         return self
     
-    def _normalize_attr_key(self,key:str):
+    def _normalize_attr_key(self,key:str)->str:
         """
         Internal utility to convert Pythonic keys to valid HTML/SVG attributes.
         For example: 'stroke_width' -> 'stroke-width' and 'Class' -> 'class'.
@@ -369,7 +370,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
-    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node')
+    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node', 'element_tag')
 
     def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
         """
@@ -381,6 +382,7 @@ class BaseHTMLElement(ABC):
                       (e.g., class_='my-class', id='my-id', style='color: red;').
         """
         self.content = deque(content)
+        self.element_tag=''
         self.attributes = kwargs
     
     @property
@@ -404,7 +406,8 @@ class BaseHTMLElement(ABC):
         Returns:
             A string containing the concatenated HTML of all child items.
         """
-        is_nested_iter = any([not isinstance(x, (str, bytes)) for x in self.content])
+        is_nested_iter = any([not isinstance(x, (str, bytes,int, float)) for x in self.content])
+
         if not is_nested_iter:
             return "".join(
                 [

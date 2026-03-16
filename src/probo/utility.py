@@ -148,7 +148,7 @@ class EnumLookUPMixin:
         'Thaws' the Enum members into raw sets and dicts for high-speed access.
         Call this once after defining your Enum.
         """
-        cls.keys_set = {m.name.lower() for m in cls}
+        cls.keys_set = set(cls._member_names_)
         cls.values_map = {m.name.lower(): m for m in cls}
         # Check if the Enum value has a metadata dict with 'void'
         cls.void_set = {

@@ -1,9 +1,9 @@
 # context_logic/processor.py
 import re
-from typing import Any, Optional, Callable, Dict
+from typing import Any, Optional, Callable, Dict, Self, Iterable
 from dataclasses import dataclass, field
 from collections.abc import Iterable
-
+from probo.utility import ProboSourceString
 
 class TemplateProcessor:
     """
@@ -13,7 +13,7 @@ class TemplateProcessor:
 
     SUPPORTED_STYLES = ["django", "probo"]
     __slots__ = ('_global_data_context')
-    def __init__(self, data_context: dict = None):
+    def __init__(self, data_context: dict = None)->None:
         """
         Initializes the processor with a global data context.
 
@@ -151,7 +151,7 @@ class TemplateProcessor:
             for item in iterable:
                 local_context = {**context, loop_var: item}
                 result.append(self._process_template_block(loop_content, local_context))
-            return "".join(result)
+            return ProboSourceString("".join(result))
 
         return for_pattern.sub(repl, text)
 
@@ -200,8 +200,8 @@ class TemplateProcessor:
 
     @staticmethod
     def if_true(
-        expression, if_block, style="probo", else_statement=None, **elif_statements
-    ):
+        expression, if_block, style="probo", else_statement=None, **elif_statements:dict[str,Any]
+    ) -> str:
         """
         Generates a conditional block string in the specified style (MUI or Django).
 
@@ -228,7 +228,7 @@ class TemplateProcessor:
                 + "</$if>"
             )
         elif style == "django":
-            return (
+            return ProboSourceString(
                 f"{{% if {expression} %}}{if_block}"
                 + "".join(
                     [
@@ -243,7 +243,7 @@ class TemplateProcessor:
             return ""
 
     @staticmethod
-    def for_loop(expression, for_block, style="probo", empty_content=None):
+    def for_loop(expression, for_block, style="probo", empty_content: str | None = None) -> str:
         """
         Generates a for-loop block string in the specified style.
 
@@ -258,16 +258,16 @@ class TemplateProcessor:
         """
         empty = f"{{% empty %}} {empty_content}" if empty_content else ""
         if style == "probo":
-            return f"<$for {expression}>{for_block}</$for>"
+            return ProboSourceString(f"<$for {expression}>{for_block}</$for>")
         elif style == "django":
-            return f"{{% for {expression} %}}{for_block}{empty}{{% endfor %}}"
+            return ProboSourceString(f"{{% for {expression} %}}{for_block}{empty}{{% endfor %}}")
         else:
             return ""
 
     @staticmethod
     def set_variable(
-        expression,
-    ):
+        expression:str,
+    )->str:
         """
         Generates a variable output string.
 
@@ -277,9 +277,9 @@ class TemplateProcessor:
         Returns:
             str: The formatted variable string (e.g., "{{ user.name }}").
         """
-        return f" {{{{ {expression} }}}}"
+        return ProboSourceString(f" {{{{ {expression} }}}}")
 
-def loop(data, renderer):
+def loop(data:int|dict[Any,Any]|Iterable, renderer:Callable | str |None= None) -> list:
     """
     Iterates over data and generates elements using a renderer function.
 
@@ -316,20 +316,20 @@ def loop(data, renderer):
             if isinstance(data, dict):
                 # For dicts, unpack key and value: renderer(key, value)
                 key, value = item
-                results.append(renderer(key, value))
+                results.append(ProboSourceString(renderer(key, value)))
             else:
                 # For lists/ints, pass the single item: renderer(item)
-                results.append(renderer(item))
+                results.append(ProboSourceString(renderer(item)))
     return results
 
 class TemplateComponentMap:
     """Template Components Map is the cordinator that serves the right component to spesific view"""
     __slots__ = ('url_name_comp','r_props')
-    def __init__(self, r_props: dict[str, Any] = None, **url_name_comp):
+    def __init__(self, r_props: dict[str, Any] = None, **url_name_comp: dict[str, Any]) -> None:
         self.url_name_comp = url_name_comp
         self.r_props = r_props or {}
 
-    def get_component(self, url_name) -> str | tuple:
+    def get_component(self, url_name:str) -> str | tuple:
         """
         Retrieves a component associated with a URL name and injects request properties.
 
@@ -353,21 +353,21 @@ class TemplateComponentMap:
         else:
             raise ValueError("no such url maping")
 
-    def set_component(self, url_name=None, component_name=None, **url_name_comp):
+    def set_component(self, url_name:str|None=None, component:Any|None=None, **url_name_comp:dict[str, Any]) -> Self:
         """
         Registers new components or updates existing mappings.
 
         Args:
             url_name (str, optional): The specific URL key to update.
-            component_name (object, optional): The component object to associate.
+            component (object, optional): The component object to associate.
             **url_name_comp: Additional mappings passed as keyword arguments.
 
         Returns:
             TemplateComponentMap: Self, allowing for method chaining.
         """
         self.url_name_comp.update(url_name_comp)
-        if url_name and component_name:
-            self.url_name_comp[url_name] = component_name
+        if url_name and component:
+            self.url_name_comp[url_name] = component
         return self
 
 @dataclass
@@ -378,17 +378,17 @@ class StaticData:
 
     static_data: dict[str, Any]
 
-    def get(self, Value):
+    def get(self, key:str)->Any:
         """
         Retrieves a value from the static data dictionary.
 
         Args:
-            Value (str): The key to look up.
+            key (str): The key to look up.
 
         Returns:
             Any: The value associated with the key, or None if not found.
         """
-        return self.static_data.get(Value, None)
+        return self.static_data.get(key, None)
 
 @dataclass
 class DynamicData:
@@ -410,17 +410,17 @@ class DynamicData:
         elif isinstance(self.data_obj, dict):
             self.dynamic_data = self.data_obj
 
-    def get(self, Value):
+    def get(self, key: str) -> Any:
         """
         Retrieves a value from the processed dynamic data.
 
         Args:
-            Value (str): The key to look up.
+            key (str): The key to look up.
 
         Returns:
             Any: The value associated with the key, or None if not found.
         """
-        return self.dynamic_data.get(Value, None)
+        return self.dynamic_data.get(key, None)
 
     # Optional: Keep this if you want a "Safe Accessor" that ensures a Dict return type
     @property

@@ -1,6 +1,6 @@
 from probo.components.component import Component
 from probo.components.state.component_state import ComponentState
-from typing import List, Union, Dict
+from typing import List, Union, Dict, Any, Self
 
 class BaseComponent(Component):
     """The Single Source of Truth for the ProboUI Component Tree.
@@ -51,7 +51,7 @@ class BS5Component(BaseComponent):
             state=ComponentState(**state_props)
         super().__init__(name=name, state=state, template=self.template, props=props)
 
-    def include_env_props(self,**props):
+    def include_env_props(self,**props:dict[str,Any])->Self:
         """Merges environment-specific properties into the component's property dictionary.
 
         Returns:
@@ -60,7 +60,7 @@ class BS5Component(BaseComponent):
         self.props.update(props)
         return self
     
-    def add_child(self,child):
+    def add_child(self,child:str|Any)->Self:
         """Appends a child component or raw HTML string to the children list.
 
         Args:
@@ -71,10 +71,10 @@ class BS5Component(BaseComponent):
         """
         self.children.append((child.render() if hasattr(child,'render') else str(child)))
         return self
-    def swap_element(self,tag):
+    def swap_element(self,tag:str)->Self:
         """Dynamically changes the HTML tag of the rendered component.
 
-        Useful for changing a <div> to a <section> or a <button> to an <a> 
+        Useful for changing a "div" to a "section" or a "button" to an "a" 
         without rebuilding the entire component logic.
 
         Args:
@@ -83,7 +83,7 @@ class BS5Component(BaseComponent):
         self.tag = tag
         self.template.tag=tag
         return self
-    def include_content_parts(self,*parts,first=False):
+    def include_content_parts(self,*parts:tuple[str|type['BS5Element']],first:bool=False)->Self:
         """Injects content directly into the underlying BS5Element template.
 
         Args:

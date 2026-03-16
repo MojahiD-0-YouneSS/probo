@@ -22,6 +22,7 @@ app = typer.Typer(
 console = Console()
 VERSION = "1.2.0"
 
+
 def load_tcm_registry(path: Path):
     """
     Dynamically loads the 'probo_tcm.py' file from the user's project.
@@ -52,10 +53,12 @@ def load_tcm_registry(path: Path):
         console.print(f"[red] Error loading registry: {e}[/red]")
         raise typer.Exit(code=1)
 
+
 try:
     import readline
     import rlcompleter
-    if 'libedit' in readline.__doc__:
+
+    if "libedit" in readline.__doc__:
         readline.parse_and_bind("bind ^I rl_complete")
     else:
         readline.parse_and_bind("tab: complete")
@@ -63,26 +66,31 @@ except ImportError:
     # On some systems (like Windows without pyreadline), this might fail
     pass
 
+
 class ProboConsole(python_code.InteractiveConsole):
     """
-    A custom Python console that intercepts input to allow 'naked' 
+    A custom Python console that intercepts input to allow 'naked'
     Emmet shorthand without quotes.
     """
+
     def push(self, line):
         # 1. Look for Emmet markers: starts with a tag, contains #, ., -c, or -s
         # We check if it's NOT already quoted and looks like shorthand
-        is_shorthand = any(marker in line for marker in [' -c ', ' -s ', ' #', ' .'])
-        
+        is_shorthand = any(marker in line for marker in [" -c ", " -s ", " #", " ."])
+
         # Also check if it starts with a common tag followed by a space
-        common_tags = ['div', 'p', 'span', 'section', 'h1', 'h2', 'h3', 'a', 'ul', 'li']
+        common_tags = ["div", "p", "span", "section", "h1", "h2", "h3", "a", "ul", "li"]
         starts_with_tag = any(line.strip().startswith(tag + " ") for tag in common_tags)
 
-        if (is_shorthand or starts_with_tag) and not (line.strip().startswith('"') or line.strip().startswith("'")):
+        if (is_shorthand or starts_with_tag) and not (
+            line.strip().startswith('"') or line.strip().startswith("'")
+        ):
             # Auto-wrap the line in quotes so Python treats it as a string
             line = f'"{line.strip()}"'
-        
+
         # 2. Pass the (potentially modified) line to the real Python interpreter
         return super().push(line)
+
 
 def save_to_dist(value, filename="index.html"):
     """
@@ -91,27 +99,31 @@ def save_to_dist(value, filename="index.html"):
     dist_path = "dist"
     if not os.path.exists(dist_path):
         os.makedirs(dist_path)
-    
+
     file_path = os.path.join(dist_path, filename)
-    
+
     # Handle renderable objects or strings
     html_content = value.render() if hasattr(value, "render") else str(value)
-    
+
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(html_content)
-    
+
     console.print(f"[bold green]✓[/bold green] Exported to [cyan]{file_path}[/cyan]")
 
+
 # --- ARCHITECTURE DEFINITIONS ---
+
 
 class DjangoStructure(str, Enum):
     BASE = "base"  # Standard Django (MVT)
     HACKSOFT = "hacksoft"  # Domain-Driven (Services/Selectors)
     PROBO_DJ = "probo-dj"  # Enterprise (Split Views/Forms + Root Utils)
 
+
 # ==============================================================================
 #  1. PURE PROBO PROJECT (Standalone)
 # ==============================================================================
+
 
 @app.command("init")
 def init(name: str):
@@ -138,19 +150,32 @@ def init(name: str):
     # 1. The Entry Point
     (project_dir / "main.py").write_text(
         f"""from probo.router import ProboRouter
-from probo import div, h1
+from pages.index import index_document
+from components.greeting import greeting_component
+from probo.templates import welcome_template_tree
 
 router = ProboRouter(app_name="{name}")
 
 if __name__ == "__main__":
-    print("Building static {name} site...")
+    print("Building static ''{name}'' site...")
+
     router.load_tcm()
+
     @router.page("/")
-    def home_view(request,response):
-        return {{'greeting':div(
-            h1("Welcome to {name}"),
-        )}}
-    router.run(port=8080) # any port is okay :)
+    def welcome_view():
+        return welcome_template_tree()
+
+    @router.page("/startup/page")
+    def home_view():
+        index_document.html_doc.find(lambda n:n.element_tag == "title").content.append("{name}")
+        return index_document
+
+    @router.page("/greeting")
+    def update_view():
+        return greeting_component('{name}!!')
+
+    router.run() 
+
 """,
         encoding="utf-8",
     )
@@ -170,10 +195,156 @@ tcm = TemplateComponentMap()
     # 3. The Components Layer
     (project_dir / "components").mkdir()
     (project_dir / "components" / "__init__.py").touch()
-    (project_dir / "components" / "header.py").touch()
+    (project_dir / "components" / "greeting.py").write_text(
+        '''from typing import Optional
+from probo import DIV, H1, P, SPAN, IMG
+from probo.styles import element_style
+
+
+def greeting_component(
+    user_name: str,
+    message: str = "Welcome back to your page.",
+    avatar_url: Optional[str] = None,
+    theme_color: str = "#1e40af",
+):
+    """
+    A professional Greeting Component for ProboUI.
+    
+    Demonstrates:
+    1. JIT Element Styling
+    2. Optional Node Injection (Avatar)
+    3. Attribute Merging
+    """
+
+    # 1. Define Component-Specific Styles
+    card_style = element_style(
+        background_color="#ffffff",
+        padding="24px",
+        border_radius="16px",
+        border=f"1px solid #e2e8f0",
+        display="flex",
+        align_items="center",
+        gap="20px",
+        box_shadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+    )
+
+    text_container_style = element_style(
+        display="flex",
+        flex_direction="column",
+        gap="4px"
+    )
+
+    # 2. Construct the Node Tree
+    # Handling the optional Avatar node
+    avatar_node = None
+    if avatar_url:
+        avatar_node = IMG(
+            src=avatar_url,
+            alt=f"{user_name}'s avatar",
+            style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 0 0 2px " + theme_color
+        )
+    else:
+        # Fallback Initial Icon
+        avatar_node = DIV(
+            SPAN(user_name[0].upper(), style="font-weight: bold; color: white; font-size: 24px;"),
+            style=f"width: 64px; height: 64px; border-radius: 50%; background: {theme_color}; display: flex; align-items: center; justify-content: center;"
+        )
+
+    # 3. Assemble the Final Component
+    return DIV(
+        avatar_node,
+        DIV(
+            H1(f"Hello, {user_name}!", style=f"font-size: 24px; font-weight: 700; color: {theme_color}; margin: 0;"),
+            P(message, style="color: #64748b; font-size: 16px; margin: 0;"),
+            style=text_container_style
+        ),
+        Class="probo-greeting-card",
+        style=card_style
+    )
+
+                                                            
+  ''')
 
     (project_dir / "pages").mkdir()
-    (project_dir / "pages" / "index.py").touch()
+    (project_dir / "pages" / "index.py").write_text(
+        """from probo import (DOCTYPE, HTML, HEAD, META, LINK, BODY, DIV, H1, TITLE, STYLE, SPAN,SCRIPT)
+from probo.styles import element_style
+from probo.htmx.htmx import HTMX as HX
+
+# We use element_style for the primary body layout
+body_style = element_style(
+    background_color="#f8fafc",
+    font_family="'Roboto', sans-serif",
+    margin="0",
+    padding="0",
+    color="#1e293b"
+)
+
+index_document = DOCTYPE(
+    HTML(
+        HEAD(
+            META(charset="UTF-8"),
+            META(name="viewport", content="width=device-width, initial-scale=1.0"),
+            META(http_equiv="X-UA-Compatible", content="ie=edge"),
+            
+            # Typography (Google Fonts)
+            LINK(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"),
+            
+            # CSS Framework (Bootstrap 5.3.3)
+            LINK(
+                rel="stylesheet", 
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+                xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH", # <-- we advise you to change SRI Hash for integrity check
+                crossorigin="anonymous"
+            ),
+            
+            TITLE(),
+            
+            # Style Injection Slot
+            STYLE(".probo-hero { transition: transform 0.3s ease; } ",".probo-hero:hover { transform: scale(1.01); }"),
+            
+            # Reactive Bridge (HTMX)
+            SCRIPT(src="https://unpkg.com/htmx.org@1.9.12"),
+        ),
+        BODY(
+            DIV(
+                DIV(
+                    H1("The Future of Python Web", Class="display-4 fw-bold mb-3"),
+                    DIV(
+                        "Your project is now running with ",
+                        SPAN("Bootstrap 5", Class="badge bg-primary"),
+                        " and ",
+                        SPAN("HTMX", Class="badge bg-dark"),
+                        Class="lead mb-4"
+                    ),
+                    # HTMX Example Trigger
+                    DIV(
+                        "Click to swap content via HTMX",
+                        hx_get="/greeting",
+                        hx_target="#status-box",
+                        Class="btn btn-outline-primary btn-lg",
+                        style="cursor: pointer;"
+                    ),
+                    DIV(id="status-box", Class="mt-4 p-3 border rounded bg-white"),
+                    Class="probo-hero p-5 mb-4 bg-light rounded-3 shadow-sm"
+                ),
+                Class="container py-5"
+            ),
+            
+            # JS Framework (Bootstrap JS for Modals/Dropdowns)
+            SCRIPT(
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js",
+                xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz",# <-- we advise you to change SRI Hash for integrity check
+                crossorigin="anonymous"
+            ),
+            style=body_style
+        ),
+        lang="en"
+    )
+)
+
+        """
+    )
     (project_dir / "pages" / "__init__.py").touch()
 
     # 4. Assets
@@ -188,12 +359,16 @@ tcm = TemplateComponentMap()
     )
     (project_dir / "dist").mkdir()  # Output folder
 
-    console.print(f"[green]✨ Pure PROBO Project '{name}' initialized![/green]")
-    console.print(f"[dim]Run 'cd {name}' then 'probo shell' to start building static pages.[/dim]")
+    console.print(f"[green] <=> Pure PROBO Project '{name}' initialized![/green]")
+    console.print(
+        f"[dim] <=> Run 'cd {name}' then 'probo shell' to start building static pages.[/dim]"
+    )
+
 
 # ==============================================================================
 #  2. DJANGO APP INTEGRATION
 # ==============================================================================
+
 
 @app.command("dj-app")
 def startapp(
@@ -230,7 +405,160 @@ def startapp(
     components_dir = app_dir / "components"
     components_dir.mkdir(parents=True, exist_ok=True)
     (components_dir / "__init__.py").touch()
-    (app_dir / "probo_tcm.py").write_text(""" # utilities for django views and multi-component mapping
+    (components_dir / "greeting.py").write_text(
+        '''from typing import Optional
+from probo import DIV, H1, P, SPAN, IMG
+from probo.styles import element_style
+
+
+def greeting_component(
+    user_name: str,
+    message: str = "Welcome back to your page.",
+    avatar_url: Optional[str] = None,
+    theme_color: str = "#1e40af",
+):
+    """
+    A professional Greeting Component for ProboUI.
+    
+    Demonstrates:
+    1. JIT Element Styling
+    2. Optional Node Injection (Avatar)
+    3. Attribute Merging
+    """
+
+    # 1. Define Component-Specific Styles
+    card_style = element_style(
+        background_color="#ffffff",
+        padding="24px",
+        border_radius="16px",
+        border=f"1px solid #e2e8f0",
+        display="flex",
+        align_items="center",
+        gap="20px",
+        box_shadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+    )
+
+    text_container_style = element_style(
+        display="flex",
+        flex_direction="column",
+        gap="4px"
+    )
+
+    # 2. Construct the Node Tree
+    # Handling the optional Avatar node
+    avatar_node = None
+    if avatar_url:
+        avatar_node = IMG(
+            src=avatar_url,
+            alt=f"{user_name}'s avatar",
+            style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 0 0 2px " + theme_color
+        )
+    else:
+        # Fallback Initial Icon
+        avatar_node = DIV(
+            SPAN(user_name[0].upper(), style="font-weight: bold; color: white; font-size: 24px;"),
+            style=f"width: 64px; height: 64px; border-radius: 50%; background: {theme_color}; display: flex; align-items: center; justify-content: center;"
+        )
+
+    # 3. Assemble the Final Component
+    return DIV(
+        avatar_node,
+        DIV(
+            H1(f"Hello, {user_name}!", style=f"font-size: 24px; font-weight: 700; color: {theme_color}; margin: 0;"),
+            P(message, style="color: #64748b; font-size: 16px; margin: 0;"),
+            style=text_container_style
+        ),
+        Class="probo-greeting-card",
+        style=card_style
+    )
+
+                                           
+''')
+    pages_dir = app_dir / "pages"
+    pages_dir.mkdir(parents=True, exist_ok=True)
+    (pages_dir / "__init__.py").touch()
+    (pages_dir / "index.py").write_text(
+        """from probo import (DOCTYPE, HTML, HEAD, META, LINK, BODY, DIV, H1, TITLE, STYLE, SPAN,SCRIPT)
+from probo.styles import element_style
+from probo.htmx.htmx import HTMX as HX
+
+# We use element_style for the primary body layout
+body_style = element_style(
+    background_color="#f8fafc",
+    font_family="'Roboto', sans-serif",
+    margin="0",
+    padding="0",
+    color="#1e293b"
+)
+
+index_document = DOCTYPE(
+    HTML(
+        HEAD(
+            META(charset="UTF-8"),
+            META(name="viewport", content="width=device-width, initial-scale=1.0"),
+            META(http_equiv="X-UA-Compatible", content="ie=edge"),
+            
+            # Typography (Google Fonts)
+            LINK(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"),
+            
+            # CSS Framework (Bootstrap 5.3.3)
+            LINK(
+                rel="stylesheet", 
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+                xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH", # <-- we advise you to change SRI Hash for integrity check
+                crossorigin="anonymous"
+            ),
+            
+            TITLE(),
+            
+            # Style Injection Slot
+            STYLE(".probo-hero { transition: transform 0.3s ease; } ",".probo-hero:hover { transform: scale(1.01); }"),
+            
+            # Reactive Bridge (HTMX)
+            SCRIPT(src="https://unpkg.com/htmx.org@1.9.12"),
+        ),
+        BODY(
+            DIV(
+                DIV(
+                    H1("The Future of Python Web", Class="display-4 fw-bold mb-3"),
+                    DIV(
+                        "Your project is now running with ",
+                        SPAN("Bootstrap 5", Class="badge bg-primary"),
+                        " and ",
+                        SPAN("HTMX", Class="badge bg-dark"),
+                        Class="lead mb-4"
+                    ),
+                    # HTMX Example Trigger
+                    DIV(
+                        "Click to swap content via HTMX",
+                        hx_get="/greeting",
+                        hx_target="#status-box",
+                        Class="btn btn-outline-primary btn-lg",
+                        style="cursor: pointer;"
+                    ),
+                    DIV(id="status-box", Class="mt-4 p-3 border rounded bg-white"),
+                    Class="probo-hero p-5 mb-4 bg-light rounded-3 shadow-sm"
+                ),
+                Class="container py-5"
+            ),
+            
+            # JS Framework (Bootstrap JS for Modals/Dropdowns)
+            SCRIPT(
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js",
+                xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz",# <-- we advise you to change SRI Hash for integrity check
+                crossorigin="anonymous"
+            ),
+            style=body_style
+        ),
+        lang="en"
+    )
+)
+
+        """
+    )
+
+    (app_dir / "probo_tcm.py").write_text(
+        """ # utilities for django views and multi-component mapping
 from probo.context import TemplateComponentMap
 from django.utils.safestring import mark_safe
 from django.template import Template, RequestContext
@@ -246,26 +574,36 @@ def render_probo(request, *raw_template_strings,**context):
 
 tcm = TemplateComponentMap() #mapper of component objects
 
-""")
+"""
+    )
 
     # 3. Apply Structure Logic
     if structure == DjangoStructure.HACKSOFT:
         create_hacksoft_structure(app_dir)
-        console.print(f"[green]✨ Created App '{name}' (HackSoft Style)[/green]")
+        console.print(f"[green] <=> Created App '{name}' (HackSoft Style)[/green]")
 
     elif structure == DjangoStructure.PROBO_DJ:
         create_probo_dj_structure(app_dir, name)
-        console.print(f"[green]✨ Created App '{name}' (PROBO-DJ Enterprise)[/green]")
+        console.print(f"[green] <=> Created App '{name}' (PROBO-DJ Enterprise)[/green]")
 
     else:
-        console.print(f"[green]✨ Created App '{name}' (Base Style)[/green]")
+        console.print(f"[green] <=> Created App '{name}' (Base Style)[/green]")
 
     # Visual Confirmation
     console.print("   + components/")
+    console.print("   + pages/")
     console.print("   + probo_tcm.py")
 
+
 @app.command("build:css")
-def build_css(registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry file"),output: Path = typer.Option("static/assets/style.css", help="Output path for the CSS file"),):
+def build_css(
+    registry_path: Path = typer.Option(
+        "probo_tcm.py", help="Path to the TCM registry file"
+    ),
+    output: Path = typer.Option(
+        "static/assets/style.css", help="Output path for the CSS file"
+    ),
+):
     """
     The JIT (Just-In-Time) styling engine. It scans your TCM registry to find all utilized Bootstrap utility classes and Probo-specific styles, merging them into a single optimized CSS file.
 
@@ -280,7 +618,7 @@ def build_css(registry_path: Path = typer.Option("probo_tcm.py", help="Path to t
     seen_signatures = set()
     final_css_blocks = []
 
-    typer.echo(f"🎨 Scanning {len(tcm.url_name_comp)} components for JIT CSS...")
+    typer.echo(f" <=> Scanning {len(tcm.url_name_comp)} components for JIT CSS...")
 
     for name, ComponentClass in tcm.url_name_comp.items():
         try:
@@ -305,36 +643,42 @@ def build_css(registry_path: Path = typer.Option("probo_tcm.py", help="Path to t
                 final_css_blocks.append(css_output)
 
         except Exception as e:
-            console.print(f"[yellow]⚠️  Skipping {name}: {e}[/yellow]")
+            console.print(f"[yellow] <=>  Skipping {name}: {e}[/yellow]")
 
     # 3. Write
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(final_css_blocks), encoding="utf-8")
 
     console.print(
-        "[bold green]CSS Exported ✅✅✅ [/bold green]",
+        "[bold green]CSS Exported <=> [/bold green]",
     )
     console.print(
-        f"[bold green]✅ Successfully wrote {len(seen_signatures)} unique styles to {output}[/bold green]",
+        f"[bold green] <=> Successfully wrote {len(seen_signatures)} unique styles to {output}[/bold green]",
     )
 
+
 @app.command("build:html")
-def build_html(registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry file"), output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),):
+def build_html(
+    registry_path: Path = typer.Option(
+        "probo_tcm.py", help="Path to the TCM registry file"
+    ),
+    output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),
+):
     """
-   The Static Site Generation (SSG) command. It iterates through every route defined in your TCM and renders the components into standalone HTML files.
+    The Static Site Generation (SSG) command. It iterates through every route defined in your TCM and renders the components into standalone HTML files.
 
-    Options:
+     Options:
 
-    --registry-path: Path to your probo_tcm.py.
+     --registry-path: Path to your probo_tcm.py.
 
-    --output-dir: The directory where HTML files will be saved (Default: dist).
+     --output-dir: The directory where HTML files will be saved (Default: dist).
 
-    Outcome: A ready-to-deploy static version of your site in the /dist folder.
+     Outcome: A ready-to-deploy static version of your site in the /dist folder.
     """
     tcm = load_tcm_registry(registry_path)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    typer.echo(f"🏗️  Rendering components to '{output_dir}/'...")
+    typer.echo(f" <=>  Rendering components to '{output_dir}/'...")
 
     count = 0
     for name, ComponentClass in tcm.url_name_comp.items():
@@ -363,19 +707,23 @@ def build_html(registry_path: Path = typer.Option("probo_tcm.py", help="Path to 
             file_path = output_dir / f"{name}.html"
             file_path.write_text(full_page, encoding="utf-8")
             count += 1
-            typer.echo(f"   📄 Generated: {file_path}")
+            typer.echo(f" <=> Generated: {file_path}")
 
         except Exception as e:
             console.print(
-                f"⚠️  Failed to render {name}: {e}",
+                f" <=>  Failed to render {name}: {e}",
             )
 
     console.print(
-        f"[bold green]✅ Generated {count} HTML files.[/bold green]",
+        f"[bold green]<=> Generated {count} HTML files.[/bold green]",
     )
 
+
 @app.command("preview")
-def preview_component(component_name: str, registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry"),):
+def preview_component(
+    component_name: str,
+    registry_path: Path = typer.Option("probo_tcm.py", help="Path to the TCM registry"),
+):
     """
     Instantly previews a specific component in the browser without needing to navigate through the whole app.
 
@@ -436,7 +784,7 @@ def preview_component(component_name: str, registry_path: Path = typer.Option("p
         # 5. Open Browser (The Logic from your 'brow_a_file')
         file_url = f"file:///{path}"
         console.print(
-            f"[blue]👀 Opening preview for {component_name}...[/blue]...",
+            f"[blue] <=> Opening preview for {component_name}...[/blue]...",
         )
         webbrowser.open_new_tab(file_url)
 
@@ -444,6 +792,7 @@ def preview_component(component_name: str, registry_path: Path = typer.Option("p
         console.print(
             f"Error rendering {component_name}: {e}",
         )
+
 
 @app.command("shell")
 def shell():
@@ -460,20 +809,17 @@ def shell():
 
     Arrow Keys: Fully supported command history and navigation.
     """
-    user_ns = {
-        "save": save_to_dist,
-        "console": console
-    }
+    user_ns = {"save": save_to_dist, "console": console}
     exec("from probo import *", user_ns)
-    state = {
-        "allow_emmet": True,
-        "last_rendered": []
-    }
+    state = {"allow_emmet": True, "last_rendered": []}
+
     def displayhook(value):
 
-        if value == 'allow_emmet':
-            console.print("""[yellow]•Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]""")
-            state["allow_emmet"]=True
+        if value == "allow_emmet":
+            console.print(
+                """[yellow]•Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]"""
+            )
+            state["allow_emmet"] = True
             return
         if value is None:
             return
@@ -491,10 +837,15 @@ def shell():
 
         else:
             console.print(value)
-        state['last_rendered'].append(value)
-        user_ns['_'] = ''.join(state['last_rendered'])
+        state["last_rendered"].append(value)
+        user_ns["_"] = "".join(state["last_rendered"])
+
     sys.displayhook = displayhook
-    emmet_banner = """\n[yellow]• Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]\n type ""allow_emmet" """if state["allow_emmet"] else ''
+    emmet_banner = (
+        """\n[yellow]• Shorthand enabled:[/yellow] Use [bold magenta]'div #id .class -c content' <==> <div id="id" class="class">content</div>[/bold magenta]\n type ""allow_emmet" """
+        if state["allow_emmet"]
+        else ""
+    )
     banner_text = f"""
     [italic][bold green]PROBO Interactive Shell v1.0[/bold green]
     [yellow]• Standard:[/yellow]  div('Hello', id='main')
@@ -502,16 +853,19 @@ def shell():
     [yellow]• Type[/yellow] [bold cyan]save(_)[/bold cyan] to export result to dist/index.html
     [yellow]• Type[/yellow] [red]exit()[/red] to quit.[/italic]
 """
-   
+
     console.print(Panel(banner_text, title="PROBO Console", expand=False))
 
     console.print(f"[bold blue]Context:[/bold blue] {os.getcwd()}")
     probo_shell = ProboConsole(locals=user_ns)
-    
+
     try:
-        probo_shell.interact(banner="",)
+        probo_shell.interact(
+            banner="",
+        )
     except SystemExit:
         pass
+
 
 @app.command("version")
 def version():
@@ -521,11 +875,13 @@ def version():
         f"[bold cyan]Mastodon UI (probo)[/bold cyan] version [yellow]{VERSION}[/yellow]"
     )
 
+
 @app.command("echo")
 def echo(text: str):
     """Print arguments to the console (Debug tool)."""
     # This replaces your 'echo' method
     console.print(f"[italic blue]Echo:[/italic blue] {text}")
+
 
 def main():
     app()

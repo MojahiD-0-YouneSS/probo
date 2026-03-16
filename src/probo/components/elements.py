@@ -13,7 +13,7 @@ from typing import Any, Self
 
 MARKER = chr(31)
 CONTENT_MARKER = f"@probo:{MARKER}"
-# Tag.thaw()
+Tag.thaw()
 
 
 class Element:
@@ -251,7 +251,7 @@ class Element:
         self.probo_custom_attrs = probo_custom_attrs
         self.collect_history = collect_history
         self.collect_to_end = True
-        self.attrs: dict[str, str] = attrs
+        self.attrs = attrs
         self.tag = tag
         self.use_sibling = False
         self.sibling_element = self.element = str()
@@ -275,7 +275,7 @@ class Element:
             AttributeError: If the tag is not recognized in the registry.
         """
         name = name.lower()
-        self.tag = name
+        # self.tag = name
         method = self._tag_loader(name)
         if method:
             # return getattr(self, name)
@@ -284,19 +284,20 @@ class Element:
             raise AttributeError(f"Tag '{name}' is not defined as Element method. ")
 
     @property
-    def reset_sebling(self):
+    def reset_sebling(self) -> None:
         self.use_sibling = False
         self.sibling_element = str()
         self.element = str()
-    def _tag_loader(self, name: str) -> bool:
+
+    def _tag_loader(self, name: str) -> bool|partial:
 
         try:
             attr = Tag.get(name)
-            method = partial(self._tag_func_handler,tag_enum=attr)
-            if name == "doctype":
-                method_name = name
-            else:
-                method_name = attr.value[0]  # name-mangled to be private
+            method = partial(self._tag_func_handler,tag_enum=attr,tag_string=name)
+            # if name == "doctype":
+            #     method_name = name
+            # else:
+            #     method_name = attr.value[0]  # name-mangled to be private
             setattr(self, name, method)
             return method
         except:
@@ -308,24 +309,26 @@ class Element:
 
     def _tag_func_handler(
         self,
-        *args,
-        tag_enum,
-        reset_sibling=False,
-        is_sibling=False,
-        set_as_content=False,
-        append_to_end=True,
-        escape=True,
-        **kwargs,
-    ):
+        *args:tuple[str],
+        tag_enum:Tag,
+        tag_string:str,
+        reset_sibling:bool=False,
+        is_sibling:bool=False,
+        set_as_content:bool=False,
+        append_to_end:bool=True,
+        escape:bool=True,
+        **kwargs:dict[str,Any],
+    )->Self:
+        self.tag=tag_string
         if is_sibling and not reset_sibling:
             self.use_sibling = True
         if reset_sibling:
             self.reset_sebling
         self.collect_to_end = append_to_end
-        self.attrs.update(kwargs)
         content=''
         if args:
             content = self._element_parser(*args,escape=escape)
+        self.attrs.update(kwargs)
 
         if (
             not is_sibling
@@ -365,7 +368,7 @@ class Element:
         self.attrs.clear()
         return self
 
-    def _element_parser(self, *args,escape=True) -> str:
+    def _element_parser(self, *args,escape:bool=True) -> str:
         """Parses mixed arguments into structured HTML components.
 
         Accepts a flexible variety of arguments to determine the tag,
@@ -396,7 +399,8 @@ class Element:
                 sub_content = str(arg)
                 is_sub_content = False
                 continue
-            if type(arg) is str and arg in Tag.keys_set:
+           
+            if type(arg) is str and str(arg).upper() in Tag.keys_set:
                 tag = Tag.get(arg)
                 is_sub_content = True
             elif type(arg) is str:
@@ -460,7 +464,11 @@ class Element:
                 self.content = "".join([self.stringify_element().element, self.content])
         if tag_value[1]["void"]:
             if self.tag == "doctype":
-                return f"<{tag_value[0]}{self.render_attrs()}>"
+                content = self.render_content()
+                if '<html' in content:
+                    return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{content}"
+                else:
+                    return f"<{tag_value[0]}{self.render_attrs()}>"
             else:
 
                 return f"<{tag_value[0]}{self.render_attrs()}/>"
@@ -570,7 +578,7 @@ class Element:
     def raw(
         self, *string: tuple[str], inner: bool = False, is_comment: bool = False
     ) -> Self:
-        STRING = "".join(["<!--", *string, "-->"])
+        STRING = ProboSourceString("".join(string))
 
         if inner:
             self.content += "<!--" + STRING + "-->" if is_comment else STRING
@@ -599,7 +607,7 @@ class Element:
         **attrs: dict[str, Any],
     ) -> Self:
         Tag.thaw()
-        if cstm_tag in Tag.keys_set:
+        if cstm_tag.upper() in Tag.keys_set:
             tag = Tag.values_map[cstm_tag]
         else:
             tag = None
@@ -629,9 +637,7 @@ class Element:
         self.attrs.clear()
         return self
 
-    def __str__(
-        self,
-    ):
+    def __str__( self,) -> str:
         return str(self.stringify_element().element)
 
 class Head:
@@ -667,7 +673,7 @@ class Head:
         'title',
         '_var_attrs',
     )
-    def __init__(self, *head_strings):
+    def __init__(self, *head_strings: tuple[str]):
         self.head_strings = list(head_strings)
         self._registry = OrderedDict()
         self.meta_tags = []
@@ -679,7 +685,7 @@ class Head:
         for item in head_strings:
             self.add(item)
 
-    def add(self, element, key=None):
+    def add(self, element:Element|Any, key:str|None=None)-> Self:
         """Adds an element to the head registry with intelligent overwriting.
 
         Args:
@@ -701,7 +707,7 @@ class Head:
         )
         return self
 
-    def _generate_key(self, element):
+    def _generate_key(self, element: Element | Any) -> str:
         """Generates a unique key based on the element's tag and attributes.
 
         Logic:
@@ -746,7 +752,7 @@ class Head:
 
         return f"{tag}:{uuid.uuid4().hex[:8]}"
 
-    def set_title(self, title: str, **title_attrs):
+    def set_title(self, title: str, **title_attrs:dict[str,Any])-> Self:
         """Registers the page title. Overwrites any existing title tag.
 
         Args:
@@ -760,7 +766,7 @@ class Head:
         self._var_attrs = title_attrs
         return self.add(title)
 
-    def register_meta(self, **meta_attrs):
+    def register_meta(self, **meta_attrs:dict[str,Any])->Self:
         """Creates and registers a <meta> tag with the specified attributes.
 
         This method leverages the `Element` factory to build the tag and then
@@ -779,7 +785,7 @@ class Head:
         self._var_attrs = meta_attrs
         return self.add(meta_tag)
 
-    def register_link(self, **link_attrs):
+    def register_link(self, **link_attrs:dict[str,Any])->Self:
         """Creates and registers a <link> tag.
 
         Commonly used for stylesheets, favicons, or canonical URLs. The
@@ -797,7 +803,7 @@ class Head:
         self._var_attrs = link_attrs
         return self.add(link_tag)
 
-    def register_script(self, content="", **attrs):
+    def register_script(self, content:str="", **attrs:dict[str,Any])->Self:
         """Creates and registers a script tag.
 
         Supports both external scripts (via 'src' attribute) and inline
@@ -815,7 +821,7 @@ class Head:
         self._var_attrs = attrs
         return self.add(script_tag)
 
-    def register_style(self, content=""):
+    def register_style(self, content:str="") -> Self:
         """Creates and registers an inline style block.
 
         Args:
@@ -827,7 +833,7 @@ class Head:
         style_tag = Element().set_content(content).style()
         return self.add(style_tag)
 
-    def render(self, *extra_head_content):
+    def render(self, *extra_head_content: tuple[Element | Any]) -> str:
         """Renders the final <head> block as a single HTML string.
 
         Args:
@@ -883,6 +889,7 @@ class Template:
         'head',
         '_Template__loaded_base',
         'components',
+        'switch_base',
     )
     def __init__(self, separator: str = "\n", **components):
         """
@@ -901,10 +908,11 @@ class Template:
         )
         self.head.set_title("probo Page")
         self.__loaded_base = ""
+        self.switch_base=False
         # 2. Initialize Body Slots (OrderedDict preserves insertion order)
         self.components = OrderedDict(components)
 
-    def swap_component(self, **kwargs):
+    def swap_component(self, **kwargs: dict[str, Any])->Self:
         """Updates or replaces components in the body slots.
 
         This is the primary method for layout inheritance, allowing you to
@@ -919,7 +927,7 @@ class Template:
         self.components.update(kwargs)
         return self
 
-    def load_base_template(self, template: str, use_as_base=False):
+    def load_base_template(self, template: str|Any, use_as_base:bool=False)-> Self:
         """Loads an external base template string.
 
         Args:
@@ -984,23 +992,24 @@ class Template:
         sep = self._get_separator_html()
         body_content = sep.join(rendered_parts)
 
-        # 3. Construct the Tree
-        # doctype() returns string "<!DOCTYPE html>"
-        # html(...) wraps head and body
+        if self.switch_base:
 
-        # Note: We use your functional tags here
-        document = ProboSourceString(
-            Element().doctype().element
-            + Element()
-            .set_attrs(lang="en")
-            .set_content(
+            body_element = self.__loaded_base.find(lambda n: n.element_tag == "body")
+            body_element.content.append(body_content)
+            document = Element().doctype().element + self.__loaded_base.render()
+        else:
+            document = (
+                Element().doctype().element
+                + Element()
+                .set_attrs(lang="en")
+                .set_content(
                 self.head.render() + Element().set_content(body_content).body().element
             )
             .html()
             .element
         )
 
-        return document
+        return ProboSourceString(document)
 
     def preview(self):
         """Renders the template and opens it in the system's default browser.

@@ -24,9 +24,10 @@ from probo.request.transformer import (
 )
 from typing import (
     Any,
-    Optional,
+    Optional,Callable, Self
 )
 from probo.utility import ProboSourceString
+
 def get_widget_info(django_bound_field) -> dict[str, str]:
     """
     Analyzes a Django BoundField and returns a clean dictionary
@@ -137,17 +138,17 @@ class ProboFormField:
         wraper_func=None,
         **attrs: dict[str, str],
     ):
-        self.content = content or str()
-        self.wraper_func = wraper_func
-        self.field_label = field_label or str()
-        self.attrs = attrs
-        self.label_attr =  {"for": attrs.get("id"),} if attrs.get("id", None) else dict()
+        self.content:str = content or str()
+        self.wraper_func:Callable = wraper_func
+        self.field_label:Optional[str] = field_label or str()
+        self.attrs:dict[str, str] = attrs
+        self.label_attr:dict[str, str] =  {"for": attrs.get("id"),} if attrs.get("id", None) else dict()
         self.label_attr.update(label_attr or {})
-        self.tag_name = tag_name
+        self.tag_name:str = tag_name
         self.widget_info: dict[str, str] = dict()
-        self.form_field = str()
-        self.dj_field = dj_field
-        self.dj_field_info = dict()
+        self.form_field:str = str()
+        self.dj_field:Optional['BoundField'] = dj_field
+        self.dj_field_info:dict[str,Any] = dict()
         if dj_field:
             self.include_dj_field(dj_field)
 
@@ -171,7 +172,7 @@ class ProboFormField:
             "content": content or str(),
         }
 
-    def _field_build(self, tag: str, **info):
+    def _field_build(self, tag: str, **info:dict[str,Any]) -> Self:
         tag_info_dict = {
             "input": {"method": Input, "void": True},
             "textarea": {"method": textarea, "void": False},
@@ -204,7 +205,7 @@ class ProboFormField:
                 )
         return self
 
-    def include_dj_field(self, dj_field):
+    def include_dj_field(self, dj_field:Optional['BoundField']) -> Self:
         if hasattr(dj_field, "field") and hasattr(dj_field.field, "widget"):
             field_info = get_widget_info(dj_field)
             tag = field_info["tag"]
@@ -227,8 +228,8 @@ class ProboFormField:
         self,
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **input_attrs,
-    ):
+        **input_attrs:dict[str,str],
+    ) -> Self:
         """
         <label for="xyz">...</label>
         <input type="..." id="xyz" name="xyz">
@@ -247,8 +248,8 @@ class ProboFormField:
         textarea_content: str = None,
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **textarea_attrs,
-    ):
+        **textarea_attrs:dict[str:Any],
+    ) -> Self:
         _defaults = {
             "rows": 8,
             "cols": 50,
@@ -264,8 +265,8 @@ class ProboFormField:
         selected_options_indexes: list[int] = None,
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **select_attrs,
-    ):
+        **select_attrs:dict[str,Any],
+    ) -> Self:
         """option"""
         content = ProboSourceString(" ".join(
             [
@@ -286,8 +287,8 @@ class ProboFormField:
         selected_options_indexes: list[int] = None,
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **select_attrs,
-    ):
+        **select_attrs:dict[str,Any],
+    ) -> Self:
         """option"""
 
         optgroup_content = []
@@ -318,8 +319,8 @@ class ProboFormField:
         form_elements: list[str],
         label_string: str = None,
         label_attrs: str = None,
-        **fieldset_attrs,
-    ):
+        **fieldset_attrs:dict[str,Any],
+    ) -> Self:
         content = ProboSourceString("".join([legend(legend_content), *form_elements]))
         info = self._make_info(fieldset_attrs, label_string, label_attrs, content)
 
@@ -330,8 +331,8 @@ class ProboFormField:
         option_value_list: list[str],
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **data_list_attrs,
-    ):
+        **data_list_attrs:dict[str,Any],
+    ) -> Self:
         content = ProboSourceString("".join([option(value=k) for k in option_value_list]))
 
         info = self._make_info(data_list_attrs, label_string, label_attrs, content)
@@ -342,13 +343,13 @@ class ProboFormField:
         self,
         label_string: str = None,
         label_attrs: dict[str, str] = None,
-        **output_attrs,
-    ):
+        **output_attrs:dict[str,Any],
+    ) -> Self:
         info = self._make_info(output_attrs, label_string, label_attrs)
 
         return self._field_build("output", **info)
 
-    def add_custom_field(self,*field_string,skip_wraper=False):
+    def add_custom_field(self,*field_string:tuple[str],skip_wraper:bool=False) -> Self:
         field_string = ''.join(field_string)
         if skip_wraper:
             self.widget_info['custm-field'] = field_string
@@ -384,7 +385,7 @@ class ProboFormField:
             or str()
         )
         self.form_field = fields + error_string
-        return fields
+        return ProboSourceString(fields)
 
 
 class ProboForm:
@@ -431,6 +432,7 @@ class ProboForm:
         'action',
         'attrs',
         'override_button',
+        'override_button_content',
         'override_button_attrs',
         'handler',
         'is_valid',
@@ -440,6 +442,7 @@ class ProboForm:
         '_manual_csrf',
         'fields',
     )
+    
     def __init__(
         self,
         action: str,
@@ -450,8 +453,9 @@ class ProboForm:
         use_htmx: bool = True,
         form_class: Any = None,
         form_declaration: Optional[str] = None,
-        override_button=False,
-        override_button_attrs=None,
+        override_button:bool=False,
+        override_button_content:str='Submit',
+        override_button_attrs:dict[str,Any]=None,
         csrf_token: str = None,
             **attrs
     ):
@@ -468,6 +472,7 @@ class ProboForm:
              }
         self.attrs.update(attrs)
         self.override_button =override_button
+        self.override_button_content = override_button_content
         self.override_button_attrs =override_button_attrs
         self.handler = None
         self.is_valid = False
@@ -505,7 +510,7 @@ class ProboForm:
         submit_btn=''
         if not self.override_button :
             if self.override_button_attrs:
-                submit_btn = button("Submit", **self.override_button_attrs)
+                submit_btn = button(self.override_button_content, **self.override_button_attrs)
             else:
                 submit_btn = button("Submit", type="submit", Class="btn btn-lg")
         fields_html = [ProboSourceString(x.render()) if hasattr(x,'render') else ProboSourceString(str(x)) for x in fields_html]
@@ -520,6 +525,7 @@ class ProboForm:
     def save_to_db(
         self,
     ):
+        
         if self.request_form_bool:
             self.handler = FormHandler(self.request_data)
             self.is_handled = self.handler.form_handling()

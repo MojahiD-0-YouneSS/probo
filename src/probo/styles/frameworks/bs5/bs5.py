@@ -4,24 +4,24 @@ from probo.styles.frameworks.bs5.forms import Form
 from probo.styles.frameworks.bs5.utilities import Utilities
 from probo.styles.frameworks.bs5.comp_enum import Components
 from probo.components.base import ElementAttributeManipulator
-from typing import Optional
+from typing import Optional, Any, Self
 from enum import Enum
 
 
 class BS5Props(Enum):
-    layout = Layout()
-    typography = Typography()
-    form = Form()
-    urilities = Utilities()
-    components = Components()
+    layout:Layout = Layout()
+    typography:Typography = Typography()
+    form:Form = Form()
+    utilities:Utilities = Utilities()
+    components:Components = Components()
 
-def _unpack_props():
+def _unpack_props()->list[str]:
     base = []
     for k in BS5Props._member_names_:
         try:
             base.extend(BS5Props[k].value.values_as_list)
         except Exception as e:
-            print(e)
+            pass
     return base
 
 BS5_PROPS_AS_LIST = _unpack_props()
@@ -38,7 +38,7 @@ class PropsProxy:
         self.kls_value = None
         self.get_attr(attr)
 
-    def get_attr(self, attr):
+    def get_attr(self, attr:str)->None:
         og_attr = attr.replace("_", "-")
         enum_cls = (
             og_attr if og_attr in set(self.enums) else None
@@ -62,12 +62,12 @@ class BS5ElementStyle:
     )
     def __init__(
         self,
-        tag,
+        tag:str,
     ):
         self.tag = tag
         self.classes = []
 
-    def add(self, *values):
+    def add(self, *values:tuple[str]) -> Self:
         """Resolves and appends one or more Bootstrap classes to the element.
 
         Uses `PropsProxy` to translate input values into valid BS5 utilities.
@@ -89,7 +89,7 @@ class BS5ElementStyle:
                 self.classes.append(kls)
         return self
 
-    def remove(self, value):
+    def remove(self, value:str) -> Self:
         """Removes a specific class from the element if it exists.
 
         Args:
@@ -102,7 +102,7 @@ class BS5ElementStyle:
             self.classes.remove(value)
         return self
 
-    def toggle(self, value, add_cls=True):
+    def toggle(self, value:str, add_cls:bool=True) -> Self:
         """Adds or removes a class based on a conditional flag.
 
         Args:
@@ -120,7 +120,7 @@ class BS5ElementStyle:
                 self.classes.remove(value)
         return self
 
-    def render(self):
+    def render(self)->str:
         """Serializes the class list into a space-separated string.
 
         Returns:
@@ -162,7 +162,7 @@ class BS5Element:
     def attr_manager(self) -> ElementAttributeManipulator:
         return ElementAttributeManipulator(self.attrs)
     
-    def add(self, *new_classes: str):
+    def add(self, *new_classes: tuple[str])->Self:
         """Appends Bootstrap utility classes to the element.
 
         This method proxies directly to the underlying BS5ElementStyle 
@@ -179,7 +179,7 @@ class BS5Element:
         self.classes.extend(new_classes)
         return self
 
-    def include(self, *content,first=False,override=False):
+    def include(self, *content:tuple[str],first:bool=False,override:bool=False)->Self:
         """Adds child content or elements to this container.
 
         Allows for flexible manipulation of the element's inner HTML 
@@ -256,7 +256,7 @@ class BS5:
 
     def render(
         self,
-        target_elemnt=None,
+        target_element:BS5Element|None=None,
     ) -> str:
         """Serializes the specified element or the entire registry into HTML.
 
@@ -267,15 +267,15 @@ class BS5:
         Returns:
             str: The final HTML output string.
         """
-        if target_elemnt is not None and target_elemnt in self.elements:
-            return self.elements[target_elemnt]
+        if target_element is not None and target_element in self.elements:
+            return self.elements[target_element]
         else:
             return " ".join([v.render() for k, v in self.registry.items()])
 
-    def __str__(self):
+    def __str__(self)->str:
         return self.render()
 
-    def add_new(self, element=None, class_obj=None):
+    def add_new(self, element:str|None=None, class_obj:Any=None)->Self:
         """Registers a new element type or class mapping into the BS5 context.
 
         This allows for extending the factory with custom components or 
@@ -322,7 +322,7 @@ class BS5:
         """
         return key.replace("#", "__").replace(".", "_").replace("-", "_")
 
-    def get_element(self, key: str, content: str = "", **attrs) -> BS5Element:
+    def get_element(self, key: str, content: str = "", **attrs: dict[str, str]) -> BS5Element:
         """Factory method to create and configure a new BS5Element.
 
         This is the primary way to generate components. It automatically 

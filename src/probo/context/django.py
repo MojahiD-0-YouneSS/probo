@@ -1,8 +1,7 @@
-
-from typing import Dict, Any
+from typing import Dict, Any, Self
 import re
 from probo.context.context_logic import TemplateProcessor
-
+from probo.utility import ProboSourceString
 
 class DjangoComponentTools(TemplateProcessor):
     """
@@ -14,7 +13,7 @@ class DjangoComponentTools(TemplateProcessor):
         super().__init__()
 
     def If(
-        self, condition: str, content: str, else_content: str = None, **elif_blocks
+        self, condition: str, content: str, else_content: str = None, **elif_blocks:dict[str, Any]
     ) -> str:
         """
         Generates a standard Django IF block: {% if condition %}...{% endif %}
@@ -41,7 +40,7 @@ class DjangoComponentTools(TemplateProcessor):
         item: str,
         iterable: str,
         content: str,
-        empty_content=None,
+        empty_content: str|None= None,
     ) -> str:
         """
         Generates a Django FOR loop: {% for item in iterable %}...{% endfor %}
@@ -86,7 +85,7 @@ class DjangoComponentTools(TemplateProcessor):
         Returns:
             str: The formatted with-block string.
         """
-        return f"{{% with {assignments} %}}\n{content}\n{{% endwith %}}"
+        return ProboSourceString(f"{{% with {assignments} %}}\n{content}\n{{% endwith %}}")
 
     @staticmethod
     def Comment(content: str) -> str:
@@ -99,7 +98,7 @@ class DjangoComponentTools(TemplateProcessor):
         Returns:
             str: The formatted comment string.
         """
-        return f"{{# {content} #}}"
+        return ProboSourceString(f"{{# {content} #}}")
 
     @staticmethod
     def Include(template_name: str, with_args: str = None) -> str:
@@ -114,7 +113,7 @@ class DjangoComponentTools(TemplateProcessor):
             str: The formatted include tag.
         """
         args = f" with {with_args}" if with_args else ""
-        return f"{{% include '{template_name}'{args} %}}"
+        return ProboSourceString(f"{{% include '{template_name}'{args} %}}")
 
     @staticmethod
     def Csrf() -> str:
@@ -124,7 +123,7 @@ class DjangoComponentTools(TemplateProcessor):
         Returns:
             str: The csrf token tag.
         """
-        return "{% csrf_token %}"
+        return ProboSourceString("{% csrf_token %}")
 
     @staticmethod
     def Load(library: str) -> str:
@@ -137,7 +136,7 @@ class DjangoComponentTools(TemplateProcessor):
         Returns:
             str: The formatted load tag.
         """
-        return f"{{% load {library} %}}"
+        return ProboSourceString(f"{{% load {library} %}}")
 
 class DjangoComponent:
     """
@@ -158,9 +157,9 @@ class DjangoComponent:
     def __init__(
         self,
         template_string: str = "",
-        context: Dict[str, Any] = None,
-        extends: str = None,
-        **kwargs,
+        context: Dict[str, Any]|None = None,
+        extends: str|None = None,
+        **kwargs:dict[str,Any],
     ):
         """
         Initializes the DjangoComponent builder.
@@ -179,7 +178,7 @@ class DjangoComponent:
         self.variables = kwargs
         super().__init__()
 
-    def extends(self, template_name: str):
+    def extends(self, template_name: str) -> Self:
         """
         Sets the parent template (e.g. 'base.html').
 
@@ -192,7 +191,7 @@ class DjangoComponent:
         self.extends_from = template_name
         return self
 
-    def add_block(self, name: str, content: str):
+    def add_block(self, name: str, content: str)-> Self:
         """
         Adds a named block to the template: {% block name %}...{% endblock %}
 
@@ -206,7 +205,7 @@ class DjangoComponent:
         self.blocks[name] = content
         return self
 
-    def set_variables(self, **kwargs):
+    def set_variables(self, **kwargs: Dict[str, Any]) -> Self:
         """
         Sets context variables for the template.
         These are merged into the context at render time.
@@ -237,7 +236,7 @@ class DjangoComponent:
         # Replace matches with Django variable syntax {{ ... }}
         compiled_source = re.sub(pattern, r"{{\1}}", source)
 
-        return compiled_source
+        return ProboSourceString(compiled_source)
 
     def build_source(self) -> str:
         """

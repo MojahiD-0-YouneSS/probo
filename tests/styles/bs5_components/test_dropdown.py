@@ -19,7 +19,7 @@ def test_bs5_dropdown_render_basic_structure():
     )
 
     html = dd.render()
-
+ 
     # Container
     assert '<div id="dropdown-container" class="dropdown"' in html
 

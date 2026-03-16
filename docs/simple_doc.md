@@ -1,4 +1,4 @@
-# Probo UI (PUI) v1.1.0 Documentation
+# Probo UI (PUI) v1.3.1 Documentation
 
 Probo allows you to build type-safe, server-side rendered HTML components in Python with built-in state management and JIT CSS generation.
 
@@ -86,6 +86,7 @@ signup_comp.set_root_element(
 # 4. Render
 html = signup_comp.render()
 print(html)
+
 ```
 
 ## 3. Adding State (Dynamic Components)

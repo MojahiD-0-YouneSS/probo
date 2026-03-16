@@ -92,6 +92,7 @@ class Component(ComponentNode):
         'default_css_rules',
         'active_css_rules',
         'cmp_style',
+        'node_mode'
     )
     _registry = {}  # Global component registry
 
@@ -101,6 +102,7 @@ class Component(ComponentNode):
             state: ComponentState = None,
             template: str = str(),
             props: dict = None,
+            node_mode:bool=False,
             **elements,
     ):
         self.name: str = name
@@ -119,7 +121,7 @@ class Component(ComponentNode):
         self.is_root_element: bool = False
         self.root_element_tag = None
         self.root_element_attrs = {}
-
+        self.node_mode=node_mode
         self.props = props or {}
         self.comp_state = state or ComponentState()
         ComponentNode.__init__(self)
@@ -131,36 +133,36 @@ class Component(ComponentNode):
 
         self.on_init()
 
-    def on_init(self):
+    def on_init(self) -> Any:
         """Lifecycle Hook: Called after initialization. Override to add setup logic."""
         pass
 
-    def before_render(self, **props):
+    def before_render(self, **props) -> Self:
         """Lifecycle Hook: Called before render. Override to modify state/props dynamically."""
         return self
 
     @classmethod
-    def get(cls, name: str):
+    def get(cls, name: str) -> Self:
         """Retrieves a registered component by name."""
         return cls._registry.get(name)
 
     @classmethod
     def register(
             cls, name: str, state: ComponentState = None, props: dict = None, *elements
-    ):
+    ) -> Self:
         """Registers a new component instance."""
         comp = cls(name=name, template="".join(elements), state=state, props=props)
         cls._registry[name] = comp
         return comp
 
-    def set_root_element(self, root: str = "div", **attrs):
+    def set_root_element(self, root: str = "div", **attrs) -> Self:
         """Defines a wrapper element for the component."""
         self.root_element_tag = root
         self.is_root_element = True
         self.root_element_attrs = attrs
         return self
 
-    def add_root_class(self, class_name: str):
+    def add_root_class(self, class_name: str) -> Self:
         """Adds a CSS class to the root element."""
         current = self.root_element_attrs.get("class", "")
         # simple check to avoid duplicates or extra spaces
@@ -168,12 +170,12 @@ class Component(ComponentNode):
             self.root_element_attrs["class"] = f"{current} {class_name}".strip()
         return self
 
-    def set_root_id(self, element_id: str):
+    def set_root_id(self, element_id: str) -> Self:
         """Sets the ID of the root element."""
         self.root_element_attrs["id"] = element_id
         return self
 
-    def add_child(self, child: "str|Component", name: str = None):
+    def add_child(self, child: str|Self, name: str = None) -> Self:
         if isinstance(child, type(self)):
             child._set_parent(self)
             self.children.update({child.name: child.render()})
@@ -190,7 +192,7 @@ class Component(ComponentNode):
 
         return self
 
-    def sub_component(self, component: Self):
+    def sub_component(self, component: Self) -> Self:
         """Embeds another component inside this one."""
 
         render_result = component.render()
@@ -228,8 +230,12 @@ class Component(ComponentNode):
             else:
                 self.comp_state.props.update(override_props)  # not quite
             self.comp_state.state_errors = None
-
-        template = self.template_obj.render() if hasattr(self.template_obj,'render') else str(self.template_obj.tmplt_str)
+        if self.node_mode:
+            template = TemplateResolver(
+                tmplt_str=self.component_to_string(), load_it=True
+            ).tmplt_str
+        else:
+            template = self.template_obj.render() if hasattr(self.template_obj,'render') else str(self.template_obj.tmplt_str)
         if self.children:
             template += "".join(list(self.children.values()))
         if self.node_children:
@@ -260,7 +266,7 @@ class Component(ComponentNode):
             root_attr: str = None,
             root_attr_value: str = None,
             **root_css: dict["CssSelector", "CssRule"],
-    ):
+    ) -> Self:
         """
         Applies a new skin (CSS rules) to the component.
         Supports Dictionaries, other Components, Theme lists, and Root kwargs.
@@ -304,7 +310,7 @@ class Component(ComponentNode):
         self.active_css_rules = SelectorRuleBridge.make_bridge_list(new_rules)
         return self
 
-    def load_css_rules(self, **css):
+    def load_css_rules(self, **css:dict[str,str]) -> Self:
         """Loads initial CSS rules into the component."""
 
         if css:

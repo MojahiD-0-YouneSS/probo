@@ -40,7 +40,7 @@ def test_bs5_button_render_link_variant():
 
 def test_bs5_button_state_constraints_blocking():
     """5. State: Button hidden when constraints not met."""
-    btn = BS5Button(content="Admin Action", render_constaints={"is_admin": True})
+    btn = BS5Button(content="Admin Action", render_constraints={"is_admin": True})
     
     # Render without props -> should be empty/None
     html = btn.render()
@@ -48,13 +48,13 @@ def test_bs5_button_state_constraints_blocking():
 
 def test_bs5_button_state_constraints_passing():
     """6. State: Button visible when constraints met via override_props."""
-    btn = BS5Button(content="Admin Action", render_constaints={"is_admin": True})
+    btn = BS5Button(content="Admin Action", render_constraints={"is_admin": True})
     
     html = btn.render(override_props={"is_admin": True})
     assert "Admin Action" not in html
 def test_bs5_button_state_constraints_passing_global():
     """6. State: Button visible when constraints met via override_props."""
-    btn = BS5Button(content="Admin Action", render_constaints={"is_admin": True})
+    btn = BS5Button(content="Admin Action", render_constraints={"is_admin": True})
     
     html = btn.render(override_props={"is_admin": True},add_to_global=True)
     assert "Admin Action" in html
@@ -97,13 +97,13 @@ def test_bs5_close_button_render_custom_attrs():
 
 def test_bs5_close_button_state_blocking():
     """5. State: Close button hidden via constraints."""
-    btn = BS5CloseButton(render_constaints={"show_close": True})
+    btn = BS5CloseButton(render_constraints={"show_close": True})
     html = btn.render(override_props={"show_close": False})
     assert not html
 
 def test_bs5_close_button_state_passing():
     """6. State: Close button visible via constraints."""
-    btn = BS5CloseButton(render_constaints={"show_close": True})
+    btn = BS5CloseButton(render_constraints={"show_close": True})
     html = btn.render(override_props={"show_close": True},add_to_global=True,)
     assert "btn-close" in html
 
@@ -146,17 +146,20 @@ def test_bs5_btn_group_render_checkbox_button():
     """4. Render checkbox button toggle inside group."""
     grp = BS5ButtonGroup()
     grp.add_check_box_btn(content="Check me", override_input_attr={'id':'btn-check-1','autocomplete':"off"},**{'for':"btn-check-1",'class':"btn btn-primary"})
-    
+
     html = grp.render()
     # Should render <input type="checkbox" class="btn-check" ...> <label class="btn ...">...</label>
     assert '<input' in html
-    assert 'type="checkbox" class="btn-check"' in html
+    assert (
+        'type="checkbox" id="btn-check-1" autocomplete="off" class="btn-check"'
+        in html
+    )
     assert 'id="btn-check-1"' in html
     assert '<label for="btn-check-1" class="btn btn-primary"' in html
 
 def test_bs5_btn_group_state_blocking():
     """5. State: Hide entire group based on constraints."""
-    grp = BS5ButtonGroup(render_constaints={"has_permissions": True})
+    grp = BS5ButtonGroup(render_constraints={"has_permissions": True})
     grp.add_btn(content="Action")
     
     html = grp.render(override_props={"has_permissions": False})
@@ -164,7 +167,7 @@ def test_bs5_btn_group_state_blocking():
 
 def test_bs5_btn_group_state_passing():
     """6. State: Show group based on constraints."""
-    grp = BS5ButtonGroup(render_constaints={"has_permissions": True})
+    grp = BS5ButtonGroup(render_constraints={"has_permissions": True})
     grp.add_btn(content="Action")
     
     html = grp.render(override_props={"has_permissions": True},add_to_global=True)
@@ -227,13 +230,13 @@ def test_bs5_toolbar_render_input_group_mix():
 
 def test_bs5_toolbar_state_blocking():
     """5. State: Hide toolbar via constraints."""
-    toolbar = BS5ButtonToolbar(render_constaints={"show_tools": True})
+    toolbar = BS5ButtonToolbar(render_constraints={"show_tools": True})
     html = toolbar.render(override_props={"show_tools": False})
     assert not html
 
 def test_bs5_toolbar_state_passing():
     """6. State: Show toolbar via constraints."""
-    toolbar = BS5ButtonToolbar(render_constaints={"show_tools": True})
+    toolbar = BS5ButtonToolbar(render_constraints={"show_tools": True})
     grp = BS5ButtonGroup()
     grp.add_btn("Tool")
     toolbar.add_btn_grp(grp)
@@ -241,4 +244,3 @@ def test_bs5_toolbar_state_passing():
     html = toolbar.render(override_props={"show_tools": True},add_to_global=True)
     assert "btn-toolbar" in html
     assert "Tool" in html
-

@@ -4,10 +4,18 @@ from src.probo import (
     div,
     span,
 )
+from src.probo import (
+    DIV,P,HTML,HEAD,BODY,H1
+)
 from src.probo.components.component import Component
 
 
 # --- FIXTURES ---
+@pytest.fixture
+def base_tree():
+    return HTML(
+        HEAD(),BODY(DIV(H1('HELLO'),P('WORLD')))
+    )
 @pytest.fixture
 def base_layout():
     """
@@ -104,3 +112,20 @@ def test_custom_separator():
     # (Assuming render logic puts separator between items)
     html = tmpl.render()
     assert "<span>A</span><hr><span>B</span>" in html
+
+def test_load_base_template(base_tree):
+    """
+    Scenario: Load an existing HTML tree as the base template.
+    Expected: The loaded tree is used as the structure for rendering.
+    """
+    tmpl = Template(separator="\n")
+    print(BODY().element_tag)
+    tmpl.load_base_template(base_tree,use_as_base=True)  # Simulate loading a base template
+
+    html = tmpl.render()
+    assert "<!DOCTYPE html>" in html
+    assert "<html" in html
+    assert "<head>" in html
+    assert "<body>" in html
+    assert "HELLO" in html
+    assert "WORLD" in html

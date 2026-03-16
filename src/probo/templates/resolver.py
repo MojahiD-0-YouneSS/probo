@@ -163,7 +163,7 @@ class TemplateResolver:
 
         return result
 
-    def __template_resolver(self, tmplt_str=None, load_it=False):
+    def __template_resolver(self, tmplt_str:str|None=None, load_it:bool=False)-> dict[str,dict]:
         """Internal execution pipeline for template resolution.
 
         Performs the HTML -> XML conversion and triggers the attribute 
@@ -186,7 +186,7 @@ class TemplateResolver:
 
         return result
 
-    def template_resolver(self, template=None, load_it=False):
+    def template_resolver(self, template:str|None=None, load_it:bool=False)-> dict[str,dict]:
         """Public entry point for resolving templates.
 
         Args:

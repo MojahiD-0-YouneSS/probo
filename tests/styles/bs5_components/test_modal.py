@@ -14,7 +14,10 @@ def test_bs5_modal_render_basic_structure():
     html = modal.render()
 
     # Check hierarchy
-    assert '<div id="testModal" class="modal"' in html
+    assert (
+        '<div id="testModal" tabindex="-1" aria-hidden="true" class="modal fade">'
+        in html
+    )
     assert 'id="testModal"' in html
     # Assuming init content goes to body if not specified otherwise
     assert 'Default Body' in html

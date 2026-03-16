@@ -10,7 +10,8 @@ def test_bs5_pagination_render_basic():
     # Assuming string inputs create simple items
     pag = BS5Pagination("1", "2", Id="page-nav",aria_label="Page navigation")
     html = pag.render()
-
+    
+    print(html)
     # Structure checks
     assert '<nav id="page-nav" aria-label="Page navigation"' in html
     assert '<ul class="pagination"' in html
@@ -38,9 +39,9 @@ def test_bs5_pagination_controls():
 
     # Add controls with custom text/links
     pag.add_controls(
-        prev_conten="Back",
+        prev_content="Back",
         prev_link="/prev",
-        next_conten="Forward",
+        next_content="Forward",
         next_link="/next"
     )
 

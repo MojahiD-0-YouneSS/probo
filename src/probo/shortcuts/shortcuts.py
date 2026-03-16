@@ -40,9 +40,10 @@ from probo.shortcuts.configs import (
 from probo.shortcuts.shortcuts_utils import (
     make_es_from_esc,
 )
+from typing import Any
+from probo.utility import ProboSourceString
 
-
-def custom(tag: str, content: str = "", is_void_element: bool = False, **attrs) -> str:
+def custom(tag: str, content: str = "", is_void_element: bool = False, **attrs:dict[str,Any]) -> str:
     """Instantly creates and renders a custom HTML tag string.
 
     This utility serves as a functional shortcut for the `Element` factory, 
@@ -68,7 +69,7 @@ def custom(tag: str, content: str = "", is_void_element: bool = False, **attrs) 
         .element
     )
 
-def set_data(*variables) -> str:
+def set_data(*variables:Any) -> str:
     """Instantly injects data variables into an element and renders it to a string.
 
     This utility serves as a functional shortcut for the `Element.set_data` 
@@ -85,7 +86,7 @@ def set_data(*variables) -> str:
     """
     return Element().set_data(*variables).stringify_element().element
 
-def form_field(tag, **kwargs) -> ProboFormField:
+def form_field(tag: str, **kwargs:dict[str,Any]) -> ProboFormField:
     """A functional factory for creating ProboFormField instances.
 
     This utility simplifies the creation of form field configurations by 
@@ -353,7 +354,7 @@ def theme(config: ThemeConfig) -> str:
         css_vars["--spacing"] = config.spacing
 
     # Return the rendered CSS rule string
-    return f":root {CssRule(**css_vars).render()}"
+    return ProboSourceString(f":root {CssRule(**css_vars).render()}")
 
 def datatable(config: TableConfig) -> str:
     """Compiles a TableConfig blueprint into a fully formatted HTML table string.
@@ -388,7 +389,7 @@ def datatable(config: TableConfig) -> str:
 
     tbody = f"<tbody>{''.join(rows)}</tbody>"
 
-    return f'<table class="{config.table_class}">{thead}{tbody}</table>'
+    return ProboSourceString(f'<table class="{config.table_class}">{thead}{tbody}</table>')
 
 def head_seo(config: HeadConfig) -> Head:
     """Compiles a HeadConfig blueprint into a functional Head object.

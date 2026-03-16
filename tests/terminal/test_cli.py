@@ -38,7 +38,7 @@ def test_cli_init_pure_project(tmp_path):
     assert (project / "static").exists()
     assert (project / "static" / "assets").exists()
     assert (project / "components").exists()
-    assert (project / "components" / "header.py").exists()
+    assert (project / "components" / "greeting.py").exists()
     assert (project / "pages").exists()
     assert (project / "pages" / "index.py").exists()
 
@@ -89,7 +89,11 @@ def test_generate_app_base_structure(tmp_path, mock_django_subprocess):
 
     # Base PROBO files
     assert (app_dir / "components" / "__init__.py").exists()
+    assert (app_dir / "components" / "greeting.py").exists()
     assert (app_dir / "probo_tcm.py").exists()
+    assert (app_dir / "pages").exists()
+    assert (app_dir / "pages" / "__init__.py").exists()
+    assert (app_dir / "pages" / "index.py").exists()
 
     # Ensure Advanced folders are NOT created
     assert not (app_dir / "services").exists()

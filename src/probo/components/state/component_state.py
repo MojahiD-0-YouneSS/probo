@@ -2,7 +2,7 @@ from probo.components.state.props import StateProps
 from probo.components.elements import Element
 from probo.components.attributes import ElementAttributeValidator
 import re
-from typing import Any, Self
+from typing import Any, Self, Callable
 
 from probo.utility import ProboSourceString
 
@@ -247,19 +247,19 @@ class ElementState:
     )
     def __init__(
         self,
-        element,
+        element:str,
         s_state: str = str(),
         d_state: str = None,
         c_state=str(),
-        is_custom=False,
+        is_custom:bool=False,
         props: StateProps = None,
-        bind_to=None,
-        inner_html=None,
-        i_state=False,
-        hide_dynamic=False,
+        bind_to:str=None,
+        inner_html:Callable=None,
+        i_state:bool=False,
+        hide_dynamic:bool=False,
         is_void_element: bool = False,
-        key_as_content=False,
-        **attrs,
+        key_as_content:bool=False,
+        **attrs:dict[str,Any],
     ):
         import uuid
 
@@ -419,7 +419,7 @@ class ElementState:
                 )
         return self
 
-    def bind_data_to(self, target_value):
+    def bind_data_to(self, target_value:str)-> dict[str, str]:
         if self.bind_to is None:
             return self.attrs
         else:
@@ -430,5 +430,5 @@ class ElementState:
                 return render_attrs
             return self.attrs
 
-    def render(self, **data) -> str | None:
+    def render(self, **data:dict[str, Any]) -> str | None:
         return ProboSourceString(self.change_state(data).state_placeholder)

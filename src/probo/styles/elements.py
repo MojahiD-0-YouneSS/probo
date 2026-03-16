@@ -4,8 +4,9 @@ from probo.styles.plain_css import (
     CssSelector,
 )
 from dataclasses import dataclass
-from typing import List, Dict, Any, Union
+from typing import List, Dict, Any, Union, Self
 from probo.styles.utils import resolve_complex_selector
+from probo.utility import ProboSourceString
 
 
 class ComponentStyle:
@@ -42,7 +43,7 @@ class ComponentStyle:
         if template:
             self.template_info = CssSelector(self.template).template_info
 
-    def link_component(self, cmp_str: str):
+    def link_component(self, cmp_str: str) -> Self:
         """Binds a specific HTML representation to this style for validation.
 
         Allows for late-binding of structural templates. This is useful for 
@@ -58,7 +59,7 @@ class ComponentStyle:
         self.template = cmp_str
         return self
 
-    def render(self, as_string=True, with_style_tag=False):
+    def render(self, as_string:bool=True, with_style_tag:bool=False) -> Union[str, List[str]]:
         """Serializes the CSS rules into a validated string or list.
 
         This method triggers the validation pipeline for every rule bridge. 
@@ -83,13 +84,13 @@ class ComponentStyle:
         else:
             from probo.components.tag_functions.block_tags import style
 
-            return (
+            return ProboSourceString(
                 "".join(self.template_representation)
                 if not with_style_tag
                 else style("".join(self.template_representation))
             )
 
-    def _validate_css(self, bridge):
+    def _validate_css(self, bridge)-> str:
         """Internally validates a SelectorRuleBridge against the template.
 
         Checks the existence of CSS selectors within the template_info 
@@ -134,9 +135,9 @@ class ComponentStyle:
         return f"{selectors} {r} \n"
 
 def element_style(
-    with_style_attr=False,
-    **prop_val,
-):
+    with_style_attr:bool=False,
+    **prop_val:dict[str,str],
+)-> str|dict[str,str]:
     """Generates inline CSS strings from Python keyword arguments.
 
     This utility converts Pythonic snake_case or standard CSS properties 
@@ -151,6 +152,7 @@ def element_style(
 
     Returns:
         str: A formatted CSS string or a full HTML style attribute.
+        dict[str, str]: A dictionary with a single "style" key and the formatted CSS string as its value.
 
     Example:
         >>> element_style(color="blue", font_size="12px")
@@ -164,9 +166,9 @@ def element_style(
         or ""
     )
     if with_style_attr:
-        return f'style="{style_string}"'
+        return { "style": ProboSourceString(style_string) }
     else:
-        return style_string
+        return ProboSourceString(style_string)
 
 @dataclass
 class SelectorRuleBridge:
@@ -237,7 +239,7 @@ class SelectorRuleBridge:
 
         body = self.rule.render()
         if body:
-            return f"{self.selector_str} {body}"
+            return ProboSourceString(f"{self.selector_str} {body}")
         else:
             return ""  # No styles to render
 
@@ -303,7 +305,7 @@ def element_style_state(
     template: str,
     rslvd_el: Dict[str, Any],  # Dict[str, ElementState]
     *css: SelectorRuleBridge,
-):
+)-> List[SelectorRuleBridge]:
     """Applies and validates styles based on the resolved state of a template.
 
     This function acts as a state-aware style applicator. It cross-references 

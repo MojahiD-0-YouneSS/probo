@@ -1,5 +1,5 @@
 from probo.components.tag_functions import script as Srpt
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Self
 from probo.htmx.htmx_enum import (
     HxAttr,
     HxBoolValue,
@@ -8,8 +8,7 @@ from probo.htmx.htmx_enum import (
     HxParams,
     HxSyncStrategy,
 )
-from probo.utility import render_attributes as r
-# from probo.components.elements import Element
+from probo.utility import render_attributes
 from probo.components.tag_classes.block_tags import EL
 from probo.components.base import ElementAttributeManipulator
 
@@ -35,9 +34,9 @@ class Ajax:
     def __init__(
         self,
     ):
-        self.AJAX_HX_DICT = dict()
+        self.AJAX_HX_DICT:dict[str, str] = dict()
 
-    def hx_get(self, url: str) -> Dict[str, str]:
+    def hx_get(self, url: str) -> Self:
         """Sets the hx-get attribute to the specified URL.
 
         Args:
@@ -49,7 +48,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.GET.value] = url
         return self
 
-    def hx_post(self, url: str) -> Dict[str, str]:
+    def hx_post(self, url: str) -> Self:
         """Sets the hx-post attribute to the specified URL.
 
         Args:
@@ -61,11 +60,11 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.POST.value] = url
         return self
 
-    def hx_put(self, url: str) -> Dict[str, str]:
+    def hx_put(self, url: str) -> Self:
         """Specifies the target element to be updated by the AJAX response.
 
         Args:
-            selector: A CSS selector (e.g., "#content", ".result") indicating 
+            url: A CSS selector (e.g., "#content", ".result") indicating 
                 where the response HTML should be injected.
 
         Returns:
@@ -74,11 +73,11 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.PUT.value] = url
         return self
 
-    def hx_patch(self, url: str) -> Dict[str, str]:
+    def hx_patch(self, url: str) -> Self:
         """Defines how the response will be swapped into the target.
 
         Args:
-            swap_str: The swap strategy (e.g., "innerHTML", "outerHTML", "beforebegin").
+            url: The swap strategy (e.g., "innerHTML", "outerHTML", "beforebegin").
 
         Returns:
             The Ajax instance for method chaining.
@@ -86,7 +85,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.PATCH.value] = url
         return self
     
-    def hx_swap_oob(self,) -> Dict[str, str]:
+    def hx_swap_oob(self,) -> Self:
         """Enables 'Out of Band' swaps for this element.
 
         Returns:
@@ -95,7 +94,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.SWAP_OOB.value] = True
         return self
 
-    def hx_delete(self, url: str) -> Dict[str, str]:
+    def hx_delete(self, url: str) -> Self:
         """Sets the hx-delete attribute for resource removal.
 
         Args:
@@ -107,7 +106,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.DELETE.value] = url
         return self
 
-    def hx_target(self, selector: str) -> Dict[str, str]:
+    def hx_target(self, selector: str) -> Self:
         """Specifies an element to show a loading indicator during the request.
 
         Args:
@@ -119,7 +118,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.TARGET.value] = selector
         return self
 
-    def hx_trigger(self, trigger_str: str) -> Dict[str, str]:
+    def hx_trigger(self, trigger_str: str) -> Self:
         """Specifies the event that triggers the AJAX request.
 
         Args:
@@ -131,7 +130,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.TRIGGER.value] = trigger_str
         return self
 
-    def hx_swap(self, swap_str: str) -> Dict[str, str]:
+    def hx_swap(self, swap_str: str) -> Self:
         """Defines how the response will be swapped into the target.
 
         Args:
@@ -143,7 +142,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.SWAP.value] = swap_str
         return self
 
-    def hx_indicator(self, selector: str) -> Dict[str, str]:
+    def hx_indicator(self, selector: str) -> Self:
         """Specifies an element to show a loading indicator during the request.
 
         Args:
@@ -155,7 +154,7 @@ class Ajax:
         self.AJAX_HX_DICT[HxAttr.INDICATOR.value] = selector
         return self
 
-    def get_values(self):
+    def get_values(self) -> dict[str, str]:
         """Retrieves the final dictionary of HTMX attributes.
 
         Returns:
@@ -208,7 +207,7 @@ class HTMXElement(Ajax):
         element_tag: str = None,
         content: str = None,
         template_info: dict = None,
-        **hx_attrs,
+        **hx_attrs:dict[str, Any],
     ):
         """Initializes the HTMX element with tag, content, and attributes.
 
@@ -244,8 +243,8 @@ class HTMXElement(Ajax):
     @property
     def attr_manager(self) -> ElementAttributeManipulator:
         return ElementAttributeManipulator(self.hx_attrs)
-    
-    def set_attr(self, **attrs) -> "HTMXElement":
+
+    def set_attr(self, **attrs:dict[str,Any]) -> Self:
         """Sets multiple attributes, automatically resolving HxAttr Enums.
 
         Args:
@@ -264,25 +263,11 @@ class HTMXElement(Ajax):
         return self
 
     def get_attr(self, attribute: str) -> Any:
-        """Constructs a complex hx-trigger string with modifiers and filters.
 
-        Args:
-            event: The base event (e.g., 'click', 'keyup'). Resolved 
-                via `HxTrigger` enum if present.
-            modifiers: Suffixes like {'delay': '500ms', 'once': ''}.
-            filters: Logic expressions in brackets, e.g., ['ctrlKey'].
-
-        Returns:
-            The HTMXElement instance for chaining.
-
-        Examples:
-            >>> btn.build_trigger_string("keyup", modifiers={"delay": "500ms"}, filters=["target.value.length > 3"])
-            # Produces: hx-trigger="keyup delay:500ms [target.value.length > 3]"
-        """
         attr_name = self.hx_attrs.get(attribute, None)
         return attr_name
 
-    def del_attr(self, attribute: str) -> "HTMXElement":
+    def del_attr(self, attribute: str) -> Self:
         """Removes a specific attribute from the element's attribute registry.
 
         This method safely attempts to remove an attribute. If the attribute 
@@ -302,7 +287,7 @@ class HTMXElement(Ajax):
         event: str,
         modifiers: Optional[Dict[str, str]] = None,
         filters: Optional[List[str]] = None,
-    ) -> "HTMXElement":
+    ) -> Self:
         """Constructs a complex hx-trigger string with modifiers and filters.
 
         This method builds the standard HTMX trigger syntax: 
@@ -346,7 +331,7 @@ class HTMXElement(Ajax):
 
     def build_swap_string(
         self, name: str, modifiers: Optional[Dict[str, str]] = None
-    ) -> "HTMXElement":
+    ) -> Self:
         """Constructs an hx-swap string with timing or transition modifiers.
 
         Args:
@@ -363,7 +348,7 @@ class HTMXElement(Ajax):
         self.hx_attrs[HxAttr.SWAP.value] = " ".join(parts)
         return self
 
-    def build_sync_string(self, element: str, strategy: str) -> "HTMXElement":
+    def build_sync_string(self, element: str, strategy: str) -> Self:
         """Constructs an hx-sync string to coordinate AJAX requests between elements.
 
         Args:
@@ -380,7 +365,7 @@ class HTMXElement(Ajax):
 
     def render(
         self,
-        as_string=True,
+        attrs_as_string: bool = True,
     ) -> str | dict[str, str]:
         """Renders the configuration as HTML or an attribute dictionary.
 
@@ -388,7 +373,7 @@ class HTMXElement(Ajax):
         before finalizing the output.
 
         Args:
-            as_string: If True and no `element_tag` exists, returns a 
+            attrs_as_string: If True and no `element_tag` exists, returns a 
                 formatted attribute string. If False, returns the raw dict.
 
         Returns:
@@ -405,8 +390,8 @@ class HTMXElement(Ajax):
                 )
                 .element
             )
-        if as_string:
-            return f" {r(self.element_tag, self.hx_attrs)}"
+        if attrs_as_string:
+            return f" {render_attributes(self.element_tag, self.hx_attrs)}"
         else:
             return self.hx_attrs
 
@@ -433,6 +418,7 @@ class HTMX:
     __slots__ = (
         'elements',
         'script_tag',
+        'htmx_cdn_url',
     )
 
     def __init__(
@@ -450,8 +436,8 @@ class HTMX:
         """
         self.elements = htmx_elemets
         self.script_tag = self.get_script_tag(use_cdn, local_path)
-
-    def get_script_tag(self, use_cdn: bool = True, local_path: Optional[str] = None):
+        self.htmx_cdn_url=HTMX_CDN_URL
+    def get_script_tag(self, use_cdn: bool = True, local_path: Optional[str] = None) -> str:
         """Generates the `script` tag required to load the HTMX library.
 
         Args:
@@ -464,7 +450,7 @@ class HTMX:
         src = HTMX_CDN_URL if use_cdn else (local_path or LOCAL_TEMPO_PATH)
         return Srpt(src=src)
 
-    def include(self, **htmx_elemets: dict[str, str]):
+    def include(self, **htmx_elemets: dict[str, str]) -> Self:
         """Bulk updates the registry with new named HTMX configurations.
 
         Args:
@@ -476,7 +462,7 @@ class HTMX:
         self.elements.update(htmx_elemets)
         return self
 
-    def add(self, element, value):
+    def add(self, element: str, value: HTMXElement) -> Self:
         """Adds or overwrites a single named configuration in the registry.
 
         Args:
@@ -489,7 +475,7 @@ class HTMX:
         self.elements[element] = value
         return self
 
-    def render(self, element=None, all_elements=False, as_string=True):
+    def render(self, element: Optional[str] = None, all_elements: bool = False, as_string: bool = True) -> str:
         """Renders registered configurations into HTML or retrieves the object.
 
         Args:

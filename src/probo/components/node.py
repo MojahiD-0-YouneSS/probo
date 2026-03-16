@@ -21,8 +21,9 @@ class ElementNodeMixin:
         self.node_children = []
         self.parent = None
         self.__void_node = False
-
-    def __init_subclass__(cls, **kwargs):
+        if hasattr(self,'element_tag'):
+            self.element_tag = self.__class__.__name__.lower()
+    def __init_subclass__(cls, **kwargs:dict[str,Any]):
         """Metaprogramming hook to configure tag-specific node behavior.
 
         Automatically assigns a unique Probo-ID and sets the default tag name 
@@ -34,7 +35,7 @@ class ElementNodeMixin:
         """
         cls._id = f"{(kwargs.get('id', None) or 'probo')}-{uuid.uuid4().hex[:8]}"
         cls.tag=cls.__name__.upper()
-        
+
         def __normalize_node_children(self,content=[],is_void=False):
             if is_void:
                 self.__void_node = True
@@ -48,7 +49,7 @@ class ElementNodeMixin:
     def children_nodes(self):
         return self.node_children
 
-    def add(self, child: Any, index: Optional[int] = None) -> 'ElementNodeMixin':
+    def add(self, child: Any, index: Optional[int] = None) -> Self:
         """Adds a child node and establishes the parent linkage.
 
         If the current node is a 'void' node, the addition is ignored to 
@@ -65,19 +66,19 @@ class ElementNodeMixin:
             return self
         if child is None or child is self:
             return self
-        
+
         if hasattr(child, 'parent'):
             child.parent = self
-            
+
         if index is None:
             self.node_children.append(child)
         else:
             self.node_children.insert(index, child)
-        if hasattr(self,'content'):
+        if hasattr(self, "content") and child not in self.content:
             self.content.append(child)
         return self
 
-    def remove(self, child: Any) -> 'ElementNodeMixin':
+    def remove(self, child: Any) ->Self:
         """Removes a child node and clears its parent reference.
 
         Args:
@@ -94,7 +95,7 @@ class ElementNodeMixin:
                 self.content.remove(child)
         return self
 
-    def pop(self, child: Any) -> 'Any':
+    def pop(self, child: Any) -> Any:
         """Pops a child node and clears its parent reference.
 
         Args:
@@ -136,7 +137,7 @@ class ElementNodeMixin:
         """
         if predicate(self):
             return self
-        
+
         for child in self.node_children:
             if hasattr(child, 'find'):
                 result = child.find(predicate)
@@ -156,13 +157,13 @@ class ElementNodeMixin:
         results = []
         if predicate(self):
             results.append(self)
-            
+
         for child in self.node_children:
             if hasattr(child, 'find_all'):
                 results.extend(child.find_all(predicate))
         return results
 
-    def select(self, selector: str):
+    def select(self, selector: str) -> Optional[Any]:
         """Retrieves a node using CSS-style selectors.
 
         Supports class (.name), ID (#name), and Tag (NAME) lookups.
@@ -239,7 +240,7 @@ from probo.components.base import BaseHTMLElement
 
 class ProxyElement(BaseHTMLElement, ElementNodeMixin):
     __slots__ = ('_proxy_tag', '_logic_obj', 'render_callable')
-    def __init__(self, tag,*content,**attrs):
+    def __init__(self, tag,*content:tuple[Optional[str]],**attrs):
         super().__init__(*content,**attrs)
         ElementNodeMixin.__init__(self)
         self._proxy_tag = tag
@@ -310,7 +311,7 @@ class ComponentNode(ElementNodeMixin):
             curr = curr._parent
         return curr
 
-    def is_descendant_of(self, other: 'ComponentNode') -> bool:
+    def is_descendant_of(self, other:Self) -> bool:
         """Efficiently checks hierarchy using depth."""
         if self.depth <= other.depth:
             return False
@@ -322,3 +323,6 @@ class ComponentNode(ElementNodeMixin):
                 break
             curr = curr._parent
         return False
+    def component_to_string(self)->str:
+        """Utility to convert the component and its subtree to a string representation."""
+        return ProboSourceString(''.join([ child.render() if hasattr(child,'render') else str(child) for child in self.node_children]))

@@ -111,17 +111,52 @@ def test_set_data_django_style(builder):
     )  # Boolean True usually becomes just the attr
 
 
+def test_raw_elemnt(builder):
+    """Test the raw method wrapping content in comments."""
+    builder.set_content("Hidden Data")
+    builder.raw(
+        "<p>Hidden Data 123</p>", "oijoiiotg", "joptjgtijopji"
+    )  # Should wrap in <!-- -->
+
+    assert "<!--"not  in builder.element
+    assert "Hidden Data 123" in builder.element
+    assert "-->" not in builder.element
+    assert "joptjgtijopji" in builder.element
+
+def test_raw_elemnt_as_content(builder):
+    """Test the raw method wrapping content in comments."""
+    builder.set_content("Hidden Data")
+    builder.raw(
+        "<p>Hidden Data 123</p>", "oijoiiotg", "joptjgtijopji",inner=True
+    )  # Should wrap in <!-- -->
+
+    assert "<!--"not  in builder.content
+    assert "Hidden Data 123" in builder.content
+    assert "-->" not in builder.content
+    assert "joptjgtijopji" in builder.content
+
 def test_raw_comment(builder):
     """Test the raw method wrapping content in comments."""
     builder.set_content("Hidden Data")
     builder.raw(
-        "Hidden Data 123", "oijoiiotg", "joptjgtijopji"
+        "Hidden Data 123", "oijoiiotg", "joptjgtijopji",is_comment=True
     )  # Should wrap in <!-- -->
 
     assert "<!--" in builder.element
     assert "Hidden Data 123" in builder.element
     assert "-->" in builder.element
     assert "joptjgtijopji" in builder.element
+def test_raw_comment_as_content(builder):
+    """Test the raw method wrapping content in comments."""
+    builder.set_content("Hidden Data")
+    builder.raw(
+        "Hidden Data 123", "oijoiiotg", "joptjgtijopji",is_comment=True,inner=True,
+    )  # Should wrap in <!-- -->
+
+    assert "<!--" in builder.content
+    assert "Hidden Data 123" in builder.content
+    assert "-->" in builder.content
+    assert "joptjgtijopji" in builder.content
 
 
 def test_attributes_chaining(builder):

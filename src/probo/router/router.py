@@ -2,11 +2,14 @@ import os
 import inspect
 import importlib.util
 from functools import wraps
-from typing import Callable, Dict, Any, Union,Optional
+from typing import Callable, Dict, Any, Union,Optional, Iterable
 from bottle import Bottle, request, response, run, static_file
 from probo.components.elements import Template
 from probo.context import TemplateComponentMap
 from probo.router.payload import RouterPayload
+from probo.router.settings import RouterSettings
+from probo.router.responses import gzip_response
+from asgiref.wsgi import WsgiToAsgi
 import inspect
 
 class ProboRouter:
@@ -18,7 +21,7 @@ class ProboRouter:
     to ensure full HTML document delivery.
     """
     __slots__ = (
-        'app',
+        '__app',
         'secret_key',
         'respond_type',
         'app_name',
@@ -27,8 +30,9 @@ class ProboRouter:
         'tcm',
         'document_template',
         'payload',
+        'settings',
     )
-    def __init__(self, app_name: str = "ProboApp", pages_dir: str = "pages",secret_key=None, respond_format='txt', base_template: Template = None):
+    def __init__(self, app_name: str = "ProboApp", pages_dir: str = "pages",secret_key:str|None=None, respond_format:str='txt', base_template: Template|None = None, settings:RouterSettings|None=None):
         """
         Initializes the ProboRouter.
 
@@ -37,8 +41,8 @@ class ProboRouter:
             pages_dir (str): The directory where page files are stored.
             base_template (Template): An optional Probo Template object to act as the global wrapper.
         """
-        
-        self.app = Bottle()
+        self.settings = settings or RouterSettings()
+        self.__app = Bottle()
         self.secret_key = secret_key
         self.respond_type = respond_format
         self.app_name = app_name
@@ -54,14 +58,63 @@ class ProboRouter:
 
         self._setup_tcm_handler()
 
+    def is_htmx(self) -> bool:
+        """Checks if the current request was triggered by HTMX."""
+        return request.headers.get('HX-Request') == 'true'
+
+    def __call__(
+        self, environ: Dict[str, Any], start_response: Callable
+    ) -> Iterable[bytes]:
+        """
+        WSGI Entry Point for Gunicorn.
+
+        This method delegates the request to the internal Bottle app but ensures
+        the output is refined into the WSGI-compliant byte-stream format.
+        """
+        # 1. Let Bottle handle the routing, middleware, and request/response context
+        result = self._maybe_compress(self.__app(environ, start_response))
+
+        # 2. Refine the result into bytes for the network
+        return self._normalize_wsgi_output(result)
+
+    def _normalize_wsgi_output(self, result: Any) -> Iterable[bytes]:
+        """
+        Ensures the response is an iterable of bytes.
+        Handles Strings, Generators (ProboStreamer), and Objects with .render()
+        """
+        # Bottle usually returns a list of strings/bytes or a generator
+        for chunk in result:
+            # If the chunk itself is a Probo component or special object
+            if hasattr(chunk, "render"):
+                chunk = chunk.render()
+
+            # If the chunk is a dictionary (common in Probo templates)
+            if isinstance(chunk, dict):
+                chunk = self.document_template.swap_component(**chunk).render()
+
+            # Ensure we are yielding bytes
+            if isinstance(chunk, str):
+                yield chunk.encode("utf-8")
+            else:
+                yield chunk
+
+    def _maybe_compress(self, body: str) -> Union[str, bytes]:
+        if not self.settings.ENABLE_GZIP:
+            return body
+
+        if "gzip" not in request.headers.get("Accept-Encoding", ""):
+            return body
+
+        compressed = gzip_response(body,response)
+        return compressed
 
     def _setup_tcm_handler(self) -> None:
         """
         Injects a hook into Bottle to check the TemplateComponentMap before 
         failing with a 404. This avoids manual route registration overhead.
         """
-        @self.app.error(404)
-        def catch_all_tcm(error):
+        @self.__app.error(404)
+        def catch_all_tcm(error) -> str:
             if self.tcm:
                 # Try to resolve via TemplateComponentMap API
                 # TCM returns str | tuple | None
@@ -70,19 +123,19 @@ class ProboRouter:
                     component_data = self.tcm.get_component(path)
                 except Exception as e:
                     component_data = None
-                
+
                 if component_data:
                     self.routes[path] = lambda :component_data
                     response.status = 200
                     if isinstance(component_data,tuple):
                         component_data = component_data[0]
                     return self._wrap_in_template(component_data)
-            
+
             return "404 Not Found"
 
     def _setup_static_routes(self) -> None:
         """Standard routes for Probo-generated assets."""
-        @self.app.get('/static/assets/<filename:path>')
+        @self.__app.get('/static/assets/<filename:path>')
         def send_static(filename):
             return static_file(filename, root='./static/assets')
 
@@ -91,10 +144,10 @@ class ProboRouter:
         Wraps a rendered component string into a full HTML document using the Template object.
         """
         rendered_content = content.render() if hasattr(content, 'render') else content if not isinstance(content,str) else content
-        
+
         # If the content is already a full document (has <html>), return as is
         if not isinstance(rendered_content,dict):
-            if "<html" in str(rendered_content).lower():
+            if "<html" in str(rendered_content):
                 return rendered_content
             rendered_content = {'section':rendered_content,}
         # Otherwise, load it into the Probo Template and return a complete document
@@ -108,7 +161,7 @@ class ProboRouter:
             # pass_request = 'request' in sig.parameters
             pass_response = 'response' in sig.parameters
             pass_request = 'request' in sig.parameters
-            @self.app.get(path)
+            @self.__app.get(path)
             @wraps(func)
             def wrapper(*args, **kwargs):
                 if pass_response: kwargs['response'] = response
@@ -117,15 +170,21 @@ class ProboRouter:
                 else:
                     result = func(*args, **kwargs,)
                 if self.respond_type == 'txt':
-                    return self._wrap_in_template(result)
+                    if self.is_htmx():
+                        return result.render() if hasattr(result, 'render') else str(result)
+                    else:
+                        return self._wrap_in_template(result)
                 else:
-                    respond_txt = self._wrap_in_template(result)
-                    self.payload.load(path=respond_txt)
-                    return self.payload.get_response(self.respond_type)
+                    if self.is_htmx():
+                        return result.render() if hasattr(result, 'render') else str(result)
+                    else:
+                        respond_txt = self._wrap_in_template(result)
+                        self.payload.load(path=respond_txt)
+                        return self.payload.get_response(self.respond_type)
             return wrapper
         return decorator
 
-    def load_tcm(self,url='.',renamed_obj_to=None,renamed_file_to=None,) -> TemplateComponentMap:
+    def load_tcm(self,url:str='.',renamed_obj_to:str=None,renamed_file_to:str=None,) -> None | TemplateComponentMap:
         """Automatically loads the tcm object from url."""
         if not os.path.exists(url):
             return
@@ -133,13 +192,13 @@ class ProboRouter:
         obj_name = renamed_obj_to or 'tcm'
         for root, dirs, files in os.walk(url):
             for file in files:
-                    
+
                 if file.endswith(".py") and not file.startswith("_"):
                     if file == str(file_name):
 
                         relative_path = os.path.relpath(os.path.join(root, file), url)
                         route_path = "/" + relative_path.replace(".py", "").replace("\\", "/")
-                       
+
                         module_name = file.replace('.py', '')
                         spec = importlib.util.spec_from_file_location(module_name, os.path.join(root, file))
                         if spec and spec.loader:
@@ -156,8 +215,24 @@ class ProboRouter:
         if not isinstance(tcm,TemplateComponentMap):
             return
         self.tcm=tcm
-    
-    def run(self, host: str = "127.0.0.1", port: int = 8080, debug: bool = True) -> None:
+
+    @property
+    def wsgi_app(self) -> Bottle:
+        return self.__app
+
+    @property
+    def asgi_app(self) -> WsgiToAsgi:
+        return WsgiToAsgi(self.__app)
+
+    def run(self,) -> None:
         """Launch the Probo Server."""
-        print(f"{self.app_name} starting on http://{host}:{port}")
-        run(self.app, host=host, port=port, debug=debug, reloader=True)
+        print(f"{self.app_name} starting on http://{self.settings.HOST}:{self.settings.PORT} with settings: {self.settings}")
+        if self.settings.DEBUG:
+            print("Debug mode is ON. Detailed error messages and auto-reloading enabled.")
+        run(
+            self.__app,
+            host=self.settings.HOST,
+            port=self.settings.PORT,
+            debug=self.settings.DEBUG,
+            reloader=self.settings.AUTO_RELOAD,
+        )

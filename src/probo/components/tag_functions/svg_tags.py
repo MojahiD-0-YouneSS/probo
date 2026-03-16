@@ -1,217 +1,217 @@
-from probo.components.tag_classes import svg_tags
+from probo.components.tag_functions.self_closing import EL
+from typing import Any
 
 
-
-def g(*content, **attrs):
+def g(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <g> element."""
-    return svg_tags.EL.g(*content, **attrs).element
+    return EL.g(*content, **attrs).element
 
-def defs(*content,**attrs):
+def defs(*content:tuple[str],**attrs:dict[str,Any]):
 
     """Represents an HTML <dfs> element."""
-    return svg_tags.EL.defs(*content, **attrs).element
+    return EL.defs(*content, **attrs).element
 
-def text(*content, **attrs):
+def text(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <text> element."""
-    return svg_tags.EL.text(*content, **attrs).element
+    return EL.text(*content, **attrs).element
 
-def tspan(*content, **attrs):
+def tspan(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <tspan> element."""
-    return svg_tags.EL.tspan(*content, **attrs).element
+    return EL.tspan(*content, **attrs).element
 
-def svg(*content, **attrs):
+def svg(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <svg> element."""
-    return svg_tags.EL.svg(*content, **attrs).element
+    return EL.svg(*content, **attrs).element
 
-def symbol(*content, **attrs):
+def symbol(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <symbol> element."""
-    return svg_tags.EL.symbol(*content, **attrs).element
+    return EL.symbol(*content, **attrs).element
 
-def marker(*content, **attrs):
+def marker(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <marker> element."""
-    return svg_tags.EL.marker(*content, **attrs).element
+    return EL.marker(*content, **attrs).element
 
-def pattern(*content, **attrs):
+def pattern(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <pattern> element."""
-    return svg_tags.EL.pattern(*content, **attrs).element
+    return EL.pattern(*content, **attrs).element
 
-def mask(*content, **attrs):
+def mask(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <mask> element."""
-    return svg_tags.EL.mask(*content, **attrs).element
+    return EL.mask(*content, **attrs).element
 
-def clippath(*content, **attrs):
+def clippath(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <clippath> element."""
-    return svg_tags.EL.clippath(*content, **attrs).element
+    return EL.clippath(*content, **attrs).element
 
-def lineargradient(*content,**attrs):
+def lineargradient(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <lineargradient> element."""
-    return svg_tags.EL.lineargradient(content, **attrs).element
+    return EL.lineargradient(content, **attrs).element
 
-def radialgradient(*content,**attrs):
+def radialgradient(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <radialgradient> element."""
-    return svg_tags.EL.radialgradient(content, **attrs).element
+    return EL.radialgradient(content, **attrs).element
 
-def Filter(*content, **attrs):
+def Filter(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <filter> element."""
-    return svg_tags.EL.Filter(*content, **attrs).element
+    return EL.Filter(*content, **attrs).element
 
-def fecomponenttransfer(*content,**attrs):
+def fecomponenttransfer(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <fecomponenttransfer> element."""
-    return svg_tags.EL.fecomponenttransfer(*content, **attrs).element
+    return EL.fecomponenttransfer(*content, **attrs).element
 
-def fediffuselighting(*content,**attrs):
+def fediffuselighting(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <fediffuselighting> element."""
-    return svg_tags.EL.fediffuselighting(*content, **attrs).element
+    return EL.fediffuselighting(*content, **attrs).element
 
-def femerge(*content, **attrs):
+def femerge(*content:tuple[str], **attrs:dict[str,Any]):
     """Represents an HTML <femerge> element."""
-    return svg_tags.EL.femerge(*content, **attrs).element
+    return EL.femerge(*content, **attrs).element
 
-def fespecularlighting(*content,**attrs):
+def fespecularlighting(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <fespecularlighting> element."""
-    return svg_tags.EL.fespecularlighting(*content, **attrs).element
+    return EL.fespecularlighting(*content, **attrs).element
 
-def animatemotion(*content,**attrs):
+def animatemotion(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <animatemotion> element."""
-    return svg_tags.EL.animatemotion(*content, **attrs).element
+    return EL.animatemotion(*content, **attrs).element
 
-def forienobject(*content,**attrs):
+def forienobject(*content:tuple[str],**attrs:dict[str,Any]):
     """Represents an HTML <forienobject> element."""
-    return svg_tags.EL.forienobject(*content, **attrs).element
+    return EL.forienobject(*content, **attrs).element
 
 # self closing
-def path(**attrs):
+def path(**attrs:dict[str,Any]):
     """Represents an HTML <path/> line break element (self-closing)."""
-    return svg_tags.EL.path(**attrs).element
+    return EL.path(**attrs).element
 
-def circle(**attrs):
+def circle(**attrs:dict[str,Any]):
     """Represents an HTML <circle/> line break element (self-closing)."""
-    return svg_tags.EL.circle(**attrs).element
+    return EL.circle(**attrs).element
 
-def rect(**attrs):
+def rect(**attrs:dict[str,Any]):
     """Represents an HTML <rect/> line break element (self-closing)."""
-    return svg_tags.EL.rect(**attrs).element
+    return EL.rect(**attrs).element
 
-def line(**attrs):
+def line(**attrs:dict[str,Any]):
     """Represents an HTML <line/> line break element (self-closing)."""
-    return svg_tags.EL.line(**attrs).element
+    return EL.line(**attrs).element
 
-def polyline(**attrs):
+def polyline(**attrs:dict[str,Any]):
     """Represents an HTML <polyline/> line break element (self-closing)."""
-    return svg_tags.EL.polyline(**attrs).element
+    return EL.polyline(**attrs).element
 
-def polygon(**attrs):
+def polygon(**attrs:dict[str,Any]):
     """Represents an HTML <polygon/> line break element (self-closing)."""
-    return svg_tags.EL.polygon(**attrs).element
+    return EL.polygon(**attrs).element
 
-def ellipse(**attrs):
+def ellipse(**attrs:dict[str,Any]):
     """Represents an HTML <ellipse/> line break element (self-closing)."""
-    return svg_tags.EL.ellipse(**attrs).element
+    return EL.ellipse(**attrs).element
 
-def image(**attrs):
+def image(**attrs:dict[str,Any]):
     """Represents an HTML <image/> line break element (self-closing)."""
-    return svg_tags.EL.image(**attrs).element
+    return EL.image(**attrs).element
 
-def feBlend(**attrs):
+def feBlend(**attrs:dict[str,Any]):
     """Represents an HTML <feBlend/> line break element (self-closing)."""
-    return svg_tags.EL.feBlend(**attrs).element
+    return EL.feBlend(**attrs).element
 
-def feColorMatrix(**attrs):
+def feColorMatrix(**attrs:dict[str,Any]):
     """Represents an HTML <feColorMatrix/> line break element (self-closing)."""
-    return svg_tags.EL.feColorMatrix(**attrs).element
+    return EL.feColorMatrix(**attrs).element
 
-def feComposite(**attrs):
+def feComposite(**attrs:dict[str,Any]):
     """Represents an HTML <feComposite/> line break element (self-closing)."""
-    return svg_tags.EL.feComposite(**attrs).element
+    return EL.feComposite(**attrs).element
 
-def feConvolveMatrix(**attrs):
+def feConvolveMatrix(**attrs:dict[str,Any]):
     """Represents an HTML <feConvolveMatrix/> line break element (self-closing)."""
-    return svg_tags.EL.feConvolveMatrix(**attrs).element
+    return EL.feConvolveMatrix(**attrs).element
 
-def feDisplacementMap(**attrs):
+def feDisplacementMap(**attrs:dict[str,Any]):
     """Represents an HTML <feDisplacementMap/> line break element (self-closing)."""
-    return svg_tags.EL.feDisplacementMap(**attrs).element
+    return EL.feDisplacementMap(**attrs).element
 
-def feDropShadow(**attrs):
+def feDropShadow(**attrs:dict[str,Any]):
     """Represents an HTML <feDropShadow/> line break element (self-closing)."""
-    return svg_tags.EL.feDropShadow(**attrs).element
+    return EL.feDropShadow(**attrs).element
 
-def feFlood(**attrs):
+def feFlood(**attrs:dict[str,Any]):
     """Represents an HTML <feFlood/> line break element (self-closing)."""
-    return svg_tags.EL.feFlood(**attrs).element
+    return EL.feFlood(**attrs).element
 
-def feFuncA(**attrs):
+def feFuncA(**attrs:dict[str,Any]):
     """Represents an HTML <feFuncA/> line break element (self-closing)."""
-    return svg_tags.EL.feFuncA(**attrs).element
+    return EL.feFuncA(**attrs).element
 
-def feFuncB(**attrs):
+def feFuncB(**attrs:dict[str,Any]):
     """Represents an HTML <feFuncB/> line break element (self-closing)."""
-    return svg_tags.EL.feFuncB(**attrs).element
+    return EL.feFuncB(**attrs).element
 
-def feFuncG(**attrs):
+def feFuncG(**attrs:dict[str,Any]):
     """Represents an HTML <feFuncG/> line break element (self-closing)."""
-    return svg_tags.EL.feFuncG(**attrs).element
+    return EL.feFuncG(**attrs).element
 
-def feFuncR(**attrs):
+def feFuncR(**attrs:dict[str,Any]):
     """Represents an HTML <feFuncR/> line break element (self-closing)."""
-    return svg_tags.EL.feFuncR(**attrs).element
+    return EL.feFuncR(**attrs).element
 
-def feGaussianBlur(**attrs):
+def feGaussianBlur(**attrs:dict[str,Any]):
     """Represents an HTML <feGaussianBlur/> line break element (self-closing)."""
-    return svg_tags.EL.feGaussianBlur(**attrs).element
+    return EL.feGaussianBlur(**attrs).element
 
-def feImage(**attrs):
+def feImage(**attrs:dict[str,Any]):
     """Represents an HTML <feImage/> line break element (self-closing)."""
-    return svg_tags.EL.feImage(**attrs).element
+    return EL.feImage(**attrs).element
 
-def feMergeNode(**attrs):
+def feMergeNode(**attrs:dict[str,Any]):
     """Represents an HTML <feMergeNode/> line break element (self-closing)."""
-    return svg_tags.EL.feMergeNode(**attrs).element
+    return EL.feMergeNode(**attrs).element
 
-def feMorphology(**attrs):
+def feMorphology(**attrs:dict[str,Any]):
     """Represents an HTML <feMorphology/> line break element (self-closing)."""
-    return svg_tags.EL.feMorphology(**attrs).element
+    return EL.feMorphology(**attrs).element
 
-def feOffset(**attrs):
+def feOffset(**attrs:dict[str,Any]):
     """Represents an HTML <feOffset/> line break element (self-closing)."""
-    return svg_tags.EL.feOffset(**attrs).element
+    return EL.feOffset(**attrs).element
 
-def fePointLight(**attrs):
+def fePointLight(**attrs:dict[str,Any]):
     """Represents an HTML <fePointLight/> line break element (self-closing)."""
-    return svg_tags.EL.fePointLight(**attrs).element
+    return EL.fePointLight(**attrs).element
 
-def feSpotLight(**attrs):
+def feSpotLight(**attrs:dict[str,Any]):
     """Represents an HTML <feSpotLight/> line break element (self-closing)."""
-    return svg_tags.EL.feSpotLight(**attrs).element
+    return EL.feSpotLight(**attrs).element
 
-def feTile(**attrs):
+def feTile(**attrs:dict[str,Any]):
     """Represents an HTML <feTile/> line break element (self-closing)."""
-    return svg_tags.EL.feTile(**attrs).element
+    return EL.feTile(**attrs).element
 
-def feTurbulence(**attrs):
+def feTurbulence(**attrs:dict[str,Any]):
     """Represents an HTML <feTurbulence/> line break element (self-closing)."""
-    return svg_tags.EL.feTurbulence(**attrs).element
+    return EL.feTurbulence(**attrs).element
 
-def animate(**attrs):
+def animate(**attrs:dict[str,Any]):
     """Represents an HTML <animate/> line break element (self-closing)."""
-    return svg_tags.EL.animate(**attrs).element
+    return EL.animate(**attrs).element
 
-def animateTransform(**attrs):
+def animateTransform(**attrs:dict[str,Any]):
     """Represents an HTML <animateTransform/> line break element (self-closing)."""
-    return svg_tags.EL.animateTransform(**attrs).element
+    return EL.animateTransform(**attrs).element
 
-def Set(**attrs):
+def Set(**attrs:dict[str,Any]):
     """Represents an HTML <set/> line break element (self-closing)."""
-    return svg_tags.EL.Set(**attrs).element
+    return EL.Set(**attrs).element
 
-def view(**attrs):
+def view(**attrs:dict[str,Any]):
     """Represents an HTML <view/> line break element (self-closing)."""
-    return svg_tags.EL.view(**attrs).element
+    return EL.view(**attrs).element
 
-def use(**attrs):
+def use(**attrs:dict[str,Any]):
     """Represents an HTML <use/> line break element (self-closing)."""
-    return svg_tags.EL.use(**attrs).element
+    return EL.use(**attrs).element
 
-def stop(**attrs):
+def stop(**attrs:dict[str,Any]):
     """Represents an HTML <stop/> line break element (self-closin).""" 
-    return svg_tags.EL.stop(**attrs).element
+    return EL.stop(**attrs).element

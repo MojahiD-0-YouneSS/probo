@@ -41,7 +41,7 @@ def test_element_style_basic():
 def test_element_style_with_attr_wrapper():
     """2. Wrap in style='...'."""
     res = element_style(with_style_attr=True, color="blue")
-    assert res == 'style="color:blue;"'
+    assert res == {'style':'color:blue;'}
 
 
 def test_element_style_snake_case():
@@ -68,7 +68,7 @@ def test_element_style_empty_wrapped():
     """6. Handle empty kwargs with wrapper (should return empty string or empty attribute?)."""
     # Usually cleaner to return empty string if no styles, or style=""
     res = element_style(with_style_attr=True)
-    assert res == 'style=""' or res == ""
+    assert res == {'style': ''}
 
 
 def test_element_style_mixed_types():

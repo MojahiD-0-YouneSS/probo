@@ -10,7 +10,9 @@ from probo.styles.css_enum import (
 from probo.templates.resolver import TemplateResolver
 import cssutils
 from probo.styles.utils import selector_type_identifier
-
+from typing import Any, Self
+from enum import Enum
+from probo.utility import ProboSourceString
 cssutils.log.setLevel(logging.FATAL)
 
 
@@ -34,7 +36,7 @@ class CssRuleValidator:
 
     def is_valid(
         self,
-    ):
+    )-> bool:
         """Aggregates validation results for all properties in the instance.
 
         Returns:
@@ -115,7 +117,7 @@ class CssRule:
     def __init__(self, **declarations):
         self.declarations: dict = self.__check_declarations(**declarations)
 
-    def set_rule(self, **prop_val):
+    def set_rule(self, **prop_val:dict[str,str]) -> Self:
         """Updates or adds new validated rules to the current declarations.
 
         Args:
@@ -128,7 +130,7 @@ class CssRule:
         self.declarations.update(valid_decs)
         return self
 
-    def __check_declarations(self, **decs):
+    def __check_declarations(self, **decs:dict[str,str])-> dict[str, str]:
         """Internal pipeline for property normalization and validation.
 
         This method performs the following:
@@ -167,13 +169,13 @@ class CssRule:
                 valid_decs[f"/* {prop_name}"] = f"{value}; CSS ERROR */"
         return valid_decs
 
-    def css_var(self, **dec):
+    def css_var(self, **dec:dict[str,Any])->Self:
         """Defines CSS custom properties (variables).
 
         Automatically prepends '--' and replaces underscores with hyphens.
 
         Args:
-            **dec: Variable names and values (e.g., brand_gold="#D4AF37").
+            dec: Variable names and values (e.g., brand_gold="#D4AF37").
 
         Returns:
             self: Allows for method chaining.
@@ -186,7 +188,7 @@ class CssRule:
         )
         return self
 
-    def apply_css_function(self, prop, name: str, *args):
+    def apply_css_function(self, prop:str, name: str, *args:tuple[str])->Self:
         """Applies a standard CSS function (e.g., calc, url, rgba) to a property.
 
         Args:
@@ -202,7 +204,7 @@ class CssRule:
             self.declarations[prop] = string
         return self
 
-    def apply_css_fonts(self, prop, name: str, *args):
+    def apply_css_fonts(self, prop:str, name: str, *args:tuple[str])->Self:
         """Applies specialized font-related CSS functions.
 
         Args:
@@ -218,7 +220,7 @@ class CssRule:
             self.declarations[prop] = string
         return self
 
-    def __apply_css_enums(self, __enum_cls, name: str, *args):
+    def __apply_css_enums(self, __enum_cls: type[Enum], name: str, *args: tuple[str])->str|bool:
         """Helper to map string names to specialized Enum templates.
 
         Args:
@@ -237,12 +239,11 @@ class CssRule:
                 string = func_enum.value
             return string
         except Exception as e:
-            print("e", e)
             return False
 
     def render(
         self,
-    ):
+    )->str:
         """Serializes the validated declarations into a CSS block string.
 
         Returns:
@@ -250,7 +251,7 @@ class CssRule:
                 Returns an empty string if no declarations exist.
         """
         if self.declarations:
-            return (
+            return ProboSourceString(
                 f"{{ {''.join([f'{p}:{v}; ' for p, v in self.declarations.items()])}}}"
             )
         else:
@@ -278,7 +279,7 @@ class CssAnimatable:
         self.animations = []
         self.validator = CssRuleValidator()
 
-    def __check_animatable(self, props: dict):
+    def __check_animatable(self, props: dict)->None:
         """Validates that a dictionary of properties can be legally animated.
 
         Args:
@@ -293,7 +294,7 @@ class CssAnimatable:
             if prop.lower() not in [e.name.lower() for e in CssAnimatableEnum]:
                 raise ValueError(f"Property '{prop}' is not animatable.")
 
-    def animate(self, name: str, steps: dict = dict(), **properties):
+    def animate(self, name: str, steps: dict[Any,Any]|None =None, **properties:dict[str,str])->str:
         """Constructs a full @keyframes string block.
 
         Can generate either a simple 'from' animation or a complex 
@@ -313,6 +314,8 @@ class CssAnimatable:
             >>> anim.animate('slide', steps={'0%': {'left': '0px'}, '100%': {'left': '100px'}})
             >>> anim.animate('fade', opacity='0')
         """
+        if not steps:
+            steps={}
         declaration = f"@keyframes {name} " + "{\n"
 
         if steps:
@@ -328,7 +331,7 @@ class CssAnimatable:
             declaration += f"  from {{ {rules}; }}\n"
 
         declaration += "}"
-        return declaration
+        return ProboSourceString(declaration)
 
 class CssSelector:
     """A fluent builder for constructing complex CSS selectors.
@@ -367,7 +370,7 @@ class CssSelector:
             self.template_tags.extend(self.template_info_obj.template_tags)
             self.template_attributes.update(self.template_info_obj.template_attributes)
 
-    def Id(self, value):
+    def Id(self, value:str)-> Self:
         """Appends an ID selector to the current chain.
         
         Args:
@@ -379,7 +382,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "ID"
         return self
 
-    def cls(self, value):
+    def cls(self, value:str)->Self:
         """Appends a class selector to the current chain.
         
         Args:
@@ -391,7 +394,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "CLS"
         return self
 
-    def el(self, value):
+    def el(self, value:str)->Self:
         """Appends an element/tag selector.
         
         Args:
@@ -403,7 +406,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "EL"
         return self
 
-    def attr(self, attr, value=None, op="="):
+    def attr(self, attr:str, value:str | None=None, op:str="=")->Self:
         """Adds an attribute selector with optional value matching.
         
         Args:
@@ -424,7 +427,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "ATTR"
         return self
 
-    def pseudo_class(self, pseudo):
+    def pseudo_class(self, pseudo:Any)->Self:
         """Appends a pseudo-class (e.g., :hover, :nth-child)."""
         pseudo_value = PseudoClassEnum.get(
             pseudo.split("(")[0] if "(" in pseudo else pseudo
@@ -439,7 +442,7 @@ class CssSelector:
             self._selector_type_maping[self.selectors[-1]] = "PSEUDO_CLASS"
         return self
 
-    def pseudo_element(self, pseudo):
+    def pseudo_element(self, pseudo:Any)->Self:
         """Appends a pseudo-element (e.g., ::before, ::after)."""
         pseudo_value = PseudoElementEnum.get(
             pseudo.split("(")[0] if "(" in pseudo else pseudo
@@ -457,14 +460,14 @@ class CssSelector:
     def add_selector(
         self,
         selector: str,
-    ):
+    )->Self:
         """Directly injects a raw selector string into the chain."""
         _, selector_type = selector_type_identifier(selector)
         self.selectors.append(selector)
         self._selector_type_maping[self.selectors[-1]] = selector_type
         return self
 
-    def child(self, child):
+    def child(self, child:Any)->Self:
         """Defines a direct child relationship (parent > child)."""
         if self.template_tags and child not in self.template_tags:
             raise ValueError("in valid value element not found in ")
@@ -475,7 +478,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "COMBINATOR >"
         return self
 
-    def group(self, *selectors):
+    def group(self, *selectors:tuple[Any])->Self:
         """Combines multiple selectors as a comma-separated group."""
         if len(selectors) == 1:
             self.selectors.append(f", {', '.join(selectors)}")
@@ -484,7 +487,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "COMBINATOR ,"
         return self
 
-    def descendant(self, *selectors):
+    def descendant(self, *selectors:tuple[Any])->Self:
         """Defines a descendant relationship (ancestor descendant)."""
         if len(selectors) == 1:
             self.selectors.append(f" {' '.join(selectors)}")
@@ -493,7 +496,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "COMBINATOR  "
         return self
 
-    def adjacent(self, *selectors):
+    def adjacent(self, *selectors:tuple[Any])->Self:
         """Defines an adjacent sibling relationship (element + sibling)."""
         if len(selectors) == 1:
             self.selectors.append(f" + {' + '.join(selectors)}")
@@ -502,7 +505,7 @@ class CssSelector:
         self._selector_type_maping[self.selectors[-1]] = "COMBINATOR +"
         return self
 
-    def sibling(self, *selectors):
+    def sibling(self, *selectors:tuple[Any])->Self:
         """Defines a general sibling relationship (element ~ sibling)."""
         if len(selectors) == 1:
             self.selectors.append(f" ~ {' ~ '.join(selectors)}")
@@ -513,7 +516,7 @@ class CssSelector:
 
     def _polish_selectors(
         self,
-    ):
+    ) -> Self:
         """Internal cleanup to remove redundant spaces and ensure valid syntax."""
         polished_selectors = list()
         el_counter = 0
@@ -535,19 +538,16 @@ class CssSelector:
         self.selectors = polished_selectors
         return self
 
-    def render(self):
+    def render(self) -> str:
         """Serializes the builder into a valid CSS selector string.
         
         Returns:
             str: The final selector (e.g., "div.card > .title:hover").
         """
         self._polish_selectors()
-        if not self.__template:
-            return "".join(self.selectors)
-        else:
-            return "".join(self.selectors)
+        return ProboSourceString("".join(self.selectors))
 
-def css_style(selectors_rules: dict[CssSelector, CssRule] = None, **declarations) -> str:
+def css_style(selectors_rules: dict[CssSelector, CssRule] |None= None, **declarations:dict[str,Any]) -> str:
     """A factory function for creating individual CSS rules or bulk Style Bridges.
 
     This utility serves a dual purpose based on the provided arguments:
@@ -595,9 +595,9 @@ def css_style(selectors_rules: dict[CssSelector, CssRule] = None, **declarations
                 for s, r in declarations.items()
             ]
         )
-    return css_string
+    return ProboSourceString(css_string)
 
-def css_comment(css, return_type=str()) -> list[str] | str:
+def css_comment(css:str, return_type=str()) -> list[str] | str:
     """Wraps a CSS string or list of rules in a CSS comment block.
 
     This function is primarily used for debugging, documenting rendered 
@@ -624,15 +624,15 @@ def css_comment(css, return_type=str()) -> list[str] | str:
         ['/* color: blue; */', '/* margin: 0; */']
     """
     if isinstance(return_type, str):
-        return f"/* {css} */"
+        return ProboSourceString(f"/* {css} */")
     else:
         return ["/* ", css, " */"]
 
 def box_model(
-    margins="10px",
-    padding="10px",
-    border="10px",
-    content_width="10px",
+    margins:str="10px",
+    padding:str="10px",
+    border:str="10px",
+    content_width:str="10px",
 ) -> str:
     """A factory function to generate a standard CSS Box Model rule.
 
@@ -659,9 +659,9 @@ def box_model(
             padding:{padding};
             margin:{margins};
     }}"""
-    return string
+    return ProboSourceString(string)
 
-def make_important(css_string) -> str:
+def make_important(css_string:str) -> str:
     """Appends the !important flag to CSS declarations.
 
     This utility modifies a CSS property-value string to ensure it overrides 
@@ -679,7 +679,7 @@ def make_important(css_string) -> str:
         >>> make_important("display: none")
         'display: none !important;'
     """
-    return f"{css_string} !important;"
+    return ProboSourceString(f"{css_string} !important;")
 
 class Animation:
     """A high-level manager for creating and rendering CSS @keyframes.
@@ -699,13 +699,13 @@ class Animation:
     )
     def __init__(
         self,
-        name,
+        name:str,
     ):
         self.name = name
         self.animation_body = str()
         self.frames = {}  # Store frames as dict to allow incremental updates
 
-    def add_frame(self, step: str, **properties):
+    def add_frame(self, step: str, **properties:dict[str,Any]) -> Any:
         """Appends a single frame to the animation timeline.
 
         Args:
@@ -724,12 +724,12 @@ class Animation:
         self.frames[step] = clean_props.render()
         return self
 
-    def __check_animatable(self, props: dict):
+    def __check_animatable(self, props: dict)->None:
         for prop in props.keys():
             if CssAnimatableEnum.get(prop.lower().replace("-", "_")) is None:
                 raise ValueError(f"Property '{prop}' is not animatable.")
 
-    def animate_from_to(self, from_props: dict, to_props: dict):
+    def animate_from_to(self, from_props: dict[str,Any], to_props: dict[str,Any]) -> Self:
         """Quickly defines a two-point transition.
 
         Args:
@@ -746,7 +746,7 @@ class Animation:
         # self.animation_body= f' from {{ {' '.join([f'{k}:{v};' for k,v in from_block.items()])} }} to {{ {' '.join([f'{k}:{v};' for k,v in to_block.items()])} }} '
         return self
 
-    def animate_percent(self, blocks: dict[str, dict]):
+    def animate_percent(self, blocks: dict[str, dict])->Self:
         """Populates the timeline using a dictionary of percentage steps.
 
         Args:
@@ -766,7 +766,7 @@ class Animation:
 
     def render(
         self,
-    ):
+    )->str:
         """Serializes the frames into a valid CSS @keyframes block.
 
         Leverages the underlying CssAnimatable engine to ensure 
@@ -782,7 +782,7 @@ class Animation:
         for step, props in self.frames.items():
             frames += f" {step} {props}"
 
-        return f"{declaration_name} {{{frames}}}"
+        return ProboSourceString(f"{declaration_name} {{{frames}}}")
 
 class MediaQueries:
     """A generator for validated and structured CSS @media at-rules.
@@ -811,12 +811,12 @@ class MediaQueries:
     )
     def __init__(
         self,
-        media_type,
-        media_values: dict,
-        no_media_type=False,
-        is_not=False,
-        is_only=False,
-        **css_rules,
+        media_type:str,
+        media_values: dict[str,Any],
+        no_media_type:bool=False,
+        is_not:bool=False,
+        is_only:bool=False,
+        **css_rules:dict[str,Any],
     ):
         self.__css_media_types = ["all", "print", "screen"]
         self.__media_features = [
@@ -838,7 +838,7 @@ class MediaQueries:
         self.is_only = is_only
         self.__checks()
 
-    def __checks(self):
+    def __checks(self) -> bool:
         """Internal validation logic for media types and features.
 
         Verifies that the provided media_type and media_values are valid 
@@ -864,7 +864,7 @@ class MediaQueries:
             raise ValueError("invalid values")
         return True
 
-    def render(self):
+    def render(self) -> str:
         """Serializes the object into a valid CSS @media block.
 
         Returns:
@@ -888,4 +888,4 @@ class MediaQueries:
         # Combine everything into a media query string
         if not media_type:
             media_vals = media_vals.strip(" and")
-        return f"@media {not_part}{only_part}{media_type}{media_vals} {{{rules}}}"
+        return ProboSourceString(f"@media {not_part}{only_part}{media_type}{media_vals} {{{rules}}}")

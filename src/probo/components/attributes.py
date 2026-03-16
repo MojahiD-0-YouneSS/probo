@@ -128,6 +128,7 @@ class GlobalAttribute(EnumLookUPMixin, Enum):
         "integrity",
         "role",
         "type",
+        "xintegrity",
     ]
 
 class EventAttribute(EnumLookUPMixin, Enum):
@@ -305,7 +306,7 @@ class AttributeValue(EnumLookUPMixin, Enum):
         "contenteditable": ["true", "false"],
         "controls": "controls",
         "coords": "any",
-        "crossorigin": ["anonymous", "use-credentials", ""],
+        # "crossorigin": ["anonymous", "use-credentials", ""],
         "cx": "any",
         "cy": "any",
         "dx": "any",
@@ -1271,6 +1272,7 @@ class AttributeValue(EnumLookUPMixin, Enum):
         "viewBox": "any", # "min-x min-y width height"
         "preserveAspectRatio": "any", 
          "opacity": "any",
+         "xintegrity": "any",
     }
 
     BOOTSTRAP_DATA_BS_ATTRIBUTE = {
@@ -1702,6 +1704,7 @@ class ElementAttribute(EnumLookUPMixin, Enum):
         'y': ['<filter>', '<foreignObject>', '<image>', '<mask>', '<rect>', '<text>', '<tspan>', '<use>'],
         'y1': ['<line>', '<linearGradient>'],
         'y2': ['<line>', '<linearGradient>'],
+        'xintegrity':['<link>','<script>']
     }
 
 class Tag(EnumLookUPMixin, Enum):
@@ -1886,14 +1889,14 @@ class Tag(EnumLookUPMixin, Enum):
     STOP = ("stop", {"void": True})  # For gradients
 
     @property
-    def tag_name(self):
+    def tag_name(self) -> str:
         return self.value[0]
 
     @property
-    def is_void(self):
+    def is_void(self) -> bool:
         return self.value[1]["void"]
 
-    def render(self):
+    def render(self) -> str:
         if self.is_void:
             return f"<{self.tag_name} />"
         else:
@@ -1936,12 +1939,12 @@ class ElementAttributeValidator:
         self.valid_attrs = {}
         self.error_attrs = []
 
-    def hydrate_validator(self,opening_tag, **attrs):
+    def hydrate_validator(self,opening_tag: str, **attrs: dict[str, Any]) -> Self:
         self.element_tag=opening_tag
         self.raw_attrs=attrs
         self.valid_attrs = {}
         return self
-    def _normalized_key(self,raw_key:str):
+    def _normalized_key(self,raw_key:str) -> str:
         """
         normalizes attribute name to be in render state. 
         
@@ -2004,8 +2007,11 @@ class ElementAttributeValidator:
                 if isinstance(rule, list):
                     # Convert to string to handle ints safely
                     if str(value) not in rule:
-                        self.error_attrs.append(f"{key}='{value}' (Expected: {rule})")
-                        all_valid = False
+                        if str(value).lower() in rule:
+                            self.valid_attrs[key] = value
+                        else:
+                            self.error_attrs.append(f"{key}='{value}' (Expected: {rule})")
+                            all_valid = False
                         continue
                     else:
                         self.valid_attrs[key] = value
@@ -2017,7 +2023,7 @@ class ElementAttributeValidator:
 
                     if tag_clean in rule:
                         allowed_vals = rule[tag_clean]
-                        if str(value) not in allowed_vals:
+                        if str(value) not in allowed_vals or str(value).lower() not in allowed_vals:
                             self.error_attrs.append(
                                 f"{key}='{value}' on <{tag_clean}> (Expected: {allowed_vals})"
                             )

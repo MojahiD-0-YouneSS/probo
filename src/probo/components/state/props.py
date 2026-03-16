@@ -16,7 +16,7 @@ class StatePropsValidator:
         'rules',
         'props',
     )
-    def __init__(self, rules: "StateProps", props: dict) -> None:
+    def __init__(self, rules: "StateProps", props: dict[str, Any]) -> None:
         self.rules = rules
         self.props = props
 
@@ -33,8 +33,8 @@ class StatePropsValidator:
         result = list()
         if not self.rules.display_it:
             return False
-        # We run each check. If any single check fails, we stop
-        # and return False immediately.
+        
+        
 
         if not self._check_equals(self.rules.prop_equals, self.props):
             result.append(False)
@@ -68,20 +68,20 @@ class StatePropsValidator:
         if self.rules.required and not all(result):
             return False
         else:
-            # If all checks passed
+            
             return all(result)
 
-    # --- Private Logic Methods ---
+    
 
     def _check_equals(self, rules_dict: Optional[Dict[str, Any]], props: dict) -> bool:
         """Logic for: prop_equals"""
         if rules_dict:
             for key, required_value in rules_dict.items():
                 if key not in props:
-                    return False  # The required prop doesn't even exist
+                    return False  
                 if props[key] != required_value:
-                    return False  # The value does not match
-        return True  # All checks passed
+                    return False  
+        return True  
 
     def _check_is_in(
         self, rules_dict: Optional[Dict[str, List[Any]]], props: dict
@@ -90,24 +90,24 @@ class StatePropsValidator:
         if rules_dict:
             for key, allowed_values in rules_dict.items():
                 if not isinstance(allowed_values, (list, set, tuple)):
-                    # Rule is misconfigured, fail safely
+                    
                     return False
                 if key not in props:
-                    return False  # The required prop doesn't exist
+                    return False  
                 if props[key] not in allowed_values:
-                    return False  # The value is not in the allowed list
-        return True  # All checks passed
+                    return False  
+        return True  
 
     def _check_truthy(self, rules_list: Optional[List[str]], props: dict) -> bool:
         """Logic for: prop_is_truthy"""
         if rules_list:
             for key in rules_list:
                 if key not in props:
-                    return False  # The required prop doesn't exist
+                    return False  
                 if not props[key]:
-                    # Fails if prop is None, False, 0, "", [], {}, etc.
+                    
                     return False
-        return True  # All checks passed
+        return True  
 
     def _check_has_attributes(
         self, rules_dict: Optional[Dict[str, List[str]]], props: dict
@@ -116,52 +116,52 @@ class StatePropsValidator:
         if rules_dict:
             for key, required_attrs in rules_dict.items():
                 if key not in props:
-                    return False  # The required prop (object) doesn't exist
+                    return False  
 
                 obj_to_check = props[key]
 
                 for attr_name in required_attrs:
                     if not hasattr(obj_to_check, attr_name):
-                        return False  # The object is missing a required attribute
-        return True  # All checks passed
+                        return False  
+        return True  
 
     def _check_permissions(
         self, permission_list: Optional[list[str]], props: dict
     ) -> bool:
         """Logic for: has_permission"""
         if not permission_list:
-            return True  # No permission rule was defined, so it passes
+            return True  
 
-        # To check permissions, we MUST have a 'user' object in props
+        
         if "user" not in props:
-            return False  # Cannot check permissions without a user
+            return False  
 
         user = props["user"]
 
-        # Check if the user object is a valid Django user (or mock)
+        
         if not hasattr(user, "has_perm"):
-            return False  # Not a valid user object
+            return False  
 
-        # The final check against Django's permission system
+        
         if not all(user.has_perm(perm) for perm in permission_list):
             return False
 
-        return True  # User has the permission
+        return True  
 
     def _check_s_props(self, s_props: dict, props: dict) -> bool:
         if not s_props:
             return True
 
-        # return self.props.items() <= props.items()
+        
         def __exists_in_dict(x):
             status = list()
             for value in props.values():
-                # Check key
+                
                 if x == value:
                     status.append(True)
-                # Check nested dict
+                
                 else:
-                    # Check nested key or nested value
+                    
                     status.append(False)
             return any(status)
 
@@ -183,24 +183,24 @@ class StateProps:
     If all rules pass, the element is rendered.
     """
 
-    # Rule: Checks if props[key] == required_value
-    # Example: {'status': 'published', 'is_active': True}
+    
+    
     prop_equals: Optional[Dict[str, Any]] = field(default_factory=dict)
 
-    # Rule: Checks if props[key] is IN allowed_values
-    # Example: {'user_role': ['admin', 'editor']}
+    
+    
     prop_is_in: Optional[Dict[str, List[Any]]] = field(default_factory=dict)
 
-    # Rule: Checks if props[key] is "truthy" (not None, False, 0, "", [])
-    # Example: ['user', 'items_list']
+    
+    
     prop_is_truthy: Optional[List[str]] = field(default_factory=list)
 
-    # Rule: Checks if props[key] (an object) has the listed attributes
-    # Example: {'user': ['is_staff', 'email']}
+    
+    
     prop_has_attributes: Optional[Dict[str, List[str]]] = field(default_factory=dict)
 
-    # Rule: Checks if props['user'] has a specific Django permission
-    # Example: "app_label.can_edit_post"
+    
+    
     has_permissions: Optional[list[str]] = field(default_factory=list)
 
     s_props: dict = field(default_factory=dict)

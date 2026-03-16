@@ -22,12 +22,12 @@ class ComponentRequestContext:
         'components',
         'processed_components',
     )
-    def __init__(self, *components_objs, **context_props):
+    def __init__(self, *components_objs:tuple[Any], **context_props:dict[str, Any]):
         self.context_props = context_props
         self.components = list(components_objs)
         self.processed_components = []
 
-    def process_components(self, *extra_component_objs, **extra_props) -> List[Any]:
+    def process_components(self, *extra_component_objs:tuple[Any], **extra_props:dict[str, Any]) -> List[Any]:
         """Applies context data to the stored and extra component targets.
 
         This method merges stored properties with any one-time extra properties, 

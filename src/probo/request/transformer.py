@@ -1,5 +1,5 @@
 from probo.request.props import RequestProps
-
+from typing import Any, Dict, List, Optional
 class RequestDataTransformer:
     """RequestDataTransformer or RDT is a class that parses and extracts contents from django  request object ,also supports form hundling
     args:
@@ -83,7 +83,7 @@ class RequestDataTransformer:
         # Initialize the form if a form_class is provided
         # Process target data fields as a dictionary of lists
 
-    def _process_get_data(self):
+    def _process_get_data(self) -> dict[str, Any]:
         get_data_dict = {}
         for field, field_data in self.request.GET.items():
             if isinstance(field_data, list):
@@ -97,7 +97,7 @@ class RequestDataTransformer:
                 get_data_dict[field] = field_data  # Single value, store as string
         return get_data_dict
 
-    def _process_post_data(self):
+    def _process_post_data(self) -> dict[str, Any]:
         post_data_dict = {}
         for field, field_data in self.request.POST.items():
             if isinstance(field_data, list):
@@ -111,7 +111,7 @@ class RequestDataTransformer:
                 post_data_dict[field] = field_data  # Single value, store as string
         return post_data_dict
 
-    def _process_post_files(self):
+    def _process_post_files(self) -> dict[str, Any]:
         post_data_dict = {}
         for field, field_data in self.request.FILES.items():
             if isinstance(field_data, list):
@@ -125,13 +125,13 @@ class RequestDataTransformer:
                 post_data_dict[field] = field_data  # Single value, store as string
         return post_data_dict
 
-    def save_form(self, **kwargs):
+    def save_form(self, **kwargs) -> bool:
         if self.is_valid():
             self.form.save(**kwargs)
             return self.form
         return not self.errors
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """Validates the request form and ensures all target data fields are provided."""
 
         # Validate the form if it was provided
@@ -149,11 +149,11 @@ class RequestDataTransformer:
 
         return not self.errors  # Returns True if there are no errors
 
-    def get_errors(self):
+    def get_errors(self) -> dict[str, Any]:
         """Returns a list of validation errors."""
         return self.errors
 
-    def get_request_data(self, organized=False):
+    def get_request_data(self, organized: bool = False) -> dict[str, Any]:
         """
         Returns cleaned form data and target fields.
 
@@ -177,38 +177,40 @@ class RequestDataTransformer:
             }
         )
 
-    def _prepare_user_data(self):
+    def _prepare_user_data(self) -> dict[str, Any] | None:
         return self.request_user.__dict__ if self.request else None
 
-    def _get_all_session_data(self):
+    def _get_all_session_data(self) -> dict[str, Any]:
         """Retrieve all session data as a dictionary."""
         return dict(self.request.session)  # Convert session to a dictionary
 
-    def set_session_data(self, key, value):
+    def set_session_data(self, key: str, value: Any) -> dict[str, Any]:
         """Sets a session variable."""
         self.request.session[key] = value
         self.request.session.modified = True  # Mark session as modified
         self.session_data = self._get_all_session_data()  # Update session_data
-
-    def get_session_data(self, key, default=None):
+        return {key:value}
+    
+    def get_session_data(self, key:str, default:str|None=None) -> Any:
         """Retrieves a session variable, returning a default if not found."""
         return self.request.session.get(key, default)
 
-    def update_session_data(self, key, update_func):
+    def update_session_data(self, key: str, update_func: callable) -> dict[str, Any]:
         """Updates a session variable using a provided function."""
         if key in self.request.session:
             self.request.session[key] = update_func(self.request.session[key])
             self.request.session.modified = True
             self.session_data = self._get_all_session_data()  # Update session_data
-
-    def delete_session_data(self, key):
+        return {key:self.request.session.get(key)}
+   
+    def delete_session_data(self, key:str) -> None:
         """Deletes a session variable if it exists."""
         if key in self.request.session:
             del self.request.session[key]
             self.request.session.modified = True
             self.session_data = self._get_all_session_data()
 
-    def extract_target_data(self, fields=None, multi_value_fields=None, is_json=False):
+    def extract_target_data(self, fields:list[str]|None=None, multi_value_fields:list[str]|None=None, is_json: bool=False) -> dict[str,Any]:
         """
         Extracts data from the request. Supports both form data (default) and JSON payloads.
         :param fields: List of fields to retrieve. If None, retrieves all fields in the request.
@@ -236,7 +238,7 @@ class RequestDataTransformer:
 
     def clear_all_session_data(
         self,
-    ):
+    )-> bool:
         """
         Clears specific session data by key, or clears all session data if no key is provided.
         """
@@ -245,9 +247,9 @@ class RequestDataTransformer:
 
     def get_field_value(
         self,
-        field,
-        default=None,
-    ):
+        field:str,
+        default:str|None=None,
+    ) -> Any:
         """
         Retrieves the value of a specific field from the request data.
         :param field: Field name to retrieve
@@ -255,7 +257,7 @@ class RequestDataTransformer:
         """
         return self.post_data.get(field) if field in self.post_data else default
 
-    def get_json_field_value(self, field, default=None):
+    def get_json_field_value(self, field:str, default:str|None=None) -> Any:
         """
         Retrieves a field's value from JSON data in the request.
         """
@@ -264,7 +266,7 @@ class RequestDataTransformer:
         json_data = self.request.json()
         return json_data.get(field, default)
 
-    def has_field(self, field):
+    def has_field(self, field:str) -> bool:
         """
         Checks if a field exists in the request data.
         """
@@ -272,7 +274,7 @@ class RequestDataTransformer:
             hasattr(self.request, "json") and field in self.request.json()
         )
 
-    def _initialize_multi_form_processing(self):
+    def _initialize_multi_form_processing(self)-> dict[str, Any]:
         """
         Initializes data structures and validation status for each form class specified.
         """
@@ -291,7 +293,7 @@ class RequestDataTransformer:
                 self.cleaned_data[prefix] = None
         return form_instances
 
-    def are_valid(self):
+    def are_valid(self) -> bool:
         """
         Checks if all forms are valid and updates error tracking.
         """
@@ -303,13 +305,13 @@ class RequestDataTransformer:
 
     def save_forms(
         self,
-    ):
+    ) -> bool:
         if self.are_valid():
             for form in self.form:
                 form.save(commit=False)
         return self.are_valid()
 
-    def get_csrf_token(self):
+    def get_csrf_token(self) -> str:
         try:
             from django.middleware.csrf import get_token
 
@@ -317,7 +319,7 @@ class RequestDataTransformer:
         except:
             return ""
 
-    def extract_props(self):
+    def extract_props(self) -> RequestProps:
         """
         Separates data into Global Context (User/Session) and
         Local Context (Form/Data) for the TCM.
@@ -380,7 +382,7 @@ class FormHandler:
 
     def form_handling(
         self,
-    ):
+    ) -> bool:
         """Executes the appropriate form saving strategy based on data shape.
 
         Returns:
@@ -394,7 +396,7 @@ class FormHandler:
 
     def mono_form_true_option(
         self,
-    ):
+    ) -> bool:
         """Processes a single form instance.
 
         Returns:
@@ -408,7 +410,7 @@ class FormHandler:
 
     def mono_form_false_option(
         self,
-    ):
+    ) -> bool:
         """Processes multiple form instances (e.g., Formsets).
 
         Returns:

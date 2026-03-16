@@ -1,81 +1,77 @@
-from probo.components.tag_classes import self_closing
-
-# --- Specific HTML Self-Closing Element Classes ---
-# These classes use the `Element` helper class and are designed for self-closing tags.
-
-
-def doctype(content=None, **attrs):
+from probo.components.elements import Element
+from typing import Any
+EL = Element()
+def doctype(content:str=None, **attrs:dict[str,Any]):
     """Represents an HTML <!DOCTYPE> line break element (self-closing)."""
-    return self_closing.EL.doctype(content, **attrs).element
-    # return el.replace('/>', '>')
+    return EL.doctype(content, **attrs).element
 
 
-def area(**attrs):
+def area(**attrs:dict[str,Any]):
     """Represents an HTML <area/> line break element (self-closing)."""
-    return self_closing.EL.area(**attrs).element
+    return EL.area(**attrs).element
 
 
-def base(**attrs):
+def base(**attrs:dict[str,Any]):
     """Represents an HTML <base/> line break element (self-closing)."""
-    return self_closing.EL.base(**attrs).element
+    return EL.base(**attrs).element
 
 
-def br(**attrs):
+def br(**attrs:dict[str,Any]):
     """Represents an HTML <br/> line break element (self-closing)."""
-    return self_closing.EL.br(**attrs).element
+    return EL.br(**attrs).element
 
 
-def col(**attrs):
+def col(**attrs:dict[str,Any]):
     """Represents an HTML <col/> line break element (self-closing)."""
-    return self_closing.EL.col(**attrs).element
+    return EL.col(**attrs).element
 
 
-def embed(**attrs):
+def embed(**attrs:dict[str,Any]):
     """Represents an HTML <embed/> line break element (self-closing)."""
-    return self_closing.EL.embed(**attrs).element
+    return EL.embed(**attrs).element
 
 
-def hr(**attrs):
+def hr(**attrs:dict[str,Any]):
     """Represents an HTML <hr/> line break element (self-closing)."""
-    return self_closing.EL.hr(**attrs).element
+    return EL.hr(**attrs).element
 
 
-def img(**attrs):
+def img(**attrs:dict[str,Any]):
     """Represents an HTML <img/> line break element (self-closing)."""
-    return self_closing.EL.img(**attrs).element
+    return EL.img(**attrs).element
 
 
-def Input(**attrs):
+def Input(**attrs:dict[str,Any]):
     """Represents an HTML <input/> line break element (self-closing)."""
-    return self_closing.EL.input(**attrs).element
+    return EL.input(**attrs).element
 
 
-def link(**attrs):
+def link(**attrs:dict[str,Any]):
     """Represents an HTML <link/> line break element (self-closing)."""
-    return self_closing.EL.link(**attrs).element
+    return EL.link(**attrs).element
 
 
-def meta(**attrs):
+def meta(**attrs:dict[str,Any]):
     """Represents an HTML <meta/> line break element (self-closing)."""
-    return self_closing.EL.meta(**attrs).element
+    return EL.meta(**attrs).element
 
 
-def param(**attrs):
+def param(**attrs:dict[str,Any]):
     """Represents an HTML <param/> line break element (self-closing)."""
-    return self_closing.EL.param(**attrs).element
+    return EL.param(**attrs).element
 
 
-def source(**attrs):
+def source(**attrs:dict[str,Any]):
     """Represents an HTML <source/> line break element (self-closing)."""
-    return self_closing.EL.source(**attrs).element
+    return EL.source(**attrs).element
 
 
-def track(**attrs):
+def track(**attrs:dict[str,Any]):
     """Represents an HTML <track/> line break element (self-closing)."""
-    return self_closing.EL.track(**attrs).element
+    return EL.track(**attrs).element
 
 
-def wbr(**attrs):
+def wbr(**attrs:dict[str,Any]):
     """Represents an HTML <wbr/> line break element (self-closing)."""
-    return self_closing.EL.wbr(**attrs).element
+    return EL.wbr(**attrs).element
 

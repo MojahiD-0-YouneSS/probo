@@ -203,7 +203,6 @@ class Background(Enum):
 
 
 class Spacing(Enum):
-    """Bootstrap Spacing utilities (margin and padding)."""
 
     PX1 = "px-1"  # Padding on X-axis
     PX2 = "px-2"  # Padding on X-axis
@@ -499,65 +498,64 @@ class SpacingFunc:
     """Bootstrap Spacing utilities (margin and padding)."""
 
     @staticmethod
-    def PX(self, value: int):
+    def PX(value: int):
         return f"px-{value}"  # Padding on X-axis
 
     @staticmethod
-    def PY(self, value: int):
+    def PY(value: int):
         return f"py-{value}"  # Padding on Y-axis
 
     @staticmethod
-    def PT(self, value: int):
+    def PT(value: int):
         return f"pt-{value}"  # Padding Top
 
     @staticmethod
-    def PB(self, value: int):
+    def PB(value: int):
         return f"pb-{value}"  # Padding Bottom
 
     @staticmethod
-    def PS(self, value: int):
-        return f"ps-{value}"  # Padding Start (self,left in LTR)
+    def PS(value: int):
+        return f"ps-{value}"  # Padding Start (left in LTR)
 
     @staticmethod
-    def PE(self, value: int):
-        return f"pe-{value}"  # Padding End (self,right in LTR)
+    def PE(value: int):
+        return f"pe-{value}"  # Padding End (right in LTR)
 
     @staticmethod
-    def P(self, value: int):
+    def P(value: int):
         return f"p-{value}"  # Padding all sides
 
     @staticmethod
-    def MX(self, value: int):
+    def MX(value: int):
         return f"mx-{value}"  # Margin on X-axis
 
     @staticmethod
-    def MY(self, value: int):
+    def MY(value: int):
         return f"my-{value}"  # Margin on Y-axis
 
     @staticmethod
-    def MT(self, value: int):
+    def MT(value: int):
         return f"mt-{value}"  # Margin Top
 
     @staticmethod
-    def MB(self, value: int):
+    def MB(value: int):
         return f"mb-{value}"  # Margin Bottom
 
     @staticmethod
-    def MS(self, value: int):
-        return f"ms-{value}"  # Margin Start (self,left in LTR)
+    def MS(value: int):
+        return f"ms-{value}"  # Margin Start (left in LTR)
 
     @staticmethod
-    def ME(self, value: int):
-        return f"me-{value}"  # Margin End (self,right in LTR)
+    def ME(value: int):
+        return f"me-{value}"  # Margin End (right in LTR)
 
     @staticmethod
-    def M(self, value: int):
+    def M(value: int):
         return f"m-{value}"  # Margin all sides
 
     @staticmethod
     def AUTO_MX(
-        self,
-    ):
+            ):
         return "mx-auto"  # Center horizontally
 
 
@@ -565,43 +563,39 @@ class GridFunc:
     """Bootstrap Grid System classes."""
 
     @staticmethod
-    def COL(self, value: int):
+    def COL(value: int):
         return f"col-{value}"
 
     @staticmethod
     def COL_AUTO(
-        self,
-    ):
+            ):
         return "col-auto"
 
     @staticmethod
-    def COL_SM(self, value: int):
+    def COL_SM(value: int):
         return f"col-sm-{value}"
 
     @staticmethod
-    def COL_MD(self, value: int):
+    def COL_MD(value: int):
         return f"col-md-{value}"
 
     @staticmethod
-    def COL_LG(self, value: int):
+    def COL_LG(value: int):
         return f"col-lg-{value}"
 
     @staticmethod
     def ROW(
-        self,
-    ):
+            ):
         return "row"
 
     @staticmethod
     def CONTAINER(
-        self,
-    ):
+            ):
         return "container"
 
     @staticmethod
     def CONTAINER_FLUID(
-        self,
-    ):
+            ):
         return "container-fluid"
 
 

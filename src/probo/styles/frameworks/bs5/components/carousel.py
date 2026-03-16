@@ -1,6 +1,7 @@
 from probo.styles.frameworks.bs5.comp_enum import Carousel
 from probo.styles.frameworks.bs5.components.base import BS5Component
 from probo.styles.frameworks.bs5.bs5 import BS5Element
+from typing import Any, Self
 
 class BS5Carousel(BS5Component):
     """A high-level manager for Bootstrap 5 Carousel (slideshow) components.
@@ -34,7 +35,7 @@ class BS5Carousel(BS5Component):
 
         super().__init__(name='BS5-carousel', state_props=self.render_constraints)
     
-    def add_carousel_item(self,content,carousel_caption=None,caption_attrs=None,return_item=False,**attrs):
+    def add_carousel_item(self,content:str|Any,carousel_caption:str|None=None,caption_attrs:dict[str,Any]|None=None,return_item:bool=False,**attrs:dict[str,Any])->Self:
         """Creates and appends a new slide to the carousel.
 
         Args:
@@ -66,7 +67,7 @@ class BS5Carousel(BS5Component):
         self.carousel_items.append(item)
         return self
 
-    def add_carousel_controls(self,):
+    def add_carousel_controls(self,)->Self:
         """Generates the 'Previous' and 'Next' navigation buttons.
 
         This method populates `carousel_control_prev` and `carousel_control_next` 
@@ -102,7 +103,7 @@ class BS5Carousel(BS5Component):
         
         return self
 
-    def add_carousel_indicators(self,):
+    def add_carousel_indicators(self,) -> Self:
         """Generates the bottom navigation indicators (dashes/dots).
 
         This method calculates the number of indicators based on the current 
@@ -128,14 +129,14 @@ class BS5Carousel(BS5Component):
         self.carousel_indicators = indicators.render()
         return self
 
-    def before_render(self, **props):
+    def before_render(self, **props:dict[str,Any]) -> None:
         carousel_inner = BS5Element(
             'div',
             classes=['carousel-inner'],
         ).include(*self.carousel_items).render()
         self.include_content_parts(self.carousel_indicators, carousel_inner,self.carousel_control_prev,self.carousel_control_next)
 
-    def _render_comp(self):
+    def _render_comp(self)->BS5Element:
 
         carousel = BS5Element(
             self.tag,

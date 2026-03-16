@@ -27,7 +27,7 @@ def client():
         return f"Value: {val}"
 
     # We return the TestApp which allows us to simulate requests
-    return TestApp(router.app)
+    return TestApp(router.wsgi_app)
 
 def test_home_route(client):
     """Test a simple manual route."""
@@ -49,11 +49,11 @@ def test_tcm_fallback(client):
         def __init__(self,):
             super().__init__()
             self.set_component("/tcm-page","TCM Content")
-            
+
     router_with_tcm = ProboRouter(app_name="TCMApp", secret_key="secret")
     router_with_tcm.register_tcm(MockTCM())
-    tcm_client = TestApp(router_with_tcm.app)
-    
+    tcm_client = TestApp(router_with_tcm.wsgi_app)
+
     res = tcm_client.get('/tcm-page')
     assert res.status_code == 200
     assert "TCM Content" in res.text

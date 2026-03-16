@@ -2,12 +2,12 @@ from probo.components.elements import Element
 from probo.components.base import BaseHTMLElement
 from probo.components.node import ElementNodeMixin
 from probo.components.tag_classes.block_tags import EL
-
+from typing import Any
 class G(BaseHTMLElement, ElementNodeMixin):
     """Represents an G HTML <g> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -16,10 +16,11 @@ class G(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:g = Element(
         ).set_attrs(**self.attributes).set_content(self.content).g().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .g()
             .element
         )
@@ -28,7 +29,7 @@ class DEFS(BaseHTMLElement, ElementNodeMixin):
     """Represents an DEFS HTML <defs> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -37,10 +38,11 @@ class DEFS(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:defs = Element(
         ).set_attrs(**self.attributes).set_content(self.content).defs().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .defs()
             .element
         )
@@ -49,7 +51,7 @@ class TEXT(BaseHTMLElement, ElementNodeMixin):
     """Represents an TEXT HTML <text> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -58,10 +60,11 @@ class TEXT(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:text = Element(
         ).set_attrs(**self.attributes).set_content(self.content).text().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .text()
             .element
         )
@@ -70,7 +73,7 @@ class TSPAN(BaseHTMLElement, ElementNodeMixin):
     """Represents an TSPAN HTML <tspan> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -79,10 +82,11 @@ class TSPAN(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:tspan = Element(
         ).set_attrs(**self.attributes).set_content(self.content).tspan().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .tspan()
             .element
         )
@@ -91,7 +95,7 @@ class SVG(BaseHTMLElement,ElementNodeMixin):
     """Represents an SVG HTML <svg> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -100,10 +104,11 @@ class SVG(BaseHTMLElement,ElementNodeMixin):
         '''
         Blueprint:svg = Element(
         ).set_attrs(**self.attributes).set_content(self.content).svg().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .svg()
             .element
         )
@@ -112,7 +117,7 @@ class SYMBOL(BaseHTMLElement, ElementNodeMixin):
     """Represents an SYMBOL HTML <symbol> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -121,10 +126,11 @@ class SYMBOL(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:symbol = Element(
         ).set_attrs(**self.attributes).set_content(self.content).symbol().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .symbol()
             .element
         )
@@ -133,7 +139,7 @@ class MARKER(BaseHTMLElement, ElementNodeMixin):
     """Represents an MARKER HTML <marker> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -142,10 +148,11 @@ class MARKER(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:marker = Element(
         ).set_attrs(**self.attributes).set_content(self.content).marker().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .marker()
             .element
         )
@@ -154,7 +161,7 @@ class PATTERN(BaseHTMLElement, ElementNodeMixin):
     """Represents an PATTERN HTML <pattern> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -163,10 +170,11 @@ class PATTERN(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:pattern = Element(
         ).set_attrs(**self.attributes).set_content(self.content).pattern().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .pattern()
             .element
         )
@@ -175,7 +183,7 @@ class MASK(BaseHTMLElement, ElementNodeMixin):
     """Represents an MASK HTML <mask> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -184,10 +192,11 @@ class MASK(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:mask = Element(
         ).set_attrs(**self.attributes).set_content(self.content).mask().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .mask()
             .element
         )
@@ -196,7 +205,7 @@ class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
     """Represents an CLIPPATH HTML <clipPath> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -205,10 +214,11 @@ class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:clipPath = Element(
         ).set_attrs(**self.attributes).set_content(self.content).clipPath().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .clipPath()
             .element
         )
@@ -217,7 +227,7 @@ class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
     """Represents an LINEARGRADIENT HTML <linearGradient> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -226,10 +236,11 @@ class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:linearGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).linearGradient().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .linearGradient()
             .element
         )
@@ -238,7 +249,7 @@ class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
     """Represents an RADIALGRADIENT HTML <radialGradient> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -247,10 +258,11 @@ class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:radialGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).radialGradient().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .radialGradient()
             .element
         )
@@ -259,7 +271,7 @@ class FILTER(BaseHTMLElement, ElementNodeMixin):
     """Represents an FILTER HTML <filter> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -268,10 +280,11 @@ class FILTER(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:filter = Element(
         ).set_attrs(**self.attributes).set_content(self.content).filter().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .filter()
             .element
         )
@@ -280,7 +293,7 @@ class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
     """Represents an FECOMPONENTTRANSFER HTML <feComponentTransfer> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -289,10 +302,11 @@ class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:feComponentTransfer = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feComponentTransfer().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .feComponentTransfer()
             .element
         )
@@ -301,7 +315,7 @@ class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEDIFFUSELIGHTING HTML <feDiffuseLighting> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -310,10 +324,11 @@ class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:feDiffuseLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feDiffuseLighting().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .feDiffuseLighting()
             .element
         )
@@ -322,7 +337,7 @@ class FEMERGE(BaseHTMLElement, ElementNodeMixin):
     """Represents an FEMERGE HTML <feMerge> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -331,10 +346,11 @@ class FEMERGE(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:feMerge = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feMerge().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .feMerge()
             .element
         )
@@ -343,7 +359,7 @@ class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
     """Represents an FESPECULARLIGHTING HTML <feSpecularLighting> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -352,10 +368,11 @@ class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:feSpecularLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feSpecularLighting().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .feSpecularLighting()
             .element
         )
@@ -364,7 +381,7 @@ class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
     """Represents an ANIMATEMOTION HTML <animateMotion> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -373,10 +390,11 @@ class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:animateMotion = Element(
         ).set_attrs(**self.attributes).set_content(self.content).animateMotion().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .animateMotion()
             .element
         )
@@ -385,7 +403,7 @@ class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
     """Represents an FOREIGNOBJECT HTML <foreignObject> element."""
 
     __slots__ = ()
-    def __init__(self, *content, **attrs):
+    def __init__(self, *content:tuple[str|ElementNodeMixin], **attrs:dict[str,Any]):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -394,10 +412,11 @@ class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
         '''
         Blueprint:foreignObject = Element(
         ).set_attrs(**self.attributes).set_content(self.content).foreignObject().element'''
+        content=self._get_rendered_content()
         return (
             EL
             .set_attrs(**self.attributes)
-            .set_content(self._get_rendered_content())
+            .set_content(content)
             .foreignObject()
             .element
         )

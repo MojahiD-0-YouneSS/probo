@@ -1,5 +1,6 @@
 import hashlib
 import json
+from typing import Any, Dict
 
 class RouterPayload:
     """
@@ -13,14 +14,14 @@ class RouterPayload:
         'payloads',
         'diff',
     )
-    def __init__(self, **payloads) -> None:
+    def __init__(self, **payloads:dict[str,Any]) -> None:
         """
         :param payloads: Key-value pairs where key is component ID and 
                          value is the component object (tcm-based).
         """
         self.payloads = payloads
         self.diff = {}
-        self._process_payloads()
+        self._process_payloads(**payloads)
 
     def _generate_hash(self, content: str) -> str:
         """Creates a unique fingerprint for a component's rendered output."""
@@ -36,7 +37,7 @@ class RouterPayload:
             # Render the component using ProboUI's rendering logic
             rendered_content = component.render() if hasattr(component, 'render') else str(component)
             new_hash = self._generate_hash(rendered_content)
-            
+
             # Check if state has changed
             if self._state_cache.get(cid) != new_hash:
                 self.diff[cid] = {
@@ -58,7 +59,7 @@ class RouterPayload:
         xml_fragments = []
         for cid, data in self.diff.items():
             xml_fragments.append(f'<component id="{cid}" hash="{data["hash"]}">{data["content"]}</component>')
-        
+
         return f'<ssdom_update>{"".join(xml_fragments)}</ssdom_update>'
 
     def load(self,**new_loads):
@@ -72,4 +73,3 @@ class RouterPayload:
         }
         func = _allowed_formats.get(response_type,)
         return func()
-

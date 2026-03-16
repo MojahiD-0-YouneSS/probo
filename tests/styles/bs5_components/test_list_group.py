@@ -9,8 +9,8 @@ from probo.styles.frameworks.bs5.components.list_group import (
 
 def test_bs5_listgroup_render_basic():
     """1. Render basic list group with text items."""
-    # Usage: BS5ListGroup("Item 1", "Item 2", content="", id="my-list")
-    lg = BS5ListGroup("Item 1", "Item 2", content="", Id="my-list")
+    # Usage: BS5ListGroup("Item 1", "Item 2", , id="my-list")
+    lg = BS5ListGroup("Item 1", "Item 2",  Id="my-list")
     html = lg.render()
 
     # Container check (ul is default usually)
@@ -24,7 +24,7 @@ def test_bs5_listgroup_render_basic():
 
 def test_bs5_listgroup_render_links_and_buttons():
     """2. Render actionable items (links/buttons) using add_list_item."""
-    lg = BS5ListGroup(content="")
+    lg = BS5ListGroup()
 
     # Add Link
     lg.add_list_item("Link Item", tag="a", href="/path")
@@ -37,31 +37,30 @@ def test_bs5_listgroup_render_links_and_buttons():
 
     # Links should automatically get 'list-group-item-action' logic
     assert '<a href="/path" class="list-group-item list-group-item-action">Link Item</a>' in html
-    assert '<button type="button" class="list-group-item">Button Item</button>' in html
+    assert '<button type="button" class="list-group-item list-group-item-action">Button Item</button>' in html
 
 
 def test_bs5_listgroup_render_modifiers():
     """3. Render with modifiers (flush, numbered, horizontal)."""
     # Flush remove borders
-    lg_flush = BS5ListGroup(content="", Class="list-group-flush")
+    lg_flush = BS5ListGroup(Class="list-group-flush")
     assert "list-group-flush" in lg_flush.render()
 
     # Numbered (requires ol tag usually)
-    lg_num = BS5ListGroup(content="",  Class="list-group-numbered")
+    lg_num = BS5ListGroup( Class="list-group-numbered")
     lg_num.swap_element('ol')
     html = lg_num.render()
     assert "<ol" in html
     assert "list-group-numbered" in html
 
     # Horizontal
-    lg_horiz = BS5ListGroup(content="", Class="list-group-horizontal")
+    lg_horiz = BS5ListGroup( Class="list-group-horizontal")
     assert "list-group-horizontal" in lg_horiz.render()
 
 def test_bs5_listgroup_state_constraints_blocking():
     """5. State: List group hidden when constraints not met."""
     lg = BS5ListGroup(
         "Secure Item",
-        content="",
         render_constraints={"show_list": True}
     )
 
@@ -79,7 +78,7 @@ def test_bs5_listgroup_state_dynamic_content():
 
     # 2. Inject into Component
     # We pass the placeholder as the content for the ListGroup
-    lg = BS5ListGroup(content='')
+    lg = BS5ListGroup()
     for item in items:
         lg.add_list_item(item)
 

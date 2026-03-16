@@ -120,3 +120,19 @@ def test_multiple_parents_scenario(root_node):
     assert child.get_parent == new_root
     assert child.depth == 1
     assert new_root.children_count == 1
+
+def test_creating_tree_and_render():
+    from probo import DIV,P,SPAN
+    comp=Component(name='GreetingComponent',node_mode=True)
+    div = DIV("hello", SPAN("world"))
+
+    comp.add(div)
+    comp.add(P('SOME TEXT',))
+    comp.add(SPAN('SOMER OTHER TEXT'))
+    html = comp.render()
+    assert html == '<div>hello<span>world</span></div><p>SOME TEXT</p><span>SOMER OTHER TEXT</span>'
+    assert 'div' in html
+    assert 'span>world' in html
+    comp.set_root_element('section',Class='greeting')
+    html2 = comp.render()
+    assert 'section' in html2
