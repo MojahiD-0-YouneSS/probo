@@ -16,7 +16,7 @@
 
 Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
-## 📣 Version 1.3.1 is Live!
+## 📣 Version 1.3.2 is Live!
 
 Probo UI has officially reached stable v1.3 status. It is a backend-first framework.
 
@@ -109,7 +109,7 @@ Probo UI solves this by bringing the Frontend into Python:
 
 - **proxy element**: The ```ProxyElement``` provides a mechanism to embed external logic or third-party objects directly into the SSDOM. It facilitates the integration of arbitrary objects by accepting the object and an optional render callable, which is utilized if the object does not possess a native ```render``` method.
 
-
+- **Style Manager**: The ```StyleManager``` helps adding inline styling to HTML onbjects like in js style with remove_style/add_style methods.
 
 # Performance diagnostics
 

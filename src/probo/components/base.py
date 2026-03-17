@@ -370,7 +370,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
-    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node', 'element_tag')
+    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node', 'element_tag', '_override_style')
 
     def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
         """
@@ -384,6 +384,7 @@ class BaseHTMLElement(ABC):
         self.content = deque(content)
         self.element_tag=''
         self.attributes = kwargs
+        self._override_style = False
     
     @property
     def attr_manager(self) -> ElementAttributeManipulator:
@@ -394,6 +395,28 @@ class BaseHTMLElement(ABC):
             the element's current attributes, allowing for chainable updates.
         """
         return ElementAttributeManipulator(self.attributes)
+    
+    @property
+    def style_manager(self) -> 'StyleManager':
+        """Accesses the style manager for this element.
+
+        Returns:
+            An instance of StyleManager initialized with 
+            the element's current attributes, allowing for chainable updates.
+        """
+        from probo.styles.style_manager import StyleManager
+        return StyleManager(self.attributes,self._override_style)
+
+    def inner_html(self, *content:tuple[str|Self]) -> Self:
+        """
+        Sets the inner HTML content of the element.
+        Args:
+            *content: Variable length argument list representing the new content 
+                      for the element. Can be strings, other BaseHTMLElement 
+                      instances, or lists of such instances.
+        """
+        self.content=deque(content)
+        return self
 
     def _get_rendered_content(self) -> str:
         """Recursively renders all nested content into a single HTML string.

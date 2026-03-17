@@ -21,7 +21,7 @@ from probo.styles.frameworks.bs5 import (
     BS5ElementStyle,
     BS5Element,
 )
-
+from probo.styles.style_manager import StyleManager
 from probo.styles.utils import (
     resolve_complex_selector,
     selector_type_identifier,
@@ -47,4 +47,5 @@ __all__ = [
     "BS5Element",
     "resolve_complex_selector",
     "selector_type_identifier",
+    "StyleManager",
 ]

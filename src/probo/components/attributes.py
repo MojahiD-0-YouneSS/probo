@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import Any,Self,Optional
 from probo.utility import EnumLookUPMixin
+
 class DataBSAttribute(EnumLookUPMixin, Enum):
     DATA_BS = [
         "data-bs-toggle",
