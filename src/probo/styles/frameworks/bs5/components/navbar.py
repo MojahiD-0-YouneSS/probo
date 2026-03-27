@@ -27,6 +27,7 @@ class BS5NavBar(BS5Component):
         *content: Any, 
         render_constraints: Optional[Dict[str, Any]] = None, 
         wraper_func: Optional[Callable[[str], Any]] = None, 
+        make_safe:bool=False,
         **attrs: Any
     ) -> None:
         """Initializes the Navbar with theme logic and structural wrappers.
@@ -41,7 +42,7 @@ class BS5NavBar(BS5Component):
         self.attrs: Dict[str, Any] = attrs
         self.wraper_func: Optional[Callable[[str], Any]] = wraper_func
         self.render_constraints: Optional[Dict[str, Any]] = render_constraints
-
+        self.make_safe = make_safe
         self.content: str = "".join([
             x.render() if hasattr(x, 'render') else str(x) for x in content
         ])
@@ -141,8 +142,9 @@ class BS5NavBar(BS5Component):
         Returns:
             BS5Element: The fully constructed Navbar root element.
         """
+        from probo.utility import ProboSourceString
         inner_content: str = (
-            self.wraper_func(self.content) 
+            self.wraper_func(ProboSourceString(self.content)) if self.make_safe else self.wraper_func(self.content)
             if callable(self.wraper_func) 
             else self.content
         )

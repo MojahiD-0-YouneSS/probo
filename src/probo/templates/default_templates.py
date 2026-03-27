@@ -281,8 +281,8 @@ def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=
     html_obj.add(head_obj).add(body_obj)
     return DOCTYPE(html_obj)
 
+
 def welcome_template_tree():
-    
     """
     DOCTYPE (Root)
     └── HTML [lang="en"]
@@ -290,6 +290,8 @@ def welcome_template_tree():
         │   └── STYLE (Custom .elephant-launch & .card-link animations)
         └── BODY
             └── MAIN [style="min-height: 100vh; ..."]
+                ├── HEADER (Brand Header)
+                │   └── A ("Probo UI") [top-left]
                 ├── SECTION (Hero Section)
                 │   └── DIV [style="text-align: center; ..."]
                 │       ├── SPAN ("🐘") [animation="float 3s..."]
@@ -305,6 +307,7 @@ def welcome_template_tree():
                         └── P ("Probo UI v1.3.0 — 800+ Tests Passed")
     """
     from probo.styles import element_style
+    from probo import HEADER, A, DIV, SECTION, SPAN, H1, H2, P, MAIN, FOOTER
 
     LAUNCH_STYLE = """
     @keyframes float {
@@ -317,6 +320,7 @@ def welcome_template_tree():
         text-decoration: none;
         color: #1A5F7A;
         border: 1px solid #e2e8f0;
+        background: white;
     }
     .card-link:hover {
         background: #f8fafc;
@@ -324,81 +328,119 @@ def welcome_template_tree():
         transform: scale(1.02);
     }
     """
-    elephant_launch=element_style(
+    brand_text_style = element_style(
         with_style_attr=True,
-        font_size= '120px',
-        display= 'inline-block',
-        animation= 'float 3s ease-in-out infinite',
-        filter= 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
+        text_decoration="none",
+        font_weight="800",
+        font_size="22px",
+        color="#1A5F7A",
+        letter_spacing="-0.5px",
     )
-    hero_section_style=element_style(
+
+    # --- STYLE DEFINITIONS ---
+    header_style = element_style(
         with_style_attr=True,
-        background= '#fff',
-        border_bottom= '1px solid #eee',
-        )
+        padding="20px 60px",
+        display="flex",
+        align_items="center",
+        background="#fff",
+        border_bottom="1px solid #f1f5f9",
+        width="100%",
+    )
+
+    elephant_launch = element_style(
+        with_style_attr=True,
+        font_size="120px",
+        display="inline-block",
+        animation="float 3s ease-in-out infinite",
+        filter="drop-shadow(0 10px 15px rgba(0,0,0,0.1))",
+    )
+
+    hero_section_style = element_style(
+        with_style_attr=True,
+        background="#fff",
+        border_bottom="1px solid #eee",
+    )
+
     hero_container_style = element_style(
         with_style_attr=True,
-        padding= '60px 20px',
-        text_align= 'center',
+        padding="60px 20px",
+        text_align="center",
     )
-    hero_paragraph_style = element_style(
-        with_style_attr=True,
-        color= '#666',
-        font_size= '18px',
-        max_width= '600px',
-        margin= '20px auto',
-    )
+
     hero_heading_style = element_style(
         with_style_attr=True,
-        font_size= '32px',
-        color= '#333',
-        margin_top= '20px',
+        font_size="32px",
+        color="#333",
+        margin_top="20px",
     )
+
+    hero_paragraph_style = element_style(
+        with_style_attr=True,
+        color="#666",
+        font_size="18px",
+        max_width="600px",
+        margin="20px auto",
+    )
+
     documentation_section_style = element_style(
         with_style_attr=True,
-        padding= '0 60px 20px',
+        padding="0 60px 20px",
     )
+
     documentation_container_style = element_style(
         with_style_attr=True,
-        display='grid',
-        grid_template_columns='repeat(auto-fit, minmax(250px, 1fr))',
-        gap='20px',
-        max_width='1000px',
-        margin='-40px auto 0'
+        display="grid",
+        grid_template_columns="repeat(auto-fit, minmax(250px, 1fr))",
+        gap="20px",
+        max_width="1000px",
+        margin="-40px auto 0",
     )
+
     documentation_link_style = element_style(
         with_style_attr=True,
-        padding= '30px',
-        border_radius= '12px',
-        display= 'block',
+        padding="30px",
+        border_radius="12px",
+        display="block",
     )
+
     documentation_link_heading_style = element_style(
         with_style_attr=True,
-        font_size= '20px',
-        margin_bottom= '10px',
+        font_size="20px",
+        margin_bottom="10px",
     )
+
     documentation_link_paragraph_style = element_style(
         with_style_attr=True,
-        font_size= '14px',
-        color= '#64748b',
+        font_size="14px",
+        color="#64748b",
     )
+
     footer_section = element_style(
         with_style_attr=True,
-        padding= '40px',
-        text_align= 'center',
-        color= '#94a3b8',
-        border_top= '1px solid #f1f5f9',
+        padding="40px",
+        text_align="center",
+        color="#94a3b8",
+        border_top="1px solid #f1f5f9",
     )
-    footer_paragraph_status= element_style(
+
+    footer_paragraph_status = element_style(
         with_style_attr=True,
-        font_weight= 'bold',
+        font_weight="bold",
     )
+
     main_section_style = element_style(
         with_style_attr=True,
-        min_height= '100vh',
-        background= '#fcfcfc',
-        font_family= 'system-ui, -apple-system, sans-serif',
+        min_height="100vh",
+        background="#fcfcfc",
+        font_family="system-ui, -apple-system, sans-serif",
     )
+
+    # --- COMPONENT BUILDERS ---
+    def HeaderSection():
+        """The top brand navigation bar."""
+        return HEADER(A("Probo UI", href="/", **brand_text_style), **header_style)
+
     def HeroSection():
         """The centerpiece of the landing page."""
         return SECTION(
@@ -422,7 +464,7 @@ def welcome_template_tree():
         links = [
             {
                 "title": "Documentation",
-                "desc": "Comprehensive guides to SSDOM and Components and other.",
+                "desc": "Comprehensive guides to SSDOM and Components.",
                 "url": "https://mojahid-0-youness.github.io/probo/",
             },
             {
@@ -456,27 +498,29 @@ def welcome_template_tree():
 
     def FooterStatus():
         """Shows the engine status and version."""
-        return FOOTER(DIV(
-            P("Probo UI v1.3.0 — 800+ Tests Passed", **footer_paragraph_status),
-            **footer_section,
-        ))
+        return FOOTER(
+            DIV(
+                P(
+                    "Probo UI v1.3.0 — The Future of Python Web UIs",
+                    **footer_paragraph_status,
+                ),
+                **footer_section,
+            )
+        )
 
-    # Initialize our standard base tree
     doc = base_template_tree(overide_body=True)
 
     # Register our launch animations in the head
-    doc.html_doc.find(lambda n:n.element_tag == 'style').content.append(LAUNCH_STYLE)
+    doc.html_doc.find(lambda n: n.element_tag == "style").content.append(LAUNCH_STYLE)
 
-    # Build the Body structure
+    # Building the layout using SSDOM nodes
     layout = MAIN(
+        HeaderSection(),
         HeroSection(),
         DocumentationLinks(),
         FooterStatus(),
         **main_section_style,
     )
 
-    # Inject into the document
     doc.html_doc.find(lambda n: n.element_tag == "body").add(layout)
-
     return doc
-

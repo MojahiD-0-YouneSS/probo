@@ -64,7 +64,7 @@ class BS5Pagination(BS5Component):
             Self: Enables fluent method chaining.
         """
         self.pagination_classes.append(Pagination.PAGINATION_LG.value)
-        self.template.classes.append(Pagination.PAGINATION_LG.value)
+        self.template.attr_manager.add_class(Pagination.PAGINATION_LG.value)
         return self
 
     @property
@@ -75,7 +75,7 @@ class BS5Pagination(BS5Component):
             Self: Enables fluent method chaining.
         """
         self.pagination_classes.append(Pagination.PAGINATION_SM.value)
-        self.template.classes.append(Pagination.PAGINATION_SM.value)
+        self.template.attr_manager.add_class(Pagination.PAGINATION_SM.value)
         return self
 
     def _normalize_bare_items(self, item: Any,url='#') -> BS5Element:

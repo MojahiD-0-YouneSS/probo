@@ -201,7 +201,7 @@ class ProboFormField:
                 if not label_attrs and input_id:
                     label_attrs["for"] = input_id
                 self.widget_info[f"{input_id}-{tag}"] = (
-                    self.wraper_func(label(label_string, **label_attrs) + tag_string) if callable(self.wraper_func) else label(label_string, **label_attrs) + tag_string
+                    self.wraper_func(ProboSourceString(label(label_string, **label_attrs) + tag_string)) if callable(self.wraper_func) else ProboSourceString(label(label_string, **label_attrs) + tag_string)
                 )
         return self
 
@@ -350,7 +350,7 @@ class ProboFormField:
         return self._field_build("output", **info)
 
     def add_custom_field(self,*field_string:tuple[str],skip_wraper:bool=False) -> Self:
-        field_string = ''.join(field_string)
+        field_string = ProboSourceString("".join(field_string))
         if skip_wraper:
             self.widget_info['custm-field'] = field_string
         else:

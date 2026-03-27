@@ -60,7 +60,7 @@ class BS5Button(BS5Component):
         """
         self.btn_classes.append("btn-lg")
         if hasattr(self, 'template'):
-            self.template.add_class("btn-lg")
+            self.template.attr_manager.add_class("btn-lg")
         return self
 
     @property
@@ -72,7 +72,7 @@ class BS5Button(BS5Component):
         """
         self.btn_classes.append("btn-sm")
         if hasattr(self, 'template'):
-            self.template.add_class("btn-sm")
+            self.template.attr_manager.add_class("btn-sm")
         return self
 
     def _render_comp(self) -> BS5Element:
@@ -174,7 +174,7 @@ class BS5ButtonGroup(BS5Component):
         """Applies large scaling to the entire button group."""
         self.btn_group_classes.append("btn-group-lg")
         if hasattr(self, 'template'):
-            self.template.add_class("btn-group-lg")
+            self.template.attr_manager.add_class("btn-group-lg")
         return self
 
     @property
@@ -182,7 +182,7 @@ class BS5ButtonGroup(BS5Component):
         """Applies small scaling to the entire button group."""
         self.btn_group_classes.append("btn-group-sm")
         if hasattr(self, 'template'):
-            self.template.add_class("btn-group-sm")
+            self.template.attr_manager.add_class("btn-group-sm")
         return self
 
     def before_render(self, *args: Any, **kwargs: Any) -> Self:

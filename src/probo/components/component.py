@@ -123,7 +123,9 @@ class Component(ComponentNode):
         self.root_element_attrs = {}
         self.node_mode=node_mode
         self.props = props or {}
-        self.comp_state = state or ComponentState()
+        self.comp_state = state if isinstance(state, ComponentState) else ComponentState()
+        if self.props and not self.comp_state.incoming_props:
+            self.comp_state.incoming_props = self.props
         ComponentNode.__init__(self)
         self.default_css_rules = list()
         self.active_css_rules = list()

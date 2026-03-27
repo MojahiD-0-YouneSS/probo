@@ -11,12 +11,12 @@
 [![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
 ![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
 ![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
-![Tests](https://img.shields.io/badge/Tests-792%20Passed-brightgreen?style=flat-square&logo=github)
+![Tests](https://img.shields.io/badge/Tests-811%20Passed-brightgreen?style=flat-square&logo=github)
 [![APIs](https://img.shields.io/badge/APIs-550%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
 
 Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
-## 📣 Version 1.3.2 is Live!
+## 📣 Version 1.3.3 is Live!
 
 Probo UI has officially reached stable v1.3 status. It is a backend-first framework.
 
@@ -121,14 +121,14 @@ The following table demonstrates the **Linear Scaling ($O(n)$)** capability of t
 
 | Elements | Total String Length | Build Phase | Manipulation | Render Phase | Total Time |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **100** | 3,989 chars | 0.0003s | 0.0001s | 0.0009s | **0.0014s** |
-| **1,000** | 41,789 chars | 0.0076s | 0.0001s | 0.0087s | **0.0164s** |
-| **10,000** | 437,789 chars | 0.0305s | 0.0001s | 0.0894s | **0.1200s** |
-| **100,000** | 4,577,789 chars | 0.3335s | 0.001s | 0.8622s | **1.1959s** |
-| **250,000** | 11,777,789 chars | 1.0517s | 0.0001s | 2.0606s | **3.1125s** |
-| **500,000** | 23,777,789 chars | 1.9719s | 0.001s | 4.1436s | **6.1156s** |
-| **750,000** | 35,777,789 chars | 3.8622s | 0.0001s | 6.1664s | **10.0287s** |
-| **1,000,000** | 47.777.789 chars | 5.4940s | 0.0001s | 8.4081s | **13.9022s** |
+| **100** | 3,989 chars | 0.0003s | 0.0001s | 0.0009s | **0.0018s** |
+| **1,000** | 41,789 chars | 0.0076s | 0.0001s | 0.0087s | **0.0168s** |
+| **10,000** | 437,789 chars | 0.0305s | 0.0001s | 0.0894s | **0.1208s** |
+| **100,000** | 4,577,789 chars | 0.3335s | 0.001s | 0.8622s | **1.1963s** |
+| **250,000** | 11,777,789 chars | 1.0517s | 0.0001s | 2.0606s | **3.1129s** |
+| **500,000** | 23,777,789 chars | 1.9719s | 0.001s | 4.1436s | **6.1160s** |
+| **750,000** | 35,777,789 chars | 3.8622s | 0.0001s | 6.1664s | **10.0291s** |
+| **1,000,000** | 47.777.789 chars | 5.4940s | 0.0001s | 8.4081s | **13.9026s** |
 
 ### Observations
 

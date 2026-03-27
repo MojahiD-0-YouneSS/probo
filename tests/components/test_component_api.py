@@ -79,7 +79,6 @@ def test_load_css_rules():
     selector = CssSelector().cls("box").render()
     rule = CssRule(color="red").declarations
     rules = {selector: rule}
-    print(selector, rules)
     comp.load_css_rules(**rules)
 
     html, css = comp.render()

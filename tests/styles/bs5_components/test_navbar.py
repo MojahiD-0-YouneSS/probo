@@ -82,3 +82,32 @@ def test_bs5_navbar_state_passing():
 
     assert "navbar" in html
     assert "Visible Brand" in html
+
+from probo import div
+def mock_wraper(content):
+    return div(content,Class='container',Id='wraper-func')
+
+def test_bs5_navbar_wraper_func():
+    """6. State: Navbar visible when constraints met."""
+    nav = BS5NavBar(
+        wraper_func=mock_wraper,
+    )
+    nav.add_navbar_brand(div('Visible Brand ""'))
+    html = nav.render()
+
+    assert "navbar" in html
+    assert "&quot;" in html
+    assert "Visible Brand" in html
+
+
+def test_bs5_navbar_wraper_func_marked():
+    """6. State: Navbar visible when constraints met."""
+    nav = BS5NavBar(
+        wraper_func=mock_wraper,
+        mark_safe=True,
+    )
+    nav.add_navbar_brand(div("Visible Brand"))
+    html = nav.render()
+
+    assert "navbar" in html
+    assert "Visible Brand" in html
