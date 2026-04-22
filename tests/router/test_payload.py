@@ -2,6 +2,7 @@ import pytest
 import json
 import hashlib
 from probo.router.payload import RouterPayload # Adjust import based on your actual structure
+from probo.router.global_cache import global_cache # Adjust import based on your actual structure
 
 # Mock component for testing .render() behavior
 class MockComponent:
@@ -13,7 +14,7 @@ class MockComponent:
 @pytest.fixture(autouse=True)
 def clear_cache():
     """Clears the global state cache before every test to ensure isolation."""
-    RouterPayload._state_cache = {}
+    global_cache.clear()
 
 def test_initial_payload_processing():
     """1. Test that initialization correctly processes and hashes a new component."""
@@ -80,9 +81,8 @@ def test_load_method_functionality():
     """7. Test the .load() method for late-binding additional payloads."""
     payload = RouterPayload(initial="data")
     payload.load(late="arrival")
-    
     assert "late" in payload.diff
-    assert RouterPayload._state_cache["late"] is not None
+    assert global_cache.get("payload::late") is not None
 
 def test_get_response_dispatcher():
     """8. Test the universal get_response dispatcher for both formats."""
@@ -103,8 +103,8 @@ def test_state_cache_persistence_across_instances():
     """10. Verify that the class-level cache persists across different instances."""
     # Instance 1 caches 'key1'
     RouterPayload(key1="content1")
-    
+
     # Instance 2 should see 'key1' as unchanged even if not passed in init
     payload2 = RouterPayload(key1="content1")
     assert "key1" not in payload2.diff
-    assert "key1" in RouterPayload._state_cache
+    assert "payload::key1" in list(global_cache.walk())

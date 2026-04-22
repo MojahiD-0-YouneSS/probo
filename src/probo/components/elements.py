@@ -9,12 +9,12 @@ import webbrowser
 import os
 from collections import OrderedDict
 from probo.utility import render_attributes, markup_escape, ProboSourceString
-from typing import Any, Self
+from typing import Any, AsyncGenerator, Self
+from collections import deque
 
 MARKER = chr(31)
 CONTENT_MARKER = f"@probo:{MARKER}"
 Tag.thaw()
-
 
 class Element:
     """A dynamic HTML element factory and renderer.
@@ -47,6 +47,8 @@ class Element:
         'tag',
         'use_sibling',
         'sibling_element',
+        '_use_deque',
+        "generator_content",
          "a",
         "abbr",
         "address",
@@ -99,7 +101,7 @@ class Element:
         "li",
         "main",
         "math",
-        "map",
+        "Map",
         "mark",
         "menu",
         "meter",
@@ -157,7 +159,7 @@ class Element:
         "embed",
         "hr",
         "img",
-        "input",
+        "Input",
         "link",
         "meta",
         "param",
@@ -177,7 +179,7 @@ class Element:
         'clippath',
         'lineargradient',
         'radialgradient',
-        'filter',
+        'Filter',
         'fecomponenttransfer',
         'fediffuselighting',
         'femerge',
@@ -214,12 +216,12 @@ class Element:
         'feturbulence',
         'animate',
         'animatetransform',
-        'set',
+        'Set',
         'view',
         'use',
         'stop',
     )
-
+    RESERVED_TAGS = ["del", "map", "object", "input", "filter","set"]
     def __init__(
         self,
         tag: str = "",
@@ -229,6 +231,7 @@ class Element:
         collect_history: bool = False,
         probo_pretty_error: bool = False,
         probo_custom_attrs: bool = False,
+        use_deque: bool = False,
         **attrs: dict[str, Any],
     ):
         """Initializes the Element with configuration flags and initial data.
@@ -246,17 +249,21 @@ class Element:
         self.element: str | list[str] = str()
         self.is_list: bool = is_list
         self.is_natural: bool = is_natural
-        self.content: str = content or str()
+        self.content: str|list[str]|deque[str] = content or str() if not self.is_list else [] if not use_deque else deque()
         self.probo_pretty_error = probo_pretty_error
         self.probo_custom_attrs = probo_custom_attrs
         self.collect_history = collect_history
+        self.generator_content = None
         self.collect_to_end = True
         self.attrs = attrs
+        self._use_deque=use_deque
         self.tag = tag
         self.use_sibling = False
-        self.sibling_element = self.element = str()
+        self.sibling_element = str()
         if self.tag:
-            self.element = self.build_tag(Tag.get(self.tag)).replace(MARKER, "")
+            self.element = ProboSourceString(self.build_tag(Tag.get(self.tag)).replace(MARKER, "")) if not self.is_list else self.build_tag(Tag.get(self.tag))
+        if use_deque and is_list:
+            self.use_deque()
 
     def __getattr__(self, name: str) -> Any:
         """Dynamically loads and returns a handler for a requested HTML tag.
@@ -274,7 +281,10 @@ class Element:
         Raises:
             AttributeError: If the tag is not recognized in the registry.
         """
-        name = name.lower()
+        if name.lower() in self.RESERVED_TAGS:
+            name = name.capitalize()
+        else:
+            name = name.lower()
         # self.tag = name
         method = self._tag_loader(name)
         if method:
@@ -288,6 +298,11 @@ class Element:
         self.use_sibling = False
         self.sibling_element = str()
         self.element = str()
+
+    def use_deque(self) -> None:
+
+        self.content = deque()
+        self._use_deque = True
 
     def _tag_loader(self, name: str) -> bool|partial:
 
@@ -343,27 +358,89 @@ class Element:
                 content = self.sibling_element + content
             self.reset_sebling
 
-        if self.collect_to_end:
-            self.content += content
-        else:
-            self.content = content + self.content
+        if self.collect_to_end: # APPENDING TO THE END
+
+            if isinstance(self.content, (list, deque)):
+                if isinstance(content, (list, deque)):
+                    self.content.extend(content)
+                else:
+                    if content:
+                        self.content.append(content)
+            else:
+                # If both are strings, just add them
+                if isinstance(content, (list, deque)):
+                    self.content += ''.join(content)
+                else:
+                    self.content += content
+
+        else: # PREPENDING TO THE FRONT
+            if isinstance(self.content, (list, deque)):
+                if isinstance(content, (list, deque)):
+                    if isinstance(self.content, list) and isinstance(content, list):
+                        self.content = content + self.content
+                    else:
+                        # Convert front content to deque, extend with back content
+                        temp = (
+                            deque(content)
+                            if not isinstance(content, deque)
+                            else content
+                        )
+                        temp.extend(self.content)
+                        self.content = temp
+                else:
+                    # Insert puts the string at index 0 (the front)
+                    self.content.insert(0, content) 
+            else:
+                # If both are strings, just add them
+                if isinstance(content, (list, deque)):
+                    self.content = ''.join(content) + self.content
+                else:            
+                    self.content = content + self.content
 
         string = self.build_tag(tag_enum)
         if self.is_list:
-            self.element = string.split(MARKER)
+            self.element = string
         else:
             if self.is_natural:
                 self.element = ProboSourceString(string.replace(MARKER, "\n"))
             else:
                 self.element = ProboSourceString(string.replace(MARKER, ""))
         if self.use_sibling and self.element and not set_as_content:
-            self.sibling_element += self.element
+            if type(self.element) is str and type(self.sibling_element) is str:
+                self.sibling_element += self.element    
+            elif isinstance(self.element, (list, deque)) and isinstance(self.sibling_element, (list, deque)):
+                self.sibling_element.extend(self.element)
+            elif type(self.element) is str and isinstance(self.sibling_element, (list, deque)):
+                self.sibling_element.append(self.element)
+            else:
+                self.sibling_element += ''.join(self.element)
+
         if set_as_content:
 
             if self.collect_to_end:
-                self.content += self.element
+                if isinstance(self.content, (list, deque)):
+                    if isinstance(self.element, (list, deque)):
+                        self.content.extend(self.element)
+                    else:
+                        self.content.append(self.element)
+                else:
+                    if isinstance(self.element, (list, deque)):
+                        self.content += ''.join(self.element)
+                    else:
+                        self.content += self.element
             else:
-                self.content = self.element + self.content
+                if isinstance(self.content, (list, deque)):
+                    if isinstance(self.element, (list, deque)):
+                        self.element.extend(self.content)
+                        self.content = self.element
+                        self.element.clear()
+                    else:
+                        self.content.insert(0, self.element)
+                else:
+                    if isinstance(self.element, (list, deque)):
+                        self.content += ''.join(self.element)
+                    else:
+                        self.content += self.element                
         self.use_sibling=False
         self.attrs.clear()
         return self
@@ -382,16 +459,28 @@ class Element:
         """
         if len(args) == 1 and type(args[0]) is str:
             if escape:
-                arg = markup_escape(args[0])
+                arg =( markup_escape(args[0]))
                 return arg
             return args[0]
 
         tag = None
         attrs_dict = {}
-        content = ""
+        content = str() if not self.is_list else list() if not self._use_deque else deque()
 
         is_sub_content = False
         sub_content = ""
+        def _extend_or_concat(current_content, arg):
+            if self.is_list:
+                if isinstance(arg, (list, deque)):
+                    current_content.extend(arg)
+                else:
+                    current_content.append(arg)
+                return current_content  # Return it!
+            else:
+                if isinstance(arg, (list, deque)):
+                    return current_content + "".join(arg)
+                else:
+                    return current_content + arg
 
         for arg in args:
 
@@ -399,16 +488,21 @@ class Element:
                 sub_content = str(arg)
                 is_sub_content = False
                 continue
-           
-            if type(arg) is str and str(arg).upper() in Tag.keys_set:
+            if isinstance(arg, (list, deque)):
+                if self.is_list:
+                    content.extend(arg)  # Instant O(1) merge
+                else:
+                    content += "".join(arg)
+
+            elif type(arg) is str and str(arg).upper() in Tag.keys_set:
                 tag = Tag.get(arg)
                 is_sub_content = True
             elif type(arg) is str:
                 if escape:
                     arg = markup_escape(arg)
-                content += f" {arg}"
+                content = _extend_or_concat(content, ProboSourceString(f" {arg}"))
             elif type(arg) is ProboSourceString:
-                content += arg
+                content = _extend_or_concat(content, arg)
             elif type(arg) is dict:
                 attrs_dict.update(arg)
             elif hasattr(arg,'render'):
@@ -416,27 +510,30 @@ class Element:
                     out_put = arg.render()
                     if type(out_put) is not ProboSourceString:
                         arg = markup_escape(out_put)
-                        content += arg
+                        content = _extend_or_concat(content, ProboSourceString(arg))
                     else:
-                        content += out_put
+                        content = _extend_or_concat(content, out_put)
             else:
-                content += markup_escape(str(arg))
+                content = _extend_or_concat(content, ProboSourceString(markup_escape(str(arg))))
         if tag:
-
             netsed_el = self.custom_element(
                 tag.value[0], sub_content, **attrs_dict
             ).element
-
-            if self.collect_to_end:
-                content += netsed_el
+            if isinstance(self.content, (list, deque)):
+                if isinstance(netsed_el, (list, deque)):
+                    self.content.extend(netsed_el)
+                else:
+                    self.content.append(netsed_el)
             else:
-                content = netsed_el + content
+                # If both are strings, just add them
+                if isinstance(netsed_el, (list, deque)):
+                    self.content += ProboSourceString(''.join(netsed_el))
+                else:
+                    self.content += netsed_el
         attrs_dict.clear()
-
-        # print(content)
         return content
 
-    def build_tag(self, tag: Tag, is_custom: bool = False) -> str:
+    def build_tag(self, tag: Tag, is_custom: bool = False) -> str|list[str]:
         """Constructs the physical HTML string for a given tag.
 
         Handles the distinction between void elements (like <img/>) and
@@ -459,21 +556,89 @@ class Element:
                 return flag
         if self.collect_history and not self.use_sibling:
             if self.collect_to_end:
-                self.content += self.stringify_element().element
+                if isinstance(self.content, (list, deque)):
+                    if isinstance(self.element, (list, deque)):
+                        self.content.extend(self.element)
+                    else:
+                        self.content.append(self.element)
+                else:
+                    if isinstance(self.element, (list, deque)):
+                        self.content += "".join(self.element)
+                    else:
+                        self.content += self.element
             else:
-                self.content = "".join([self.stringify_element().element, self.content])
+                if isinstance(self.content, (list, deque)):
+                    if isinstance(self.element, (list, deque)):
+                        self.element.extend(self.content)
+                        self.content = self.element
+                        self.element.clear()
+                    else:
+                        self.content.insert(0, self.element)
+                else:
+                    if isinstance(self.element, (list, deque)):
+                        self.content += "".join(self.element)
+                    else:
+                        self.content += self.element
+        content = self.render_content()
         if tag_value[1]["void"]:
             if self.tag == "doctype":
-                content = self.render_content()
-                if '<html' in content:
-                    return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{content}"
+                if '<html' in content or '<html' in (content[0] if isinstance(content, (list, deque)) else content):
+                    if self.is_list:
+                        result = None
+                        opening = ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",)
+                        if self._use_deque and isinstance(content, deque):
+                            content.appendleft(opening)
+                            return content
+                        elif isinstance(content, list):
+                            result = list() 
+                            result.append(opening)
+                            result.extend(content)
+                        else:
+                            result = list()
+                            result.append(opening)
+                            if content:
+                                result.append(content)
+                        return result
+                    else:
+                        return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{content}"
                 else:
-                    return f"<{tag_value[0]}{self.render_attrs()}>"
+                    if self.is_list:
+                        result = list() if not self._use_deque else deque()
+                        result.append(ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",))
+                        return result
+                    else:
+                        return f"<{tag_value[0]}{self.render_attrs()}>"
             else:
-
-                return f"<{tag_value[0]}{self.render_attrs()}/>"
+                if self.is_list:
+                    result = list() if not self._use_deque else deque()
+                    result.append(ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}/>",))
+                    return result
+                else:
+                    return f"<{tag_value[0]}{self.render_attrs()}/>"
         else:
-            return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{self.render_content()}{MARKER}</{tag_value[0]}>"
+            if self.is_list:
+
+                result = None
+                opening = ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",)
+                closing = ProboSourceString(f"</{tag_value[0]}>",)
+                if self._use_deque and isinstance(content, deque):
+                    content.appendleft(opening)
+                    content.append(closing)
+                    return content
+                elif isinstance(content, list):
+                    result = list() 
+                    result.append(opening)
+                    result.extend(content)
+                    result.append(closing)
+                else:
+                    result = list()
+                    result.append(opening)
+                    if content:
+                        result.append(content)
+                    result.append(closing)
+                return result
+            else:
+                return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{content}{MARKER}</{tag_value[0]}>"
 
     def render_attrs(self) -> str:
         """Render the attributes of the element as a string."""
@@ -539,7 +704,7 @@ class Element:
     ) -> Self:
         """Convert the element to a string representation."""
         if self.is_list:
-            self.element = "".join(self.element)
+            self.element = ProboSourceString("".join(self.element))
         return self
 
     def render_content(self) -> str:
@@ -547,7 +712,12 @@ class Element:
         if not self.content:
             return str()
         content_string = self.content
-        self.content = ""
+        if not self.is_list:
+            self.content = ""
+        elif self.is_list and self._use_deque:
+            self.content = deque()
+        else:
+            self.content = []
         return content_string
 
     def set_attrs(self, **attributes: dict[str, Any]) -> Self:
@@ -594,9 +764,9 @@ class Element:
         return self
 
     def set_data(self, *string: tuple[str]) -> Self:
-        self.content += " ".join(
+        self.content += ProboSourceString(" ".join(
             [f'<$probo-var name="{str(string_arg)}"/>' for string_arg in string]
-        )
+        ))
         return self
 
     def custom_element(
@@ -625,10 +795,20 @@ class Element:
             )[cstm_tag.upper()]
         if tag or attrs:
             self.attrs.update(attrs)
-            self.content += content
+            if isinstance(self.content, (list, deque)):
+                if isinstance(content, (list, deque)):
+                    self.content.extend(content)
+                else:
+                    self.content.append(content)
+            else:
+                # If both are strings, just add them
+                if isinstance(content, (list, deque)):
+                    self.content += ''.join(content)
+                else:
+                    self.content += content
         string = self.build_tag(tag, is_custom=True)
         if self.is_list:
-            self.element = string.split(MARKER)
+            self.element = string
         else:
             if self.is_natural:
                 self.element = string.replace(MARKER, "\n")
@@ -636,6 +816,59 @@ class Element:
                 self.element = string.replace(MARKER, "")
         self.attrs.clear()
         return self
+
+    def set_generator_content(self, generator_content)-> Self:
+        self.generator_content = generator_content
+        return self
+    def reset_generator_content(self, )-> Self:
+        self.generator_content = None
+        return self
+
+    def stream(self, batch: int = 50,):
+        """
+        A highly optimized generator that yields HTML chunks.
+        Perfect for ASGI/WSGI streaming responses.
+        
+        Args:
+            batch: The number of HTML fragments to join before yielding.
+        """
+        # 1. String Fallback: If they used is_list=False, just yield the massive string
+        # print("Starting stream with element type:", type(self.element),self.element)
+        if not self.is_list:
+            yield self.element
+            return
+
+        buffer = []
+        if self.generator_content is not None:
+            yield from self.generator_content
+            self.generator_content=None
+
+        elif isinstance(self.element, deque):
+            while self.element:
+                buffer.append(self.element.popleft()) # Removes from RAM instantly
+
+                if len(buffer) >= batch:
+                    yield ProboSourceString("".join(buffer))
+                    buffer.clear()
+
+        # 3. THE LIST ENGINE (Standard Array Iteration)
+        elif isinstance(self.element, list):
+            if len(self.element) == 1:
+                yield self.element[0]
+                return
+            for fragment in self.element:
+                buffer.append(fragment)
+
+                if len(buffer) >= batch:
+                    yield ProboSourceString("".join(buffer))
+                    buffer.clear()
+
+            # Free the list memory once the stream finishes
+            self.element.clear() 
+
+        # 4. Flush the remaining fragments
+        if buffer:
+            yield ProboSourceString("".join(buffer))
 
     def __str__( self,) -> str:
         return str(self.stringify_element().element)

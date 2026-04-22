@@ -3,7 +3,7 @@ import re
 from typing import Any, Optional, Callable, Dict, Self, Iterable
 from dataclasses import dataclass, field
 from collections.abc import Iterable
-from probo.utility import ProboSourceString
+from probo.utility import ProboSourceString, data_escaper
 
 class TemplateProcessor:
     """
@@ -12,15 +12,20 @@ class TemplateProcessor:
     """
 
     SUPPORTED_STYLES = ["django", "probo"]
-    __slots__ = ('_global_data_context')
-    def __init__(self, data_context: dict = None)->None:
+
+    # FIX: Single item tuples in Python require a trailing comma
+    __slots__ = ('_global_data_context',) 
+
+    def __init__(self, data_context: dict = None) -> None:
         """
         Initializes the processor with a global data context.
 
         Args:
             data_context (dict, optional): A dictionary of global variables available to all templates rendered by this instance.
         """
-        self._global_data_context = data_context if data_context is not None else {}
+        self._global_data_context = data_escaper(
+            (data_context if data_context is not None else {})
+        )
 
     def _evaluate_expression(self, expression: str, current_context: dict) -> Any:
         """
@@ -166,9 +171,9 @@ class TemplateProcessor:
         Returns:
             str: The text with variables replaced by their string representations.
         """
-        # Matches variables like {{ var|filter }}
-        var_pattern = re.compile(r"\{\{ (.+?) \}\}")
-
+        # BUGFIX: Changed r"\{\{ (.+?) \}\}" to allow optional spaces \s*
+        # This matches {{var}}, {{ var }}, and {{  var  }} safely.
+        var_pattern = re.compile(r"\{\{\s*(.+?)\s*\}\}")
         def repl(match):
             expr = match.group(1)
             if "|" in expr:
@@ -193,6 +198,8 @@ class TemplateProcessor:
         Returns:
             str: The fully rendered string.
         """
+        context = data_escaper(context.items() if context else {})
+
         effective_context = {**self._global_data_context, **(context or {})}
         return self._process_template_block(template_string, effective_context)
 
@@ -216,7 +223,7 @@ class TemplateProcessor:
             str: The formatted conditional block string.
         """
         if style == "probo":
-            return (
+            return ProboSourceString(
                 f"<$if {expression}>{if_block}"
                 + "".join(
                     [
@@ -267,6 +274,7 @@ class TemplateProcessor:
     @staticmethod
     def set_variable(
         expression:str,
+        style:str='django',
     )->str:
         """
         Generates a variable output string.
@@ -277,7 +285,10 @@ class TemplateProcessor:
         Returns:
             str: The formatted variable string (e.g., "{{ user.name }}").
         """
-        return ProboSourceString(f" {{{{ {expression} }}}}")
+        if style=="probo":
+            return ProboSourceString(f'<$probo-var name="{str(expression)}"/>')
+        else:
+            return ProboSourceString(f" {{{{ {expression} }}}}")
 
 def loop(data:int|dict[Any,Any]|Iterable, renderer:Callable | str |None= None) -> list:
     """

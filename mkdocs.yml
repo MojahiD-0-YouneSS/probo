@@ -38,13 +38,142 @@ plugins:
             show_source: false
             show_root_heading: true
   - include-markdown
-
-  # - gen-files:
-  #     scripts:
-  #       - gen_doc_stubs.py
+  - gen-files:
+      scripts:
+        - gen_doc_stubs.py
   - literate-nav:
       nav_file: SUMMARY.md
 nav:
-  - Home: index.md
-  - API Reference: reference/probo/ 
-  - User Guide: user_guide.md
+  - Welcome:
+    - First Steps: index.md
+    - User Guide: user_guide.md
+    # - Core Concepts: concepts.md
+  - Tutorials & Usage:
+    - Beginner Tutorial: beginner_tutorial.md
+    # - Advanced Tutorial: advanced_tutorial.md
+    - Usage & Best Practices: usage.md
+    # - Simple Documentation App: simple_doc.md
+    # - Probo Markup Language: markups.md
+  - Core SSDOM Features:
+    - O(1) Memory Streaming: streaming.md
+    - SSDOM Manipulation (API): dom_manipulation.md
+    - CSS in SSDOM: css_in_ssdom.md
+    - Proxies in SSDOM: proxies_in_ssdom.md
+    # - Request Transformer: request_transformer.md
+    - Template to SSDOM: template_to_ssdom.md
+  - Integrations & Deployment:
+    - Probo as a UI Layer (Django/FastAPI/Others): integrations/as_ui_layer_for_python_frameworks.md
+    # - Probo as a Microservice (BFF): integrations/as_backend_for_frontend.md
+    - Docker Deployment: integrations/docker/containerization.md
+  - Performance:
+    - Benchmarks: performance.md
+    - Performance Charts: performance_chart.md
+  # - FAQ: faq.md
+  - API Reference:
+    - Home: reference/probo/home.md
+    - Components:
+      - Core Component: reference/probo/components/component.md
+      - Elements Engine: reference/probo/components/elements.md
+      - Node & DOM: reference/probo/components/node.md
+      - Fragments: reference/probo/components/fragment.md
+      - Functional Executer: reference/probo/components/executer.md
+      - HTML Attributes Validation: reference/probo/components/attributes.md
+      - Base HTML for OOP Tags: reference/probo/components/base.md
+      - Forms (Probo Form): reference/probo/components/forms/probo_form.md
+      - Component State:
+        - Internal State: reference/probo/components/state/component_state.md
+        - Props Management: reference/probo/components/state/props.md
+      - Base Light Node: reference/probo/components/light_tags/node.md
+      - Light Tags (OOP):
+        - Block Tags: reference/probo/components/light_tags/oop/block_tags.md
+        - Self Closing: reference/probo/components/light_tags/oop/self_closing.md
+        - SVG Tags: reference/probo/components/light_tags/oop/svg_tags.md
+      - Light Tags (Functional):
+        - Block Tags: reference/probo/components/light_tags/func/block_tags.md
+        - Self Closing: reference/probo/components/light_tags/func/self_closing.md
+        - SVG Tags: reference/probo/components/light_tags/func/svg_tags.md
+      - Heavy Tags (OOP):
+        - Block Tags: reference/probo/components/tag_classes/block_tags.md
+        - Self Closing: reference/probo/components/tag_classes/self_closing.md
+        - SVG Tags: reference/probo/components/tag_classes/svg_tags.md
+      - Heavy Tags (Functional):
+        - Block Tags: reference/probo/components/tag_functions/block_tags.md
+        - Self Closing: reference/probo/components/tag_functions/self_closing.md
+        - SVG Tags: reference/probo/components/tag_functions/svg_tags.md
+    - Context:
+      - Provider: reference/probo/context/context.md
+      - Logic Engine: reference/probo/context/context_logic.md
+      - Django Integration: reference/probo/context/django.md
+    - HTMX:
+      - Core Directives: reference/probo/htmx/htmx.md
+      - HTMX Enums: reference/probo/htmx/htmx_enum.md
+    - Request Pipeline:
+      - Transformer: reference/probo/request/transformer.md
+      - Context: reference/probo/request/request_context.md
+      - Props: reference/probo/request/props.md
+    - Router:
+      - Core Router: reference/probo/router/router.md
+      - Class Based Views: reference/probo/router/views.md
+      - Routing Discovery: reference/probo/router/discovery.md
+      - HTTP Helpers: reference/probo/router/http.md
+      - Responses: reference/probo/router/responses.md
+      - Payload Engine: reference/probo/router/payload.md
+      - Cache System: reference/probo/router/cache.md
+      - Global Cache: reference/probo/router/global_cache.md
+      - Settings & Config: reference/probo/router/settings.md
+      - Single File Prototyping: reference/probo/router/single_file_prototyping.md
+    - Shortcuts:
+      - Utilities: reference/probo/shortcuts/shortcuts_utils.md
+      - Core Shortcuts: reference/probo/shortcuts/shortcuts.md
+      - Configs: reference/probo/shortcuts/configs.md
+    - Streaming:
+      - Stream Pipeline: reference/probo/streaming/streaming.md
+    - Styles & CSS:
+      - Style Manager: reference/probo/styles/style_manager.md
+      - Elements Engine: reference/probo/styles/elements.md
+      - CSS Enums: reference/probo/styles/css_enum.md
+      - Plain CSS: reference/probo/styles/plain_css.md
+      - Utilities: reference/probo/styles/utils.md
+      - Bootstrap 5 (BS5):
+        - Core API: reference/probo/styles/frameworks/bs5/bs5.md
+        - Component Enums: reference/probo/styles/frameworks/bs5/comp_enum.md
+        - Layout: reference/probo/styles/frameworks/bs5/layout.md
+        - Typography: reference/probo/styles/frameworks/bs5/typography.md
+        - Utilities: reference/probo/styles/frameworks/bs5/utilities.md
+        - Forms: reference/probo/styles/frameworks/bs5/forms.md
+        - Components:
+          - Base Element: reference/probo/styles/frameworks/bs5/components/base.md
+          - Accordion: reference/probo/styles/frameworks/bs5/components/accordion.md
+          - Alert: reference/probo/styles/frameworks/bs5/components/alert.md
+          - Badge: reference/probo/styles/frameworks/bs5/components/badge.md
+          - Breadcrumb: reference/probo/styles/frameworks/bs5/components/breadcrumb.md
+          - Button: reference/probo/styles/frameworks/bs5/components/button.md
+          - Card: reference/probo/styles/frameworks/bs5/components/card.md
+          - Carousel: reference/probo/styles/frameworks/bs5/components/carousel.md
+          - Collapse: reference/probo/styles/frameworks/bs5/components/collapse.md
+          - Dropdown: reference/probo/styles/frameworks/bs5/components/dropdown.md
+          - List Group: reference/probo/styles/frameworks/bs5/components/list_group.md
+          - Modal: reference/probo/styles/frameworks/bs5/components/modal.md
+          - Nav: reference/probo/styles/frameworks/bs5/components/nav.md
+          - Navbar: reference/probo/styles/frameworks/bs5/components/navbar.md
+          - Offcanvas: reference/probo/styles/frameworks/bs5/components/offcanvas.md
+          - Pagination: reference/probo/styles/frameworks/bs5/components/pagination.md
+          - Popover: reference/probo/styles/frameworks/bs5/components/popover.md
+          - Progress: reference/probo/styles/frameworks/bs5/components/progress.md
+          - Scrollspy: reference/probo/styles/frameworks/bs5/components/scrollspy.md
+          - Spinner: reference/probo/styles/frameworks/bs5/components/spinner.md
+          - Table: reference/probo/styles/frameworks/bs5/components/table.md
+          - Toast: reference/probo/styles/frameworks/bs5/components/toast.md
+          - Tooltips: reference/probo/styles/frameworks/bs5/components/tooltips.md
+    - Templates Engine:
+      - Default Templates: reference/probo/templates/default_templates.md
+      - AST Parser: reference/probo/templates/parser.md
+      - AST Resolver: reference/probo/templates/resolver.md
+    - Terminal & CLI:
+      - Command Line Interface: reference/probo/terminal/cli.md
+      - App Generator: reference/probo/terminal/app_generator.md
+      - Emmet Parser: reference/probo/terminal/emmet.md
+    - XML Engine:
+      - Core XML: reference/probo/xml/xml.md
+      - XML Elements: reference/probo/xml/elements.md
+    - Utility Tools: reference/probo/utility.md

@@ -16,6 +16,7 @@ from probo.shortcuts.configs import (
 )
 from probo.shortcuts.shortcuts import (
     custom,
+    raw,
     set_data,
     form_field,
     component,
@@ -60,4 +61,5 @@ __all__ = [
     "datatable",
     "head_seo",
     "document",
+    "raw",
 ]

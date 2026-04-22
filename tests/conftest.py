@@ -1,6 +1,4 @@
 import pytest
-from django.conf import settings
-
 
 class MockUser:
     def __init__(self, is_staff=False, permissions=None):
@@ -23,37 +21,41 @@ def mock_props_context():
         "csrf_token": "abc-123",
     }
 
+try:
+    from django.conf import settings
 
-def pytest_configure():
-    """
-    Configure a minimal Django settings environment for testing.
-    This allows us to use RequestFactory and Forms without a full project.
-    """
-    if not settings.configured:
-        settings.configure(
-            DEBUG=True,
-            SECRET_KEY="test-secret-key",
-            ROOT_URLCONF=__name__,
-            INSTALLED_APPS=[
-                "django.contrib.contenttypes",
-                "django.contrib.auth",
-                "django.contrib.sessions",
-                # 'mui', # Add your lib if it has models/tags
-            ],
-            MIDDLEWARE=[
-                "django.contrib.sessions.middleware.SessionMiddleware",
-                "django.contrib.auth.middleware.AuthenticationMiddleware",
-            ],
-            TEMPLATES=[
-                {
-                    "BACKEND": "django.template.backends.django.DjangoTemplates",
-                    "APP_DIRS": True,
-                }
-            ],
-            DATABASES={
-                "default": {
-                    "ENGINE": "django.db.backends.sqlite3",
-                    "NAME": ":memory:",
-                }
-            },
-        )
+    def pytest_configure():
+        """
+        Configure a minimal Django settings environment for testing.
+        This allows us to use RequestFactory and Forms without a full project.
+        """
+        if not settings.configured:
+            settings.configure(
+                DEBUG=True,
+                SECRET_KEY="test-secret-key",
+                ROOT_URLCONF=__name__,
+                INSTALLED_APPS=[
+                    "django.contrib.contenttypes",
+                    "django.contrib.auth",
+                    "django.contrib.sessions",
+                    # 'mui', # Add your lib if it has models/tags
+                ],
+                MIDDLEWARE=[
+                    "django.contrib.sessions.middleware.SessionMiddleware",
+                    "django.contrib.auth.middleware.AuthenticationMiddleware",
+                ],
+                TEMPLATES=[
+                    {
+                        "BACKEND": "django.template.backends.django.DjangoTemplates",
+                        "APP_DIRS": True,
+                    }
+                ],
+                DATABASES={
+                    "default": {
+                        "ENGINE": "django.db.backends.sqlite3",
+                        "NAME": ":memory:",
+                    }
+                },
+            )
+except:
+    pass

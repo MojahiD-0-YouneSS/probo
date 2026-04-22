@@ -8,13 +8,14 @@ from probo import DIV,P
 @pytest.fixture
 def proxy():
     """Returns a basic ProxyElement instance for testing."""
-    return ProxyElement("div", "Initial Content", id="main")
+    return ProxyElement("Initial Content", id="main")
 
 
 # --- Tests ---
 
 def test_basic_tag_rendering(proxy):
     """Ensures fallback to standard Element rendering works."""
+    proxy.wrap_result = True
     rendered = proxy.render()
     assert isinstance(rendered, str)
     assert "<div" in rendered
@@ -79,13 +80,19 @@ def test_probo_source_string_wrapping(input_val, expected):
 
 def test_attribute_persistence(proxy):
     """Checks if attributes from __init__ survive the render process."""
-    proxy.attributes['class'] = 'container'
+    proxy.attributes['Class'] = 'container'
+    proxy.wrap_result = True
     rendered = proxy.render()
     assert 'class="container"' in rendered
 
 def test_tree_proxy_rendering():
     """Tests recursive rendering of ProboUI nodes."""
-    inner = ProxyElement("span", "Inner")
+    inner = ProxyElement(
+        "Inner",
+        tag="span",
+        wrap_result = True
+
+    )
     outer = DIV(Class='container')
     outer.add(inner)
     outer.add(P('hello'))
@@ -110,4 +117,4 @@ def test_render_without_tag_or_logic():
     pe = ProxyElement(None)
     # This tests your 'if self.tag' fallback branch
     result = pe.render()
-    assert result is None
+    assert result == str() and bool(result) == False

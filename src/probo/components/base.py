@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
 from collections import deque
-from typing import Dict, Union, Self, Any
+from typing import Dict, Union, Self, Any,Generator
+import inspect
+from probo.utility import ProboSourceString
 
 class ElementAttributeManipulator:
     """
@@ -185,6 +187,14 @@ class ElementAttributeManipulator:
             Self: The current instance for method chaining.
         """
         return self.set_attr("Id", unique_id)
+    def get_id(self,) -> str|None:
+        """
+        Shorthand method to set the 'id' attribute.
+
+        Returns:
+            str: The value for id attribute for this element.
+        """
+        return self.get_attr("Id", None)
 
     def merge_attrs(self, **kwargs:dict[str,str]) -> Self:
         """
@@ -370,7 +380,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
-    __slots__ = ('attributes', 'content','node_children', 'parent','_ElementNodeMixin__void_node', 'element_tag', '_override_style')
+    __slots__ = ('attributes', 'content','node_children', '_render_conditions', 'parent','_ElementNodeMixin__void_node', 'element_tag', '_override_style')
 
     def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
         """
@@ -381,11 +391,11 @@ class BaseHTMLElement(ABC):
             **kwargs: Arbitrary keyword arguments representing HTML attributes.
                       (e.g., class_='my-class', id='my-id', style='color: red;').
         """
-        self.content = deque(content)
+        self.content = deque(content) if isinstance(content, tuple) else deque((content,))
         self.element_tag=''
         self.attributes = kwargs
         self._override_style = False
-    
+        self._render_conditions={}
     @property
     def attr_manager(self) -> ElementAttributeManipulator:
         """Accesses the attribute manipulator for this element.
@@ -395,7 +405,7 @@ class BaseHTMLElement(ABC):
             the element's current attributes, allowing for chainable updates.
         """
         return ElementAttributeManipulator(self.attributes)
-    
+
     @property
     def style_manager(self) -> 'StyleManager':
         """Accesses the style manager for this element.
@@ -418,7 +428,21 @@ class BaseHTMLElement(ABC):
         self.content=deque(content)
         return self
 
-    def _get_rendered_content(self) -> str:
+    def add_render_constraints(self, **constraints:str) -> Self:
+        """Adds rendering constraints to the element.
+
+        Constraints are conditions that must be met for the element to render 
+        its content. If the constraints are not satisfied during rendering, 
+        the element will render as empty (or an empty list if using list mode).
+
+        Args:
+            **constraints: Arbitrary keyword arguments representing constraint 
+                conditions (e.g., user_is_logged_in=True, has_items=False).
+        """
+        self._render_conditions = constraints
+        return self
+
+    def _get_rendered_content(self) -> str|list[str]|deque[str]:
         """Recursively renders all nested content into a single HTML string.
 
         This internal helper iterates through `self.content`, checking for 
@@ -429,32 +453,105 @@ class BaseHTMLElement(ABC):
         Returns:
             A string containing the concatenated HTML of all child items.
         """
-        is_nested_iter = any([not isinstance(x, (str, bytes,int, float)) for x in self.content])
+        use_list = self.use_list if hasattr(self, "use_list") else False
+        use_deque = self.use_deque if hasattr(self, "use_deque") else False
 
-        if not is_nested_iter:
-            return "".join(
-                [
-                    item.render() if hasattr(item, "render") else str(item)
-                    for item in self.content
-                ]
-            )
+        if not use_list and not self.use_deque:
+            collector = ""
         else:
-            results = [
-                sub_item.render()
-                if hasattr(sub_item, "render") else
-                    
-                    "".join(
-                        [
-                            x.render() if hasattr(x, "render") else x
-                            for x in sub_item
-                        ]
-                    )
-                
-                if isinstance(sub_item, Iterable) else
-                    str(sub_item)
-                for sub_item in self.content
-                ]
-            return "".join(results)
+            collector = deque() if use_deque else list()
+
+        # 2. Helper to add items to the collector based on type
+        def _add_to_collector(target, item):
+            if not use_list:
+                if isinstance(item, (list, deque)):
+                    return target + "".join(map(str, item))
+                return target + str(item)
+            else:
+                # If the item is already a collection, merge it (O(1) if deque)
+                if isinstance(item, (list, deque)):
+                    target.extend(item)
+                else:
+                    target.append(str(item))
+                return target
+
+        # 3. Process the content
+        for item in self.content:
+            rendered = None
+            # Scenario A: Child is a Component (Class)
+            if hasattr(item, "render"):
+                # Ensure the child knows our engine flags before it renders
+                if hasattr(item, "light_tag"):
+                    rendered = item.render(self.EL)
+                else:
+                    if hasattr(item, "bind_element"):
+                        item.bind_element(self.EL)
+                    rendered = item.render()
+
+            # Scenario B: Child is a raw Iterable (list of tags/strings)
+            elif inspect.isgenerator(item):
+                print('xxxxx')
+                if use_list and use_deque:
+                    rendered = ( deque(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                elif use_list and use_deque:
+                    rendered = ( list(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                else:
+                    rendered = ( ProboSourceString("".join(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item)))
+
+            elif isinstance(item, Iterable) and not isinstance(
+                item, (str, bytes, deque)
+            ):
+                # Handle nested lists/iterables recursively
+                sub_collector = deque() if self.use_deque else list()
+                for sub in item:
+                    if hasattr(sub, "render"):
+                        if hasattr(sub, "bind_element"):
+                            sub.bind_element(self.EL)
+                        sub_rendered = sub.render()
+                        if isinstance(sub_rendered, (list, deque)):
+                            sub_collector.extend(sub_rendered)
+                        else:
+                            sub_collector.append(sub_rendered)
+                    else:
+                        sub_collector.append(str(sub))
+                rendered = sub_collector
+
+            # Scenario C: Child is a raw value (String, Int, etc.)
+            else:
+                rendered = item
+
+            # Merge the rendered result into our main collector
+            collector = _add_to_collector(collector, rendered)
+
+        return collector
+
+    def _get_stream_content(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        The streaming engine: Iterates through children and yields HTML fragments.
+        If a child has a .stream() method, it delegates the generator.
+        """
+
+        def _process_item(item):
+            # BUGFIX: Catch generators and consume them lazily!
+            if inspect.isgenerator(item):
+                for sub_item in item:
+                    yield from _process_item(sub_item)
+            elif hasattr(item, "stream"):
+                if hasattr(item, "light_tag"):
+                    yield from item.stream(self.EL, batch=batch)
+                else:
+                    yield from item.stream(batch=batch)
+            elif hasattr(item, "render"):
+                res = item.render()
+                if isinstance(res, (list, deque)):
+                    yield from res
+                else:
+                    yield res
+            else:
+                yield str(item)
+
+        for item in self.content:
+            yield from _process_item(item)
 
     @abstractmethod
     def render(self) -> str:
@@ -470,4 +567,16 @@ class BaseHTMLElement(ABC):
         """
         raise NotImplementedError("Subclasses must implement the render method.")
 
+    @abstractmethod
+    def stream(self) -> str:
+        """Abstract method to stream the final HTML for the element.
 
+        This must be implemented by concrete subclasses (e.g., `Div`, `Span`).
+
+        Returns:
+            The complete HTML representation of the element.
+
+        Raises:
+            NotImplementedError: If the subclass does not implement this method.
+        """
+        raise NotImplementedError("Subclasses must implement the stream method.")

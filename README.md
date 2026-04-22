@@ -1,7 +1,8 @@
 <a href="https://ko-fi.com/youness_mojahid" target="_blank"> <img src="./docs/assets/images/kofi_brandasset/kofi_logo.svg" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;" border="0" /> </a>
-<p align="center"> 
-<img src="./docs/assets/images/mastodon_ui.ico" alt="Probo UI Logo" width="200" height="200">
-</p>
+
+# <img src="./docs/assets/images/mastodon_ui.ico" align="center" alt="Probo UI Logo" width="200" height="200"/>  Probo UI : Future of Python based UI
+
+# Python Rendered Objects for Backend-Oriented User Interfaces (Probo-UI). 
 
 ![PyPI](https://img.shields.io/pypi/v/probo-ui)
 ![Python](https://img.shields.io/pypi/pyversions/probo-ui)
@@ -11,40 +12,14 @@
 [![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
 ![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
 ![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
-![Tests](https://img.shields.io/badge/Tests-811%20Passed-brightgreen?style=flat-square&logo=github)
-[![APIs](https://img.shields.io/badge/APIs-550%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
+![Tests](https://img.shields.io/badge/Tests-1210%20Passed-brightgreen?style=flat-square&logo=github)
+[![APIs](https://img.shields.io/badge/APIs-580%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
 
 Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
 
-## 📣 Version 1.3.3 is Live!
+## 📣 Version 1.4.0 is Live!
 
-Probo UI has officially reached stable v1.3 status. It is a backend-first framework.
-
-## u can chose how youre UI can be:
-
--   **string based**
-
-```python
-from probo import (
-    div, 
-    span,
-)
-
-greeting_partial = div(span("Hello, Probo",Class='badge'))
-```
-- **object tree based**
-        
-
-```python
-from probo import (
-    DIV,
-    SPAN,
-    P,
-)
-
-greeting_partial = DIV(SPAN("Hello, Probo",Class='badge'))
-greeting_partial.add(P('this is a paragraph'))
-```
+Probo UI has officially reached stable v1.3 status. It is a backend-first UI framework.
 
 ## Why Probo?
 
@@ -67,8 +42,7 @@ Probo UI solves this by bringing the Frontend into Python:
 
 🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
 
-🔌 Django Native: Deep integration with Django Forms and Requests via the RDT (Request Data Transformer).
-
+🔌 Framework-Agnostic & Django-Ready: Build your UI completely standalone, or drop it into a Django project. When Django is present, Probo UI automatically enables deep integration with Django Forms and Requests via the RDT.
 ## Some ProboUI Architecture & Concepts
 
 - **Push & Clear**: When creating HTML elements via the ```Element``` object, the final output is pushed to the ```element``` attribute. The content and attributes used in that specific session are then cleared to maintain a clean state. To allow for cumulative processing, arguments can be passed to the class to "stash" previous results, serving as the content for the subsequent execution chain.
@@ -111,31 +85,6 @@ Probo UI solves this by bringing the Frontend into Python:
 
 - **Style Manager**: The ```StyleManager``` helps adding inline styling to HTML onbjects like in js style with remove_style/add_style methods.
 
-# Performance diagnostics
-
-The following table demonstrates the **Linear Scaling ($O(n)$)** capability of the ProboUI engine. These benchmarks verify the efficiency of the "Unified Tree" architecture when handling massive data volumes.
-
-### Benchmarking Environment
-* **Environment:** GitHub Codespaces (Standard Tier)
-* **Operations:** Each test includes full Tree Build, a `find` operation, a `add` (modification), and a full `render`.
-
-| Elements | Total String Length | Build Phase | Manipulation | Render Phase | Total Time |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **100** | 3,989 chars | 0.0003s | 0.0001s | 0.0009s | **0.0018s** |
-| **1,000** | 41,789 chars | 0.0076s | 0.0001s | 0.0087s | **0.0168s** |
-| **10,000** | 437,789 chars | 0.0305s | 0.0001s | 0.0894s | **0.1208s** |
-| **100,000** | 4,577,789 chars | 0.3335s | 0.001s | 0.8622s | **1.1963s** |
-| **250,000** | 11,777,789 chars | 1.0517s | 0.0001s | 2.0606s | **3.1129s** |
-| **500,000** | 23,777,789 chars | 1.9719s | 0.001s | 4.1436s | **6.1160s** |
-| **750,000** | 35,777,789 chars | 3.8622s | 0.0001s | 6.1664s | **10.0291s** |
-| **1,000,000** | 47.777.789 chars | 5.4940s | 0.0001s | 8.4081s | **13.9026s** |
-
-### Observations
-
-* **Constant-Time Manipulation:** The "modification" phase (finding and adding nodes) remains consistently under **0.001s** even with 1 million nodes in memory.
-* **Memory Threshold:** The framework engine successfully generated roughly a **48 MB** HTML string. Scaling beyond 1.5 million elements typically hits the physical RAM limits of the containerized environment.
-* **Linearity:** ProboUI scales linearly. Doubling the element count consistently doubles the time, with no exponential "cliffs," making it safe for enterprise-scale documents.
-
 # 📦 Installation
 
 ```bash 
@@ -160,7 +109,7 @@ def user_card(username):
 
     card = div(
         h1(username,strong(user_id)),
-        ul(*li_el)
+        ul(*li_el),
         Class='card',
         style='color:red;'
     )
@@ -173,9 +122,9 @@ print(html)
 ```
 ### Output: 
 ```html 
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
+<div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
-in case of permission based
+### in case of permission/authorization:
 ```python
 from probo.components import (
     Component,ComponentState, ElementState,StateProps,
@@ -186,7 +135,7 @@ from probo import (
 
 def user_card(username):
 
-    props = StateProps(required=True,prop_equal_to={'username':'admin'})
+    props = StateProps(required=True,prop_equals={'username':'admin'})
     
     user_id = f'User_789{username}1323'
     
@@ -195,15 +144,15 @@ def user_card(username):
     li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,props=props,)
     
     user_comp_state = ComponentState(
-        d_data=user_info,
         li_el,
+        d_data=user_info,
     )
 
     card = Component(
         name="UserCard",
         template=div(
             h1(username,strong(user_id)),
-            ul(li_el.placeholder)},
+            ul(li_el.placeholder),
             Class='card'),
         # Inject Data
         state=user_comp_state,
@@ -219,11 +168,11 @@ html2= user_card("admin").render()
 ```
 
 ### Output: 
-- print(html)
+- `print(html)`
 ```html
     <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul></ul></div>
 ```
-- print(html2)
+- `print(html2)`
 ```html
     <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```

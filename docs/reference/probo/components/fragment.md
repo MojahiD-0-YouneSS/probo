@@ -1,0 +1,3 @@
+# fragment
+
+::: probo.components.fragment

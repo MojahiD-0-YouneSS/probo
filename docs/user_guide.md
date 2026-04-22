@@ -1,206 +1,166 @@
-# ProboUI User guide
+# Probo UI User Guide
 
-Welcome to ProboUI, a Python-native SSR (Server-Side template Rendering) framework designed for rapid dynamic UI.
+Welcome to Probo UI! This framework is designed for rapid, dynamic, and highly composable UI development using a Python-native Server-Side DOM (SSDOM).
 
-🛠 Installation
+# 🛠 Installation
 
-ProboUI is designed to be lightweight with zero mandatory dependencies for its core rendering engine.
+Probo UI is designed to be lightweight with zero mandatory dependencies for its core rendering engine.
 
-# Install via pip
 ```bash
 pip install probo-ui
 ```
 
-# Reusable Partial Templates
+# 🧱 Reusable Partial Templates
 
-The power of ProboUI lies in Python's function-based composition. Since every html_tag or Component returns a ProboSourceString object, you can nest them naturally.
+The power of Probo UI lies in Python's function-based composition. Because every component evaluates to a ProboSourceString (or an object that renders to one), you can nest them naturally just like HTML, but with the power of Python loops and variables.
 
-## Creating a Partial
+Probo UI supports different paradigms for building partials based on your performance and manipulation needs.
 
-A partial is simply a Python function or class/object that performs a process defined by the developer that returns a HTML element as ProboSourceString format. ProboUI support diferent ways to make the partials based on developer need.
+### Functional (Fastest)
 
-### function version
-- function based uses tag function. mind that the returned value is string (ProboSourceString) so string processing is the way to perform modifications.
-    - Quick example:
+Function-based components use lowercase tags (e.g., `div`, `h3`). These are evaluated quickly into `ProboSourceString` formats. Because they return strings, they are extremely fast but cannot be mutated after creation.
 
 ```python
-from probo import (
-    div, h3, p, section
-)
+from probo import div, h3, p, section
 
-def user_card(username, role="Member"):
-    """A reusable partial template"""
+def user_card(username: str, role: str = "Member")->str:
+    """A reusable functional partial template"""
     return div(
         h3(username),
-        p(f"Role: {role}", Class="text-muted")
-    , Class="card")
+        p(f"Role: {role}", Class="text-muted"),
+        Class="card"
+    )
 
-```
--  Usage in a page asuming using Bottle based ProboRouter
-```python
-@app.page("/team")
-def team_page():
+# Usage inside a list comprehension
+def team_page() -> str:
     users = [("Alice", "Admin"), ("Bob", "Editor")]
     return section(*[
         user_card(name, role) for name, role in users
     ])
-
 ```
-### OOP version also reffered to as SSDOM
 
-- ProboUI implements a Server-Side DOM (SSDOM). Unlike previous implementation that renders strings on fly, ProboUI creates an efficient tree of objects. This allows you to manipulate the structure of your UI after it has been defined but before it is rendered to the client.
 
-    - Quick example:
+### OOP / SSDOM (Most Flexible)
 
-You can access and modify attributes or children directly on the element object.
+Object-Oriented components use uppercase tags (e.g., `DIV`, `H3`). These create an efficient **Server-Side DOM (SSDOM)** tree in memory. 
+
+This "lazy" approach means you can pass a complex UI tree through various logic checks to dynamically inject classes, IDs, or security tokens *before* rendering it to the client.
 
 ```python
-from probo import (
-    DIV, P, H3, SECTION
-)
+from probo import DIV, P, H3, SECTION
 
 def profile_widget():
-    # Create the structure
-
-    card = DIV(
-        H3("Guest", id="username")
-    , Class="card")
-    # also you do
+    # 1. Create the base structure
     card = DIV(Class="card")
-       card.add( H3("Guest", id="username"))
+    
+    # 2. Append children dynamically
+    card.add(H3("Guest", Id="username"))
 
-    # SSDOM Manipulation: Change an attribute dynamically
-    card.attributes['Class'] += " theme-dark"
-    card.attr_manger.set_attr('Id','sub-container')
-    # SSDOM Manipulation: Modify children
-    # You can append, remove, or replace elements in the tree
+    # 3. SSDOM Manipulation: Change an attribute dynamically
+    card.attributes.add_class("theme-dark")
+    card.attr_manager.set_attr('Id', 'sub-container')
+    
+    # 4. SSDOM Manipulation: Add more children
     card.add(P("Logout"))
+    
     container = SECTION(card)
-    return container
-    # if u want string do
+    
+    # Call .render() when you are finally ready to output the HTML!
     return container.render()
-
 ```
 
-- This "lazy" approach means you can pass a complex UI tree through various middleware or logic checks to inject classes, IDs, or security tokens without messy regex or string replacements.
 
-## using Bottle based ProboRouter
-   -  Usage in a page asuming using Bottle based ProboRouter
+### Routing with ProboRouter
+If you are using the built-in dual-engine ProboRouter, you don't even need to call .render(). The router handles it automatically!
+
 ```python
 
-from probo.router import ProboRouter
+from probo.router.router import ProboRouter
 
 app = ProboRouter('demo_app')
 
 @app.page("/admin/widget")
 def admin_widget():
-    # Just call .render() on oop version otherwise exclude it to get the final string
-    return profile_widget().render()
-    # in case returning rendered string
-    return profile_widget()
-
+    return profile_widget() # The router automatically calls .render() or .stream()
 ```
 
 
-# Integration with Other Frameworks
+🔌 Integration with Other Frameworks
 
-ProboUI is WSGI-compliant, making it the perfect "view engine" replacement for existing frameworks.
+#### Probo UI works great as a view engine for popular Python web frameworks.
 
-## FastAPI Integration
+### FastAPI (ASGI)
 
-Since FastAPI is ASGI, use ProboUI to generate the HTML and return it as an HTMLResponse.
+Since FastAPI is built on ASGI, you can use Probo UI to generate the HTML and return it via FastAPI's native `HTMLResponse`.
+
 ```python
-
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from probo import (
-    label,
-    Input,
-    button,
-)
+from probo import form, label, input_, button
 
 api = FastAPI()
 
 @api.get("/order", response_class=HTMLResponse)
 async def order_form():
+    # Build the UI
     form_string = form(
         label("Your Name:"),
-        Input(type="text", name="user_name", required=True),
+        input_(type="text", name="user_name", required=True),
         label("Table Number:"),
-        Input(type="number", name="table"),
+        input_(type="number", name="table"),
         button("Submit Order", type="submit"),
         method="post",
         action="/order",
     )
-
-    return layout("Place Order", form_string)
-
+    return form_string
 ```
 
-## Django Integration
 
-Use ProboUI inside your Django views to bypass the slow Django Template Language (DTL) for high-performance sections.
+### Django (WSGI)
 
-- using HttpResponse
-    - when using HttpResponse u have freedom to return any kind for template ether partial like this example or full page.
+Use Probo UI inside your Django views to bypass the slow Django Template Language (DTL) for high-performance dashboards and tables.
 
+**Option 1: Direct HttpResponse (Pure Probo)**
 ```python
-
 from django.http import HttpResponse
-from probo import (
-    table,tr,td,
-)
+from probo import table, tr, td
 
 def my_django_view(request):
-
-    table = table( *[
-        tr( [td( f"Cell {i}")]) 
-        for i in range(1000)
+    data_table = table(*[
+        tr(td(f"Cell {i}")) for i in range(1000)
     ])
-    return HttpResponse(table)
-
+    return HttpResponse(data_table)
 ```
-- using render
-    - when using render it required to use a base or other html template and pass the generated partials as context variables
 
+**Option 2: Hybrid Render (Probo + Django Templates)**
 ```python
-
 from django.shortcuts import render
-from probo import (
-    table,tr,td,
-)
+from probo import table, tr, td
 
-def my_django_view(request):
-
-    table = table( *[
-        tr( [td( f"Cell {i}")]) 
-        for i in range(1000)
+def my_hybrid_view(request):
+    # Generate the heavy table instantly in Python
+    data_table = table(*[
+        tr(td(f"Cell {i}")) for i in range(1000)
     ])
-    return render(request,'pages/user_dashboard.html',{'sales_table':table,})
-
+    # Pass the Probo string into a standard Django template!
+    return render(request, 'pages/dashboard.html', {'sales_table': data_table})
 ```
 
 
-## Flask Integration
+### Flask (WSGI)
+
+No more messy HTML strings everywhere! Keep your Flask views clean and entirely in Python.
 
 ```python
-
 from flask import Flask
-from probo import (
- div,
- p,
- section,
- ul,
- li,
-)
+from probo import div, p, section, ul, li
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # Look how clean this is! No more  everywherestrings    view = layout(
     view = section(
-        "Welcome to ProboUI",
+        "Welcome to Probo UI",
         p("This is the shorthand syntax demo."),
         div(
             p("Nested components feel natural:"),
@@ -213,30 +173,32 @@ def index():
         ),
     )
     return view
-
 ```
 
-## Native HTML Escaping
 
-ProboUI uses the ProboSourceString Container pattern. Any string passed as content is automatically escaped unless it is wrapped in the ProboSourceString class or is another ProboUI component.
+🛡️ Native HTML Escaping & Security
 
+Probo UI uses a strict ProboSourceString pattern. Any user-provided string passed as content is automatically escaped to prevent XSS attacks.
 
-- ProboSourceString handles nesting without double-escaping
+To bypass escaping for trusted HTML, you must explicitly wrap it in the ProboSourceString class, or use Probo's inline tag syntax.
+
+1. Explicit Trusted Strings
 ```python
 
-from probo.router import ProboSourceString
+from probo.core import ProboSourceString
 from probo import div
 
+# The <strong> tags will NOT be escaped because we explicitly trusted them
 nested = div(ProboSourceString("<strong>Already Escaped</strong>"))
-
 ```
- - if u dont want to use ProboSourceString you can do
-```python
 
+2. Inline Tag Syntax (Safe)
+
+If you don't want to import ProboSourceString, you can leverage Probo's built-in inline syntax. Probo understands strings acting as element wrappers.
+```python
 from probo import div
 
-nested = div("hey div","strong","Already Escaped",{'id':'strong-id'},Id='div-id')
-
-#  output: <div id="div-id"> hey div<strong id="strong-id">Already Escaped</strong></div>
-
+nested = div("hey div", "strong", "Already Escaped", {'id':'strong-id'}, Id='div-id') # recomend using this with functions only
+# Output: 
+# <div id="div-id">hey div<strong id="strong-id">Already Escaped</strong></div>
 ```

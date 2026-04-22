@@ -43,48 +43,101 @@ from probo.shortcuts.shortcuts_utils import (
 from typing import Any
 from probo.utility import ProboSourceString
 
-def custom(tag: str, content: str = "", is_void_element: bool = False, **attrs:dict[str,Any]) -> str:
+
+def custom(
+    tag: str,
+    content: str = "",
+    is_void_element: bool = False,
+    EL: Element | None = None,
+    **attrs: dict[str, Any],
+) -> str:
     """Instantly creates and renders a custom HTML tag string.
 
-    This utility serves as a functional shortcut for the `Element` factory, 
-    bypassing the need for manual instantiation and method chaining. It is 
-    ideal for generating simple, non-stateful HTML fragments or for use 
+    This utility serves as a functional shortcut for the `Element` factory,
+    bypassing the need for manual instantiation and method chaining. It is
+    ideal for generating simple, non-stateful HTML fragments or for use
     within list comprehensions where immediate string output is required.
 
     Args:
         tag: The HTML tag name (e.g., 'section', 'my-web-component').
         content: The inner HTML or text content for the element.
-        is_void_element: If True, renders the tag as a self-closing element 
+        is_void_element: If True, renders the tag as a self-closing element
             (e.g., <tag />).
-        **attrs: Arbitrary keyword arguments to be converted into HTML 
+        **attrs: Arbitrary keyword arguments to be converted into HTML
             attributes (e.g., class_='active', id='main').
 
     Returns:
         str: The fully rendered HTML string.
     """
-    return (
-        Element()
-        .custom_element(tag, content=content, is_void_element=is_void_element, **attrs)
-        .stringify_element()
-        .element
-    )
+    if EL:
+        return (
+            EL.custom_element(
+                tag, content=content, is_void_element=is_void_element, **attrs
+            )
+            .stringify_element()
+            .element
+        )
+    else:
+        return (
+            Element()
+            .custom_element(
+                tag, content=content, is_void_element=is_void_element, **attrs
+            )
+            .stringify_element()
+            .element
+        )
 
-def set_data(*variables:Any) -> str:
-    """Instantly injects data variables into an element and renders it to a string.
 
-    This utility serves as a functional shortcut for the `Element.set_data` 
-    pipeline. It allows for the rapid association of data-heavy attributes 
-    or internal state variables with an HTML fragment, immediately 
+def raw(
+    *variables: Any,
+    EL: Element | None = None,
+    is_comment: bool = False,
+    inner: bool = False,
+) -> str:
+    """Instantly injects raw variables into an element and renders it to a string.
+
+    This utility serves as a functional shortcut for the `Element.raw`
+    pipeline. It allows for the rapid association of escpe free attributes
+    or internal state variables with an HTML fragment, immediately
     outputting the final string representation.
 
     Args:
-        *variables: A variable number of data points, dictionaries, or 
+        *variables: A variable number of data points, dictionaries, or
+            objects to be bound to the element's data attributes or context.
+
+    Returns:
+        str: The fully rendered HTML string containin g the injected data.
+    """
+    if EL:
+        return EL.raw(*variables, inner=inner, is_comment=is_comment).element
+    else:
+        return Element().set_data(*variables).stringify_element().element
+
+
+def set_data(
+    *variables: Any,
+    EL: Element | None = None,
+) -> str:
+    """Instantly injects data variables into an element and renders it to a string.
+
+    This utility serves as a functional shortcut for the `Element.set_data`
+    pipeline. It allows for the rapid association of data-heavy attributes
+    or internal state variables with an HTML fragment, immediately
+    outputting the final string representation.
+
+    Args:
+        *variables: A variable number of data points, dictionaries, or
             objects to be bound to the element's data attributes or context.
 
     Returns:
         str: The fully rendered HTML string containing the injected data.
     """
-    return Element().set_data(*variables).stringify_element().element
+
+    if EL:
+        return EL.raw(*variables, inner=inner, is_comment=is_comment).element
+    else:
+        return Element().set_data(*variables).stringify_element().element
+
 
 def form_field(tag: str, **kwargs:dict[str,Any]) -> ProboFormField:
     """A functional factory for creating ProboFormField instances.

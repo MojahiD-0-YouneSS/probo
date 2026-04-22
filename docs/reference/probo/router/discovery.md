@@ -1,0 +1,3 @@
+# discovery
+
+::: probo.router.discovery

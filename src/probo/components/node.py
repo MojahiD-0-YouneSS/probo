@@ -1,7 +1,7 @@
 # probo/core/tree.py
 import uuid
-from typing import List, Optional, Callable, Any, Self
-from probo.utility import ProboSourceString
+from typing import Generator, List, Optional, Callable, Any, Self
+from probo.utility import ProboSourceString, StreamManager
 
 class ElementNodeMixin:
     """Adds hierarchical tree capabilities and traversal methods to a class.
@@ -35,8 +35,11 @@ class ElementNodeMixin:
         """
         cls._id = f"{(kwargs.get('id', None) or 'probo')}-{uuid.uuid4().hex[:8]}"
         cls.tag=cls.__name__.upper()
+        is_light = cls.__name__ == cls.__name__.capitalize() and cls.__name__[0]=="L"
+        if is_light:
+            cls.light_tag = f"L-{cls.__name__.lower()[1:]}"
 
-        def __normalize_node_children(self,content=[],is_void=False):
+        def __normalize_node_children(self,content=None,is_void=False):
             if is_void:
                 self.__void_node = True
                 return None
@@ -120,7 +123,7 @@ class ElementNodeMixin:
             p = p.parent
         return depth
 
-    def find(self, predicate: Callable[[Any], bool]) -> Optional[Any]:
+    def find(self, predicate: Callable[[Any], bool],stream_mode=False) -> Optional[Any]:
         """Searches the tree for the first node that matches a condition.
 
         Uses a recursive Depth-First Search (DFS) algorithm.
@@ -142,6 +145,8 @@ class ElementNodeMixin:
             if hasattr(child, 'find'):
                 result = child.find(predicate)
                 if result:
+                    if stream_mode:
+                        result.toggle_share_element(share=False)
                     return result
         return None
 
@@ -236,47 +241,186 @@ class ElementNodeMixin:
             target.content = tuple(content_list)
         return self
 
-from probo.components.base import BaseHTMLElement
+    def modify(
+        self, target: Callable, content: Any = None, **kwargs
+    ) -> "ElementNodeMixin":
+        """
+        Feature 11: Fluently targets a child by ID and applies mutations.
+        Usage: tree.modify("btn-submit", content="Loading...", class_="btn-disabled")
+        """
+        target = self.find(target())
 
-class ProxyElement(BaseHTMLElement, ElementNodeMixin):
-    __slots__ = ('_proxy_tag', '_logic_obj', 'render_callable')
-    def __init__(self, tag,*content:tuple[Optional[str]],**attrs):
-        super().__init__(*content,**attrs)
-        ElementNodeMixin.__init__(self)
-        self._proxy_tag = tag
-        self._logic_obj=None
-        self.render_callable:Callable=None
-        self._set_node_children(content)
-    def load_logic(self,logic_obj):
-        self._logic_obj=logic_obj
-    def load_render_logic(self,render_logic:Callable):
-        self.render_callable=render_logic
-    def render(self):
-        if self._logic_obj and self.render_callable:
-            return ProboSourceString(self.render_callable(self._logic_obj))
-        if not self._logic_obj and self.render_callable:
-            return ProboSourceString(self.render_callable())
-        if self._logic_obj and hasattr(self._logic_obj,'render'):
-            return ProboSourceString(self._logic_obj.render())
+        if target:
+            # 2. Modify Content if provided
+            if content is not None:
+                if isinstance(target.content, list):
+                    target.inner_html(content)
+                     
+                else:
+                    target.content.append(content)
+
+            if hasattr(target, "attributes"):
+                target.attributes.update(kwargs)
+        return self
+
+    def stream_node(
+        self, target_lambda: Callable[[Any], bool], chunk_size: int = 50
+    ) -> Generator[str, None, None]:
+        """
+        Feature 2: HTMX Targeting.
+        Finds a specific node by ID and yields its stream only.
+        """
+        target = self.find(target_lambda)
+        if target and hasattr(target, 'stream'):
+            target.toggle_share_element(share=False)  # Detach from parent Element to prevent shared state issues
+            yield from target.stream(chunk_size=chunk_size)
+        else:
+            # Silently yield nothing if not found, or a comment
+            yield f"<!-- Node not found -->"
+
+    def walk(self, include_text:bool=False)->Generator[Self,None,None]:
+        """
+        Generates a depth-first traversal of the SSDOM tree.
+        
+        Args:
+            include_text (bool): If True, yields raw text/string children 
+                                 alongside actual Node instances.
+                                 
+        Yields:
+            Node | str: The current node, followed by all its descendants.
+        """
+        # 1. Yield the current node first (pre-order traversal)
+        yield self
+        
+        # 2. Safely iterate through children
+        for child in self.node_children if not include_text else self.content:
+            if hasattr(child, "walk") and callable(child.walk):
+                # Recursively walk child nodes
+                yield from child.walk(include_text=include_text)
+            elif include_text:
+                # Yield raw strings/data if requested
+                yield child
+
+class ElementMutatorMixin:
+    """
+    Mixin to share a single Element builder across an SSDOM branch to save memory,
+    while allowing detached nodes to independently manage their own state.
+    """
+
+    def __init__(self, use_list: bool = False, use_deque: bool = False, **data):
+        self._el_instance = None
+        self.use_list = use_list
+        self.use_deque = use_deque
+        self.element_data = data
+
+        self._share_element = True  # Flag to control whether to share the Element instance with children
+    @property
+    def EL(self):
+        """
+        LAZY PROPAGATION:
+        1. If I already have an Element, return it.
+        2. If I have a parent, climb up and grab the parent's Element!
+        3. If I have no parent, I am the Root. I will spawn the Element.
+        """
+        if self._el_instance is not None  and self._share_element:
+            return self._el_instance
+
+        # 🚀 Climb the tree! If we have a parent, steal their EL builder.
+        if hasattr(self, "parent") and self.parent is not None and self._share_element:
+            if hasattr(self.parent, 'EL'):
+                # This recursively climbs all the way to the Root node!
+                self._el_instance = self.parent.EL 
+
+                # Inherit the high-performance flags from the root
+                self.use_list = getattr(self.parent, 'use_list', self.use_list)
+                self.use_deque = getattr(self.parent, 'use_deque', self.use_deque)
+
+                return self._el_instance
+        # We have no parent. We must be the Root Node! Spawn the singleton.
         from probo.components.elements import Element
-        if self._proxy_tag:
-            return Element(tag=self._proxy_tag,content=self._get_rendered_content(),**self.attributes).element
+        self._el_instance = Element(
+            is_list=self.use_list, 
+        )
+        if self.use_deque:
+            self._el_instance.use_deque()
+        self.toggle_share_element(share=True)  
+        return self._el_instance
+    def toggle_share_element(self, share=True):
+        """Utility to enable or disable sharing the Element instance with children.
 
-class ComponentNode(ElementNodeMixin):
+        When `share` is set to False, this node will not attempt to use the 
+        parent's Element instance and will instead create its own when accessed. 
+        This is useful for nodes that need to manage their own state independently 
+        of the parent branch, such as when streaming content or performing dynamic updates.
+        """
+        self._share_element = share
+        return self
+    def delegate_render_conditions(self, use_list: bool = False, use_deque: bool = False):
+        """
+        Broadcasting method: Sets the engine flags for this node and 
+        recursively pushes them down to every child in the tree.
+        """
+        # 1. Update this node's flags
+        # self.toggle_share_element(share=True)
+        if hasattr(self, 'use_list'):
+            self.use_list = use_list
+        if hasattr(self, 'use_deque'):
+            self.use_deque = use_deque
+
+        if hasattr(self, '_el_instance'):
+            self._el_instance = None 
+        for child in getattr(self, 'node_children', []):
+            if hasattr(child, 'delegate_render_conditions'):
+                child.delegate_render_conditions(use_list=use_list, use_deque=use_deque)
+
+        return self # Allow chaining: el.delegate(...).render()
+
+    def el_is_attached(self) -> bool:
+        """Utility to check if the node is currently bound to a parent Element."""
+        return self._el_instance is not None
+
+    def bind_element(self, parent_element) -> None:
+        """
+        Rule 3: Injects the parent's Element builder into this child.
+        This prevents the child from creating a new object in memory.
+        """
+        self._el_instance = parent_element
+
+        # Inherit the parent's high-performance flags automatically
+        self.use_list = parent_element.is_list
+        self.use_deque = getattr(parent_element, "_use_deque", False)
+
+    def unbind(self) -> None:
+        """
+        Safely detaches the node from the branch. The next time .EL is called,
+        it will generate its own independent builder, keeping its data intact.
+        """
+        self._el_instance = None
+
+class ComponentNode(ElementNodeMixin,):
     """
     A Mixin for ProboUI Components to enable node tree capabilities.
     Handles parent-child relationships, depth tracking, and child indexing.
     """
-    __slots__ = ('_parent', '_node_depth', '_children_count','parent','node_children', '_ElementNodeMixin__void_node')
+
+    __slots__ = (
+        "_parent",
+        "_node_depth",
+        "_children_count",
+        "parent",
+        "node_children",
+        "_ElementNodeMixin__void_node",
+    )
 
     def __init__(self):
-        self._parent: Optional['ComponentNode'] = None
+        self._parent: Optional["ComponentNode"] = None
         self._node_depth: int = 0
         self._children_count: int = 0
 
         ElementNodeMixin.__init__(self)
+
     @property
-    def get_parent(self) -> Optional['ComponentNode']:
+    def get_parent(self) -> Optional["ComponentNode"]:
         return self._parent
 
     @property
@@ -287,12 +431,13 @@ class ComponentNode(ElementNodeMixin):
     def children_count(self) -> int:
         """Returns the current number of registered child nodes."""
         return self._children_count
+
     @property
     def node_children_count(self) -> int:
         """Returns the current number of registered child nodes."""
-        return  len(self.node_children)
+        return len(self.node_children)
 
-    def _set_parent(self, parent_node: 'ComponentNode'):
+    def _set_parent(self, parent_node: "ComponentNode"):
         """Internal method to link the node to the tree."""
         if parent_node and parent_node != self:
             self._parent = parent_node
@@ -304,14 +449,14 @@ class ComponentNode(ElementNodeMixin):
         """Internal counter update."""
         self._children_count += 1
 
-    def get_root(self) -> 'ComponentNode':
+    def get_root(self) -> "ComponentNode":
         """Traverses up the tree to find the top-level component."""
         curr = self
         while curr._parent:
             curr = curr._parent
         return curr
 
-    def is_descendant_of(self, other:Self) -> bool:
+    def is_descendant_of(self, other: Self) -> bool:
         """Efficiently checks hierarchy using depth."""
         if self.depth <= other.depth:
             return False
@@ -323,6 +468,93 @@ class ComponentNode(ElementNodeMixin):
                 break
             curr = curr._parent
         return False
-    def component_to_string(self)->str:
+
+    def component_to_string(self) -> str:
         """Utility to convert the component and its subtree to a string representation."""
-        return ProboSourceString(''.join([ child.render() if hasattr(child,'render') else str(child) for child in self.node_children]))
+        return ProboSourceString(
+            "".join(
+                [
+                    child.render() if hasattr(child, "render") else str(child)
+                    for child in self.node_children
+                ]
+            )
+        )
+
+
+from probo.components.base import BaseHTMLElement
+
+class ProxyElement(BaseHTMLElement, ElementNodeMixin, ElementMutatorMixin):
+    __slots__ = (
+        "_proxy_tag",
+        "wrap_result", "_logic_obj",
+        "render_callable",
+        "stream_callable",
+    )
+    def __init__(
+        self, *content: tuple[Optional[str]], tag='div',wrap_result: bool = False, **attrs
+    ):
+        super().__init__(*content,**attrs)
+        ElementNodeMixin.__init__(self)
+        ElementMutatorMixin.__init__(self,tag)
+        self.wrap_result = wrap_result
+        self._proxy_tag = tag
+        self._logic_obj=None
+        self.render_callable:Callable=None
+        self.stream_callable:Callable=None
+        self._set_node_children(content)
+
+    def load_logic(self,logic_obj):
+        self._logic_obj=logic_obj
+    def load_render_logic(self,render_logic:Callable):
+        self.render_callable=render_logic
+    def load_stream_logic(self,render_logic:Callable):
+        self.stream_callable=render_logic
+    def render(self,obj_as_arg=True):
+        from probo.components.elements import Element
+
+        if self._logic_obj and self.render_callable and obj_as_arg:
+            return ProboSourceString(self.render_callable(self._logic_obj)) if not self.wrap_result else Element(tag=self._proxy_tag,content= ProboSourceString(self.render_callable(self._logic_obj)),**self.attributes).element  
+        if not self._logic_obj and self.render_callable:
+            return ProboSourceString(self.render_callable()) if not self.wrap_result else Element(tag=self._proxy_tag,content= ProboSourceString(self.render_callable()),**self.attributes).element  
+        if self._logic_obj and hasattr(self._logic_obj,'render'):
+            return ProboSourceString(self._logic_obj.render()) if not self.wrap_result else Element(tag=self._proxy_tag,content= ProboSourceString(self._logic_obj.render()),**self.attributes).element  
+        if self._proxy_tag and self.wrap_result:
+            content = "".join(self._get_rendered_content())
+            return Element(tag=self._proxy_tag,content=ProboSourceString(content),**self.attributes).element
+        return ProboSourceString()
+
+    def stream(self,obj_as_arg=True,batch=50):
+        from probo.components.elements import Element
+        EL = Element(is_list=True,tag=self._proxy_tag,**self.attributes)
+
+        if self.wrap_result:
+            yield EL.element[0]
+        if self._logic_obj and self.stream_callable and obj_as_arg:
+            yield from self.stream_callable(self._logic_obj)
+            if self.wrap_result and len(EL.element)!=1:
+                yield EL.element[-1]
+            return
+        if not self._logic_obj and self.stream_callable:
+            yield from  self.stream_callable()
+            if self.wrap_result and len(EL.element)!=1:
+                yield EL.element[-1]
+            return
+        if self._logic_obj and hasattr(self._logic_obj,'stream'):
+            yield from self._logic_obj.stream(batch)
+            if self.wrap_result and len(EL.element)!=1:
+                yield EL.element[-1]
+            return
+        else:
+            stream_content = self._get_stream_content()
+
+            method = getattr(EL,self._proxy_tag,None)
+            if callable(method):
+                method()
+            elemnt_info = EL.element
+            stream_manager = StreamManager(
+                elemnt_info[0],
+                EL.reset_generator_content().stream(batch) if len(elemnt_info) == 1 else EL.set_generator_content(stream_content).stream(batch),
+                None if len(elemnt_info) == 1 else elemnt_info[-1],
+                batch
+            )
+            return stream_manager

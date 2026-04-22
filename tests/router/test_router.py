@@ -39,7 +39,8 @@ def test_404_handling(client):
     """Test that non-existent routes return 404."""
     res = client.get('/non-existent', status=404)
     assert res.status_code == 404
-    assert "404 Not Found" in res.text
+    assert "404 - Page Not Found" in res.text
+    assert "The path (/non-existent) does not exist" in res.text
 
 def test_tcm_fallback(client):
     """

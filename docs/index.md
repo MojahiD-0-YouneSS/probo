@@ -1,4 +1,6 @@
-# 🐘 Probo UI : Python Rendered Objects for Backend-Oriented User Interfaces.
+
+
+# <img src="./assets/images/mastodon_ui.ico" align="center" alt="Probo UI Logo" width="200" height="200"/> Probo UI : Python Rendered Objects for Backend-Oriented User Interfaces.
 ![PyPI](https://img.shields.io/pypi/v/probo-ui)
 ![Python](https://img.shields.io/pypi/pyversions/probo-ui)
 ![License](https://img.shields.io/github/license/MojahiD-0-YouneSS/probo)
@@ -7,224 +9,175 @@
 [![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
 ![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
 ![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
-![Tests](https://img.shields.io/badge/Tests-811%20Passed-brightgreen?style=flat-square&logo=github)
+![Tests](https://img.shields.io/badge/Tests-1210%20Passed-brightgreen?style=flat-square&logo=github)
 [![APIs](https://img.shields.io/badge/APIs-550%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
 
-Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
+Python Rendered Objects for Backend-Oriented User Interfaces.
 
-## 📣 Version 1.3.3 is Live!
+Probo UI is a Python-Native, server-side Template Rendering Framework and micro web-framework. It allows you to write Type-Safe template components, structure HTML, and apply CSS styling using pure Python.
 
-Probo UI has officially reached stable v1.3 status. It is a backend-first framework.
+By transforming Python objects into highly performant HTML/CSS (with native HTMX support), Probo creates a seamless bridge between your backend logic and frontend interface. No context switching. No template spaghetti.
 
-## u can chose how youre UI can be:
+# 📣 Version 1.4.0 Architecture is Live!"
+Probo UI has officially reached its stable, highly-optimized release. It is ready to act as the backend-first UI framework for your next massive application.
 
-- **Note**: all reserved python keywords are notated with capital letters e.g: id -> Id, class -> Class, map -> Map. in rendering phase the apropriate notaion is applied.
+Why Probo?
 
--   **string based**
+#### 1. 🐍 Use your Python skills: Build dynamic UI templates without leaving Python.
 
-```python
-from probo import (
-    div, 
-    span,
-)
+#### 2. 📖 Explicit & Readable: Create highly reusable and composable layouts.
 
-greeting_partial = div(span("Hello, Probo",Class='badge'))
-```
-- **object tree based**
-        
+#### 3. 🛠️ Easy Refactoring: Because your UI is just Python objects, refactoring is infinitely easier than dealing with raw HTML strings.
 
-```python
-from probo import (
-    DIV,
-    SPAN,
-    P,
-)
+#### 4. ✅ IDE-Friendly & Type-Safe: Catch UI errors at compile-time, not run-time.
 
-greeting_partial = DIV(SPAN("Hello, Probo",Class='badge'))
-greeting_partial.add(P('this is a paragraph'))
-```
+# ⚡ Purpose & Philosophy
 
-## Why Probo?
+Traditional backend development (like Django or FastAPI) often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, typos in templates cause hidden runtime errors, and performance suffers due to massive string concatenations.
 
-- use your python skill in making dynamic UI templates.
-- Explicit, readable and reusable layout
-- Easier refactoring than HTML templates (it's python)
-- IDE-friendly & type-safe
+## Probo UI solves this by bringing the Frontend directly into Python:
 
-*For the deeper reasoning behind these choices, see Purpose & Philosophy ↓*
+#### 1.  🧠 Type-Safe UI: Write HTML in Python. If your code compiles, your HTML is valid.
 
-## ⚡ Purpose & Philosophy
+#### 2. 🎨 Just-In-Time (JIT) CSS: Styles live with components. Probo UI scans your active components and generates minified CSS bundles on the fly. No unused styles.
 
-Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.
+#### 3.🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
 
-Probo UI solves this by bringing the Frontend into Python:
+#### 4. 🔌 Ecosystem Native: Deep integrations with Django Forms, ASGI/WSGI engines, and Request Transformers.
 
-🧠 Type-Safe UI: Write HTML in Python. If your code compiles, your HTML is valid.
+# 🧬 Choose Your Chimera (Flexible Paradigms)
 
-🎨 Just-In-Time (JIT) CSS: Styles live with components. Probo UI scans your active components and generates a minified CSS bundle on the fly. No unused styles.
+Probo UI supports multiple architectural paradigms for building UIs. You can strictly follow one, or mix them together to create a flexible "Chimera" architecture tailored to your specific needs.
 
-🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
+### Reserved Python Keywords !!
+All reserved Python keywords are mapped to capitalized notations (e.g., id -> Id, class -> Class, map -> Map). During the render phase, the appropriate lowercase HTML attributes are automatically applied!
 
-🔌 Django Native: Deep integration with Django Forms and Requests via the RDT (Request Data Transformer).
+Supported Paradigms (Ranked by speed: fastest to most feature-rich):
 
-## Some ProboUI Architecture & Concepts
+- Light Functional (l_div, l_span): Blistering speed, minimal memory overhead.
 
-- **Push & Clear**: When creating HTML elements via the ```Element``` object, the final output is pushed to the ```element``` attribute. The content and attributes used in that specific session are then cleared to maintain a clean state. To allow for cumulative processing, arguments can be passed to the class to "stash" previous results, serving as the content for the subsequent execution chain.
+- Pure Functional (div, span): Fast, function-based HTML tags.
 
-- **SSDOM (Server-Side DOM)**: Unlike traditional string-based templates, ProboUI treats HTML as a live object tree in Python. This allows for direct manipulation of the structure, attributes, and children of a component after its definition but before it is finalized into a string.
+- Light OOP (Ldiv, Lspan): Object-oriented structures with a lightweight footprint.
 
-- **State Management**: Enforces strict rendering constraints on components and elements via ```ComponentState``` and ```ElementState```. To render an element, a props dictionary must be passed and validated against the expected schema; the rendering only proceeds if the state is valid.
+- Pure OOP / Heavy (DIV, SPAN): Full feature set including state management, CSS binding, and deep tree traversal.
 
-- **CSS Sharing**: Performance optimization where components can share the same CSS objects. This prevents the definition of redundant style objects and reduces memory overhead during large-scale renders.
+📦 Installation
+```bash
 
-- **Shared Execution**: An internal efficiency pattern where every HTML tag is generated by the same unified logic under the hood, ensuring zero logic duplication and a consistent output format across the entire framework.
-
-- **Head Registry**: Instead of manually managing meta, link, and script tags, ProboUI uses a centralized registry. Developers use dedicated methods to register head elements, which the engine then constructs and optimizes automatically.
-
-- **Template Switching**: The ```Template``` engine allows you to construct a page and then dynamically modify or rebase its structure based on an entirely different template hierarchy, providing extreme flexibility in multi-layout applications.
-
-- **Base Template**: Provides a standardized, overrideable page structure that facilitates rapid development by allowing developers to inherit and manipulate a global foundation without starting from scratch.
-
-- **Attribute Managers**: Utilizes the ```ElementAttributeManipulator``` to manage an element's attributes. This creates a clean separation of concerns between the element's core logic and its HTML attribute state.
-
-- **SDH (Static/Dynamic Hierarchy)**: Employs ```StaticData``` and ```DynamicData``` classes to resolve content within ```ElementState```. The hierarchy prioritizes data in the order of Dynamic > Static > Content, which is used when binding these values to specific attribute values.
-
-- **URL Component Mapping**: Implemented via the ```TemplateComponentMap``` (TCM), this concept maps components to specific URLs. It allows for effortless discovery and access via URL names or slugified versions, bypassing manual route registration.
-
-- **Django Syntax**: Provides the ability to generate ProboUI output formatted as standard Django template syntax, allowing ProboUI components to be seamlessly embedded into existing .html templates within a Django environment.
-
-- **HTMX Integration**: Native support for creating HTMX-based elements, enabling high-speed, dynamic UX updates (partial page refreshes) without writing custom JavaScript.
-
-- **Routing Engine**: A built-in, Bottle-based server designed for rapid prototyping and testing of Python-based static web pages before production deployment.
-
-- **Configs & Shortcuts**: Utilizes specialized data classes to group configuration info for each shortcut execution, streamlining the API and reducing repetitive boilerplate code.
-
-- **Component Styling**: By linking CSS selectors directly to components and verifying their existence in the template, ProboUI prevents the delivery of "dead CSS" while still fully supporting standard CSS cascading.
-
-- **Bootstrap 5 Support**: Native integration for BS5 design tokens and components, allowing developers to implement professional layouts using familiar utility classes and components with zero extra configuration.
-
-- **Probo-CLI**: A command-line interface used to scaffold custom ProboUI packages as static web apps. It also enables "Django Mutation," automatically injecting the necessary Probo directories (components/, pages/, probo_tcm.py) into existing Django projects.
-
-- **proxy element**: The ```ProxyElement``` provides a mechanism to embed external logic or third-party objects directly into the SSDOM. It facilitates the integration of arbitrary objects by accepting the object and an optional render callable, which is utilized if the object does not possess a native ```render``` method.
-
-- **Style Manager**: The ```StyleManager``` helps adding inline styling to HTML onbjects like in js style with remove_style/add_style methods.
-
-# Performance diagnostics
-
-The following table demonstrates the **Linear Scaling ($O(n)$)** capability of the ProboUI engine. These benchmarks verify the efficiency of the "Unified Tree" architecture when handling massive data volumes.
-
-### Benchmarking Environment
-* **Environment:** GitHub Codespaces (Standard Tier)
-* **Operations:** Each test includes full Tree Build, a `find` operation, a `add` (modification), and a full `render`.
-
-| Elements | Total String Length | Build Phase | Manipulation | Render Phase | Total Time |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **100** | 3,989 chars | 0.0003s | 0.0001s | 0.0009s | **0.0018s** |
-| **1,000** | 41,789 chars | 0.0076s | 0.0001s | 0.0087s | **0.0168s** |
-| **10,000** | 437,789 chars | 0.0305s | 0.0001s | 0.0894s | **0.1204s** |
-| **100,000** | 4,577,789 chars | 0.3335s | 0.001s | 0.8622s | **1.1963s** |
-| **250,000** | 11,777,789 chars | 1.0517s | 0.0001s | 2.0606s | **3.1129s** |
-| **500,000** | 23,777,789 chars | 1.9719s | 0.001s | 4.1436s | **6.1160s** |
-| **750,000** | 35,777,789 chars | 3.8622s | 0.0001s | 6.1664s | **10.0291s** |
-| **1,000,000** | 47.777.789 chars | 5.4940s | 0.0001s | 8.4081s | **13.9026s** |
-
-### Observations
-
-* **Constant-Time Manipulation:** The "modification" phase (finding and adding nodes) remains consistently under **0.001s** even with 1 million nodes in memory.
-* **Memory Threshold:** The framework engine successfully generated roughly a **48 MB** HTML string. Scaling beyond 1.5 million elements typically hits the physical RAM limits of the containerized environment.
-* **Linearity:** ProboUI scales linearly. Doubling the element count consistently doubles the time, with no exponential "cliffs," making it safe for enterprise-scale documents.
-
-# 📦 Installation
-
-```bash 
-        pip install probo-ui
+pip install probo-ui
 ```
 
-# 🚀 Quick Example
+🚀 Quick Examples
 
-Here is how you implement a reusable component in probo-ui:
+## Basic Component
+
+Here is how you implement a fast, reusable component using a mix of OOP and Functional Probo components.
 
 ```python
-from probo import (
-    li,div,h1,ul,strong,
-)
+from probo import li, div, h1, ul, strong, DIV
+
 def user_card(username):
-
     user_id = f'User_789{username}1323'
-
-    user_info = {'practical-info':['python','javascript','docker','django']}
-
+    user_info = {'practical-info': ['python', 'javascript', 'docker', 'django']}
+    
+    # Generate list items functionally
     li_el = [li(info) for info in user_info['practical-info']]
 
-    card = div(
-        h1(username,strong(user_id)),
-        ul(*li_el)
+    # Compose the final card
+    card = DIV(
+        h1(username, strong(user_id)),
+        ul(*li_el),
         Class='card',
         style='color:red;'
     )
-
     return card
 
+html = user_card("Admin")
+# style it
+html.style_manager.margin = "4px"
+html.style_manager.padding = "5px"
 # Render it
-html= user_card("Admin")
-print(html)
+html_string = httml.render()
+
 ```
-### Output: 
+
+**Output:**
 ```html 
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
+<div class='card' style='color:red; margin:4px; padding:5px;'>
+    <h1>Admin<strong>User_789Admin1323</strong></h1>
+    <ul>
+        <li>python</li>
+        <li>javascript</li>
+        <li>docker</li>
+        <li>django</li>
+    </ul>
+</div>
 ```
-in case of permission based
+
+
+##  State/Permission Component
+
+Probo includes a powerful state engine. Here, the `li` tags will only render if the username passed to the props is strictly `"admin"`.
+
 ```python
-from probo.components import (
-    Component,ComponentState, ElementState,StateProps,
-)
-from probo import (
-    div,h1,strong,ul,
-)
+from probo.components import Component, ComponentState, ElementState, StateProps
+from probo import div, h1, strong, ul
 
 def user_card(username):
-
-    props = StateProps(required=True,prop_equal_to={'username':'admin'})
+    # 1. Define Props (Must be 'admin' to pass)
+    props = StateProps(required=True, prop_equals={'username': 'admin'})
     
     user_id = f'User_789{username}1323'
+    user_info = {'practical-info': ['python', 'javascript', 'docker', 'django']}
     
-    user_info = {'practical-info':['python','javascript','docker','django']}
-    
-    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,props=props,)
-    
-    user_comp_state = ComponentState(
-        d_data=user_info,
-        li_el,
+    # 2. Define Stateful Element
+    li_el = ElementState(
+        'li', 
+        d_state='practical-info',
+        i_state=True, 
+        hide_dynamic=True,
+        props=props,
     )
+    
+    # 3. Create Component State
+    user_comp_state = ComponentState(d_data=user_info, li_el)
 
+    # 4. Compose the Smart Component
     card = Component(
         name="UserCard",
         template=div(
-            h1(username,strong(user_id)),
-            ul(li_el.placeholder)},
-            Class='card'),
-        # Inject Data
+            h1(username, strong(user_id)),
+            ul(li_el.placeholder),
+            Class='card'
+        ),
         state=user_comp_state,
-        props={'username':username}
+        props={'username': username}  # Inject Data here!
     )
-
     return card
 
-# Render it
-html= user_card("Admin").render()
-
-html2= user_card("admin").render()
+# Render outputs
+html_denied = user_card("Guest").render()
+html_allowed = user_card("admin").render()
 ```
 
-### Output: 
-- print(html)
+**Output (Guest):**
 ```html
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul></ul></div>
+<div class='card'><h1>Guest<strong>User_789Guest1323</strong></h1><ul></ul></div>
 ```
-- print(html2)
+
+**Output (Admin):**
 ```html
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
+<div class='card'><h1>admin<strong>User_789admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
 ```
+
+
+💬 Community & Support
+
+Ready to start building?
+
 [ 🚀 Get Started → ](user_guide.md)
 
-💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.
+💬 Community & Support Need help? Have a question that isn't a bug? Join our [Discord](https://discord.gg/jnZRbVasgd) Server to chat with other probo-ui developers.
+
+Need help? Have a question that isn't a bug? Join our Discord Server to chat with other Probo UI developers and share your creations!

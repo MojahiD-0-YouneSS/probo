@@ -1,14 +1,28 @@
-from typing import Any, Union, List, Self, Dict, Set
+from typing import Any, Dict, Set, Generator
 import html
+from collections import deque
+import inspect
 
 # --- HIGH-SPEED CACHE ---
 _html_escape = html.escape
 MARKER = "\u200b"
 
+
 class ProboSourceString(str):
-    __slots__=()
+    __slots__ = ()
+
     def __html__(self):
         return self
+
+    def __add__(self, other):
+        # Triggers for: ProboSourceString + string (This also handles +=)
+        return ProboSourceString(super().__add__(other))
+
+    def __radd__(self, other):
+        # Triggers for: string + ProboSourceString
+        # (Important if a standard string is on the left side of the + sign)
+        return ProboSourceString(other + str(self))
+
 
 def markup_escape(value: Any) -> str:
     """
@@ -105,20 +119,6 @@ def render_attributes(tag_name:str, attrs:dict[str,Any]) -> str:
     # Get defaults for this specific tag
     defaults = HTML_DEFAULTS.get(tag_name, {})
 
-    # parts = [
-        
-    #     # 1. Skip if value is strictly False or None
-    #     key.replace("_", "-")
-    #     if value is True
-    #     else
-    #     f'{key.replace("_", "-")}="{" ".join(str(v) for v in value)}"'
-    #     if isinstance(value, list)
-    #     else ''
-    #     if value is False or value is None or key in defaults and str(value).lower() == defaults[key]
-    #     else''
-    #     for key, value in attrs.items()
-
-    # ]
     parts = [
         (
             k
@@ -157,3 +157,87 @@ class EnumLookUPMixin:
         }
     def __iter__(self):
         return self.keys_set
+
+
+class StreamManager:
+    """
+    A lightweight wrapper that carries a generator and its wrapping tags.
+    This prevents the Element class from collapsing generators into strings.
+    """
+
+    def __init__(
+        self, opening: str|None, content_gen: Generator, closing: str|None=None, chunk_size: int = 50
+    ):
+        self.opening = opening
+        self.content_gen = content_gen
+        self.closing = closing
+        self.chunk_size = chunk_size
+
+    def __iter__(self) -> Generator[str, None, None]:
+        """
+        The actual linking logic: Yield opening tag first, then stream
+        the internal content in chunks, then yield the closing tag.
+        """
+        # Yield opening tag before starting the content loop
+        if self.opening:
+            yield self.opening
+
+        buffer = []
+        for fragment in self.content_gen:
+            # Handle fragments (strings or nested list/deques)
+            if isinstance(fragment, (list, deque)):
+                buffer.append("".join(map(str, fragment)))
+            else:
+                buffer.append(str(fragment))
+
+            if len(buffer) >= self.chunk_size:
+                yield "".join(buffer)
+                buffer.clear()
+
+        if buffer:
+            yield "".join(buffer)
+
+        # Yield closing tag after the content loop is exhausted
+        if self.closing:
+            yield self.closing
+    
+    def tolist(self,) -> list:
+        return  list(self)
+    def tostring(self,) -> str:
+        return  "".join(list(self))
+
+def _resolve_stream(content_tuple, chunk_size=50,EL=None):
+    """
+    Helper to flatten nested generators and classes.
+    Ensures that if a user passes a generator, it is consumed lazily.
+    """
+    for item in content_tuple:
+        if inspect.isgenerator(item):
+            yield from item
+        elif hasattr(item, "stream"):
+            if hasattr(item, "light_tag") and item.light_tag and EL is not None:
+                yield from item.stream(batch=chunk_size, EL=EL)  # Bridge to classes
+            else:
+                 yield from item.stream(batch=chunk_size)  # Bridge to classes
+        else:
+            yield ProboSourceString(item)
+
+
+def data_escaper(data: Any) -> Any:
+    """
+    Recursively iterates through data structures (dicts, lists, tuples) 
+    and HTML-escapes any strings to prevent XSS.
+    Leaves other data types (int, bool, lists, dicts) intact so filters
+    like |length continue to work on the actual collections.
+    """
+    if isinstance(data, str):
+        return ProboSourceString(html.escape(data))
+    elif isinstance(data, dict):
+        return {k: data_escaper(v) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [data_escaper(v) for v in data]
+    elif isinstance(data, tuple):
+        return tuple(data_escaper(v) for v in data)
+    elif isinstance(data, set):
+        return {data_escaper(v) for v in data}
+    return data

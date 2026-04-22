@@ -1970,7 +1970,7 @@ class ElementAttributeValidator:
         el_attr_definitions = ElementAttribute.ELEMENT_ATTRIBUTE.value
         # Access the master dictionary
         definitions = AttributeValue.ATTRIBUTE_VALUE.value
-
+        
         for raw_key, value in self.raw_attrs.items():
             # 1. NORMALIZE KEY (class_ -> class, aria_hidden -> aria-hidden)
             key = self._normalized_key(raw_key)
@@ -1987,7 +1987,7 @@ class ElementAttributeValidator:
             if key.startswith(("data-", "aria-", "hx-", "on", "xml", "ng-", "v-")):
                 self.valid_attrs[key] = value
                 continue
-
+                        
             el_attr_check = el_attr_definitions.get(key, None)
             if (
                 (el_attr_check and self.element_tag )and (not self.element_tag in el_attr_check)

@@ -20,7 +20,7 @@ app = typer.Typer(
     help="PROBO: The declarative rendering engine for Django.", add_completion=False
 )
 console = Console()
-VERSION = "1.2.0"
+VERSION = "1.3.4"
 
 
 def load_tcm_registry(path: Path):
@@ -148,6 +148,12 @@ def init(name: str):
     project_dir.mkdir(parents=True)
 
     # 1. The Entry Point
+    (project_dir / "requirements.txt").write_text(
+        """
+        probo-ui>=1.3.4
+        """
+    )
+
     (project_dir / "main.py").write_text(
         f"""from probo.router import ProboRouter
 from pages.index import index_document
@@ -156,24 +162,24 @@ from probo.templates import welcome_template_tree
 
 router = ProboRouter(app_name="{name}")
 
+
+router.load_tcm()
+
+@router.page("/")
+def welcome_view():
+    return welcome_template_tree()
+
+@router.page("/startup/page")
+def home_view():
+    index_document.html_doc.find(lambda n:n.element_tag == "title").content.append("{name}")
+    return index_document
+
+@router.page("/greeting")
+def update_view():
+    return greeting_component('{name}!!')
+
 if __name__ == "__main__":
     print("Building static ''{name}'' site...")
-
-    router.load_tcm()
-
-    @router.page("/")
-    def welcome_view():
-        return welcome_template_tree()
-
-    @router.page("/startup/page")
-    def home_view():
-        index_document.html_doc.find(lambda n:n.element_tag == "title").content.append("{name}")
-        return index_document
-
-    @router.page("/greeting")
-    def update_view():
-        return greeting_component('{name}!!')
-
     router.run() 
 
 """,
@@ -663,6 +669,9 @@ def build_html(
         "probo_tcm.py", help="Path to the TCM registry file"
     ),
     output_dir: Path = typer.Option("dist", help="Directory to save HTML files"),
+    preview: bool = typer.Option(
+        False, "-p", "--preview", help="Open index in browser after build"
+    ),
 ):
     """
     The Static Site Generation (SSG) command. It iterates through every route defined in your TCM and renders the components into standalone HTML files.
@@ -702,9 +711,24 @@ def build_html(
     {html_output}
 </body>
 </html>"""
+            file_path = output_dir / f"{name}.html"
+            if preview:
+                # 4. Save to Temp File (The Logic from your 'build_logic')
+                import tempfile
+
+                fd, path = tempfile.mkstemp(suffix=".html", prefix=f"probo_{file_path.name}_")
+
+                with os.fdopen(fd, "w") as tmp:
+                    tmp.write(full_page)
+
+                # 5. Open Browser (The Logic from your 'brow_a_file')
+                file_url = f"file:///{path}"
+                console.print(
+                    f"[blue] <=> Opening preview for {file_path.name}...[/blue]...",
+                )
+                webbrowser.open_new_tab(file_url)
 
             # 3. Save
-            file_path = output_dir / f"{name}.html"
             file_path.write_text(full_page, encoding="utf-8")
             count += 1
             typer.echo(f" <=> Generated: {file_path}")
@@ -872,7 +896,7 @@ def version():
     """Show the current version."""
     # This replaces your 'show_version' method
     console.print(
-        f"[bold cyan]Mastodon UI (probo)[/bold cyan] version [yellow]{VERSION}[/yellow]"
+        f"[bold cyan]Probo UI[/bold cyan] version [yellow]{VERSION}[/yellow]"
     )
 
 
@@ -883,5 +907,103 @@ def echo(text: str):
     console.print(f"[italic blue]Echo:[/italic blue] {text}")
 
 
+@app.command("dev")
+def dev(
+    target: str = typer.Argument(..., help="Module:app (main:app) or file.py"),
+    port: int = typer.Option(8000, "--port", "-p", help="Development port"),
+    no_reload: bool = typer.Option(True, "--no-reload", "-nr", help="Enable live reloading"),
+    host: str = typer.Option("127.0.0.1", "--host", "-h"),
+):
+    """Run development server with Live Reloading."""
+    console.print(
+        f"[cyan]📡 Starting dev server for {target} on {host}:{port}...[/cyan]"
+    )
+    is_reload = False if no_reload == "--no-reload" or no_reload == "-nr" else True
+    from probo.router.single_file_prototyping import run_file_server
+
+    run_file_server(file=target, host=host, port=port, reload=is_reload)
+
+
+@app.command("run")
+def run_prod(
+    target: str = typer.Argument(..., help="Module:app (main:app) or (main::app)"),
+    port: int = typer.Option(8000, "--port", "-p", help="Development port"),
+    host: str = typer.Option(
+        "localhost",
+        "--host",
+    ),
+    reload: bool = typer.Option(False, "--reload", "-r", help="Enable live reloading"),
+    workers: int = typer.Option(
+        1,
+        "-w",
+        "--workers",
+    ),
+):
+    """Run development server with Live Reloading."""
+    console.print(
+        f"[cyan]📡 Starting dev server for {target} on {host}:{port}...[/cyan]"
+    )
+    is_reload = True if reload == "--reload" or reload == "-r" else False
+    from probo.router.single_file_prototyping import run_project_server
+
+    run_project_server(
+        target=target,
+        port=port,
+        host=host,
+        reload=is_reload,
+        is_uv="::" in target,
+        workers=workers,
+    )
+
+
+@app.command("build:route")
+def build_from_route(
+    target: str = typer.Argument(..., help="Python file containing the routes"),
+    out: str = typer.Option("dist", "--out", "-o", help="Output directory"),
+    look_for: str = typer.Option("routes", "-r", "--route-name", help="name of route object"),
+    preview: bool = typer.Option(
+        False, "--preview", help="Open index in browser after build"
+    ),
+):
+
+    """Export Probo UI components to static HTML files (SSG)."""
+
+    import sys
+    import importlib.util
+    import webbrowser
+    from pathlib import Path
+
+    console.print(
+        f"[bold yellow]📦 Building static site from {target}...[/bold yellow]"
+    )
+
+    path = Path(target).resolve()
+    out_dir = Path(out).resolve()
+    out_dir.mkdir(exist_ok=True)
+
+    # 1. Dynamically load routes
+    sys.path.insert(0, str(path.parent))
+    spec = importlib.util.spec_from_file_location(path.stem, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    routes = getattr(module, look_for, getattr(module, "url_patterns", []))
+
+    # 2. Render and Save
+    for r in routes:
+        file_name = "index.html" if r.path == "/" else f"{r.path.strip('/')}.html"
+        content = r.component()
+        html = content.render() if hasattr(content, "render") else str(content)
+
+        with open(out_dir / file_name, "w", encoding="utf-8") as f:
+            f.write(html)
+        console.print(f"  [green]✓[/green] Built: {r.path} -> {file_name}")
+
+    if preview:
+        webbrowser.open_new_tab(f"file:///{ (out_dir / 'index.html').as_posix() }")
+
+
 def main():
     app()
+if __name__ == "__main__":
+    main()

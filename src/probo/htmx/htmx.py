@@ -9,7 +9,6 @@ from probo.htmx.htmx_enum import (
     HxSyncStrategy,
 )
 from probo.utility import render_attributes
-from probo.components.tag_classes.block_tags import EL
 from probo.components.base import ElementAttributeManipulator
 
 HTMX_CDN_URL = "https://unpkg.com/htmx.org@1.9.10"
@@ -383,8 +382,9 @@ class HTMXElement(Ajax):
         if self.AJAX_HX_DICT:
             self.hx_attrs.update(self.AJAX_HX_DICT)
         if self.element_tag:
+            from probo.components.elements import Element
             return (
-                EL.set_attrs(**self.hx_attrs).set_content(self.content)
+                Element().set_attrs(**self.hx_attrs).set_content(self.content)
                 .custom_element(
                     self.element_tag,
                 )

@@ -5,6 +5,7 @@ from probo.context.context_logic import (
     StaticData,
     DynamicData,
 )
+from probo.context.context import ProboContextProvider
 from probo.context.django import (
     DjangoComponentTools,
     DjangoComponent,
@@ -18,4 +19,5 @@ __all__ = [
     "DynamicData",
     "DjangoComponent",
     "DjangoComponentTools",
+    "ProboContextProvider",
 ]

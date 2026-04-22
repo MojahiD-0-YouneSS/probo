@@ -1,18 +1,21 @@
-from probo.components import(
+from probo.components import (
     Element,
     BaseHTMLElement,
     ElementNodeMixin,
-
+    ElementMutatorMixin,
 )
 import pytest
 
-class CIRCLE(BaseHTMLElement, ElementNodeMixin):
+
+class CIRCLE(BaseHTMLElement, ElementNodeMixin, ElementMutatorMixin):
     def __init__(self, probo_pretty_error=False, probo_custom_attrs=False, **kwargs):
         self.flags = {
             "probo_pretty_error": probo_pretty_error,
             "probo_custom_attrs": probo_custom_attrs
         }
         super().__init__(**kwargs)
+        ElementNodeMixin.__init__(self)
+        ElementMutatorMixin.__init__(self)
 
     def render(self):
         return (
@@ -21,6 +24,15 @@ class CIRCLE(BaseHTMLElement, ElementNodeMixin):
             .circle()
             .element
         )
+    def stream(self,batch=50):
+        return (
+            Element(**self.flags)  # Pass flags here
+            .set_attrs(**self.attributes)
+            .circle()
+            .rest_generator_content()
+            .element
+        )
+
 
 def test_probo_flags_extraction():
     """

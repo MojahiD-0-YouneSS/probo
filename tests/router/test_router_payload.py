@@ -2,6 +2,7 @@ import pytest
 import json
 import hashlib
 from probo.router.payload import RouterPayload
+from probo.router.global_cache import global_cache
 from probo.context import TemplateComponentMap
 from probo.router.router import ProboRouter
 from probo import DIV, P
@@ -144,7 +145,7 @@ def test_router_status_on_no_change(router):
 def test_manual_cache_clear_triggers_resend(router):
     """13. Manually clearing the _state_cache should force the router to resend everything."""
     RouterPayload(x=1)
-    RouterPayload._state_cache.clear()
+    global_cache.clear()
     p = RouterPayload(x=1)
     assert "x" in p.diff
 

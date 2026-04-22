@@ -1,23 +1,31 @@
 import pytest
 from probo.components.base import BaseHTMLElement
-from probo.components.node import ElementNodeMixin
+from probo.components.node import ElementNodeMixin, ElementMutatorMixin
 from probo.utility import render_attributes
 
 # Mocking the required tags for testing
-class MockDIV(BaseHTMLElement, ElementNodeMixin):
+class MockDIV(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
+        ElementMutatorMixin.__init__(self)
     def render(self): return f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>"
+    def stream(self):
+        yield f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>"
 
-class MockSPAN(BaseHTMLElement, ElementNodeMixin):
+
+class MockSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-        
+        ElementMutatorMixin.__init__(self)
+
     def render(self): return f"<Mockspan>{self._get_rendered_content()}</Mockspan>"
+    def stream(self):
+        yield f"<Mockspan>{self._get_rendered_content()}</Mockspan>"
+
 
 def test_initialization_vs_manual_add():
     """Verify MockDIV(MockSPAN()) is equivalent to Mockdiv.add(Mockspan)."""
@@ -79,38 +87,49 @@ def test_find_works_on_tag_classes():
 
 # --- advanced Tests ---
 
-class IMG(BaseHTMLElement, ElementNodeMixin):
+class IMG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, **attrs):
         super().__init__(**attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
+        ElementMutatorMixin.__init__(self)
     def render(self):
         return f"<img {render_attributes('img',self.attributes)}/>"
+    def stream(self):
+        yield f"<img {render_attributes('img',self.attributes)}/>"
 
-class SVG(BaseHTMLElement, ElementNodeMixin):
+class SVG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
+        ElementMutatorMixin.__init__(self)
     def render(self):
         return f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>"
+    def stream(self):
+        yield f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>"
 
-class MockG(BaseHTMLElement, ElementNodeMixin):
+class MockG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
+        ElementMutatorMixin.__init__(self)
     def render(self):
         return f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>"
+    def stream(self):
+        yield f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>"
 
-class PATH(BaseHTMLElement, ElementNodeMixin):
+class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, **attrs):
         super().__init__(**attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        # SVG paths are often self-closing
         return f"<path {render_attributes('path', self.attributes)} />"
+    def stream(self):
+        yield f"<path {render_attributes('path', self.attributes)} />"
 
 def test_void_tag_initialization():
     """1. Ensure void tags like IMG initialize without children."""

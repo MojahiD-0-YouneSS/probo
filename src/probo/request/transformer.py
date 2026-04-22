@@ -26,24 +26,7 @@ class RequestDataTransformer:
         >>>         if rdt.are_valid():
         >>>             rdt.save_forms()
     """
-    __slots__ = (
-        'target_data',
-        'request',
-        'form_class',
-        'errors',
-        'cleaned_data',
-        'request_method',
-        'request_user',
-        'mono_form',
-        'form',
-        'user_data',
-        'request_files',
-        'post_data',
-        'get_data',
-        'session_data',
-        'id',
-        'validations',
-    )
+
     def __init__(
         self, request=None, form_class=None, request_files=False, mono_form=True
     ):
@@ -52,49 +35,64 @@ class RequestDataTransformer:
         self.form_class = form_class
         self.errors = {}
         self.cleaned_data = {}
-        self.request_method = request.method if hasattr(request, "method") else str()
-        self.request_user = request.user if hasattr(request, "user") else dict()
+
+        # BUGFIX: Move validations up so _initialize_multi_form_processing can use it
+        self.validations = {}
+
+        # Safe getattr fetching
+        self.request_method = getattr(request, "method", "") or ""
+        self.request_user = getattr(request, "user", dict()) or dict()
         self.mono_form = mono_form
 
         if mono_form:
             self.form = (
-                form_class(request.POST, request.FILES)
+                form_class(
+                    getattr(request, "POST", None), getattr(request, "FILES", None)
+                )
                 if form_class and request_files
-                else (form_class(request.POST) if form_class else None)
+                else (
+                    form_class(getattr(request, "POST", None)) if form_class else None
+                )
             )
         else:
             self.form = self._initialize_multi_form_processing()
 
-        self.user_data = (
-            self._prepare_user_data() if hasattr(request, "user") else dict()
-        )
+        self.user_data = self._prepare_user_data()
+
+        # BUGFIX: Ensure we explicitly check 'is not None' because hasattr returns True for POST=None
         self.request_files = (
-            self._process_post_files() if hasattr(request, "FILES") else dict()
+            self._process_post_files()
+            if getattr(request, "FILES", None) is not None
+            else dict()
         )
         self.post_data = (
-            self._process_post_data() if hasattr(request, "POST") else dict()
+            self._process_post_data()
+            if getattr(request, "POST", None) is not None
+            else dict()
         )
-        self.get_data = self._process_get_data() if hasattr(request, "GET") else dict()
+        self.get_data = (
+            self._process_get_data()
+            if getattr(request, "GET", None) is not None
+            else dict()
+        )
         self.session_data = (
-            self._get_all_session_data() if hasattr(request, "session") else dict()
+            self._get_all_session_data()
+            if getattr(request, "session", None) is not None
+            else dict()
         )
+
         self.id = self.session_data.get("session_key", None)
-        self.validations = {}
-        # Initialize the form if a form_class is provided
-        # Process target data fields as a dictionary of lists
 
     def _process_get_data(self) -> dict[str, Any]:
         get_data_dict = {}
         for field, field_data in self.request.GET.items():
             if isinstance(field_data, list):
                 if len(field_data) == 1:
-                    get_data_dict[field] = field_data[
-                        0
-                    ]  # Single value, store as string
+                    get_data_dict[field] = field_data[0]
                 else:
-                    get_data_dict[field] = field_data  # Multiple values, store as list
+                    get_data_dict[field] = field_data
             else:
-                get_data_dict[field] = field_data  # Single value, store as string
+                get_data_dict[field] = field_data
         return get_data_dict
 
     def _process_post_data(self) -> dict[str, Any]:
@@ -102,13 +100,11 @@ class RequestDataTransformer:
         for field, field_data in self.request.POST.items():
             if isinstance(field_data, list):
                 if len(field_data) == 1:
-                    post_data_dict[field] = field_data[
-                        0
-                    ]  # Single value, store as string
+                    post_data_dict[field] = field_data[0]
                 else:
-                    post_data_dict[field] = field_data  # Multiple values, store as list
+                    post_data_dict[field] = field_data
             else:
-                post_data_dict[field] = field_data  # Single value, store as string
+                post_data_dict[field] = field_data
         return post_data_dict
 
     def _process_post_files(self) -> dict[str, Any]:
@@ -116,13 +112,11 @@ class RequestDataTransformer:
         for field, field_data in self.request.FILES.items():
             if isinstance(field_data, list):
                 if len(field_data) == 1:
-                    post_data_dict[field] = field_data[
-                        0
-                    ]  # Single value, store as string
+                    post_data_dict[field] = field_data[0]
                 else:
-                    post_data_dict[field] = field_data  # Multiple values, store as list
+                    post_data_dict[field] = field_data
             else:
-                post_data_dict[field] = field_data  # Single value, store as string
+                post_data_dict[field] = field_data
         return post_data_dict
 
     def save_form(self, **kwargs) -> bool:
@@ -132,36 +126,18 @@ class RequestDataTransformer:
         return not self.errors
 
     def is_valid(self) -> bool:
-        """Validates the request form and ensures all target data fields are provided."""
-
-        # Validate the form if it was provided
         if self.form and not self.form.is_valid():
             self.errors.update(**{self.form_class.__name__: self.form.errors.values()})
 
-        # Check if each target data field has at least one value
-        """for field, values in self.post_data.items():
-            if not values:
-                self.errors.update(f'{field}':f"Please select at least one option for '{field}'.")
-        """
-        # Populate cleaned_data with form data if the form is valid
         if self.form and self.form.is_valid():
             self.cleaned_data.update(self.form.cleaned_data)
 
-        return not self.errors  # Returns True if there are no errors
+        return not self.errors
 
     def get_errors(self) -> dict[str, Any]:
-        """Returns a list of validation errors."""
         return self.errors
 
     def get_request_data(self, organized: bool = False) -> dict[str, Any]:
-        """
-        Returns cleaned form data and target fields.
-
-        Parameters:
-        - organized: If True, returns a dictionary with cleaned and target data organized in separate keys.
-
-        Returns: Dictionary of cleaned data and target fields.
-        """
         return (
             {
                 "cleaned_data": self.cleaned_data,
@@ -177,47 +153,45 @@ class RequestDataTransformer:
             }
         )
 
-    def _prepare_user_data(self) -> dict[str, Any] | None:
-        return self.request_user.__dict__ if self.request else None
+    def _prepare_user_data(self) -> dict[str, Any]:
+        # Safely handle user objects vs dictionaries
+        if hasattr(self.request_user, "__dict__"):
+            return self.request_user.__dict__
+        elif isinstance(self.request_user, dict):
+            return self.request_user
+        return dict()
 
     def _get_all_session_data(self) -> dict[str, Any]:
-        """Retrieve all session data as a dictionary."""
-        return dict(self.request.session)  # Convert session to a dictionary
+        return dict(self.request.session)
 
     def set_session_data(self, key: str, value: Any) -> dict[str, Any]:
-        """Sets a session variable."""
         self.request.session[key] = value
-        self.request.session.modified = True  # Mark session as modified
-        self.session_data = self._get_all_session_data()  # Update session_data
-        return {key:value}
-    
-    def get_session_data(self, key:str, default:str|None=None) -> Any:
-        """Retrieves a session variable, returning a default if not found."""
+        self.request.session.modified = True
+        self.session_data = self._get_all_session_data()
+        return {key: value}
+
+    def get_session_data(self, key: str, default: str | None = None) -> Any:
         return self.request.session.get(key, default)
 
     def update_session_data(self, key: str, update_func: callable) -> dict[str, Any]:
-        """Updates a session variable using a provided function."""
         if key in self.request.session:
             self.request.session[key] = update_func(self.request.session[key])
             self.request.session.modified = True
-            self.session_data = self._get_all_session_data()  # Update session_data
-        return {key:self.request.session.get(key)}
-   
-    def delete_session_data(self, key:str) -> None:
-        """Deletes a session variable if it exists."""
+            self.session_data = self._get_all_session_data()
+        return {key: self.request.session.get(key)}
+
+    def delete_session_data(self, key: str) -> None:
         if key in self.request.session:
             del self.request.session[key]
             self.request.session.modified = True
             self.session_data = self._get_all_session_data()
 
-    def extract_target_data(self, fields:list[str]|None=None, multi_value_fields:list[str]|None=None, is_json: bool=False) -> dict[str,Any]:
-        """
-        Extracts data from the request. Supports both form data (default) and JSON payloads.
-        :param fields: List of fields to retrieve. If None, retrieves all fields in the request.
-        :param multi_value_fields: List of fields that may contain multiple values (e.g., checkboxes).
-        :param is_json: If True, treats the request as containing JSON data.
-        :return: Dictionary with extracted data.
-        """
+    def extract_target_data(
+        self,
+        fields: list[str] | None = None,
+        multi_value_fields: list[str] | None = None,
+        is_json: bool = False,
+    ) -> dict[str, Any]:
         if is_json:
             self.target_data = (
                 self.request.json() if hasattr(self.request, "json") else {}
@@ -228,7 +202,6 @@ class RequestDataTransformer:
 
             for field in fields:
                 if field in multi_value_fields:
-                    # Get a list for fields that may contain multiple values
                     values = self.request.POST.getlist(field)
                     self.target_data[field] = values if len(values) > 1 else values[0]
                 else:
@@ -236,52 +209,31 @@ class RequestDataTransformer:
 
         return self.target_data
 
-    def clear_all_session_data(
-        self,
-    )-> bool:
-        """
-        Clears specific session data by key, or clears all session data if no key is provided.
-        """
+    def clear_all_session_data(self) -> bool:
         self.session_data.clear()
         return True
 
-    def get_field_value(
-        self,
-        field:str,
-        default:str|None=None,
-    ) -> Any:
-        """
-        Retrieves the value of a specific field from the request data.
-        :param field: Field name to retrieve
-        :param default: Default value if the field does not exist
-        """
+    def get_field_value(self, field: str, default: str | None = None) -> Any:
         return self.post_data.get(field) if field in self.post_data else default
 
-    def get_json_field_value(self, field:str, default:str|None=None) -> Any:
-        """
-        Retrieves a field's value from JSON data in the request.
-        """
+    def get_json_field_value(self, field: str, default: str | None = None) -> Any:
         if not hasattr(self.request, "json"):
             raise ValueError("Request does not contain JSON data.")
         json_data = self.request.json()
         return json_data.get(field, default)
 
-    def has_field(self, field:str) -> bool:
-        """
-        Checks if a field exists in the request data.
-        """
+    def has_field(self, field: str) -> bool:
         return field in self.post_data or (
             hasattr(self.request, "json") and field in self.request.json()
         )
 
-    def _initialize_multi_form_processing(self)-> dict[str, Any]:
-        """
-        Initializes data structures and validation status for each form class specified.
-        """
+    def _initialize_multi_form_processing(self) -> dict[str, Any]:
         form_instances = {}
         for form_class in self.form_class:
             prefix = form_class.__name__.lower()
-            form_instance = form_class(self.request.POST, prefix=prefix)
+            form_instance = form_class(
+                getattr(self.request, "POST", None), prefix=prefix
+            )
             form_instances[prefix] = form_instance
             if form_instance.is_valid():
                 self.cleaned_data[prefix] = form_instance.cleaned_data
@@ -294,20 +246,16 @@ class RequestDataTransformer:
         return form_instances
 
     def are_valid(self) -> bool:
-        """
-        Checks if all forms are valid and updates error tracking.
-        """
         all_valid = True
         for prefix, instance in self.validations.items():
             if not instance:
                 all_valid = False
         return all_valid
 
-    def save_forms(
-        self,
-    ) -> bool:
+    def save_forms(self) -> bool:
         if self.are_valid():
-            for form in self.form:
+            # BUGFIX: self.form is a dictionary. Must iterate over .values()!
+            for form in self.form.values():
                 form.save(commit=False)
         return self.are_valid()
 
@@ -320,37 +268,30 @@ class RequestDataTransformer:
             return ""
 
     def extract_props(self) -> RequestProps:
-        """
-        Separates data into Global Context (User/Session) and
-        Local Context (Form/Data) for the TCM.
-        """
-
-        # 1. GLOBAL DATA (Context for all components)
-        # This data is needed by Layouts, Navbars, User Menus, etc.
         global_ctx = {
             "user": self.request_user,
-            "is_authenticated": self.request.user.is_authenticated
-            if self.request
-            else False,
+            "is_authenticated": (
+                self.request.user.is_authenticated
+                if self.request and hasattr(self.request, "user")
+                else False
+            ),
             "session": self.session_data,
-            "csrf_token": self.get_csrf_token(),  # Crucial for FormElement
-            "path": self.request.path,
+            "csrf_token": self.get_csrf_token(),
+            "path": getattr(self.request, "path", ""),
             "request_method": self.request_method,
         }
 
-        # 2. LOCAL DATA (Specific to the component/form being rendered)
-        # This data is needed by the specific FormElement or Content Component
         local_ctx = {
-            "form": self.form,  # The specific form instance
-            "errors": self.errors,  # Validation errors
+            "form": self.form,
+            "errors": self.errors,
             "cleaned_data": self.cleaned_data,
             "raw_post_data": self.post_data,
             "raw_get_data": self.get_data,
             "is_valid": self.is_valid() if self.mono_form else self.are_valid(),
         }
 
-        # Return the structured object
         return RequestProps(global_context=global_ctx, local_context=local_ctx)
+
 
 class FormHandler:
     """Orchestrates form validation and persistence logic within a view.
@@ -367,57 +308,30 @@ class FormHandler:
             to track form success or failure.
     """
     __slots__ = (
-        'request_data',
-        'logger_instance',
-        'logger_instance_message',
+        "request_data",
+        "logger_instance",
+        "logger_instance_message",
     )
+
     def __init__(self, request_data: RequestDataTransformer):
-        """
-        Initializes FormHandler with request data and operation type.
-        """
         self.request_data = request_data
         self.logger_instance = None
         self.logger_instance_message = None
-        super().__init__()
 
-    def form_handling(
-        self,
-    ) -> bool:
-        """Executes the appropriate form saving strategy based on data shape.
-
-        Returns:
-            bool: True if all involved forms were valid and saved; False otherwise.
-        """
+    def form_handling(self) -> bool:
         if self.request_data.mono_form:
-            operation_status = self.mono_form_true_option()
+            return self.mono_form_true_option()
         else:
-            operation_status = self.mono_form_false_option()
-        return operation_status
+            return self.mono_form_false_option()
 
-    def mono_form_true_option(
-        self,
-    ) -> bool:
-        """Processes a single form instance.
-
-        Returns:
-            bool: True if the single form was valid and saved.
-        """
+    def mono_form_true_option(self) -> bool:
         if self.request_data.is_valid():
             self.request_data.save_form()
             return True
-        else:
-            return False
+        return False
 
-    def mono_form_false_option(
-        self,
-    ) -> bool:
-        """Processes multiple form instances (e.g., Formsets).
-
-        Returns:
-            bool: True if all forms in the collection were valid and saved.
-        """
+    def mono_form_false_option(self) -> bool:
         if self.request_data.are_valid():
             self.request_data.save_forms()
             return True
-        else:
-            return False
+        return False

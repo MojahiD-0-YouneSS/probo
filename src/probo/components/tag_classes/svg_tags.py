@@ -1,9 +1,9 @@
-from probo.components.elements import Element
 from probo.components.base import BaseHTMLElement
-from probo.components.node import ElementNodeMixin
-from probo.components.tag_classes.block_tags import EL
-from typing import Any
-class G(BaseHTMLElement, ElementNodeMixin):
+from probo.components.node import ElementNodeMixin,ElementMutatorMixin
+from typing import Any, Generator
+from probo.utility import StreamManager
+
+class G(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an G HTML <g> element."""
 
     __slots__ = ()
@@ -11,21 +11,46 @@ class G(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:g = Element(
         ).set_attrs(**self.attributes).set_content(self.content).g().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .g()
             .element
         )
 
-class DEFS(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .g() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .g()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+class DEFS(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an DEFS HTML <defs> element."""
 
     __slots__ = ()
@@ -33,21 +58,47 @@ class DEFS(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:defs = Element(
         ).set_attrs(**self.attributes).set_content(self.content).defs().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .defs()
             .element
         )
 
-class TEXT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .defs() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .defs()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class TEXT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an TEXT HTML <text> element."""
 
     __slots__ = ()
@@ -55,21 +106,47 @@ class TEXT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:text = Element(
         ).set_attrs(**self.attributes).set_content(self.content).text().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .text()
             .element
         )
 
-class TSPAN(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .text() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .text()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class TSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an TSPAN HTML <tspan> element."""
 
     __slots__ = ()
@@ -77,21 +154,47 @@ class TSPAN(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:tspan = Element(
         ).set_attrs(**self.attributes).set_content(self.content).tspan().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .tspan()
             .element
         )
 
-class SVG(BaseHTMLElement,ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .tspan() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .tspan()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class SVG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SVG HTML <svg> element."""
 
     __slots__ = ()
@@ -99,21 +202,47 @@ class SVG(BaseHTMLElement,ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:svg = Element(
         ).set_attrs(**self.attributes).set_content(self.content).svg().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .svg()
             .element
         )
-    
-class SYMBOL(BaseHTMLElement, ElementNodeMixin):
+
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .svg() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .svg()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class SYMBOL(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an SYMBOL HTML <symbol> element."""
 
     __slots__ = ()
@@ -121,21 +250,47 @@ class SYMBOL(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:symbol = Element(
         ).set_attrs(**self.attributes).set_content(self.content).symbol().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .symbol()
             .element
         )
 
-class MARKER(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .symbol() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .symbol()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class MARKER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an MARKER HTML <marker> element."""
 
     __slots__ = ()
@@ -143,21 +298,47 @@ class MARKER(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:marker = Element(
         ).set_attrs(**self.attributes).set_content(self.content).marker().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .marker()
             .element
         )
 
-class PATTERN(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .marker() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .marker()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class PATTERN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an PATTERN HTML <pattern> element."""
 
     __slots__ = ()
@@ -165,21 +346,47 @@ class PATTERN(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:pattern = Element(
         ).set_attrs(**self.attributes).set_content(self.content).pattern().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .pattern()
             .element
         )
 
-class MASK(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .pattern() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .pattern()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class MASK(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an MASK HTML <mask> element."""
 
     __slots__ = ()
@@ -187,21 +394,47 @@ class MASK(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:mask = Element(
         ).set_attrs(**self.attributes).set_content(self.content).mask().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .mask()
             .element
         )
 
-class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .mask() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .mask()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class CLIPPATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an CLIPPATH HTML <clipPath> element."""
 
     __slots__ = ()
@@ -209,21 +442,47 @@ class CLIPPATH(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:clipPath = Element(
         ).set_attrs(**self.attributes).set_content(self.content).clipPath().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .clipPath()
             .element
         )
 
-class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .clipPath() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .clipPath()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an LINEARGRADIENT HTML <linearGradient> element."""
 
     __slots__ = ()
@@ -231,21 +490,47 @@ class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:linearGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).linearGradient().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .linearGradient()
             .element
         )
 
-class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .linearGradient() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .linearGradient()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an RADIALGRADIENT HTML <radialGradient> element."""
 
     __slots__ = ()
@@ -253,21 +538,47 @@ class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:radialGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).radialGradient().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .radialGradient()
             .element
         )
 
-class FILTER(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .radialGradient() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .radialGradient()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FILTER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FILTER HTML <filter> element."""
 
     __slots__ = ()
@@ -275,21 +586,47 @@ class FILTER(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:filter = Element(
         ).set_attrs(**self.attributes).set_content(self.content).filter().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .filter()
             .element
         )
 
-class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .filter() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .filter()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FECOMPONENTTRANSFER HTML <feComponentTransfer> element."""
 
     __slots__ = ()
@@ -297,21 +634,47 @@ class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:feComponentTransfer = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feComponentTransfer().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .feComponentTransfer()
             .element
         )
 
-class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .feComponentTransfer() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .feComponentTransfer()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEDIFFUSELIGHTING HTML <feDiffuseLighting> element."""
 
     __slots__ = ()
@@ -319,21 +682,47 @@ class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:feDiffuseLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feDiffuseLighting().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .feDiffuseLighting()
             .element
         )
 
-class FEMERGE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .feDiffuseLighting() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .feDiffuseLighting()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEMERGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEMERGE HTML <feMerge> element."""
 
     __slots__ = ()
@@ -341,21 +730,47 @@ class FEMERGE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:feMerge = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feMerge().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .feMerge()
             .element
         )
 
-class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .feMerge() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .feMerge()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FESPECULARLIGHTING HTML <feSpecularLighting> element."""
 
     __slots__ = ()
@@ -363,21 +778,47 @@ class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:feSpecularLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feSpecularLighting().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .feSpecularLighting()
             .element
         )
 
-class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .feSpecularLighting() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .feSpecularLighting()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an ANIMATEMOTION HTML <animateMotion> element."""
 
     __slots__ = ()
@@ -385,21 +826,47 @@ class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:animateMotion = Element(
         ).set_attrs(**self.attributes).set_content(self.content).animateMotion().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .animateMotion()
             .element
         )
 
-class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .animateMotion() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .animateMotion()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FOREIGNOBJECT HTML <foreignObject> element."""
 
     __slots__ = ()
@@ -407,23 +874,49 @@ class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
         '''
         Blueprint:foreignObject = Element(
         ).set_attrs(**self.attributes).set_content(self.content).foreignObject().element'''
         content=self._get_rendered_content()
         return (
-            EL
+            self.EL
             .set_attrs(**self.attributes)
             .set_content(content)
             .foreignObject()
             .element
         )
 
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Yields HTML in chunks.
+        Note: The builder's .foreignObject() method must support returning a generator.
+        """
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        content_generator = self._get_stream_content(batch=batch)
+
+        elment_info = (
+            self.EL.set_attrs(**self.attributes)
+            .set_generator_content(content_generator)
+            .foreignObject()
+            .element
+        )
+        stream_manager = StreamManager(
+            elment_info[0],
+            self.EL.stream(batch=batch),
+            elment_info[-1],
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
 # self closing tags
 
-class PATH(BaseHTMLElement, ElementNodeMixin):
+class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an PATH HTML <path> line break element (self-closing)."""
 
     __slots__ = ()
@@ -431,11 +924,32 @@ class PATH(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).path().element
+        return self.EL.set_attrs(**self.attributes).path().element
 
-class CIRCLE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).path().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .path()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class CIRCLE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an CIRCLE HTML <circle> line break element (self-closing)."""
 
     __slots__ = ()
@@ -443,11 +957,32 @@ class CIRCLE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).circle().element
+        return self.EL.set_attrs(**self.attributes).circle().element
 
-class RECT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).circle().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .circle()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class RECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an RECT HTML <rect> line break element (self-closing)."""
 
     __slots__ = ()
@@ -455,11 +990,32 @@ class RECT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).rect().element
+        return self.EL.set_attrs(**self.attributes).rect().element
 
-class LINE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).rect().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .rect()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class LINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an LINE HTML <line> line break element (self-closing)."""
 
     __slots__ = ()
@@ -467,11 +1023,32 @@ class LINE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).line().element
+        return self.EL.set_attrs(**self.attributes).line().element
 
-class POLYLINE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).line().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .line()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class POLYLINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an POLYLINE HTML <polyline> line break element (self-closing)."""
 
     __slots__ = ()
@@ -479,11 +1056,32 @@ class POLYLINE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).polyline().element
+        return self.EL.set_attrs(**self.attributes).polyline().element
 
-class POLYGON(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).polyline().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .polyline()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class POLYGON(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an POLYGON HTML <polygon> line break element (self-closing)."""
 
     __slots__ = ()
@@ -491,11 +1089,32 @@ class POLYGON(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).polygon().element
+        return self.EL.set_attrs(**self.attributes).polygon().element
 
-class ELLIPSE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).polygon().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .polygon()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class ELLIPSE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an ELLIPSE HTML <ellipse> line break element (self-closing)."""
 
     __slots__ = ()
@@ -503,11 +1122,32 @@ class ELLIPSE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).ellipse().element
+        return self.EL.set_attrs(**self.attributes).ellipse().element
 
-class IMAGE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).ellipse().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .ellipse()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class IMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an IMAGE HTML <image> line break element (self-closing)."""
 
     __slots__ = ()
@@ -515,11 +1155,32 @@ class IMAGE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).image().element
+        return self.EL.set_attrs(**self.attributes).image().element
 
-class FEBLEND(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).image().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .image()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEBLEND(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEBLEND HTML <feBlend> line break element (self-closing)."""
 
     __slots__ = ()
@@ -527,11 +1188,32 @@ class FEBLEND(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feBlend().element
+        return self.EL.set_attrs(**self.attributes).feBlend().element
 
-class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feBlend().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feBlend()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FECOLORMATRIX HTML <feColorMatrix> line break element (self-closing)."""
 
     __slots__ = ()
@@ -539,11 +1221,32 @@ class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feColorMatrix().element
+        return self.EL.set_attrs(**self.attributes).feColorMatrix().element
 
-class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feColorMatrix().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feColorMatrix()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FECOMPOSITE HTML <feComposite> line break element (self-closing)."""
 
     __slots__ = ()
@@ -551,11 +1254,32 @@ class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feComposite().element
+        return self.EL.set_attrs(**self.attributes).feComposite().element
 
-class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feComposite().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feComposite()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FECONVOLVEMATRIX HTML <feConvolveMatrix> line break element (self-closing)."""
 
     __slots__ = ()
@@ -563,11 +1287,32 @@ class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feConvolveMatrix().element
+        return self.EL.set_attrs(**self.attributes).feConvolveMatrix().element
 
-class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feConvolveMatrix().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feConvolveMatrix()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEDISPLACEMENTMAP HTML <feDisplacementMap> line break element (self-closing)."""
 
     __slots__ = ()
@@ -575,11 +1320,32 @@ class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feDisplacementMap().element
+        return self.EL.set_attrs(**self.attributes).feDisplacementMap().element
 
-class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feDisplacementMap().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feDisplacementMap()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEDROPSHADOW HTML <feDropShadow> line break element (self-closing)."""
 
     __slots__ = ()
@@ -587,11 +1353,32 @@ class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feDropShadow().element
+        return self.EL.set_attrs(**self.attributes).feDropShadow().element
 
-class FEFLOOD(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feDropShadow().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feDropShadow()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEFLOOD(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEFLOOD HTML <feFlood> line break element (self-closing)."""
 
     __slots__ = ()
@@ -599,11 +1386,32 @@ class FEFLOOD(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feFlood().element
+        return self.EL.set_attrs(**self.attributes).feFlood().element
 
-class FEFUNCA(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feFlood().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feFlood()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEFUNCA(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEFUNCA HTML <feFuncA> line break element (self-closing)."""
 
     __slots__ = ()
@@ -611,11 +1419,32 @@ class FEFUNCA(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feFuncA().element
+        return self.EL.set_attrs(**self.attributes).feFuncA().element
 
-class FEFUNCB(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feFuncA().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feFuncA()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEFUNCB(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEFUNCB HTML <feFuncB> line break element (self-closing)."""
 
     __slots__ = ()
@@ -623,11 +1452,32 @@ class FEFUNCB(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feFuncB().element
+        return self.EL.set_attrs(**self.attributes).feFuncB().element
 
-class FEFUNCG(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feFuncB().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feFuncB()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEFUNCG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEFUNCG HTML <feFuncG> line break element (self-closing)."""
 
     __slots__ = ()
@@ -635,11 +1485,32 @@ class FEFUNCG(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feFuncG().element
+        return self.EL.set_attrs(**self.attributes).feFuncG().element
 
-class FEFUNCR(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feFuncG().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feFuncG()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEFUNCR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEFUNCR HTML <feFuncR> line break element (self-closing)."""
 
     __slots__ = ()
@@ -647,11 +1518,32 @@ class FEFUNCR(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feFuncR().element
+        return self.EL.set_attrs(**self.attributes).feFuncR().element
 
-class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feFuncR().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feFuncR()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEGAUSSIANBLUR HTML <feGaussianBlur> line break element (self-closing)."""
 
     __slots__ = ()
@@ -659,11 +1551,32 @@ class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feGaussianBlur().element
+        return self.EL.set_attrs(**self.attributes).feGaussianBlur().element
 
-class FEIMAGE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feGaussianBlur().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feGaussianBlur()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEIMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEIMAGE HTML <feImage> line break element (self-closing)."""
 
     __slots__ = ()
@@ -671,11 +1584,32 @@ class FEIMAGE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feImage().element
+        return self.EL.set_attrs(**self.attributes).feImage().element
 
-class FEMERGENODE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feImage().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feImage()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEMERGENODE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEMERGENODE HTML <feMergeNode> line break element (self-closing)."""
 
     __slots__ = ()
@@ -683,11 +1617,32 @@ class FEMERGENODE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feMergeNode().element
+        return self.EL.set_attrs(**self.attributes).feMergeNode().element
 
-class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feMergeNode().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feMergeNode()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEMORPHOLOGY HTML <feMorphology> line break element (self-closing)."""
 
     __slots__ = ()
@@ -695,11 +1650,32 @@ class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feMorphology().element
+        return self.EL.set_attrs(**self.attributes).feMorphology().element
 
-class FEOFFSET(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feMorphology().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feMorphology()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEOFFSET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEOFFSET HTML <feOffset> line break element (self-closing)."""
 
     __slots__ = ()
@@ -707,11 +1683,32 @@ class FEOFFSET(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feOffset().element
+        return self.EL.set_attrs(**self.attributes).feOffset().element
 
-class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feOffset().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feOffset()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FEPOINTLIGHT HTML <fePointLight> line break element (self-closing)."""
 
     __slots__ = ()
@@ -719,11 +1716,32 @@ class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).fePointLight().element
+        return self.EL.set_attrs(**self.attributes).fePointLight().element
 
-class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).fePointLight().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .fePointLight()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FESPOTLIGHT HTML <feSpotLight> line break element (self-closing)."""
 
     __slots__ = ()
@@ -731,11 +1749,32 @@ class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feSpotLight().element
+        return self.EL.set_attrs(**self.attributes).feSpotLight().element
 
-class FETILE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feSpotLight().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feSpotLight()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FETILE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FETILE HTML <feTile> line break element (self-closing)."""
 
     __slots__ = ()
@@ -743,11 +1782,32 @@ class FETILE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feTile().element
+        return self.EL.set_attrs(**self.attributes).feTile().element
 
-class FETURBULENCE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feTile().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feTile()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class FETURBULENCE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an FETURBULENCE HTML <feTurbulence> line break element (self-closing)."""
 
     __slots__ = ()
@@ -755,11 +1815,32 @@ class FETURBULENCE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).feTurbulence().element
+        return self.EL.set_attrs(**self.attributes).feTurbulence().element
 
-class ANIMATE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).feTurbulence().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .feTurbulence()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class ANIMATE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an ANIMATE HTML <animate> line break element (self-closing)."""
 
     __slots__ = ()
@@ -767,11 +1848,32 @@ class ANIMATE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).animate().element
+        return self.EL.set_attrs(**self.attributes).animate().element
 
-class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).animate().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .animate()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an ANIMATETRANSFORM HTML <animateTransform> line break element (self-closing)."""
 
     __slots__ = ()
@@ -779,11 +1881,32 @@ class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).animateTransform().element
+        return self.EL.set_attrs(**self.attributes).animateTransform().element
 
-class SET(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).animateTransform().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .animateTransform()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class SET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an SET HTML <set> line break element (self-closing)."""
 
     __slots__ = ()
@@ -791,11 +1914,32 @@ class SET(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).set().element
+        return self.EL.set_attrs(**self.attributes).set().element
 
-class VIEW(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).set().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .set()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class VIEW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an VIEW HTML <view> line break element (self-closing)."""
 
     __slots__ = ()
@@ -803,11 +1947,32 @@ class VIEW(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).view().element
+        return self.EL.set_attrs(**self.attributes).view().element
 
-class USE(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).view().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .view()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class USE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an USE HTML <use> line break element (self-closing)."""
 
     __slots__ = ()
@@ -815,11 +1980,32 @@ class USE(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).use().element
+        return self.EL.set_attrs(**self.attributes).use().element
 
-class STOP(BaseHTMLElement, ElementNodeMixin):
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).use().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .use()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
+
+class STOP(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     """Represents an STOP HTML <stop> line break element (self-closing)."""
 
     __slots__ = ()
@@ -827,6 +2013,27 @@ class STOP(BaseHTMLElement, ElementNodeMixin):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
-
+        ElementMutatorMixin.__init__(self)
     def render(self):
-        return EL.set_attrs(**self.attributes).stop().element
+        return self.EL.set_attrs(**self.attributes).stop().element
+
+    def stream(self, batch: int = 50) -> Generator[str, None, None]:
+        """
+        Blueprint:meter = Element(
+        ).set_attrs(**self.attributes).stop().element"""
+        self.delegate_render_conditions(
+            use_list=True,
+        )
+
+        stream_manager = StreamManager(
+            None,
+            (
+                self.EL.set_attrs(**self.attributes)
+                .stop()
+                .reset_generator_content()
+                .stream(batch=batch)
+            ),
+            chunk_size=batch,
+        )
+        yield from stream_manager
+
