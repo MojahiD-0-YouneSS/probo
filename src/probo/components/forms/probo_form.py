@@ -59,7 +59,8 @@ def get_widget_info(django_bound_field) -> dict[str, str]:
         choices = getattr(widget, "choices", [])
         if widget.allow_multiple_selected:
             attrs["multiple"] = True
-
+        if "value" in attrs:
+            del attrs["value"]
     # Check for Textarea
     elif widget.__class__.__name__ == "Textarea":
         tag = "textarea"

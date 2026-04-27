@@ -98,7 +98,7 @@ def test_tree_node_injection_integrity():
     head_nodes = [META(name="robots", content="noindex")]
     body_nodes = [DIV(SPAN("Content", Class="test-class"), id="test-id")]
 
-    out = base_template_tree(head_nodes=head_nodes, body_nodes=body_nodes, overide_head=True, overide_body=True).render()
+    out = base_template_tree(head_nodes=head_nodes, body_nodes=body_nodes, override_head=True, override_body=True).render()
     assert 'name="robots"' in out
     assert 'content="noindex"' in out
     assert 'id="test-id"' in out
@@ -122,16 +122,16 @@ def test_resilience_to_garbage_input(bad_input):
     try:
 
         base_template_tree(
-            head_nodes=[bad_input] if bad_input else None, overide_head=True
+            head_nodes=[bad_input] if bad_input else None, override_head=True
         ).html_doc.find(lambda n: n.element_tag == "body").add(body_content()).render()
 
-        base_template_string(head_list=[bad_input] if bad_input else None,overide_head=True)
+        base_template_string(head_list=[bad_input] if bad_input else None,override_head=True)
     except Exception as e:
         pytest.fail(f"Template crashed on input {bad_input}: {e}")
 
 def test_template_logic_parity():
     """Ensures base_template_string and base_template_tree produce logically identical output."""
-    str_out = base_template_string(body_list=body_content(), overide_body=True)
+    str_out = base_template_string(body_list=body_content(), override_body=True)
     tree_out = base_template_tree()
     tree_out.html_doc.find(lambda n: n.element_tag == "body").add(body_content())
 
@@ -150,7 +150,7 @@ def test_massive_node_injection_scaling():
     """Injects 500 unique nodes to check for performance regressions."""
     nodes = [DIV(id=f"node-{i}") for i in range(500)]
     start = time()
-    out = base_template_tree(body_nodes=nodes, overide_body=True).render()
+    out = base_template_tree(body_nodes=nodes, override_body=True).render()
     end = time()
 
     assert end - start < 0.5  # Should render 500 nodes in under 500ms even on Celeron

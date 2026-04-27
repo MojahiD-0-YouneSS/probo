@@ -2,6 +2,8 @@
 
 # <img src="./docs/assets/images/mastodon_ui.ico" align="center" alt="Probo UI Logo" width="200" height="200"/>  Probo UI : Future of Python based UI
 
+[Watch the Probo UI Demo](./docs/assets/videos/the_one.mp4)
+
 # Python Rendered Objects for Backend-Oriented User Interfaces (Probo-UI). 
 
 ![PyPI](https://img.shields.io/pypi/v/probo-ui)

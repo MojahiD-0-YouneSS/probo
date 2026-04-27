@@ -44,7 +44,7 @@ from probo.htmx.htmx import HTMX as HX, HTMXElement as HXE
 from typing import Any
 
 
-def base_template_string(head_list:list[str]|None=None,body_list:list[str]|None=None, overide_head:bool=False,overide_body:bool=False,base_title='My Project')->str:
+def base_template_string(head_list:list[str]|None=None,body_list:list[str]|None=None, override_head:bool=False,override_body:bool=False,base_title='My Project')->str:
     """Generates the primary HTML shell and boilerplate for a ProboUI application.
 
     This function acts as the "Master Layout" or "Main Entry Point" for the 
@@ -100,19 +100,19 @@ def base_template_string(head_list:list[str]|None=None,body_list:list[str]|None=
     Args:
         head_list: type list[str] a list of head safe elements to be passed to head section.
         body_list: type list[str] a list of body safe elements to be passed to body section.
-        overide_head: type bool if True, the default head block will not be rendered and only the head_list elements will be rendered in the head section.
-        overide_body: type bool if True, the default body block will not be rendered and only the body_list elements will be rendered in the body section.
+        override_head: type bool if True, the default head block will not be rendered and only the head_list elements will be rendered in the head section.
+        override_body: type bool if True, the default body block will not be rendered and only the body_list elements will be rendered in the body section.
         base_title: type str the title for the HTML document.
     Returns:
         Template: A ProboUI Template object loaded with the serialized HTML 
             and the necessary DOCTYPE declaration.
     """
-    if overide_head and not head_list:
+    if override_head and not head_list:
         head_list=[]
-    if overide_body and not body_list:
+    if override_body and not body_list:
         body_list=[]
     # head block
-    if not overide_head:
+    if not override_head:
         head_string = head(
             meta(
                 charset="UTF-8",
@@ -160,7 +160,7 @@ def base_template_string(head_list:list[str]|None=None,body_list:list[str]|None=
     else:
         head_string = head(*head_list)
     # body
-    if overide_body:
+    if override_body:
         body_string = body(*body_list)
     else:
         body_string = body()
@@ -169,7 +169,7 @@ def base_template_string(head_list:list[str]|None=None,body_list:list[str]|None=
 
     return doctype(html_string)
 
-def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=None, overide_head:bool=False,overide_body:bool=False) -> DOCTYPE:
+def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=None, override_head:bool=False,override_body:bool=False) -> DOCTYPE:
     """Generates the primary HTML tree shell and boilerplate for a ProboUI application.
 
     This function acts as the "Master Layout" or "Main Entry Point" for the
@@ -185,8 +185,8 @@ def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=
     Args:
         head_nodes: a list of head safe node elements to be passed to head section.
         body_nodes: a list of body safe node elements to be passed to body section.
-        overide_head: type bool if True, the default head block will not be rendered and only the head_nodes elements will be rendered in the head section.
-        overide_body: type bool if True, the default body block will not be rendered and only the body_nodes elements will be rendered in the body section.
+        override_head: type bool if True, the default head block will not be rendered and only the head_nodes elements will be rendered in the head section.
+        override_body: type bool if True, the default body block will not be rendered and only the body_nodes elements will be rendered in the body section.
 
     Detailed Workflow:
         - **Head Generation**: Configures viewport, charset, and external assets.
@@ -220,14 +220,14 @@ def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=
         Template: A ProboUI Template object loaded with the serialized HTML
             and the necessary DOCTYPE declaration.
     """
-    if overide_head and not head_nodes:
+    if override_head and not head_nodes:
         head_nodes = []
-    if overide_body and not body_nodes:
+    if override_body and not body_nodes:
         body_nodes = []
 
     # head block
     head_obj = HEAD()
-    if not overide_head:
+    if not override_head:
         head_obj.add(META(
                 charset="UTF-8",
             ))
@@ -274,7 +274,7 @@ def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=
         for node in head_nodes: head_obj.add(node)
     # body
     body_obj = BODY()
-    if overide_body:
+    if override_body:
         for node in body_nodes:
             body_obj.add(node)
     html_obj = HTML( lang="en")
@@ -508,7 +508,7 @@ def welcome_template_tree():
             )
         )
 
-    doc = base_template_tree(overide_body=True)
+    doc = base_template_tree(override_body=True)
 
     # Register our launch animations in the head
     doc.html_doc.find(lambda n: n.element_tag == "style").content.append(LAUNCH_STYLE)
