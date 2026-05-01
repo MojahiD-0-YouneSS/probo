@@ -10,7 +10,7 @@ class A(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an A HTML <a> element."""
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -54,7 +54,7 @@ class ABBR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an ABBR HTML <abbr> element."""
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -96,7 +96,7 @@ class ADDRESS(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an ADDRESS HTML <address> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -143,7 +143,7 @@ class ARTICLE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an ARTICLE HTML <article> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -189,7 +189,7 @@ class ASIDE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an ASIDE HTML <aside> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -235,7 +235,7 @@ class AUDIO(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an AUDIO HTML <audio> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -281,7 +281,7 @@ class B(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an B HTML <b> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -327,7 +327,7 @@ class BDI(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BDI HTML <bdi> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -373,7 +373,7 @@ class BDO(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BDO HTML <bdo> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -419,7 +419,7 @@ class BLOCKQUOTE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BLOCKQUOTE HTML <blockquote> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -465,7 +465,7 @@ class BODY(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BODY HTML <body> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -511,7 +511,7 @@ class BUTTON(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BUTTON HTML <button> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -557,7 +557,7 @@ class CANVAS(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an CANVAS HTML <canvas> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -603,7 +603,7 @@ class CAPTION(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an CAPTION HTML <caption> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -649,7 +649,7 @@ class CITE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an CITE HTML <cite> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -695,7 +695,7 @@ class CODE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an CODE HTML <code> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -741,7 +741,7 @@ class COLGROUP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an COLGROUP HTML <colgroup> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -787,7 +787,7 @@ class DATA(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DATA HTML <data> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -833,7 +833,7 @@ class DATALIST(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DATALIST HTML <datalist> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -879,7 +879,7 @@ class DD(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DD HTML <dd> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -925,7 +925,7 @@ class DEL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DEL HTML <del> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -971,7 +971,7 @@ class DETAILS(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DETAILS HTML <details> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1017,7 +1017,7 @@ class DFN(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DFN HTML <dfn> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1063,7 +1063,7 @@ class DIALOG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DIALOG HTML <dialog> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1109,7 +1109,7 @@ class DIALOG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
 class DIV(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DIV HTML <div> element."""
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1157,7 +1157,7 @@ class DL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DL HTML <dl> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1203,7 +1203,7 @@ class DT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DT HTML <dt> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1249,7 +1249,7 @@ class EM(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an EM HTML <em> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1295,7 +1295,7 @@ class FIELDSET(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an FIELDSET HTML <fieldset> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1341,7 +1341,7 @@ class FIGCAPTION(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an FIGCAPTION HTML <figcaption> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1387,7 +1387,7 @@ class FIGURE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an FIGURE HTML <figure> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1433,7 +1433,7 @@ class FOOTER(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an FOOTER HTML <footer> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1479,7 +1479,7 @@ class FORM(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an FORM HTML <form> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1525,7 +1525,7 @@ class H1(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H1 HTML <h1> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1571,7 +1571,7 @@ class H2(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H2 HTML <h2> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1617,7 +1617,7 @@ class H3(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H3 HTML <h3> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1663,7 +1663,7 @@ class H4(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H4 HTML <h4> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1710,7 +1710,7 @@ class H5(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H5 HTML <h5> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1757,7 +1757,7 @@ class H6(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an H6 HTML <h6> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1804,7 +1804,7 @@ class HEAD(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an HEAD HTML <head> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1850,7 +1850,7 @@ class HEADER(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an HEADER HTML <header> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1897,7 +1897,7 @@ class HGROUP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an HGROUP HTML <hgroup> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1944,7 +1944,7 @@ class HTML(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an HTML HTML <html> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -1991,7 +1991,7 @@ class I(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an I HTML <i> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2038,7 +2038,7 @@ class IFRAME(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an IFRAME HTML <iframe> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2085,7 +2085,7 @@ class INS(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an INS HTML <ins> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2132,7 +2132,7 @@ class KBD(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an KBD HTML <kbd> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2179,7 +2179,7 @@ class LABEL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an LABEL HTML <label> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2226,7 +2226,7 @@ class LEGEND(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an LEGEND HTML <legend> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2273,7 +2273,7 @@ class LI(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an LI HTML <li> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2320,7 +2320,7 @@ class MAIN(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an MAIN HTML <main> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2367,7 +2367,7 @@ class MATH(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an MATH HTML <math> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2414,7 +2414,7 @@ class MAP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an MAP HTML <map> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2461,7 +2461,7 @@ class MARK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an MARK HTML <mark> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2508,7 +2508,7 @@ class MENU(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an MENU HTML <menu> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2555,7 +2555,7 @@ class METER(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an METER HTML <meter> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2602,7 +2602,7 @@ class NAV(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an NAV HTML <nav> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2649,7 +2649,7 @@ class NOSCRIPT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an NOSCRIPT HTML <noscript> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2696,7 +2696,7 @@ class OBJECT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an OBJECT HTML <object> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2743,7 +2743,7 @@ class OL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an OL HTML <ol> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2790,7 +2790,7 @@ class OPTGROUP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an OPTGROUP HTML <optgroup> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2837,7 +2837,7 @@ class OPTION(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an OPTION HTML <option> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2884,7 +2884,7 @@ class OUTPUT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an OUTPUT HTML <output> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2930,7 +2930,7 @@ class OUTPUT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
 class P(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an P HTML <p> element."""
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -2977,7 +2977,7 @@ class PORTAL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an PORTAL HTML <portal> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3024,7 +3024,7 @@ class PICTURE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an PICTURE HTML <picture> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3071,7 +3071,7 @@ class PRE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an PRE HTML <pre> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3118,7 +3118,7 @@ class PROGRESS(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an PROGRESS HTML <progress> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3165,7 +3165,7 @@ class Q(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an Q HTML <q> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3212,7 +3212,7 @@ class RP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an RP HTML <rp> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3259,7 +3259,7 @@ class RT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an RT HTML <rt> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3306,7 +3306,7 @@ class RUBY(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an RUBY HTML <ruby> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3353,7 +3353,7 @@ class S(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an S HTML <s> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3400,7 +3400,7 @@ class SAMP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SAMP HTML <samp> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3447,7 +3447,7 @@ class SCRIPT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SCRIPT HTML <script> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3494,7 +3494,7 @@ class SEARCH(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SEARCH HTML <search> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3541,7 +3541,7 @@ class SECTION(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SECTION HTML <section> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3588,7 +3588,7 @@ class SELECT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SELECT HTML <select> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3635,7 +3635,7 @@ class SLOT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SLOT HTML <slot> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3682,7 +3682,7 @@ class SMALL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SMALL HTML <small> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3729,7 +3729,7 @@ class SPAN(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SPAN HTML <span> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3776,7 +3776,7 @@ class STRONG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an STRONG HTML <strong> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3823,7 +3823,7 @@ class STYLE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an STYLE HTML <style> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3870,7 +3870,7 @@ class SUB(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SUB HTML <sub> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3917,7 +3917,7 @@ class SUMMARY(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SUMMARY HTML <summary> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -3964,7 +3964,7 @@ class SUP(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SUP HTML <sup> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4010,7 +4010,7 @@ class TABLE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TABLE HTML <table> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4057,7 +4057,7 @@ class TBODY(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TBODY HTML <tbody> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4104,7 +4104,7 @@ class TD(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TD HTML <td> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4151,7 +4151,7 @@ class TEMPLATE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TEMPLATE HTML <template> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4198,7 +4198,7 @@ class TEXTAREA(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TEXTAREA HTML <textarea> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4245,7 +4245,7 @@ class TFOOT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TFOOT HTML <tfoot> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4292,7 +4292,7 @@ class TH(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TH HTML <th> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4339,7 +4339,7 @@ class THEAD(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an THEAD HTML <thead> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4386,7 +4386,7 @@ class TIME(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TIME HTML <time> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4433,7 +4433,7 @@ class TITLE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TITLE HTML <title> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4480,7 +4480,7 @@ class TR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TR HTML <tr> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4527,7 +4527,7 @@ class U(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an U HTML <u> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4574,7 +4574,7 @@ class UL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an UL HTML <ul> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4621,7 +4621,7 @@ class VAR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an VAR HTML <var> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
@@ -4668,7 +4668,7 @@ class VIDEO(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an VIDEO HTML <video> element."""
 
     __slots__ = ()
-    def __init__(self, *content:tuple[str | ElementNodeMixin], **attrs:dict[str,Any]):
+    def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content, **attrs)
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)

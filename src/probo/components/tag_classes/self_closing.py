@@ -8,7 +8,7 @@ class DOCTYPE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an DOCTYPE HTML <!> line break element (self-closing)."""
 
     __slots__ = ('html_doc',)
-    def __init__(self, content:ElementNodeMixin|None=None, **kwargs:dict[str,Any]):
+    def __init__(self, content:ElementNodeMixin|None=None, **kwargs:Any):
         super().__init__(content, **kwargs)
         ElementMutatorMixin.__init__(self)
         ElementNodeMixin.__init__(self)
@@ -57,7 +57,7 @@ class AREA(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an AREA HTML <area> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -92,7 +92,7 @@ class BASE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BASE HTML <base> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -125,7 +125,7 @@ class BR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an BR HTML <br> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -158,7 +158,7 @@ class COL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an COL HTML <col> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -191,7 +191,7 @@ class EMBED(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an EMBED HTML <embed> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -224,7 +224,7 @@ class HR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an HR HTML <hr> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -257,7 +257,7 @@ class IMG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an IMG HTML <img> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -290,7 +290,7 @@ class INPUT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an INPUT HTML <input> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -323,7 +323,7 @@ class LINK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an LINK HTML <link> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -356,7 +356,7 @@ class META(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an META HTML <meta> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -389,7 +389,7 @@ class PARAM(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an PARAM HTML <param> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -422,7 +422,7 @@ class SOURCE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an SOURCE HTML <source> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -455,7 +455,7 @@ class TRACK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an TRACK HTML <track> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)
@@ -488,7 +488,7 @@ class WBR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
     """Represents an WBR HTML <wbr> line break element (self-closing)."""
 
     __slots__ = ()
-    def __init__(self, **kwargs:dict[str,Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([],True)

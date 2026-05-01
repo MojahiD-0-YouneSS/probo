@@ -3,7 +3,7 @@ from typing import Any,Generator
 from probo.utility import ProboSourceString, StreamManager, _resolve_stream
 from collections import deque
 
-def l_g(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_g(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <g> element."""
 
     if stream:
@@ -21,7 +21,7 @@ def l_g(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs:
         return EL.g(*content, **attrs).element
 
 
-def l_defs(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_defs(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <dfs> element."""
 
     if stream:
@@ -39,7 +39,7 @@ def l_defs(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **att
         return EL.defs(*content, **attrs).element
 
 
-def l_text(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_text(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <text> element."""
 
     if stream:
@@ -57,7 +57,7 @@ def l_text(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **att
         return EL.text(*content, **attrs).element
 
 
-def l_tspan(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_tspan(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <tspan> element."""
 
     if stream:
@@ -75,7 +75,7 @@ def l_tspan(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **at
         return EL.tspan(*content, **attrs).element
 
 
-def l_svg(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_svg(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <svg> element."""
 
     if stream:
@@ -93,7 +93,7 @@ def l_svg(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attr
         return EL.svg(*content, **attrs).element
 
 
-def l_symbol(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_symbol(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <symbol> element."""
 
     if stream:
@@ -111,7 +111,7 @@ def l_symbol(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **a
         return EL.symbol(*content, **attrs).element
 
 
-def l_marker(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_marker(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <marker> element."""
 
     if stream:
@@ -129,7 +129,7 @@ def l_marker(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **a
         return EL.marker(*content, **attrs).element
 
 
-def l_pattern(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_pattern(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <pattern> element."""
 
     if stream:
@@ -147,7 +147,7 @@ def l_pattern(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **
         return EL.pattern(*content, **attrs).element
 
 
-def l_mask(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_mask(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <mask> element."""
 
     if stream:
@@ -165,7 +165,7 @@ def l_mask(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **att
         return EL.mask(*content, **attrs).element
 
 
-def l_clippath(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_clippath(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <clippath> element."""
 
     if stream:
@@ -183,17 +183,17 @@ def l_clippath(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, *
         return EL.clippath(*content, **attrs).element
 
 
-def l_lineargradient(EL:Element,*content: tuple[str], **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_lineargradient(EL:Element,*content:str, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <lineargradient> element."""
     return EL.lineargradient(content, **attrs).element
 
 
-def l_radialgradient(EL:Element,*content: tuple[str], **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_radialgradient(EL:Element,*content:str, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <radialgradient> element."""
     return EL.radialgradient(content, **attrs).element
 
 
-def l_filter(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_filter(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <filter> element."""
 
     if stream:
@@ -212,7 +212,7 @@ def l_filter(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **a
 
 
 def l_fecomponenttransfer(EL:Element,
-    *content: tuple[str], stream:bool=False,batch:int=50,**attrs: dict[str, Any]
+    *content:str, stream:bool=False,batch:int=50,**attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <fecomponenttransfer> element."""
 
@@ -232,7 +232,7 @@ def l_fecomponenttransfer(EL:Element,
 
 
 def l_fediffuselighting(EL:Element,
-    *content: tuple[str], stream:bool=False,batch:int=50,**attrs: dict[str, Any]
+    *content:str, stream:bool=False,batch:int=50,**attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <fediffuselighting> element."""
 
@@ -251,7 +251,7 @@ def l_fediffuselighting(EL:Element,
         return EL.fediffuselighting(*content, **attrs).element
 
 
-def l_femerge(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_femerge(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <femerge> element."""
 
     if stream:
@@ -270,7 +270,7 @@ def l_femerge(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **
 
 
 def l_fespecularlighting(EL:Element,
-    *content: tuple[str], stream:bool=False,batch:int=50,**attrs: dict[str, Any]
+    *content:str, stream:bool=False,batch:int=50,**attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <fespecularlighting> element."""
 
@@ -289,7 +289,7 @@ def l_fespecularlighting(EL:Element,
         return EL.fespecularlighting(*content, **attrs).element
 
 
-def l_animatemotion(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_animatemotion(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <animatemotion> element."""
 
     if stream:
@@ -307,7 +307,7 @@ def l_animatemotion(EL:Element,*content: tuple[str],stream:bool=False,batch:int=
         return EL.animatemotion(*content, **attrs).element
 
 
-def l_foreignobject(EL:Element,*content: tuple[str],stream:bool=False,batch:int=50, **attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_foreignobject(EL:Element,*content:str,stream:bool=False,batch:int=50, **attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <forienobject> element."""
 
     if stream:
@@ -326,7 +326,7 @@ def l_foreignobject(EL:Element,*content: tuple[str],stream:bool=False,batch:int=
 
 
 # self closing
-def l_path(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_path(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <path/> line break element (self-closing)."""
     if stream:
         def __stream_path():
@@ -346,7 +346,7 @@ def l_path(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) ->
         return EL.path(**attrs).element
 
 
-def l_circle(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_circle(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <circle/> line break element (self-closing)."""
     if stream:
         def __stream_circle():
@@ -366,7 +366,7 @@ def l_circle(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) 
         return EL.circle(**attrs).element
 
 
-def l_rect(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_rect(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <rect/> line break element (self-closing)."""
     if stream:
         def __stream_rect():
@@ -386,7 +386,7 @@ def l_rect(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) ->
         return EL.rect(**attrs).element
 
 
-def l_line(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_line(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <line/> line break element (self-closing)."""
     if stream:
         def __stream_line():
@@ -406,7 +406,7 @@ def l_line(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) ->
         return EL.line(**attrs).element
 
 
-def l_polyline(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_polyline(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <polyline/> line break element (self-closing)."""
     if stream:
         def __stream_polyline():
@@ -426,7 +426,7 @@ def l_polyline(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]
         return EL.polyline(**attrs).element
 
 
-def l_polygon(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_polygon(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <polygon/> line break element (self-closing)."""
     if stream:
         def __stream_polygon():
@@ -446,7 +446,7 @@ def l_polygon(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.polygon(**attrs).element
 
 
-def l_ellipse(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_ellipse(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <ellipse/> line break element (self-closing)."""
     if stream:
         def __stream_ellipse():
@@ -466,7 +466,7 @@ def l_ellipse(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.ellipse(**attrs).element
 
 
-def l_image(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_image(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <image/> line break element (self-closing)."""
     if stream:
         def __stream_image():
@@ -486,7 +486,7 @@ def l_image(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -
         return EL.image(**attrs).element
 
 
-def l_feBlend(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feBlend(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feBlend/> line break element (self-closing)."""
     if stream:
         def __stream_feBlend():
@@ -506,7 +506,7 @@ def l_feBlend(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feBlend(**attrs).element
 
 
-def l_feColorMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feColorMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feColorMatrix/> line break element (self-closing)."""
     if stream:
         def __stream_feColorMatrix():
@@ -526,7 +526,7 @@ def l_feColorMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str,
         return EL.feColorMatrix(**attrs).element
 
 
-def l_feComposite(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feComposite(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feComposite/> line break element (self-closing)."""
     if stream:
         def __stream_feComposite():
@@ -546,7 +546,7 @@ def l_feComposite(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, A
         return EL.feComposite(**attrs).element
 
 
-def l_feConvolveMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feConvolveMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feConvolveMatrix/> line break element (self-closing)."""
     if stream:
         def __stream_feConvolveMatrix():
@@ -566,7 +566,7 @@ def l_feConvolveMatrix(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[s
         return EL.feConvolveMatrix(**attrs).element
 
 
-def l_feDisplacementMap(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feDisplacementMap(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feDisplacementMap/> line break element (self-closing)."""
     if stream:
         def __stream_feDisplacementMap():
@@ -586,7 +586,7 @@ def l_feDisplacementMap(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[
         return EL.feDisplacementMap(**attrs).element
 
 
-def l_feDropShadow(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feDropShadow(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feDropShadow/> line break element (self-closing)."""
     if stream:
         def __stream_feDropShadow():
@@ -606,7 +606,7 @@ def l_feDropShadow(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, 
         return EL.feDropShadow(**attrs).element
 
 
-def l_feFlood(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feFlood(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feFlood/> line break element (self-closing)."""
     if stream:
         def __stream_feFlood():
@@ -626,7 +626,7 @@ def l_feFlood(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feFlood(**attrs).element
 
 
-def l_feFuncA(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feFuncA(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feFuncA/> line break element (self-closing)."""
     if stream:
         def __stream_feFuncA():
@@ -646,7 +646,7 @@ def l_feFuncA(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feFuncA(**attrs).element
 
 
-def l_feFuncB(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feFuncB(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feFuncB/> line break element (self-closing)."""
     if stream:
         def __stream_feFuncB():
@@ -666,7 +666,7 @@ def l_feFuncB(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feFuncB(**attrs).element
 
 
-def l_feFuncG(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feFuncG(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feFuncG/> line break element (self-closing)."""
     if stream:
         def __stream_feFuncG():
@@ -686,7 +686,7 @@ def l_feFuncG(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feFuncG(**attrs).element
 
 
-def l_feFuncR(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feFuncR(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feFuncR/> line break element (self-closing)."""
     if stream:
         def __stream_feFuncR():
@@ -706,7 +706,7 @@ def l_feFuncR(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feFuncR(**attrs).element
 
 
-def l_feGaussianBlur(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feGaussianBlur(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feGaussianBlur/> line break element (self-closing)."""
     if stream:
         def __stream_feGaussianBlur():
@@ -726,7 +726,7 @@ def l_feGaussianBlur(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str
         return EL.feGaussianBlur(**attrs).element
 
 
-def l_feImage(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feImage(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feImage/> line break element (self-closing)."""
     if stream:
         def __stream_feImage():
@@ -746,7 +746,7 @@ def l_feImage(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.feImage(**attrs).element
 
 
-def l_feMergeNode(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feMergeNode(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feMergeNode/> line break element (self-closing)."""
     if stream:
         def __stream_feMergeNode():
@@ -766,7 +766,7 @@ def l_feMergeNode(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, A
         return EL.feMergeNode(**attrs).element
 
 
-def l_feMorphology(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feMorphology(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feMorphology/> line break element (self-closing)."""
     if stream:
         def __stream_feMorphology():
@@ -786,7 +786,7 @@ def l_feMorphology(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, 
         return EL.feMorphology(**attrs).element
 
 
-def l_feOffset(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feOffset(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feOffset/> line break element (self-closing)."""
     if stream:
         def __stream_feOffset():
@@ -806,7 +806,7 @@ def l_feOffset(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]
         return EL.feOffset(**attrs).element
 
 
-def l_fePointLight(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_fePointLight(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <fePointLight/> line break element (self-closing)."""
     if stream:
         def __stream_fePointLight():
@@ -826,7 +826,7 @@ def l_fePointLight(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, 
         return EL.fePointLight(**attrs).element
 
 
-def l_feSpotLight(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feSpotLight(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feSpotLight/> line break element (self-closing)."""
     if stream:
         def __stream_feSpotLight():
@@ -846,7 +846,7 @@ def l_feSpotLight(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, A
         return EL.feSpotLight(**attrs).element
 
 
-def l_feTile(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feTile(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feTile/> line break element (self-closing)."""
     if stream:
         def __stream_feTile():
@@ -866,7 +866,7 @@ def l_feTile(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) 
         return EL.feTile(**attrs).element
 
 
-def l_feTurbulence(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_feTurbulence(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <feTurbulence/> line break element (self-closing)."""
     if stream:
         def __stream_feTurbulence():
@@ -886,7 +886,7 @@ def l_feTurbulence(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, 
         return EL.feTurbulence(**attrs).element
 
 
-def l_animate(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_animate(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <animate/> line break element (self-closing)."""
     if stream:
         def __stream_animate():
@@ -906,7 +906,7 @@ def l_animate(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any])
         return EL.animate(**attrs).element
 
 
-def l_animateTransform(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_animateTransform(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <animateTransform/> line break element (self-closing)."""
     if stream:
         def __stream_animateTransform():
@@ -926,7 +926,7 @@ def l_animateTransform(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[s
         return EL.animateTransform(**attrs).element
 
 
-def l_set(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_set(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <set/> line break element (self-closing)."""
     if stream:
         def __stream_Set():
@@ -946,7 +946,7 @@ def l_set(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> 
         return EL.Set(**attrs).element
 
 
-def l_view(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_view(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <view/> line break element (self-closing)."""
     if stream:
         def __stream_view():
@@ -966,7 +966,7 @@ def l_view(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) ->
         return EL.view(**attrs).element
 
 
-def l_use(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_use(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <use/> line break element (self-closing)."""
     if stream:
         def __stream_use():
@@ -986,7 +986,7 @@ def l_use(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> 
         return EL.use(**attrs).element
 
 
-def l_stop(EL:Element,stream:bool=False,batch:int=50,**attrs: dict[str, Any]) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
+def l_stop(EL:Element,stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager|Generator:
     """Represents an HTML <stop/> line break element (self-closin)."""
     if stream:
         def __stream_stop():

@@ -9,7 +9,7 @@ def doctype(
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs:Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <!DOCTYPE> line break element (self-closing)."""
     if stream:
@@ -35,7 +35,7 @@ def doctype(
 
 
 def area(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <area/> line break element (self-closing)."""
     if stream:
@@ -61,7 +61,7 @@ def area(
 
 
 def base(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <base/> line break element (self-closing)."""
     if stream:
@@ -87,7 +87,7 @@ def base(
 
 
 def br(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <br/> line break element (self-closing)."""
     if stream:
@@ -113,7 +113,7 @@ def br(
 
 
 def col(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <col/> line break element (self-closing)."""
     if stream:
@@ -139,7 +139,7 @@ def col(
 
 
 def embed(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <embed/> line break element (self-closing)."""
     if stream:
@@ -165,7 +165,7 @@ def embed(
 
 
 def hr(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <hr/> line break element (self-closing)."""
     if stream:
@@ -191,7 +191,7 @@ def hr(
 
 
 def img(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <img/> line break element (self-closing)."""
     if stream:
@@ -217,7 +217,7 @@ def img(
 
 
 def Input(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <input/> line break element (self-closing)."""
     if stream:
@@ -243,7 +243,7 @@ def Input(
 
 
 def link(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <link/> line break element (self-closing)."""
     if stream:
@@ -269,7 +269,7 @@ def link(
 
 
 def meta(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <meta/> line break element (self-closing)."""
     if stream:
@@ -295,7 +295,7 @@ def meta(
 
 
 def param(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <param/> line break element (self-closing)."""
     if stream:
@@ -321,7 +321,7 @@ def param(
 
 
 def source(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <source/> line break element (self-closing)."""
     if stream:
@@ -347,7 +347,7 @@ def source(
 
 
 def track(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <track/> line break element (self-closing)."""
     if stream:
@@ -373,7 +373,7 @@ def track(
 
 
 def wbr(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs:Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|Generator|StreamManager:
     """Represents an HTML <wbr/> line break element (self-closing)."""
     if stream:

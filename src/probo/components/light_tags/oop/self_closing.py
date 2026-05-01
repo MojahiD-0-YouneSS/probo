@@ -10,7 +10,7 @@ class Ldoctype(LightNode, ElementNodeMixin):
     __slots__ = ("html_doc",)
 
     def __init__(
-        self, content: ElementNodeMixin | None = None, **kwargs: dict[str, Any]
+        self, content: ElementNodeMixin | None = None, **kwargs:Any
     ):
         super().__init__(content, **kwargs)
         self.html_doc: ElementNodeMixin | None = None
@@ -42,7 +42,7 @@ class Larea(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -63,7 +63,7 @@ class Lbase(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -83,7 +83,7 @@ class Lbr(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -103,7 +103,7 @@ class Lcol(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -123,7 +123,7 @@ class Lembed(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -143,7 +143,7 @@ class Lhr(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -163,7 +163,7 @@ class Limg(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -183,7 +183,7 @@ class Linput(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -203,7 +203,7 @@ class Llink(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -223,7 +223,7 @@ class Lmeta(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -243,7 +243,7 @@ class Lparam(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -263,7 +263,7 @@ class Lsource(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -283,7 +283,7 @@ class Ltrack(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)
@@ -303,7 +303,7 @@ class Lwbr(LightNode, ElementNodeMixin):
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
 
-    def __init__(self, **kwargs: dict[str, Any]):
+    def __init__(self, **kwargs:Any):
         super().__init__(tag=None,**kwargs)
         ElementNodeMixin.__init__(self)
         self._set_node_children([], True)

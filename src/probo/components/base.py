@@ -382,7 +382,7 @@ class BaseHTMLElement(ABC):
     """
     __slots__ = ('attributes', 'content','node_children', '_render_conditions', 'parent','_ElementNodeMixin__void_node', 'element_tag', '_override_style')
 
-    def __init__(self, *content:tuple[str], **kwargs:dict[str,Any]):
+    def __init__(self, *content:str, **kwargs:Any):
         """
         Initializes the HTML element.
         Args:

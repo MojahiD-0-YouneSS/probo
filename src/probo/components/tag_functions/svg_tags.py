@@ -5,12 +5,12 @@ from probo.utility import ProboSourceString, StreamManager,_resolve_stream
 
 
 def g(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <g> element."""
     if stream:
@@ -37,12 +37,12 @@ def g(
 
 
 def defs(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <dfs> element."""
     if stream:
@@ -69,12 +69,12 @@ def defs(
 
 
 def text(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <text> element."""
     if stream:
@@ -101,12 +101,12 @@ def text(
 
 
 def tspan(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <tspan> element."""
     if stream:
@@ -133,12 +133,12 @@ def tspan(
 
 
 def svg(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <svg> element."""
     if stream:
@@ -165,12 +165,12 @@ def svg(
 
 
 def symbol(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <symbol> element."""
     if stream:
@@ -197,12 +197,12 @@ def symbol(
 
 
 def marker(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <marker> element."""
     if stream:
@@ -229,12 +229,12 @@ def marker(
 
 
 def pattern(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <pattern> element."""
     if stream:
@@ -261,12 +261,12 @@ def pattern(
 
 
 def mask(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <mask> element."""
     if stream:
@@ -293,12 +293,12 @@ def mask(
 
 
 def clippath(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <clippath> element."""
     if stream:
@@ -325,12 +325,12 @@ def clippath(
 
 
 def lineargradient(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <lineargradient> element."""
     if stream:
@@ -357,12 +357,12 @@ def lineargradient(
 
 
 def radialgradient(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <radialgradient> element."""
     if stream:
@@ -389,12 +389,12 @@ def radialgradient(
 
 
 def Filter(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <filter> element."""
     if stream:
@@ -421,12 +421,12 @@ def Filter(
 
 
 def fecomponenttransfer(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <fecomponenttransfer> element."""
     if stream:
@@ -453,12 +453,12 @@ def fecomponenttransfer(
 
 
 def fediffuselighting(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <fediffuselighting> element."""
     if stream:
@@ -485,12 +485,12 @@ def fediffuselighting(
 
 
 def femerge(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <femerge> element."""
     if stream:
@@ -517,12 +517,12 @@ def femerge(
 
 
 def fespecularlighting(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <fespecularlighting> element."""
     if stream:
@@ -549,12 +549,12 @@ def fespecularlighting(
 
 
 def animatemotion(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <animatemotion> element."""
     if stream:
@@ -581,12 +581,12 @@ def animatemotion(
 
 
 def foreignobject(
-    *content: tuple[str],
+    *content:str,
     return_list: bool = False,
     return_deque: bool = False,
     stream:bool=False,
     batch:int=50,
-    **attrs: dict[str, Any],
+    **attrs: Any,
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <forienobject> element."""
     if stream:
@@ -614,7 +614,7 @@ def foreignobject(
 
 # self closing
 def path(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <path/> line break element (self-closing)."""
     
@@ -640,7 +640,7 @@ def path(
 
 
 def circle(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <circle/> line break element (self-closing)."""
     
@@ -666,7 +666,7 @@ def circle(
 
 
 def rect(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <rect/> line break element (self-closing)."""
     
@@ -692,7 +692,7 @@ def rect(
 
 
 def line(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <line/> line break element (self-closing)."""
     
@@ -718,7 +718,7 @@ def line(
 
 
 def polyline(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <polyline/> line break element (self-closing)."""
     
@@ -746,7 +746,7 @@ def polyline(
 
 
 def polygon(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <polygon/> line break element (self-closing)."""
     
@@ -772,7 +772,7 @@ def polygon(
 
 
 def ellipse(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <ellipse/> line break element (self-closing)."""
     
@@ -798,7 +798,7 @@ def ellipse(
 
 
 def image(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <image/> line break element (self-closing)."""
     
@@ -824,7 +824,7 @@ def image(
 
 
 def feBlend(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feBlend/> line break element (self-closing)."""
     
@@ -850,7 +850,7 @@ def feBlend(
 
 
 def feColorMatrix(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feColorMatrix/> line break element (self-closing)."""
     
@@ -880,7 +880,7 @@ def feColorMatrix(
 
 
 def feComposite(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feComposite/> line break element (self-closing)."""
     
@@ -910,7 +910,7 @@ def feComposite(
 
 
 def feConvolveMatrix(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feConvolveMatrix/> line break element (self-closing)."""
     
@@ -940,7 +940,7 @@ def feConvolveMatrix(
 
 
 def feDisplacementMap(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feDisplacementMap/> line break element (self-closing)."""
     
@@ -970,7 +970,7 @@ def feDisplacementMap(
 
 
 def feDropShadow(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feDropShadow/> line break element (self-closing)."""
     
@@ -1000,7 +1000,7 @@ def feDropShadow(
 
 
 def feFlood(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feFlood/> line break element (self-closing)."""
     
@@ -1026,7 +1026,7 @@ def feFlood(
 
 
 def feFuncA(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feFuncA/> line break element (self-closing)."""
     
@@ -1052,7 +1052,7 @@ def feFuncA(
 
 
 def feFuncB(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feFuncB/> line break element (self-closing)."""
     
@@ -1078,7 +1078,7 @@ def feFuncB(
 
 
 def feFuncG(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feFuncG/> line break element (self-closing)."""
     
@@ -1104,7 +1104,7 @@ def feFuncG(
 
 
 def feFuncR(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feFuncR/> line break element (self-closing)."""
     
@@ -1130,7 +1130,7 @@ def feFuncR(
 
 
 def feGaussianBlur(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feGaussianBlur/> line break element (self-closing)."""
     
@@ -1160,7 +1160,7 @@ def feGaussianBlur(
 
 
 def feImage(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feImage/> line break element (self-closing)."""
     
@@ -1186,7 +1186,7 @@ def feImage(
 
 
 def feMergeNode(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feMergeNode/> line break element (self-closing)."""
     
@@ -1216,7 +1216,7 @@ def feMergeNode(
 
 
 def feMorphology(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feMorphology/> line break element (self-closing)."""
     
@@ -1246,7 +1246,7 @@ def feMorphology(
 
 
 def feOffset(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feOffset/> line break element (self-closing)."""
     
@@ -1274,7 +1274,7 @@ def feOffset(
 
 
 def fePointLight(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <fePointLight/> line break element (self-closing)."""
     
@@ -1304,7 +1304,7 @@ def fePointLight(
 
 
 def feSpotLight(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feSpotLight/> line break element (self-closing)."""
     
@@ -1334,7 +1334,7 @@ def feSpotLight(
 
 
 def feTile(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feTile/> line break element (self-closing)."""
     
@@ -1360,7 +1360,7 @@ def feTile(
 
 
 def feTurbulence(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <feTurbulence/> line break element (self-closing)."""
     
@@ -1390,7 +1390,7 @@ def feTurbulence(
 
 
 def animate(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <animate/> line break element (self-closing)."""
     
@@ -1416,7 +1416,7 @@ def animate(
 
 
 def animateTransform(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <animateTransform/> line break element (self-closing)."""
     
@@ -1446,7 +1446,7 @@ def animateTransform(
 
 
 def Set(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <set/> line break element (self-closing)."""
     
@@ -1472,7 +1472,7 @@ def Set(
 
 
 def view(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <view/> line break element (self-closing)."""
     
@@ -1498,7 +1498,7 @@ def view(
 
 
 def use(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <use/> line break element (self-closing)."""
     
@@ -1524,7 +1524,7 @@ def use(
 
 
 def stop(
-    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: dict[str, Any]
+    return_list: bool = False, return_deque: bool = False,stream:bool=False,batch:int=50, **attrs: Any
 ) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
     """Represents an HTML <stop/> line break element (self-closin)."""
     
