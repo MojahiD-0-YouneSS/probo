@@ -465,14 +465,14 @@ class BaseHTMLElement(ABC):
         def _add_to_collector(target, item):
             if not use_list:
                 if isinstance(item, (list, deque)):
-                    return target + "".join(map(str, item))
-                return target + str(item)
+                    return target + "".join((x if isinstance(x, ProboSourceString) else str(x)) for x in item)
+                return target + (item if isinstance(item, ProboSourceString) else str(item))
             else:
                 # If the item is already a collection, merge it (O(1) if deque)
                 if isinstance(item, (list, deque)):
                     target.extend(item)
                 else:
-                    target.append(str(item))
+                    target.append(item if isinstance(item, ProboSourceString) else str(item))
                 return target
 
         # 3. Process the content
@@ -492,11 +492,11 @@ class BaseHTMLElement(ABC):
             elif inspect.isgenerator(item):
                 print('xxxxx')
                 if use_list and use_deque:
-                    rendered = ( deque(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                    rendered = ( deque((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item))
                 elif use_list and use_deque:
-                    rendered = ( list(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                    rendered = ( list((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item))
                 else:
-                    rendered = ( ProboSourceString("".join(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item)))
+                    rendered = ( ProboSourceString("".join((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item)))
 
             elif isinstance(item, Iterable) and not isinstance(
                 item, (str, bytes, deque)
@@ -511,14 +511,14 @@ class BaseHTMLElement(ABC):
                         if isinstance(sub_rendered, (list, deque)):
                             sub_collector.extend(sub_rendered)
                         else:
-                            sub_collector.append(sub_rendered)
+                            sub_collector.append(sub_rendered if isinstance(sub_rendered, ProboSourceString) else str(sub_rendered))
                     else:
-                        sub_collector.append(str(sub))
+                        sub_collector.append(sub if isinstance(sub, ProboSourceString) else str(sub))
                 rendered = sub_collector
 
             # Scenario C: Child is a raw value (String, Int, etc.)
             else:
-                rendered = item
+                rendered = item if isinstance(item, ProboSourceString) else str(item)
 
             # Merge the rendered result into our main collector
             collector = _add_to_collector(collector, rendered)

@@ -72,15 +72,22 @@ class LightNode:
                     collector.append(item.render(EL))
             elif inspect.isgenerator(item):
                 if EL.is_list and EL.use_deque:
-                    collector.extend( deque(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                    collector.extend(
+                        deque((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x, "render") else x.render() for x in item)
+                    )
                 elif EL.is_list and not EL.use_deque:
-                    collector.extend( list(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item))
+                    collector.extend(
+                        list((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x, "render") else x.render() for x in item)
+                    )
                 else:
-                    collector.extend( ProboSourceString("".join(ProboSourceString(x)if not hasattr(x,"render") else x.render() for x in item)))
+                    collector.extend(
+                        ProboSourceString("".join((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x, "render") else x.render() for x in item))
+                    )
             elif hasattr(item, "render"):
-                collector.append(ProboSourceString(item.render()))
+                rendered_item = item.render()
+                collector.append(rendered_item if isinstance(rendered_item, ProboSourceString) else str(rendered_item))
             else:
-                collector.append(ProboSourceString(str(item)))
+                collector.append(item if isinstance(item, ProboSourceString) else str(item))
         if EL.is_list or EL.is_list and EL.use_deque:
             return collector  # Return list of strings for the caller to join
         return ProboSourceString("".join(collector))
