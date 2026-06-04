@@ -3,7 +3,7 @@ from collections.abc import Iterable
 from collections import deque
 from typing import Dict, Union, Self, Any,Generator
 import inspect
-from probo.utility import ProboSourceString
+from probo.utility import ProboSourceString,markup_escape
 
 class ElementAttributeManipulator:
     """
@@ -465,14 +465,14 @@ class BaseHTMLElement(ABC):
         def _add_to_collector(target, item):
             if not use_list:
                 if isinstance(item, (list, deque)):
-                    return target + "".join((x if isinstance(x, ProboSourceString) else str(x)) for x in item)
-                return target + (item if isinstance(item, ProboSourceString) else str(item))
+                    return target + "".join((x if isinstance(x, ProboSourceString) else markup_escape(x)) for x in item)
+                return target + (item if isinstance(item, ProboSourceString) else markup_escape(item))
             else:
                 # If the item is already a collection, merge it (O(1) if deque)
                 if isinstance(item, (list, deque)):
                     target.extend(item)
                 else:
-                    target.append(item if isinstance(item, ProboSourceString) else str(item))
+                    target.append(item if isinstance(item, ProboSourceString) else markup_escape(item))
                 return target
 
         # 3. Process the content
@@ -492,11 +492,11 @@ class BaseHTMLElement(ABC):
             elif inspect.isgenerator(item):
                 print('xxxxx')
                 if use_list and use_deque:
-                    rendered = ( deque((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item))
+                    rendered = ( deque((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item))
                 elif use_list and use_deque:
-                    rendered = ( list((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item))
+                    rendered = ( list((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item))
                 else:
-                    rendered = ( ProboSourceString("".join((x if isinstance(x, ProboSourceString) else str(x)) if not hasattr(x,"render") else x.render() for x in item)))
+                    rendered = ( ProboSourceString("".join((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item)))
 
             elif isinstance(item, Iterable) and not isinstance(
                 item, (str, bytes, deque)
@@ -511,20 +511,20 @@ class BaseHTMLElement(ABC):
                         if isinstance(sub_rendered, (list, deque)):
                             sub_collector.extend(sub_rendered)
                         else:
-                            sub_collector.append(sub_rendered if isinstance(sub_rendered, ProboSourceString) else str(sub_rendered))
+                            sub_collector.append(sub_rendered if isinstance(sub_rendered, ProboSourceString) else markup_escape(sub_rendered))
                     else:
-                        sub_collector.append(sub if isinstance(sub, ProboSourceString) else str(sub))
+                        sub_collector.append(sub if isinstance(sub, ProboSourceString) else markup_escape(sub))
                 rendered = sub_collector
 
             # Scenario C: Child is a raw value (String, Int, etc.)
             else:
-                rendered = item if isinstance(item, ProboSourceString) else str(item)
+                rendered = item if isinstance(item, ProboSourceString) else markup_escape(item)
 
             # Merge the rendered result into our main collector
             collector = _add_to_collector(collector, rendered)
 
         return collector
-
+        
     def _get_stream_content(self, batch: int = 50) -> Generator[str, None, None]:
         """
         The streaming engine: Iterates through children and yields HTML fragments.
