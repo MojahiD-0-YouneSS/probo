@@ -490,7 +490,6 @@ class BaseHTMLElement(ABC):
 
             # Scenario B: Child is a raw Iterable (list of tags/strings)
             elif inspect.isgenerator(item):
-                print('xxxxx')
                 if use_list and use_deque:
                     rendered = ( deque((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item))
                 elif use_list and use_deque:

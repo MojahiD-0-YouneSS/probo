@@ -337,6 +337,7 @@ class AttributeValue(EnumLookUPMixin, Enum):
         "for": "any",
         "form": "any",
         "formaction": "any",
+        "font-size":"any",
         "gradientUnits": ["userSpaceOnUse", "objectBoundingBox"],
         "gradientTransform": "any",
         "headers": "any",
@@ -1500,6 +1501,7 @@ class ElementAttribute(EnumLookUPMixin, Enum):
         "enctype": ["<form>"],
         'fill': ['<circle>', '<ellipse>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>', '<text>','<symbol>'],
         "For": ["<label>", "<output>"],
+        "font-size":["<text>"],
         "form": [
             "<button>",
             "<fieldset>",

@@ -1,7 +1,7 @@
 import pytest
 from probo.components.base import BaseHTMLElement
 from probo.components.node import ElementNodeMixin, ElementMutatorMixin
-from probo.utility import render_attributes
+from probo.utility import render_attributes, ProboSourceString
 
 # Mocking the required tags for testing
 class MockDIV(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
@@ -10,9 +10,9 @@ class MockDIV(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         ElementNodeMixin.__init__(self)
         self._set_node_children(content)
         ElementMutatorMixin.__init__(self)
-    def render(self): return f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>"
+    def render(self): return ProboSourceString(f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>")
     def stream(self):
-        yield f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>"
+        yield ProboSourceString(f"<Mockdiv>{self._get_rendered_content()}</Mockdiv>")
 
 
 class MockSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
@@ -22,9 +22,9 @@ class MockSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self._set_node_children(content)
         ElementMutatorMixin.__init__(self)
 
-    def render(self): return f"<Mockspan>{self._get_rendered_content()}</Mockspan>"
+    def render(self): return ProboSourceString(f"<Mockspan>{self._get_rendered_content()}</Mockspan>")
     def stream(self):
-        yield f"<Mockspan>{self._get_rendered_content()}</Mockspan>"
+        yield ProboSourceString(f"<Mockspan>{self._get_rendered_content()}</Mockspan>")
 
 
 def test_initialization_vs_manual_add():
@@ -94,9 +94,9 @@ class IMG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self._set_node_children([],True)
         ElementMutatorMixin.__init__(self)
     def render(self):
-        return f"<img {render_attributes('img',self.attributes)}/>"
+        return ProboSourceString(f"<img {render_attributes('img',self.attributes)}/>")
     def stream(self):
-        yield f"<img {render_attributes('img',self.attributes)}/>"
+        yield ProboSourceString(f"<img {render_attributes('img',self.attributes)}/>")
 
 class SVG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
@@ -105,9 +105,9 @@ class SVG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self._set_node_children(content)
         ElementMutatorMixin.__init__(self)
     def render(self):
-        return f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>"
+        return ProboSourceString(f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>")
     def stream(self):
-        yield f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>"
+        yield ProboSourceString(f"<svg {render_attributes('svg', self.attributes)}>{self._get_rendered_content()}</svg>")
 
 class MockG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, *content, **attrs):
@@ -116,9 +116,9 @@ class MockG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self._set_node_children(content)
         ElementMutatorMixin.__init__(self)
     def render(self):
-        return f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>"
+        return ProboSourceString(f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>")
     def stream(self):
-        yield f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>"
+        yield ProboSourceString(f"<g {render_attributes('g', self.attributes)}>{self._get_rendered_content()}</g>")
 
 class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
     def __init__(self, **attrs):
@@ -127,9 +127,9 @@ class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self._set_node_children([],True)
         ElementMutatorMixin.__init__(self)
     def render(self):
-        return f"<path {render_attributes('path', self.attributes)} />"
+        return ProboSourceString(f"<path {render_attributes('path', self.attributes)} />")
     def stream(self):
-        yield f"<path {render_attributes('path', self.attributes)} />"
+        yield ProboSourceString(f"<path {render_attributes('path', self.attributes)} />")
 
 def test_void_tag_initialization():
     """1. Ensure void tags like IMG initialize without children."""
