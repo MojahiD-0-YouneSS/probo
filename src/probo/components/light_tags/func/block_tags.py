@@ -1623,7 +1623,37 @@ def l_template(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:A
 
 
 def l_textarea(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <textarea> element."""
+    """Represents an HTML <textarea> element in the SSDOM.
+
+    This function creates multi-line text input fields with inherited attribute and
+    style management support for building interactive forms.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> note = l_textarea("Write your notes")
+                >>> note.attr_manager.set_attr("name", "notes")
+                >>> note.attr_manager.set_attr("rows", "4")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> note.style_manager.add_style("padding", "8px")
+                >>> note.style_manager.border = "1px solid #ccc"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> area = l_textarea("Daily log", name="log", Class="u-full-width")
+        >>> area.style_manager.font_family = "Arial"
+        >>> print(area.element[0])
+        <textarea name="log" class="u-full-width" style="font-family: Arial;">Daily log</textarea>
+    """
     if stream:
         def __stream_textarea():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1641,7 +1671,36 @@ def l_textarea(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:A
 
 
 def l_tfoot(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <tfoot> element."""
+    """Represents an HTML <tfoot> element in the SSDOM.
+
+    This function creates table footer rows that summarize or present totals and
+    metadata for data tables.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> footer = l_tfoot(row="1")
+                >>> footer.attr_manager.set_attr("align", "right")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> footer.style_manager.background_color = "#f5f5f5"
+                >>> footer.style_manager.add_style("padding", "0.5rem")
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> foot = l_tfoot(l_tr("Total", l_td("$200")))
+        >>> foot.style_manager.font_weight = "bold"
+        >>> print(foot.element[0])
+        <tfoot style="font-weight: bold;"><tr>...</tr></tfoot>
+    """
     if stream:
         def __stream_tfoot():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1659,7 +1718,36 @@ def l_tfoot(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_th(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <th> element."""
+    """Represents an HTML <th> element in the SSDOM.
+
+    This function creates table header cells and keeps attribute and style
+    operations inherited from base SSDOM helpers.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> cell = l_th("Name", scope="col")
+                >>> cell.attr_manager.set_attr("abbr", "Employee Name")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> cell.style_manager.text_align = "left"
+                >>> cell.style_manager.add_style("font-weight", "700")
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> header = l_th("Employee", scope="col")
+        >>> header.style_manager.background_color = "#f0f0f0"
+        >>> print(header.element[0])
+        <th scope="col" style="background-color: #f0f0f0;">Employee</th>
+    """
     if stream:
         def __stream_th():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1677,7 +1765,36 @@ def l_th(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) ->
 
 
 def l_thead(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <thead> element."""
+    """Represents an HTML <thead> element in the SSDOM.
+
+    This function creates table head containers and applies inherited behavior for
+    attribute mutation and style customization.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> head = l_thead()
+                >>> head.attr_manager.set_attr("role", "presentation")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> head.style_manager.background_color = "#fafafa"
+                >>> head.style_manager.border_bottom = "1px solid #ddd"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> heading = l_thead(l_tr(l_th("Metric"), l_th("Value")))
+        >>> heading.style_manager.text_align = "left"
+        >>> print(heading.element[0])
+        <thead style="text-align: left;"><tr>...</tr></thead>
+    """
     if stream:
         def __stream_thead():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1695,7 +1812,36 @@ def l_thead(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_time(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <time> element."""
+    """Represents an HTML <time> element in the SSDOM.
+
+    This function creates a machine-readable timestamp element for event metadata,
+    with inherited attribute and style management support.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> t = l_time("2026-06-08", datetime="2026-06-08T00:00:00")
+                >>> t.attr_manager.set_attr("datetime", "2026-06-08T00:00:00")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> t.style_manager.color = "gray"
+                >>> t.style_manager.font_size = "0.85rem"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> updated = l_time("Updated", datetime="2026-06-08T00:00:00")
+        >>> updated.style_manager.color = "gray"
+        >>> print(updated.element[0])
+        <time datetime="2026-06-08T00:00:00" style="color: gray;">Updated</time>
+    """
     if stream:
         def __stream_time():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1713,7 +1859,33 @@ def l_time(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) 
 
 
 def l_title(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <title> element."""
+    """Represents an HTML <title> element in the SSDOM.
+
+    This function creates a page title node and keeps inherited mechanisms for
+    attribute edits and inline style updates.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> title = l_title("Probo Dashboard")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> title.style_manager.add_style("display", "none")
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> page_title = l_title("Probo App")
+        >>> print(page_title.element[0])
+        <title>Probo App</title>
+    """
     if stream:
         def __stream_title():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1731,7 +1903,36 @@ def l_title(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_tr(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <tr> element."""
+    """Represents an HTML <tr> element in the SSDOM.
+
+    This function creates a table row container and preserves inherited attribute
+    and style manipulation capabilities.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> row = l_tr(l_td("A"), l_td("B"))
+                >>> row.attr_manager.set_attr("data-row", "summary")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> row.style_manager.background_color = "#fff"
+                >>> row.style_manager.border_bottom = "1px solid #eee"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> row = l_tr(l_th("Product"), l_td("$12"))
+        >>> row.style_manager.font_size = "0.9rem"
+        >>> print(row.element[0])
+        <tr style="font-size: 0.9rem;"><th>Product</th><td>$12</td></tr>
+    """
     if stream:
         def __stream_tr():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1749,7 +1950,35 @@ def l_tr(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) ->
 
 
 def l_u(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <u> element."""
+    """Represents an HTML <u> element in the SSDOM.
+
+    This function creates underlined text nodes with inherited API support for
+    dynamic attribute and style updates.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> text = l_u("Important")
+                >>> text.attr_manager.set_attr("data-note", "underline")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> text.style_manager.text_decoration_color = "red"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> emphasized = l_u("Important")
+        >>> emphasized.style_manager.color = "red"
+        >>> print(emphasized.element[0])
+        <u style="color: red;">Important</u>
+    """
     if stream:
         def __stream_u():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1767,7 +1996,35 @@ def l_u(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> 
 
 
 def l_ul(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <ul> element."""
+    """Represents an HTML <ul> element in the SSDOM.
+
+    This function creates an unordered list container and supports inherited utility
+    helpers for attribute and style customization.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> list_node = l_ul(l_li("First"), l_li("Second"))
+                >>> list_node.attr_manager.set_attr("aria-label", "Task list")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> list_node.style_manager.list_style_type = "none"
+                >>> list_node.style_manager.margin_left = "1rem"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> tasks = l_ul(l_li("Write tests"), l_li("Document behavior"))
+        >>> print(tasks.element[0])
+        <ul><li>Write tests</li><li>Document behavior</li></ul>
+    """
     if stream:
         def __stream_ul():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1785,7 +2042,35 @@ def l_ul(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) ->
 
 
 def l_var(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <var> element."""
+    """Represents an HTML <var> element in the SSDOM.
+
+    This function creates inline variables for expressions and keeps inherited
+    attribute and style handling available.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> var = l_var("x")
+                >>> var.attr_manager.set_attr("data-name", "index")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> var.style_manager.font_family = "monospace"
+                >>> var.style_manager.color = "darkred"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> variable = l_var("x", Class="variable")
+        >>> print(variable.element[0])
+        <var class="variable">x</var>
+    """
     if stream:
         def __stream_var():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1803,7 +2088,36 @@ def l_var(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -
 
 
 def l_video(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <video> element."""
+    """Represents an HTML <video> element in the SSDOM.
+
+    This function creates a video component wrapper and inherits behavior for flexible
+    attribute and style management.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> player = l_video(controls=True, src="sample.mp4")
+                >>> player.attr_manager.set_attr("autoplay", False)
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> player.style_manager.max_width = "100%"
+                >>> player.style_manager.border_radius = "8px"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> clip = l_video(src="trailer.mp4", controls=True)
+        >>> clip.style_manager.max_width = "640px"
+        >>> print(clip.element[0])
+        <video src="trailer.mp4" controls="true" style="max-width: 640px;"></video>
+    """
     if stream:
         def __stream_video():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
