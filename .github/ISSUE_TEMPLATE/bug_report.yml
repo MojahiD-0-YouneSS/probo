@@ -1,0 +1,58 @@
+name: "🐛 Bug Report"
+description: "Report a broken feature, routing failure, or SSDOM crash."
+title: "[BUG] <Short description>"
+labels: ["type: bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Architecture Domain"
+      description: "Which part of ProboUI is failing?"
+      options:
+        - "area: components & ssdom"
+        - "area: htmx-engine"
+        - "area: styles & bs5"
+        - "area: routing & cache"
+        - "area: state-management"
+        - "area: external-adapters"
+        - "area: terminal-tools"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bottleneck
+    attributes:
+      label: "The Bottleneck (Expected vs. Actual)"
+      description: "Explain exactly what is failing."
+      placeholder: "When I update the ComponentAttrManager, it wipes the dictionary references instead of copying them..."
+    validations:
+      required: true
+
+  - type: input
+    id: boundary
+    attributes:
+      label: "The Execution Boundary"
+      description: "Tell us exactly where to look. (e.g., src/probo/components/base.py -> update() method)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: test-case
+    attributes:
+      label: "The Failing Test (Sandbox)"
+      description: "Provide a minimal, reproducible Python script or pytest function that triggers this crash."
+      value: |
+        ```python
+        # Paste your minimal reproducible code here
+        
+        ```
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "Python version and Host Framework (if applicable, e.g., Django 5.0, ASGI Uvicorn)."
+    validations:
+      required: true

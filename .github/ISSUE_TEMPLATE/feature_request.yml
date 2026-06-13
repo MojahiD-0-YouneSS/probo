@@ -1,0 +1,50 @@
+name: "💡 Feature Request / Architecture Idea"
+description: "Propose a new feature, SSDOM enhancement, or Epic roadmap item."
+title: "[FEATURE] <Short description>"
+labels: ["type: feature", "discussion"]
+body:
+  - type: checkboxes
+    id: is-epic
+    attributes:
+      label: "Is this an Epic?"
+      description: "Epics are massive roadmap items that will be broken down into smaller tasks."
+      options:
+        - label: "Yes, this is an Epic."
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Target Domain"
+      description: "Which part of ProboUI will this affect most?"
+      options:
+        - "area: components & ssdom"
+        - "area: htmx-engine"
+        - "area: styles & bs5"
+        - "area: routing & cache"
+        - "area: state-management"
+        - "area: external-adapters"
+        - "area: terminal-tools"
+        - "New Architecture Core"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "The Problem / Vision"
+      description: "What limitation does this solve? Why does ProboUI need this?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "Proposed Architecture"
+      description: "Explain how this will work under the hood. Provide pseudo-code if possible."
+      value: |
+        ```python
+        # Blueprint of the proposed API or logic
+        
+        ```
+    validations:
+      required: true
