@@ -1354,7 +1354,37 @@ def l_script(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any
 
 
 def l_search(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <search> element."""
+    """Represents an HTML <search> element in the SSDOM.
+
+    This function creates a search landmark region used to group search-related
+    controls and content.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> search = l_search("Search")
+                >>> search.attr_manager.set_attr("role", "search")
+                >>> search.attr_manager.set_attr("id", "site-search")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> search.style_manager.add_style("padding", "1rem")
+                >>> search.style_manager.border = "1px solid #ddd"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> search = l_search("Search Results", role="search")
+        >>> search.style_manager.font_weight = "bold"
+        >>> print(search.render())
+        <search role="search" style="font-weight: bold;">Search Results</search>
+    """
     if stream:
         def __stream_search():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1372,7 +1402,37 @@ def l_search(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any
 
 
 def l_section(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <section> element."""
+    """Represents an HTML <section> element in the SSDOM.
+
+    This function creates thematic sections of content used to organize related
+    information within a document.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> section = l_section("About Us")
+                >>> section.attr_manager.set_attr("id", "about")
+                >>> section.attr_manager.set_attr("role", "region")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> section.style_manager.add_style("padding", "1rem")
+                >>> section.style_manager.background_color = "#f5f5f5"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> section = l_section("About Us", id="about")
+        >>> section.style_manager.padding = "1rem"
+        >>> print(section.element[0])
+        <section id="about" style="padding: 1rem;">About Us</section>
+    """
     if stream:
         def __stream_section():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1390,7 +1450,37 @@ def l_section(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:An
 
 
 def l_select(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <select> element."""
+    """Represents an HTML <select> element in the SSDOM.
+    
+    This function creates dropdown selection controls for forms and user
+    input interfaces.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> select = l_select()
+                >>> select.attr_manager.set_attr("name", "language")
+                >>> select.attr_manager.set_attr("required", "true")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> select.style_manager.add_style("padding", "0.5rem")
+                >>> select.style_manager.width = "200px"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> select = l_select(l_option("Python"), name="language")
+        >>> select.style_manager.font_weight = "bold"
+        >>> print(select.render())
+        <select name="language" style="font-weight: bold;"><option>Python</option></select>
+    """
     if stream:
         def __stream_select():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1408,7 +1498,37 @@ def l_select(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any
 
 
 def l_slot(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <slot> element."""
+    """Represents an HTML <slot> element in the SSDOM.
+
+    This function creates a placeholder within web components where external
+    content may be inserted and rendered dynamically.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> slot = l_slot()
+                >>> slot.attr_manager.set_attr("name", "header")
+                >>> slot.attr_manager.set_attr("id", "header-slot")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> slot.style_manager.add_style("display", "block")
+                >>> slot.style_manager.padding = "0.5rem"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> slot = l_slot("Navigation Menu", name="navbar")
+        >>> slot.style_manager.display = "block"
+        >>> print(slot.render())
+        <slot name="navbar" style="display: block;">Navigation Menu</slot>
+    """
     if stream:
         def __stream_slot():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1426,7 +1546,37 @@ def l_slot(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) 
 
 
 def l_small(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <small> element."""
+    """Represents an HTML <small> element in the SSDOM.
+
+    This function creates fine print, side notes, and supplementary text displayed
+    with reduced emphasis relative to surrounding content.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> note = l_small("Terms apply")
+                >>> note.attr_manager.set_attr("id", "legal-note")
+                >>> note.attr_manager.set_attr("Class", "muted-text")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> note.style_manager.add_style("font_size", "0.8rem")
+                >>> note.style_manager.color = "gray"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> note = l_small("Fine print", Class="muted-text")
+        >>> note.style_manager.color = "gray"
+        >>> print(note.render())
+        <small class="muted-text" style="color: gray;">Fine print</small>
+    """
     if stream:
         def __stream_small():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1444,7 +1594,37 @@ def l_small(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_span(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <span> element."""
+    """Represents an HTML <span> element in the SSDOM.
+
+    This function creates a generic inline container used for grouping text and
+    applying styles without adding semantic meaning to the content.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> span = l_span("Highlighted Text")
+                >>> span.attr_manager.set_attr("id", "highlight")
+                >>> span.attr_manager.set_attr("Class", "text-accent")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> span.style_manager.add_style("color", "red")
+                >>> span.style_manager.font_weight = "bold"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> span = l_span("Highlighted Text", Class="text-accent")
+        >>> span.style_manager.color = "red"
+        >>> print(span.render())
+        <span class="text-accent" style="color: red;">Highlighted Text</span>
+    """
     if stream:
         def __stream_span():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1462,7 +1642,37 @@ def l_span(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) 
 
 
 def l_strong(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <strong> element."""
+    """Represents an HTML <strong> element in the SSDOM.
+
+    This function creates strongly emphasized content that carries importance or
+    urgency within a document.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> strong = l_strong("Important Notice")
+                >>> strong.attr_manager.set_attr("id", "notice")
+                >>> strong.attr_manager.set_attr("Class", "alert-text")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> strong.style_manager.add_style("color", "crimson")
+                >>> strong.style_manager.font_weight = "bold"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> strong = l_strong("Important Notice", Class="alert-text")
+        >>> strong.style_manager.color = "crimson"
+        >>> print(strong.render())
+        <strong class="alert-text" style="color: crimson;">Important Notice</strong>
+    """
     if stream:
         def __stream_strong():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1480,7 +1690,37 @@ def l_strong(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any
 
 
 def l_style(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <style> element."""
+    """Represents an HTML <style> element in the SSDOM.
+
+    This function creates embedded CSS style definitions that can be used to
+    control the appearance of elements within a document.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> style = l_style("body { margin: 0; }")
+                >>> style.attr_manager.set_attr("id", "global-styles")
+                >>> style.attr_manager.set_attr("media", "screen")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> style.style_manager.add_style("display", "block")
+                >>> style.style_manager.margin = "0"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> style = l_style("body { background-color: #f5f5f5; }", id="theme-styles")
+        >>> style.style_manager.display = "block"
+        >>> print(style.render())
+        <style id="theme-styles" style="display: block;">body { background-color: #f5f5f5; }</style>
+    """
     if stream:
         def __stream_style():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1498,7 +1738,37 @@ def l_style(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_sub(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <sub> element."""
+    """Represents an HTML <sub> element in the SSDOM.
+
+    This function creates subscript text commonly used in scientific formulas,
+    chemical equations, and annotations.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> sub = l_sub("2")
+                >>> sub.attr_manager.set_attr("id", "formula-part")
+                >>> sub.attr_manager.set_attr("Class", "chemical-index")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> sub.style_manager.add_style("color", "blue")
+                >>> sub.style_manager.font_weight = "bold"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> sub = l_sub("2", Class="chemical-index")
+        >>> sub.style_manager.color = "blue"
+        >>> print(sub.render())
+        <sub class="chemical-index" style="color: blue;">2</sub>
+    """
     if stream:
         def __stream_sub():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1516,7 +1786,36 @@ def l_sub(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -
 
 
 def l_summary(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <summary> element."""
+    """Represents an HTML <summary> element in the SSDOM.
+
+    This function creates a visible heading or label for a element,
+    allowing users to expand or collapse additional content.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> summary = l_summary("More Information")
+                >>> summary.attr_manager.set_attr("id", "details-summary")
+                >>> summary.attr_manager.set_attr("Class", "summary-heading")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> summary.style_manager.add_style("cursor", "pointer")
+                >>> summary.style_manager.font_weight = "bold"
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> summary = l_summary("More Information", Class="summary-heading")
+        >>> summary.style_manager.color = "navy"
+        >>> print(summary.render())
+        <summary class="summary-heading" style="color: navy;">More Information</summary>
+    """
     if stream:
         def __stream_summary():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1534,7 +1833,37 @@ def l_summary(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:An
 
 
 def l_sup(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <sup> element."""
+    """Represents an HTML <sup> element in the SSDOM.
+
+    This function creates superscript text commonly used for exponents,
+    footnotes, references, and mathematical expressions.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> sup = l_sup("2")
+                >>> sup.attr_manager.set_attr("id", "exponent")
+                >>> sup.attr_manager.set_attr("Class", "math-power")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> sup.style_manager.add_style("color", "green")
+                >>> sup.style_manager.font_weight = "bold"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> sup = l_sup("2", Class="math-power")
+        >>> sup.style_manager.color = "green"
+        >>> print(sup.render())
+        <sup class="math-power" style="color: green;">2</sup>
+    """
     if stream:
         def __stream_sup():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1551,7 +1880,37 @@ def l_sup(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -
         return EL.sup(*content, **attrs).element
 
 def l_table(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <table> element."""
+    """Represents an HTML <table> element in the SSDOM.
+
+    This function creates tabular data structures consisting of rows, columns,
+    and related content for organizing and displaying structured information.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> table = l_table()
+                >>> table.attr_manager.set_attr("id", "user-table")
+                >>> table.attr_manager.set_attr("Class", "table-striped")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> table.style_manager.add_style("border", "1px solid black")
+                >>> table.style_manager.width = "100%"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> table = l_table(l_tr(l_td("Alice")))
+        >>> table.style_manager.width = "100%"
+        >>> print(table.render())
+        <table style="width: 100%;"><tr><td>Alice</td></tr></table>
+    """
     if stream:
         def __stream_table():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1569,7 +1928,37 @@ def l_table(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_tbody(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <tbody> element."""
+    """Represents an HTML <tbody> element in the SSDOM.
+
+    This function creates the body section of a table containing the primary
+    data rows displayed within tabular content.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> tbody = l_tbody()
+                >>> tbody.attr_manager.set_attr("id", "table-body")
+                >>> tbody.attr_manager.set_attr("Class", "data-section")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> tbody.style_manager.add_style("background_color", "#f9f9f9")
+                >>> tbody.style_manager.border = "1px solid #ddd"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> tbody = l_tbody(l_tr(l_td("Alice")))
+        >>> tbody.style_manager.background_color = "#f9f9f9"
+        >>> print(tbody.render())
+        <tbody style="background-color: #f9f9f9;"><tr><td>Alice</td></tr></tbody>
+    """
     if stream:
         def __stream_tbody():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1587,7 +1976,37 @@ def l_tbody(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any)
 
 
 def l_td(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <td> element."""
+    """Represents an HTML <td> element in the SSDOM.
+
+    This function creates standard data cells within HTML table rows, allowing
+    structured information to be displayed in a tabular format.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> cell = l_td("Alice")
+                >>> cell.attr_manager.set_attr("colspan", "2")
+                >>> cell.attr_manager.set_attr("Class", "table-cell")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> cell.style_manager.add_style("padding", "0.5rem")
+                >>> cell.style_manager.text_align = "center"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> cell = l_td("Alice", Class="table-cell")
+        >>> cell.style_manager.text_align = "center"
+        >>> print(cell.render())
+        <td class="table-cell" style="text-align: center;">Alice</td>
+    """
     if stream:
         def __stream_td():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
@@ -1605,7 +2024,37 @@ def l_td(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) ->
 
 
 def l_template(EL:Element,*content:str, stream:bool=False,batch:int=50,**attrs:Any) -> ProboSourceString|list[ProboSourceString]|deque[ProboSourceString]|StreamManager:
-    """Represents an HTML <template> element."""
+    """Represents an HTML <template> element in the SSDOM.
+
+    This function creates reusable document fragments that remain inactive until
+    instantiated by client-side logic or application code.
+
+    Inherited API Usage:
+        attr_manager (ElementAttributeManipulator):
+            Used to safely mutate, retrieve, or delete HTML attributes for this tag
+            after initialization.
+            Example:
+                >>> template = l_template("Reusable Content")
+                >>> template.attr_manager.set_attr("id", "card-template")
+                >>> template.attr_manager.set_attr("Class", "template-node")
+
+        style_manager (StyleManager):
+            Utilizes Python metaprogramming to dynamically manage inline CSS styles
+            for this tag. You can use standard methods or dot-notation.
+            Example:
+                >>> template.style_manager.add_style("display", "none")
+                >>> template.style_manager.border = "1px solid #ddd"
+
+    Args:
+        *content (str | Any): The inner text content or child SSDOM nodes.
+        **attrs (Any): Standard HTML attributes to pass into the element.
+
+    Example:
+        >>> template = l_template("Reusable Content", Class="template-node")
+        >>> template.style_manager.display = "none"
+        >>> print(template.render())
+        <template class="template-node" style="display: none;">Reusable Content</template>
+    """
     if stream:
         def __stream_template():
             content_gen = _resolve_stream(content, chunk_size=batch, EL=EL)
