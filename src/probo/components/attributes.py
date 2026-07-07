@@ -23,7 +23,8 @@ class DataBSAttribute(EnumLookUPMixin, Enum):
         "data-bs-html",
         "data-bs-delay",
         "data-bs-trigger",
-        "data-bs-custom-classdata-bs-boundary",
+        "data-bs-custom-class",
+        "data-bs-boundary",
         "data-bs-slide",
         "data-bs-ride",
         "data-bs-interval",
@@ -1917,7 +1918,7 @@ class ElementAttributeValidator:
     """
     Class to validate HTML attributes for elements.
     This class checks if the provided attributes are valid for a given HTML element.
-    
+
     Args:
         element_tag: the element string tag used in <tag> format.
         
@@ -1986,16 +1987,22 @@ class ElementAttributeValidator:
                 continue
             # --- SKIP PART 2: WILDCARDS ---
             # Bootstrap (data-*), HTMX (hx-*), Aria (aria-*), Events (on*),
-            if key.startswith(("data-", "aria-", "hx-", "on", "xml", "ng-", "v-")):
+            if key.startswith(("data-", "aria-", "hx-", "xml", "ng-", "v-")):
+                self.valid_attrs[key] = value
+                continue
+            
+            # Events must be purely alphabetic after 'on' (e.g., onclick, not ondata-id)
+            if key.startswith("on") and key[2:].isalpha():
                 self.valid_attrs[key] = value
                 continue
                         
             el_attr_check = el_attr_definitions.get(key, None)
-            if (
-                (el_attr_check and self.element_tag )and (not self.element_tag in el_attr_check)
-            ):
-                self.error_attrs.append(f"{key}='{value}'")
-                return False
+            if el_attr_check is not None:
+                # If the attribute requires specific tags, fail if the tag is missing or not in the allowed list
+                if not self.element_tag or self.element_tag not in el_attr_check:
+                    self.error_attrs.append(f"{key}='{value}'")
+                    all_valid = False
+                    continue
             
             rule = definitions.get(key,None)
             # --- CHECK: DEFINITIONS ---
@@ -2026,7 +2033,7 @@ class ElementAttributeValidator:
 
                     if tag_clean in rule:
                         allowed_vals = rule[tag_clean]
-                        if str(value) not in allowed_vals or str(value).lower() not in allowed_vals:
+                        if str(value) not in allowed_vals and str(value).lower() not in allowed_vals:
                             self.error_attrs.append(
                                 f"{key}='{value}' on <{tag_clean}> (Expected: {allowed_vals})"
                             )
@@ -2038,8 +2045,10 @@ class ElementAttributeValidator:
                             continue
                     else:
                         self.error_attrs.append(f"{key}='{value}'")
-                        return False
+                        all_valid = False
+                        continue
             else:
                 self.error_attrs.append(f"{key}='{value}'")
-                return False
+                all_valid = False
+                continue
         return all_valid

@@ -7,7 +7,7 @@ from probo.styles.css_enum import (
     CssFontsEnum,
     CssAnimatableEnum,
 )
-from probo.templates.resolver import TemplateResolver
+
 import cssutils
 from probo.styles.utils import selector_type_identifier
 from typing import Any, Self
@@ -358,6 +358,7 @@ class CssSelector:
         self._selector_type_maping = {}
         self.template_tags = []
         self.template_attributes = {}
+        from probo.templates.resolver import TemplateResolver
         self.template_info_obj = (
             TemplateResolver(tmplt_str=self.__template, load_it=True)
             if self.__template

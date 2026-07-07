@@ -15,6 +15,12 @@ from probo.terminal.app_generator import (
     create_probo_dj_structure,
     create_hacksoft_structure,
 )
+from probo.terminal.framework_scaffold import (
+    scaffold_fastapi,
+    scaffold_litestar,
+    scaffold_flask,
+    scaffold_cherrypy,
+)
 
 app = typer.Typer(
     help="PROBO: The declarative rendering engine for Django.", add_completion=False
@@ -149,15 +155,40 @@ def init(name: str):
 
     # 1. The Entry Point
     (project_dir / "requirements.txt").write_text(
-        """
-        probo-ui>=1.3.4
-        """
+        """probo-ui>=1.3.4
+uvicorn==0.50.2
+asgiref>=3.11.1
+"""
     )
+    
+    dockerfile_content = """FROM python:3.12-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Run the application with Uvicorn
+CMD ["uvicorn", "main:router.asgi_app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+"""
+    (project_dir / "Dockerfile").write_text(dockerfile_content, encoding="utf-8")
+
 
     (project_dir / "main.py").write_text(
         f"""from probo.router import ProboRouter
-from pages.index import index_document
-from components.greeting import greeting_component
+from ui.pages.index import index_document
+from ui.components.greeting import greeting_component
 from probo.templates import welcome_template_tree
 
 router = ProboRouter(app_name="{name}")
@@ -171,8 +202,9 @@ def welcome_view():
 
 @router.page("/startup/page")
 def home_view():
-    index_document.html_doc.find(lambda n:n.element_tag == "title").content.append("{name}")
-    return index_document
+    index = index_document()
+    index.html_doc.find(lambda n:n.element_tag == "title").content.append("{name}")
+    return index
 
 @router.page("/greeting")
 def update_view():
@@ -199,9 +231,10 @@ tcm = TemplateComponentMap()
 
     (project_dir / "__init__.py").touch()
     # 3. The Components Layer
-    (project_dir / "components").mkdir()
-    (project_dir / "components" / "__init__.py").touch()
-    (project_dir / "components" / "greeting.py").write_text(
+    (project_dir / "ui").mkdir()
+    (project_dir / "ui" / "components").mkdir()
+    (project_dir / "ui" / "components" / "__init__.py").touch()
+    (project_dir / "ui" / "components" / "greeting.py").write_text(
         '''from typing import Optional
 from probo import DIV, H1, P, SPAN, IMG
 from probo.styles import element_style
@@ -271,22 +304,50 @@ def greeting_component(
                                                             
   ''')
 
-    (project_dir / "pages").mkdir()
-    (project_dir / "pages" / "index.py").write_text(
+    (project_dir /"ui"/ "pages").mkdir()
+    (project_dir /"ui"/ "pages" /"base.py").write_text(
+        """from probo.templates import base_template_tree 
+from probo import DIV, LINK, SCRIPT
+
+def get_base_template(*args,**kwargs):
+    base = base_template_tree(override_body=True)
+    base_head = base.html_doc.find(lambda n:n.tag == 'HEAD')
+    if base_head:
+        base_head.add(
+            LINK(
+                rel="stylesheet",
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+            )
+        ).add(
+            SCRIPT(
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js",
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM",
+            crossorigin="anonymous",
+            )
+        )
+    base_body = base.html_doc.find(lambda n:n.tag == 'BODY')
+    
+    return base
+
+        """
+    )
+    (project_dir /"ui"/ "pages" / "index.py").write_text(
         """from probo import (DOCTYPE, HTML, HEAD, META, LINK, BODY, DIV, H1, TITLE, STYLE, SPAN,SCRIPT)
 from probo.styles import element_style
 from probo.htmx.htmx import HTMX as HX
 
 # We use element_style for the primary body layout
-body_style = element_style(
-    background_color="#f8fafc",
-    font_family="'Roboto', sans-serif",
-    margin="0",
-    padding="0",
-    color="#1e293b"
-)
 
-index_document = DOCTYPE(
+def index_document(*args,**kwargs):
+    
+    body_style = element_style(
+        background_color="#f8fafc",
+        font_family="'Roboto', sans-serif",
+        margin="0",
+        padding="0",
+        color="#1e293b"
+    )
+    return DOCTYPE(
     HTML(
         HEAD(
             META(charset="UTF-8"),
@@ -351,7 +412,7 @@ index_document = DOCTYPE(
 
         """
     )
-    (project_dir / "pages" / "__init__.py").touch()
+    (project_dir /"ui"/ "pages" / "__init__.py").touch()
 
     # 4. Assets
     (project_dir / "static").mkdir()
@@ -385,6 +446,11 @@ def startapp(
         "-s",
         help="Choose architecture: 'base' (Standard), 'hacksoft' (DDD), or 'probo-dj' (Enterprise).",
     ),
+    skip_ui: bool = typer.Option(
+            False,
+            "--skip-ui",
+            help="Do not create a new UI layer. The CLI will look for an existing 'ui' folder in the project root."
+        ),
 ):
     """
     Create a Django app with PROBO folders.
@@ -407,8 +473,9 @@ def startapp(
         return
 
     app_dir = Path.cwd() / name
+    ui_app_dir = Path.cwd() / name if not skip_ui else Path.cwd()
     # 2. Common PROBO Layer (All structures get this)
-    components_dir = app_dir / "components"
+    components_dir = ui_app_dir /"ui"/ "components"
     components_dir.mkdir(parents=True, exist_ok=True)
     (components_dir / "__init__.py").touch()
     (components_dir / "greeting.py").write_text(
@@ -480,7 +547,7 @@ def greeting_component(
 
                                            
 ''')
-    pages_dir = app_dir / "pages"
+    pages_dir = ui_app_dir / "ui"/ "pages"
     pages_dir.mkdir(parents=True, exist_ok=True)
     (pages_dir / "__init__.py").touch()
     (pages_dir / "index.py").write_text(
@@ -489,15 +556,16 @@ from probo.styles import element_style
 from probo.htmx.htmx import HTMX as HX
 
 # We use element_style for the primary body layout
-body_style = element_style(
-    background_color="#f8fafc",
-    font_family="'Roboto', sans-serif",
-    margin="0",
-    padding="0",
-    color="#1e293b"
-)
+def index(*args,**kwargs):
+    body_style = element_style(
+        background_color="#f8fafc",
+        font_family="'Roboto', sans-serif",
+        margin="0",
+        padding="0",
+        color="#1e293b"
+    )
 
-index_document = DOCTYPE(
+    return DOCTYPE(
     HTML(
         HEAD(
             META(charset="UTF-8"),
@@ -562,6 +630,32 @@ index_document = DOCTYPE(
 
         """
     )
+    (pages_dir / "base.py").write_text(
+        """from probo.templates import base_template_tree 
+from probo import DIV, LINK, SCRIPT
+
+def get_base_template(*args,**kwargs):
+    base = base_template_tree(override_body=True)
+    base_head = base.html_doc.find(lambda n:n.tag == 'HEAD')
+    if base_head:
+        base_head.add(
+            LINK(
+                rel="stylesheet",
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+            )
+        ).add(
+            SCRIPT(
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js",
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM",
+            crossorigin="anonymous",
+            )
+        )
+    base_body = base.html_doc.find(lambda n:n.tag == 'BODY')
+    
+    return base
+
+        """
+    )
 
     (app_dir / "probo_tcm.py").write_text(
         """ # utilities for django views and multi-component mapping
@@ -596,9 +690,33 @@ tcm = TemplateComponentMap() #mapper of component objects
         console.print(f"[green] <=> Created App '{name}' (Base Style)[/green]")
 
     # Visual Confirmation
-    console.print("   + components/")
-    console.print("   + pages/")
-    console.print("   + probo_tcm.py")
+    if not skip_ui:
+        console.print(f"   + {name}/ui/components/")
+        console.print(f"   +  {name}/ui/pages/")
+    else:
+        console.print(f"   + {ui_app_dir}/ui/components/")
+        console.print(f"   +  {ui_app_dir}/ui/pages/")
+    console.print(f"   +  {name}/probo_tcm.py")
+
+@app.command("fastapi")
+def fastapi_app(name: str, structure: str = typer.Option("standard", help="'standard' or 'advanced'")):
+    """Create a FastAPI app with PROBO folders."""
+    scaffold_fastapi(name, structure)
+
+@app.command("litestar")
+def litestar_app(name: str):
+    """Create a Litestar app with PROBO folders."""
+    scaffold_litestar(name)
+
+@app.command("flask")
+def flask_app(name: str):
+    """Create a Flask app with PROBO folders."""
+    scaffold_flask(name)
+
+@app.command("cherrypy")
+def cherrypy_app(name: str):
+    """Create a CherryPy app with PROBO folders."""
+    scaffold_cherrypy(name)
 
 
 @app.command("build:css")

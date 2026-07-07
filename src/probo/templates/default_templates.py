@@ -282,7 +282,7 @@ def base_template_tree(head_nodes:list[Any]|None=None,body_nodes:list[Any]|None=
     return DOCTYPE(html_obj)
 
 
-def welcome_template_tree():
+def welcome_template_tree() -> DOCTYPE:
     """
     DOCTYPE (Root)
     └── HTML [lang="en"]

@@ -54,6 +54,15 @@ nav:
     - Usage & Best Practices: usage.md
     # - Simple Documentation App: simple_doc.md
     # - Probo Markup Language: markups.md
+  - YouTube Video Tutorials:
+    - Introduction & Roadmap: TUTORIALS/index.md
+    - Part 1 - Getting Started: TUTORIALS/part1_getting_started.md
+    - Part 2 - SSDOM Manipulation: TUTORIALS/part2_ssdom_manipulation.md
+    - Part 3 - Styling without Spaghetti: TUTORIALS/part3_styling.md
+    - Part 4 - State Management & HTMX: TUTORIALS/part4_state_htmx.md
+    - Part 5 - Routing & Deployments: TUTORIALS/part5_routing_deployment.md
+    - Part 6 - XML & Custom Markup: TUTORIALS/part6_xml_engine.md
+    - Part 7 - Request Pipeline & Context: TUTORIALS/part7_request_context.md
   - Core SSDOM Features:
     - O(1) Memory Streaming: streaming.md
     - SSDOM Manipulation (API): dom_manipulation.md

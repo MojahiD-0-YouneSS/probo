@@ -133,7 +133,7 @@ def test_template_logic_parity():
     """Ensures base_template_string and base_template_tree produce logically identical output."""
     str_out = base_template_string(body_list=body_content(), override_body=True)
     tree_out = base_template_tree()
-    tree_out.html_doc.find(lambda n: n.element_tag == "body").add(body_content())
+    tree_out.html_doc.find(lambda n: n.tag == "BODY").add(body_content())
 
     checkpoints = [
         "<!DOCTYPE html>",
@@ -142,9 +142,10 @@ def test_template_logic_parity():
         "click me",
         "navbar-toggler-icon",
     ]
+    tree_out_string = tree_out.render()
     for cp in checkpoints:
         assert cp in str_out
-        assert cp in tree_out.render()
+        assert cp in tree_out_string
 
 def test_massive_node_injection_scaling():
     """Injects 500 unique nodes to check for performance regressions."""

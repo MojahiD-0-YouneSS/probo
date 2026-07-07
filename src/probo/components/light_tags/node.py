@@ -20,7 +20,7 @@ class LightNode:
         "content",
         "attributes",
         "node_children",
-        "_ElementNodeMixin__void_node",
+        "_void_node",
         "parent",
         "light_tag"
     )

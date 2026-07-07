@@ -5,17 +5,23 @@ from unittest.mock import MagicMock
 
 # Assuming your mixin is saved here, adjust if needed
 from probo.components.node import ElementMutatorMixin
-
+from probo.components.base import BaseHTMLElement
 
 # ==========================================
 # MOCKS AND FIXTURES
 # ==========================================
 
 
-class DummyNode(ElementMutatorMixin):
+class DummyNode(ElementMutatorMixin,BaseHTMLElement):
     """A concrete class to test the mixin behaviors."""
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
 
-    pass
+    def render(self) -> str:
+        return str()
+    def stream(self) -> str:
+        yield str()
+
 
 
 @pytest.fixture
@@ -53,7 +59,7 @@ def mock_element_engine(monkeypatch):
 
 def test_initialization():
     """Tests the default state of the mutator."""
-    node = DummyNode(use_list=True, custom_data="test")
+    node = DummyNode(use_list=True, data={'custom_data' : "test"})
 
     assert node._el_instance is None
     assert node.use_list is True

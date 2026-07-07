@@ -1,5 +1,5 @@
 from typing import Any, Dict, Optional
-from probo.styles import element_style
+from probo.styles.elements import element_style
 from probo.styles.css_enum import CssPropertyEnum, CssFunctionsEnum
 
 class StyleManager:
@@ -64,14 +64,14 @@ class StyleManager:
             except ValueError:
                 continue
 
-    def add(self, name: str, value: str):
+    def add(self, name: str, value: str) -> Self:
         """Adds a style property to the buffer."""
         css_prop = name.lower().replace("_", "-")
         self._read_style_attr()
         self._styles[css_prop] = str(value)
         self.render
         return self  # Allow chaining
-    def remove(self, name: str):
+    def remove(self, name: str) -> Self:
         """Removes a style property from the buffer."""
         self._read_style_attr()
         css_prop = name.lower().replace("_", "-")

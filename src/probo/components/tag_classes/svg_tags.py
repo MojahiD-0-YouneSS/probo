@@ -1,22 +1,33 @@
 from probo.components.base import BaseHTMLElement
-from probo.components.node import ElementNodeMixin,ElementMutatorMixin
+from probo.components.node import ElementNodeMixin,ElementMutatorMixin,DataPipeLineMixin, MutationPipelineMixin
 from typing import Any, Generator
 from probo.utility import StreamManager
 
-class G(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class G(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an G HTML <g> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:g = Element(
         ).set_attrs(**self.attributes).set_content(self.content).g().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -33,37 +44,54 @@ class G(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .g()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-class DEFS(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class DEFS(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an DEFS HTML <defs> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:defs = Element(
         ).set_attrs(**self.attributes).set_content(self.content).defs().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -80,38 +108,54 @@ class DEFS(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .defs()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class TEXT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class TEXT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an TEXT HTML <text> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:text = Element(
         ).set_attrs(**self.attributes).set_content(self.content).text().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -128,38 +172,54 @@ class TEXT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .text()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class TSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class TSPAN(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an TSPAN HTML <tspan> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:tspan = Element(
         ).set_attrs(**self.attributes).set_content(self.content).tspan().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -176,38 +236,55 @@ class TSPAN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .tspan()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class SVG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class SVG(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an SVG HTML <svg> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:svg = Element(
         ).set_attrs(**self.attributes).set_content(self.content).svg().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -224,38 +301,54 @@ class SVG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .svg()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class SYMBOL(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class SYMBOL(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an SYMBOL HTML <symbol> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:symbol = Element(
         ).set_attrs(**self.attributes).set_content(self.content).symbol().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -272,38 +365,54 @@ class SYMBOL(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .symbol()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class MARKER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class MARKER(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an MARKER HTML <marker> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:marker = Element(
         ).set_attrs(**self.attributes).set_content(self.content).marker().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -320,38 +429,54 @@ class MARKER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .marker()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class PATTERN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class PATTERN(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an PATTERN HTML <pattern> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:pattern = Element(
         ).set_attrs(**self.attributes).set_content(self.content).pattern().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -368,38 +493,54 @@ class PATTERN(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .pattern()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class MASK(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class MASK(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an MASK HTML <mask> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:mask = Element(
         ).set_attrs(**self.attributes).set_content(self.content).mask().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -416,38 +557,54 @@ class MASK(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .mask()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class CLIPPATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class CLIPPATH(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an CLIPPATH HTML <clipPath> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:clipPath = Element(
         ).set_attrs(**self.attributes).set_content(self.content).clipPath().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -464,38 +621,54 @@ class CLIPPATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .clipPath()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class LINEARGRADIENT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an LINEARGRADIENT HTML <linearGradient> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:linearGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).linearGradient().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -512,38 +685,54 @@ class LINEARGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .linearGradient()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class RADIALGRADIENT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an RADIALGRADIENT HTML <radialGradient> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:radialGradient = Element(
         ).set_attrs(**self.attributes).set_content(self.content).radialGradient().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -560,38 +749,54 @@ class RADIALGRADIENT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .radialGradient()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FILTER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FILTER(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FILTER HTML <filter> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:filter = Element(
         ).set_attrs(**self.attributes).set_content(self.content).filter().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -608,38 +813,54 @@ class FILTER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .filter()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FECOMPONENTTRANSFER(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FECOMPONENTTRANSFER HTML <feComponentTransfer> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:feComponentTransfer = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feComponentTransfer().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -656,38 +877,54 @@ class FECOMPONENTTRANSFER(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin)
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .feComponentTransfer()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEDIFFUSELIGHTING(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEDIFFUSELIGHTING HTML <feDiffuseLighting> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:feDiffuseLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feDiffuseLighting().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -704,38 +941,54 @@ class FEDIFFUSELIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .feDiffuseLighting()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FEMERGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEMERGE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEMERGE HTML <feMerge> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:feMerge = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feMerge().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -752,38 +1005,54 @@ class FEMERGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .feMerge()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FESPECULARLIGHTING(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FESPECULARLIGHTING HTML <feSpecularLighting> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:feSpecularLighting = Element(
         ).set_attrs(**self.attributes).set_content(self.content).feSpecularLighting().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -800,38 +1069,54 @@ class FESPECULARLIGHTING(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .feSpecularLighting()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class ANIMATEMOTION(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an ANIMATEMOTION HTML <animateMotion> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:animateMotion = Element(
         ).set_attrs(**self.attributes).set_content(self.content).animateMotion().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -848,38 +1133,54 @@ class ANIMATEMOTION(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .animateMotion()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
-class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FOREIGNOBJECT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FOREIGNOBJECT HTML <foreignObject> element."""
 
     __slots__ = ()
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self._set_node_children(self.content)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         '''
         Blueprint:foreignObject = Element(
         ).set_attrs(**self.attributes).set_content(self.content).foreignObject().element'''
-        content=self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content=self._get_rendered_content()
+        else:
+            content=self._get_rendered_content()
+
         return (
             self.EL
             .set_attrs(**self.attributes)
@@ -896,35 +1197,44 @@ class FOREIGNOBJECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         self.delegate_render_conditions(
             use_list=True,
         )
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=batch)
+        else:
+            content_generator = self._get_stream_content(batch=batch)
 
-        content_generator = self._get_stream_content(batch=batch)
 
-        elment_info = (
+        element_info = (
             self.EL.set_attrs(**self.attributes)
             .set_generator_content(content_generator)
             .foreignObject()
             .element
         )
         stream_manager = StreamManager(
-            elment_info[0],
+            element_info[0],
             self.EL.stream(batch=batch),
-            elment_info[-1],
+            element_info[-1],
             chunk_size=batch,
         )
         yield from stream_manager
 
-
 # self closing tags
 
-class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class PATH(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an PATH HTML <path> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).path().element
 
@@ -949,15 +1259,19 @@ class PATH(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class CIRCLE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class CIRCLE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an CIRCLE HTML <circle> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).circle().element
 
@@ -982,15 +1296,19 @@ class CIRCLE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class RECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class RECT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an RECT HTML <rect> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).rect().element
 
@@ -1015,15 +1333,19 @@ class RECT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class LINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class LINE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an LINE HTML <line> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).line().element
 
@@ -1048,15 +1370,19 @@ class LINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class POLYLINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class POLYLINE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an POLYLINE HTML <polyline> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).polyline().element
 
@@ -1081,15 +1407,19 @@ class POLYLINE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class POLYGON(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class POLYGON(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an POLYGON HTML <polygon> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).polygon().element
 
@@ -1114,15 +1444,19 @@ class POLYGON(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class ELLIPSE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class ELLIPSE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an ELLIPSE HTML <ellipse> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).ellipse().element
 
@@ -1147,15 +1481,19 @@ class ELLIPSE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class IMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class IMAGE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an IMAGE HTML <image> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).image().element
 
@@ -1180,15 +1518,19 @@ class IMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEBLEND(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEBLEND(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEBLEND HTML <feBlend> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feBlend().element
 
@@ -1213,15 +1555,19 @@ class FEBLEND(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FECOLORMATRIX(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FECOLORMATRIX HTML <feColorMatrix> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feColorMatrix().element
 
@@ -1246,15 +1592,19 @@ class FECOLORMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FECOMPOSITE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FECOMPOSITE HTML <feComposite> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feComposite().element
 
@@ -1279,15 +1629,19 @@ class FECOMPOSITE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FECONVOLVEMATRIX(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FECONVOLVEMATRIX HTML <feConvolveMatrix> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feConvolveMatrix().element
 
@@ -1312,15 +1666,19 @@ class FECONVOLVEMATRIX(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEDISPLACEMENTMAP(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEDISPLACEMENTMAP HTML <feDisplacementMap> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feDisplacementMap().element
 
@@ -1345,15 +1703,19 @@ class FEDISPLACEMENTMAP(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEDROPSHADOW(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEDROPSHADOW HTML <feDropShadow> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feDropShadow().element
 
@@ -1378,15 +1740,19 @@ class FEDROPSHADOW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEFLOOD(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEFLOOD(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEFLOOD HTML <feFlood> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feFlood().element
 
@@ -1411,15 +1777,19 @@ class FEFLOOD(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEFUNCA(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEFUNCA(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEFUNCA HTML <feFuncA> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feFuncA().element
 
@@ -1444,15 +1814,19 @@ class FEFUNCA(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEFUNCB(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEFUNCB(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEFUNCB HTML <feFuncB> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feFuncB().element
 
@@ -1477,15 +1851,19 @@ class FEFUNCB(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEFUNCG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEFUNCG(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEFUNCG HTML <feFuncG> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feFuncG().element
 
@@ -1510,15 +1888,19 @@ class FEFUNCG(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEFUNCR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEFUNCR(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEFUNCR HTML <feFuncR> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feFuncR().element
 
@@ -1543,15 +1925,19 @@ class FEFUNCR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEGAUSSIANBLUR(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEGAUSSIANBLUR HTML <feGaussianBlur> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feGaussianBlur().element
 
@@ -1576,15 +1962,19 @@ class FEGAUSSIANBLUR(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEIMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEIMAGE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEIMAGE HTML <feImage> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feImage().element
 
@@ -1609,15 +1999,19 @@ class FEIMAGE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEMERGENODE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEMERGENODE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEMERGENODE HTML <feMergeNode> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feMergeNode().element
 
@@ -1642,15 +2036,19 @@ class FEMERGENODE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEMORPHOLOGY(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEMORPHOLOGY HTML <feMorphology> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feMorphology().element
 
@@ -1675,15 +2073,19 @@ class FEMORPHOLOGY(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEOFFSET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEOFFSET(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEOFFSET HTML <feOffset> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feOffset().element
 
@@ -1708,15 +2110,19 @@ class FEOFFSET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FEPOINTLIGHT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FEPOINTLIGHT HTML <fePointLight> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).fePointLight().element
 
@@ -1741,15 +2147,19 @@ class FEPOINTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FESPOTLIGHT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FESPOTLIGHT HTML <feSpotLight> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feSpotLight().element
 
@@ -1774,15 +2184,19 @@ class FESPOTLIGHT(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FETILE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FETILE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FETILE HTML <feTile> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feTile().element
 
@@ -1807,15 +2221,19 @@ class FETILE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class FETURBULENCE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class FETURBULENCE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an FETURBULENCE HTML <feTurbulence> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).feTurbulence().element
 
@@ -1840,15 +2258,19 @@ class FETURBULENCE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class ANIMATE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class ANIMATE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an ANIMATE HTML <animate> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).animate().element
 
@@ -1873,15 +2295,19 @@ class ANIMATE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class ANIMATETRANSFORM(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an ANIMATETRANSFORM HTML <animateTransform> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).animateTransform().element
 
@@ -1906,15 +2332,19 @@ class ANIMATETRANSFORM(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class SET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class SET(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an SET HTML <set> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).set().element
 
@@ -1939,15 +2369,19 @@ class SET(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class VIEW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class VIEW(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an VIEW HTML <view> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).view().element
 
@@ -1972,15 +2406,19 @@ class VIEW(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class USE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class USE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an USE HTML <use> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).use().element
 
@@ -2005,15 +2443,19 @@ class USE(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class STOP(BaseHTMLElement, ElementNodeMixin,ElementMutatorMixin):
+class STOP(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,  MutationPipelineMixin, BaseHTMLElement,):
     """Represents an STOP HTML <stop> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
         return self.EL.set_attrs(**self.attributes).stop().element
 

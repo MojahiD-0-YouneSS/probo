@@ -386,7 +386,7 @@ class ProboFormField:
             or str()
         )
         self.form_field = fields + error_string
-        return ProboSourceString(fields)
+        return ProboSourceString(self.form_field)
 
 
 class ProboForm:
@@ -442,6 +442,7 @@ class ProboForm:
         'submit_btn',
         '_manual_csrf',
         'fields',
+        'field_wrapper'
     )
     
     def __init__(
@@ -458,8 +459,10 @@ class ProboForm:
         override_button_content:str='Submit',
         override_button_attrs:dict[str,Any]=None,
         csrf_token: str = None,
+        field_wrapper: Callable = None,
             **attrs
     ):
+        self.field_wrapper = field_wrapper
         self.form_class = form_class
         self.request_data = request_data
         self.request_form_bool: bool = bool(request_data)
@@ -504,7 +507,7 @@ class ProboForm:
             # Iterate over the Django Form Fields
             for field in self.request_data.form:
                 # Wrap each Django field in MFF and render
-                mff = ProboFormField(dj_field=field)
+                mff = ProboFormField(dj_field=field, wraper_func=self.field_wrapper)
                 fields_html.append(mff.render())
         if self.form_declaration:
             fields_html.append(self.form_declaration)

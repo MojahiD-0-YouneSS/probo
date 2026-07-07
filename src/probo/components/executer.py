@@ -65,7 +65,7 @@ class ProboFunctionalExecuter:
     Everything starts with a Root node.
 
     # Initialize with a root tag (div) and optional attributes
-    exe = ProboFunctionalExecuter(div, id="app-root", class_="container")
+    exe = ProboFunctionalExecuter(div, id="app-root", Class="container")
 
 
     At this point, the AST looks like this: {"root": <div id="app-root" class="container">}
@@ -77,7 +77,7 @@ class ProboFunctionalExecuter:
     If you don't specify a path, it defaults to adding directly to the "root".
 
     # Add to root: exe + _(tag, *content, **kwargs)
-    exe += _(h1, "Admin Dashboard", class_="text-xl")
+    exe += _(h1, "Admin Dashboard", Class="text-xl")
     exe += _(p, "Welcome back, user.")
 
     # Add to a specific path: exe + _("path", tag, *content, **kwargs)
@@ -95,7 +95,7 @@ class ProboFunctionalExecuter:
     Syntax: exe / _("parent_path", "new_branch_name", tag, **kwargs)
 
     # Create a branch named "sidebar" under "root"
-    exe /= _("root", "sidebar", div, class_="sidebar-dark")
+    exe /= _("root", "sidebar", div, Class="sidebar-dark")
 
     # Create a branch named "nav" under "root.sidebar"
     exe /= _("root.sidebar", "nav", div, role="navigation")
@@ -121,10 +121,10 @@ class ProboFunctionalExecuter:
 
     (
         exe
-        + _(h1, "System Overview", class_="title")
-        / _("root", "grid", div, class_="grid-layout")
-        / _("root.grid", "col1", div, class_="col-span-1")
-        / _("root.grid", "col2", div, class_="col-span-2")
+        + _(h1, "System Overview", Class="title")
+        / _("root", "grid", div, Class="grid-layout")
+        / _("root.grid", "col1", div, Class="col-span-1")
+        / _("root.grid", "col2", div, Class="col-span-2")
         / _("root.grid.col1", p, "Stats go here")
         / _("root.grid.col2", l_div, "Light Node Graph Component")
     )
@@ -389,7 +389,7 @@ class ProboFunctionalExecuter:
     def __truediv__(self, other):
         """
         Smart syntactic sugar for nesting AND adding.
-        Usage (Nest):   exe / _("root", "sidebar", div, class_="bg-dark")
+        Usage (Nest):   exe / _("root", "sidebar", div, Class="bg-dark")
         Usage (Add To): exe / _("root.sidebar", a, "Link", href="/")
         """
         if not isinstance(other, tuple) or len(other) < 2:

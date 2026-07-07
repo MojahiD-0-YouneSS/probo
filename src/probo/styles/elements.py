@@ -127,10 +127,10 @@ class ComponentStyle:
             else:
                 raise ValueError("invalid selectors")
         else:
-            if exists_in_dict(self.template_info, s):
+            if exists_in_dict(self.template_info, s.strip(".").strip("#")):
                 selectors = s
             else:
-                raise ValueError("invalid selectors")
+                raise ValueError(f"invalid selectors: {s}")
         # css_rules = f"{' '.join([ c for cr in self.css_rules])}"
         return f"{selectors} {r} \n"
 

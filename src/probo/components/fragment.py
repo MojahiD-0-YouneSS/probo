@@ -1,4 +1,4 @@
-from typing import Generator, Any, Union
+from typing import Generator, Any, Union, Callable
 import inspect
 from probo.components.elements import Element
 from probo.utility import ProboSourceString
@@ -34,8 +34,8 @@ def _resolve_content(content, stream=False, batch=50,EL:Element=None):
                 yield ProboSourceString(item)
 
 def frag(
-    *content, stream: bool = False, batch: int = 50, EL: Element = None
-) -> Union[str, Generator[str, None, None]]:
+    *content, stream: bool = False, batch: int = 50, EL: Element = None, fragments: list[Callable] = None
+) -> Union[ProboSourceString, Generator[str, None, None]]:
     """
     The Functional Ghost Node (v1.3.4).
 
@@ -49,8 +49,20 @@ def frag(
             stream=True
         )
     """
+    if fragments:
+        extracted = []
+        for item in content:
+            # Check if it's an SSDOM tree (it has a 'find' method)
+            if hasattr(item, "find"):
+                for func in fragments:
+                    found = item.find(func)
+                    if found:
+                        extracted.append(found)
+        content = tuple(extracted)
+
     if stream:
-        return _resolve_content(content, stream=True, batch=batch,EL=EL)
+        return _resolve_content(content, stream=True, batch=batch, EL=EL)
 
     # Eagerly join content into a single joint string
     return ProboSourceString("".join(_resolve_content(content, stream=False, EL=EL)))
+

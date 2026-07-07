@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../PythonProject/.idea/PythonProject.iml" filepath="$PROJECT_DIR$/../PythonProject/.idea/PythonProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/../django-abstract/.idea/django-abstract.iml" filepath="$PROJECT_DIR$/../django-abstract/.idea/django-abstract.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/probo.iml" filepath="$PROJECT_DIR$/.idea/probo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../probo-ui-tutorial/.idea/probo-ui-tutorial.iml" filepath="$PROJECT_DIR$/../probo-ui-tutorial/.idea/probo-ui-tutorial.iml" />
       <module fileurl="file://$PROJECT_DIR$/../probo_website/.idea/probo_website.iml" filepath="$PROJECT_DIR$/../probo_website/.idea/probo_website.iml" />
     </modules>
   </component>

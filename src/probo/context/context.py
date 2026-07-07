@@ -8,6 +8,14 @@ class ProboContextProvider:
     Provides context to the SSDOM tree without prop-drilling.
     """
 
+    def __init__(self, **inline_context: Any):
+        """
+        Initializes a scoped context.
+        Accepts kwargs for immediate injection during the `with` block.
+        """
+        self._inline_context = inline_context
+        # Define instance variables here to keep linters happy
+        self._snapshot: Dict[str, Any] = {}
     # The 'Storage' part: thread-local prevents data leaking between concurrent users.
     _storage = threading.local()
 
@@ -50,19 +58,34 @@ class ProboContextProvider:
                 del cls._storage.bucket[key]
             else:
                 cls._storage.bucket.clear()
+    #
+    # def __enter__(self):
+    #     """Allows scoped context injection using 'with Context():'"""
+    #     # Snapshot the existing keys before entering the scope
+    #     self._snapshot = set(self._get_bucket().keys())
+    #     return self.__class__
+    #
+    # def __exit__(self, exc_type, exc_val, exc_tb):
+    #     """Automatically clears only the new keys added during the scope."""
+    #     bucket = self._get_bucket()
+    #     # Find and delete only the keys that were not in our snapshot
+    #     keys_to_remove = [
+    #         k for k in bucket.keys() if k not in getattr(self, "_snapshot", set())
+    #     ]
+    #     for k in keys_to_remove:
+    #         del bucket[k]
 
     def __enter__(self):
-        """Allows scoped context injection using 'with Context():'"""
-        # Snapshot the existing keys before entering the scope
-        self._snapshot = set(self._get_bucket().keys())
+        # 1. Take a SHALLOW COPY of the entire dictionary to preserve exact values
+        self._snapshot = self._get_bucket().copy()
+
+        # 2. Push any inline arguments passed during instantiation
+        if self._inline_context:
+            self.push(**self._inline_context)
+
         return self.__class__
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        """Automatically clears only the new keys added during the scope."""
-        bucket = self._get_bucket()
-        # Find and delete only the keys that were not in our snapshot
-        keys_to_remove = [
-            k for k in bucket.keys() if k not in getattr(self, "_snapshot", set())
-        ]
-        for k in keys_to_remove:
-            del bucket[k]
+        # Completely restore the bucket to its exact state before the `with` block
+        # This prevents both new keys from leaking AND existing keys from being permanently mutated.
+        self._storage.bucket = self._snapshot

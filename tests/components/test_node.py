@@ -9,6 +9,7 @@ class Node(ElementNodeMixin):
         self.tag = tag
         self.id = id or str(uuid.uuid4())[:8]
         self.classes = classes or []
+        self.content = []
 
 # --- Pytest Suite ---
 @pytest.fixture
@@ -159,3 +160,154 @@ def test_find_all_multiple_branches():
     right = Node("div")
     root.add(left).add(right)
     assert len(root.find_all(lambda n: n.tag == "div")) == 2
+
+def test_ssdom_navigation_properties(complex_tree):
+    root, body, main, nav = complex_tree
+    
+    assert root.first_child == body
+    assert root.last_child == body
+    
+    assert body.first_child == nav
+    assert body.last_child == main
+    
+    assert nav.next_sibling == main
+    assert main.previous_sibling == nav
+    assert nav.previous_sibling is None
+    assert main.next_sibling is None
+
+def test_ssdom_ancestors(complex_tree):
+    root, body, main, nav = complex_tree
+    section = main.node_children[0]
+    
+    ancs = list(section.ancestors)
+    assert ancs == [main, body, root]
+
+def test_ssdom_append_prepend():
+    parent = Node()
+    child1 = Node("1")
+    child2 = Node("2")
+    child3 = Node("3")
+    
+    parent.append(child1, child2)
+    assert parent.node_children == [child1, child2]
+    
+    parent.prepend(child3)
+    assert parent.node_children == [child3, child1, child2]
+
+def test_ssdom_insert_before_and_replace_with():
+    parent = Node()
+    c1 = Node("1")
+    c3 = Node("3")
+    parent.append(c1, c3)
+    
+    c2 = Node("2")
+    parent.insert_before(c2, c3)
+    assert parent.node_children == [c1, c2, c3]
+    
+    c4 = Node("4")
+    c2.replace_with(c4)
+    assert parent.node_children == [c1, c4, c3]
+    assert c2.parent is None
+    assert c4.parent == parent
+
+def test_ssdom_clear_children():
+    parent = Node()
+    parent.append(Node("1"), Node("2"))
+    assert len(parent.node_children) == 2
+    parent.clear_children()
+    assert len(parent.node_children) == 0
+
+def test_ssdom_clone_node(complex_tree):
+    root, body, main, nav = complex_tree
+    
+    # shallow clone
+    cloned_nav = nav.clone_node(deep=False)
+    assert cloned_nav is not nav
+    assert cloned_nav.tag == nav.tag
+    assert len(cloned_nav.node_children) == 0
+    assert cloned_nav.parent is None
+    
+    # deep clone
+    cloned_body = body.clone_node(deep=True)
+    assert len(cloned_body.node_children) == len(body.node_children)
+    assert cloned_body.node_children[0] is not nav
+    assert cloned_body.node_children[0].tag == nav.tag
+
+def test_ssdom_text_content():
+    parent = Node()
+    parent.append("Hello")
+    child = Node()
+    child.append("World!")
+    parent.append(child)
+    
+    assert parent.text_content == "Hello World!"
+
+def test_remove_with_callable():
+    root = Node("root")
+    target = Node("div")
+    root.add(target)
+    
+    # Remove using a callable that finds the node by tag
+    root.remove("div", lambda tag: root.find(lambda n: n.tag == tag))
+    
+    assert len(root.node_children) == 0
+    assert target.parent is None
+
+def test_pop_with_callable():
+    root = Node("root")
+    target = Node("span")
+    root.add(target)
+    
+    # Pop using a callable
+    popped = root.pop("span", lambda tag: root.find(lambda n: n.tag == tag))
+    
+    assert popped is target
+    assert len(root.node_children) == 0
+    assert target.parent is None
+
+def test_ssdom_text_properties():
+    parent = Node()
+    parent.append("Direct text 1")
+    child = Node()
+    child.append("Inner text")
+    parent.append(child)
+    parent.append("Direct text 2")
+    
+    # text should only get direct string children
+    assert parent.text == "Direct text 1Direct text 2"
+    
+    # inner_text should return a list of all texts recursively
+    assert parent.inner_text == ["Direct text 1", "Inner text", "Direct text 2"]
+
+def test_ssdom_creation_helpers():
+    parent = Node()
+    
+    # create_element should instantiate an Element (or LightNode if is_light=True) and append it
+    heavy_child = parent.create_element(tag="div", is_light=False)
+    light_child = parent.create_element(tag="span", is_light=True)
+    
+    assert parent.get_child_count() == 2
+    
+    children_col = parent.get_children()
+    assert len(children_col) == 2
+    assert children_col.first is heavy_child
+    assert children_col.last is light_child
+
+def test_get_max_depth():
+    root = Node("div")
+    assert root.get_max_depth() == 0
+
+    child1 = Node("span")
+    child2 = Node("span")
+    root.append(child1, child2)
+    assert root.get_max_depth() == 1
+
+    grandchild = Node("a")
+    child1.append(grandchild)
+    assert root.get_max_depth() == 2
+    assert child1.get_max_depth() == 1
+    assert child2.get_max_depth() == 0
+
+    great_grandchild = Node("b")
+    grandchild.append(great_grandchild)
+    assert root.get_max_depth() == 3

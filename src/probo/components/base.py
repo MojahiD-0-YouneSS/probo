@@ -187,6 +187,7 @@ class ElementAttributeManipulator:
             Self: The current instance for method chaining.
         """
         return self.set_attr("Id", unique_id)
+    
     def get_id(self,) -> str|None:
         """
         Shorthand method to set the 'id' attribute.
@@ -228,6 +229,71 @@ class ElementAttributeManipulator:
 
         reserved_attrs = {'id':'Id','class':'Class',}
         return reserved_attrs.get(key.lower(),key)
+    
+    def __getitem__(self, key: str) -> str:
+        return self.get_attr(key)
+        
+    def __setitem__(self, key: str, value: Union[str, bool]) -> None:
+        self.set_attr(key, value)
+        
+    def __delitem__(self, key: str) -> None:
+        self.remove_attr(key)
+        
+    def __contains__(self, key: str) -> bool:
+        return self._normalize_attr_key(key) in self.attrs
+
+    def get(self, key: str, default=None) -> Any:
+        """Returns the attribute value if it exists, otherwise default."""
+        return self.attrs.get(self._normalize_attr_key(key), default)
+
+    def items(self):
+        """Returns a view of the attribute items."""
+        return self.attrs.items()
+
+    def keys(self):
+        """Returns a view of the attribute keys."""
+        return self.attrs.keys()
+
+    def update(self, **kwargs) -> Self:
+        """Updates attributes from a dictionary or kwargs."""
+        for k, v in kwargs.items():
+            self[k] = v
+        return self
+
+    def toggle_attr(self, key: str, condition: bool = None) -> Self:
+        """Toggles a boolean HTML attribute on or off."""
+        norm_key = self._normalize_attr_key(key)
+        if condition is True:
+            self[norm_key] = True
+        elif condition is False:
+            if norm_key in self.attrs:
+                del self[norm_key]
+        else:
+            if norm_key in self.attrs:
+                del self[norm_key]
+            else:
+                self[norm_key] = True
+        return self
+
+    def set_attr_if(self, condition: bool, key: str, value: Any) -> Self:
+        """Sets an attribute only if the condition evaluates to True."""
+        if condition:
+            self[key] = value
+        return self
+
+    def render_attrs(self) -> str:
+        """Converts the attributes dictionary into a valid HTML attribute string."""
+        if not self.attrs:
+            return ""
+        
+        parts = []
+        for k, v in self.attrs.items():
+            if str(v) == k:
+                parts.append(k)
+            else:
+                parts.append(f'{k}="{v}"')
+                
+        return " " + " ".join(parts)
     
     def set_style(self, property: str, value: str) -> Self:
         """
@@ -367,7 +433,6 @@ class ComponentAttrManager(ElementAttributeManipulator):
             dictionaries of HTML attributes.
         """
         return self.children
-
 class BaseHTMLElement(ABC):
     """The abstract base class for all ProboUI HTML elements.
 
@@ -380,7 +445,7 @@ class BaseHTMLElement(ABC):
         content (tuple): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
-    __slots__ = ('attributes', 'content','node_children', '_render_conditions', 'parent','_ElementNodeMixin__void_node', 'element_tag', '_override_style')
+    __slots__ = ('attributes', 'content','node_children', 'rendering', 'custom_attrs','_render_conditions', 'parent','_void_node', 'element_tag', '_override_style', "_DataPipLineMixin__policy","_data_pipeline", "_data_policies", "_custom_retriever", "_has_pipeline_vars", "strict_data")
 
     def __init__(self, *content:str, **kwargs:Any):
         """
@@ -391,11 +456,21 @@ class BaseHTMLElement(ABC):
             **kwargs: Arbitrary keyword arguments representing HTML attributes.
                       (e.g., class_='my-class', id='my-id', style='color: red;').
         """
+        super().__init__()
         self.content = deque(content) if isinstance(content, tuple) else deque((content,))
-        self.element_tag=''
+        self.element_tag=None if not hasattr(self,'tag') else str(self.tag).lower()
         self.attributes = kwargs
         self._override_style = False
         self._render_conditions={}
+        self.rendering = False
+        # self.custom_attrs = kwargs.pop('custom_attrs', False)
+        # if self.custom_attrs:
+        #     if hasattr(self,'enforce_custom_attrs'):
+        #         print(self.tag,self.node_children)
+        #         self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False))
+        if hasattr(self, 'element_tag') and not self.element_tag:
+            self.element_tag = self.__class__.__name__.lower()
+
     @property
     def attr_manager(self) -> ElementAttributeManipulator:
         """Accesses the attribute manipulator for this element.
@@ -408,13 +483,14 @@ class BaseHTMLElement(ABC):
 
     @property
     def style_manager(self) -> 'StyleManager':
+        from probo.styles.style_manager import StyleManager
         """Accesses the style manager for this element.
 
         Returns:
             An instance of StyleManager initialized with 
             the element's current attributes, allowing for chainable updates.
         """
-        from probo.styles.style_manager import StyleManager
+        
         return StyleManager(self.attributes,self._override_style)
 
     def inner_html(self, *content:tuple[str|Self]) -> Self:
@@ -426,8 +502,21 @@ class BaseHTMLElement(ABC):
                       instances, or lists of such instances.
         """
         self.content=deque(content)
+        if hasattr(self,'reset_node_children'):
+            self.reset_node_children()
+            self._set_node_children(self.content)
         return self
 
+    def include_custom_attrs(self) -> Self:
+        if hasattr(self,'attributes'):
+            self.attributes.update(
+                {
+                    'probo_custom_attrs':True,
+                }
+            )
+            return True
+        return self
+    
     def add_render_constraints(self, **constraints:str) -> Self:
         """Adds rendering constraints to the element.
 
@@ -453,33 +542,32 @@ class BaseHTMLElement(ABC):
         Returns:
             A string containing the concatenated HTML of all child items.
         """
+        if self._render_conditions:
+            if hasattr(self, 'get_data'):
+                for x,v in self._render_conditions.items():
+                    resolved_x = self.get_data(x)
+                    if not resolved_x == v:
+                        return []
+        self.rendering = True
+        if hasattr(self,'before_render_exe'):
+            self.before_render_exe()
         use_list = self.use_list if hasattr(self, "use_list") else False
         use_deque = self.use_deque if hasattr(self, "use_deque") else False
 
-        if not use_list and not self.use_deque:
-            collector = ""
+        if not use_list and not use_deque:
+            collector = []
         else:
             collector = deque() if use_deque else list()
 
-        # 2. Helper to add items to the collector based on type
-        def _add_to_collector(target, item):
-            if not use_list:
-                if isinstance(item, (list, deque)):
-                    return target + "".join((x if isinstance(x, ProboSourceString) else markup_escape(x)) for x in item)
-                return target + (item if isinstance(item, ProboSourceString) else markup_escape(item))
-            else:
-                # If the item is already a collection, merge it (O(1) if deque)
-                if isinstance(item, (list, deque)):
-                    target.extend(item)
-                else:
-                    target.append(item if isinstance(item, ProboSourceString) else markup_escape(item))
-                return target
+        last_was_text = False
 
         # 3. Process the content
         for item in self.content:
             rendered = None
+            has_render = False
             # Scenario A: Child is a Component (Class)
             if hasattr(item, "render"):
+                last_was_text = False
                 # Ensure the child knows our engine flags before it renders
                 if hasattr(item, "light_tag"):
                     rendered = item.render(self.EL)
@@ -490,6 +578,7 @@ class BaseHTMLElement(ABC):
 
             # Scenario B: Child is a raw Iterable (list of tags/strings)
             elif inspect.isgenerator(item):
+                last_was_text = False
                 if use_list and use_deque:
                     rendered = ( deque((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item))
                 elif use_list and use_deque:
@@ -500,6 +589,7 @@ class BaseHTMLElement(ABC):
             elif isinstance(item, Iterable) and not isinstance(
                 item, (str, bytes, deque)
             ):
+                last_was_text = False
                 # Handle nested lists/iterables recursively
                 sub_collector = deque() if self.use_deque else list()
                 for sub in item:
@@ -517,43 +607,84 @@ class BaseHTMLElement(ABC):
 
             # Scenario C: Child is a raw value (String, Int, etc.)
             else:
+                if not isinstance(item, ProboSourceString):
+                    if last_was_text:
+                        collector.append(" ")
+                    last_was_text = True
+                else:
+                    last_was_text = False
                 rendered = item if isinstance(item, ProboSourceString) else markup_escape(item)
 
             # Merge the rendered result into our main collector
-            collector = _add_to_collector(collector, rendered)
-
-        return collector
+            if isinstance(rendered, (list, deque)):
+                if not use_list and not use_deque:
+                    collector.append(" ".join(str(x) for x in rendered))
+                else:
+                    collector.extend(rendered)
+            else:
+                if not use_list and not use_deque:
+                    collector.append(str(rendered))
+                else:
+                    collector.append(rendered)
         
+        self.rendering = False
+        
+        if use_deque:
+            return deque(collector) if not isinstance(collector, deque) else collector
+        elif use_list:
+            return collector
+        else:
+            return "".join(collector)
+
     def _get_stream_content(self, batch: int = 50) -> Generator[str, None, None]:
         """
         The streaming engine: Iterates through children and yields HTML fragments.
         If a child has a .stream() method, it delegates the generator.
         """
-
+        if self._render_conditions:
+            if hasattr(self, 'get_data'):
+                for x,v in self._render_conditions.items():
+                    resolved_x = self.get_data(x)
+                    if not resolved_x == v:
+                        yield (_ for _ in range(0))
+        self.rendering = True
+        if hasattr(self,'before_render_exe'):
+            self.before_render_exe()
+        last_was_text = False
         def _process_item(item):
+            nonlocal last_was_text
             # BUGFIX: Catch generators and consume them lazily!
             if inspect.isgenerator(item):
                 for sub_item in item:
                     yield from _process_item(sub_item)
             elif hasattr(item, "stream"):
+                last_was_text = False
                 if hasattr(item, "light_tag"):
                     yield from item.stream(self.EL, batch=batch)
                 else:
                     yield from item.stream(batch=batch)
             elif hasattr(item, "render"):
+                last_was_text = False
                 res = item.render()
                 if isinstance(res, (list, deque)):
                     yield from res
                 else:
                     yield res
             else:
+                if not isinstance(item, ProboSourceString):
+                    if last_was_text:
+                        yield " "
+                    last_was_text = True
+                else:
+                    last_was_text = False
                 yield str(item)
-
+        
         for item in self.content:
             yield from _process_item(item)
+        self.rendering = False
 
     @abstractmethod
-    def render(self) -> str:
+    def render(self) -> ProboSourceString:
         """Abstract method to generate the final HTML string for the element.
 
         This must be implemented by concrete subclasses (e.g., `Div`, `Span`).
@@ -567,7 +698,7 @@ class BaseHTMLElement(ABC):
         raise NotImplementedError("Subclasses must implement the render method.")
 
     @abstractmethod
-    def stream(self) -> str:
+    def stream(self) -> ProboSourceString:
         """Abstract method to stream the final HTML for the element.
 
         This must be implemented by concrete subclasses (e.g., `Div`, `Span`).
@@ -579,3 +710,29 @@ class BaseHTMLElement(ABC):
             NotImplementedError: If the subclass does not implement this method.
         """
         raise NotImplementedError("Subclasses must implement the stream method.")
+
+    def __await__(self) -> ProboSourceString:
+        """
+        Allows the element to be awaited, resolving any coroutine children
+        asynchronously before rendering and returning the HTML string.
+        """
+        async def _resolve_and_render():
+            content = getattr(self, "content", [])
+            if content:
+                resolved_content = []
+                for item in content:
+                    if hasattr(item, '__await__'):
+                        resolved_item = await item
+                        resolved_content.append(resolved_item)
+                    else:
+                        resolved_content.append(item)
+                
+                self.content = tuple(resolved_content)
+                
+                if hasattr(self, 'node_children') and hasattr(self, '_set_node_children'):
+                    self.node_children.clear()
+                    self._set_node_children(self.content)
+                    
+            return self.render()
+
+        return _resolve_and_render().__await__()

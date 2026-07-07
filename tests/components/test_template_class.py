@@ -119,7 +119,6 @@ def test_load_base_template(base_tree):
     Expected: The loaded tree is used as the structure for rendering.
     """
     tmpl = Template(separator="\n")
-    print(BODY().element_tag)
     tmpl.load_base_template(base_tree,use_as_base=True)  # Simulate loading a base template
 
     html = tmpl.render()

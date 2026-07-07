@@ -4,7 +4,7 @@ from unittest.mock import patch, mock_open
 # Check if bs4 is available, otherwise skip these tests
 
 
-from src.probo.xml.xml import HtmlToXmlConverter  # Assuming you save your snippet here
+from src.probo.xml.xml import HtmlToXmlConverter
 
 
 class TestHtmlToXmlConverter:

@@ -287,3 +287,45 @@ def test_mff_builder_output():
     assert 'name="result"' in html
     assert 'for="a b"' in html
     assert "Total:" in html
+
+def test_probo_form_field_custom_wrapper():
+    """
+    Test that the wraper_func successfully wraps the generated field content.
+    """
+    def custom_wrapper(content):
+        return f"<div class='custom-wrapper'>{content}</div>"
+
+    mff = ProboFormField(wraper_func=custom_wrapper)
+    mff.add_input(name="wrapped_input", value="123")
+    
+    html = mff.render()
+    assert "<div class='custom-wrapper'>" in html
+    assert "wrapped_input" in html
+
+
+def test_probo_form_field_errors_retained():
+    """
+    Test that validation errors correctly persist in the output (bug fix).
+    """
+    mff = ProboFormField()
+    
+    # Mocking a django-like field structure that has validation errors
+    mff.dj_field_info = {
+        "input": {
+            "errors": ["This field is required.", "Must be at least 5 chars."],
+            "attrs": {"name": "username"},
+            "label": "Username",
+            "tag": "input"
+        }
+    }
+    mff.widget_info = {
+        "username-input": "<input name='username'/>"
+    }
+    
+    html = mff.render()
+    
+    # Ensure both the field and the errors are present in the final returned string
+    assert "<input name='username'/>" in html
+    assert "This field is required." in html
+    assert "Must be at least 5 chars." in html
+    assert 'class="errors"' in html

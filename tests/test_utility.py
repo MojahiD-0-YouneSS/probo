@@ -312,3 +312,58 @@ def test_resolve_stream_light_tag_class():
         _resolve_stream((MockLightComponentFallback(),), chunk_size=10, EL=None)
     )
     assert results_without_el == ["Fallback stream"]
+
+# ==========================================
+# TESTS: HTMLCollection
+# ==========================================
+from probo.utility import HTMLCollection
+
+class DummyNode:
+    def __init__(self, val):
+        self.val = val
+        self.classes = set()
+    def add_class(self, *cls):
+        self.classes.update(cls)
+
+def test_html_collection_basic():
+    col = HTMLCollection([DummyNode(1), DummyNode(2), DummyNode(3)])
+    assert len(col) == 3
+    assert col.first.val == 1
+    assert col.last.val == 3
+    assert col[1].val == 2
+    assert bool(col) is True
+    
+    empty_col = HTMLCollection()
+    assert bool(empty_col) is False
+
+def test_html_collection_for_each():
+    col = HTMLCollection([DummyNode(1), DummyNode(2)])
+    res = []
+    col.for_each(lambda n: res.append(n.val))
+    assert res == [1, 2]
+    
+    res_idx = []
+    col.for_each(lambda n, i: res_idx.append((n.val, i)))
+    assert res_idx == [(1, 0), (2, 1)]
+
+def test_html_collection_map():
+    col = HTMLCollection([DummyNode(1), DummyNode(2), DummyNode(3)])
+    res = col.maping(lambda n: n.val * 10)
+    assert res == [10, 20, 30]
+
+def test_html_collection_filter():
+    col = HTMLCollection([DummyNode(1), DummyNode(2), DummyNode(3)])
+    filtered = col.filter(lambda n: n.val % 2 != 0)
+    assert len(filtered) == 2
+    assert filtered.first.val == 1
+    assert filtered.last.val == 3
+
+def test_html_collection_add_class():
+    n1 = DummyNode(1)
+    n2 = DummyNode(2)
+    col = HTMLCollection([n1, n2])
+    col.add_class("btn", "btn-primary")
+    
+    assert "btn" in n1.classes
+    assert "btn-primary" in n2.classes
+

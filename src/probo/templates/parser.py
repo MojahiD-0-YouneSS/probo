@@ -1,31 +1,41 @@
 from html.parser import HTMLParser
 from typing import List, Dict, Any, Union, Callable,Generator
 from probo.components.node import (
-    ElementMutatorMixin,ElementNodeMixin
+    ElementMutatorMixin,ElementNodeMixin, DataPipeLineMixin, MutationPipelineMixin
 )
 from probo.components.light_tags.node import LightNode
 from probo.components.base import BaseHTMLElement
 from probo.utility import StreamManager
 import re
 
-class HeavyNodeProxy(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class HeavyNodeProxy(DataPipeLineMixin,ElementNodeMixin,ElementMutatorMixin, MutationPipelineMixin, BaseHTMLElement):
     __slots__ = ("parsed_tag","_el_instance", "use_list", "use_deque", "element_data")
 
     def __init__(
         self,tag, *content: tuple[str | ElementNodeMixin], **attrs: dict[str, Any]
     ):
-        self.parsed_tag=tag
         super().__init__(*content, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
+        self.parsed_tag=tag
         self._set_node_children(content)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),
+                                      kwargs=self.attributes)
     def render(self) -> str:
         """
         Blueprint:a = Element(
         ).set_attrs(**self.attributes).set_content(self.content).a().element"""
 
-        content = self._get_rendered_content()
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                content = ""
+            else:
+                content = self._get_rendered_content()
+        else:
+            content = self._get_rendered_content()
         self.EL.set_attrs(**self.attributes).set_content(content)
         method = getattr(self.EL, self.parsed_tag, None)
         if callable(method):
@@ -41,7 +51,13 @@ class HeavyNodeProxy(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
             use_list=True,
         )
 
-        content_generator = self._get_stream_content(batch=chunk_size)
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables():
+                content_generator = (_ for _ in range(0))
+            else:
+                content_generator = self._get_stream_content(batch=chunk_size)
+        else:
+                content_generator = self._get_stream_content(batch=chunk_size)
 
         (self.EL.set_attrs(**self.attributes)
         .set_generator_content(content_generator))
@@ -68,7 +84,7 @@ class HeavyNodeProxy(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         children = f", children={len(self.content)}" if self.content else ""
         return f"HeavyNodeProxy(<{self.tag}>{children})"
 
-class LightNodeProxy(LightNode,ElementNodeMixin):
+class LightNodeProxy(DataPipeLineMixin,ElementNodeMixin, MutationPipelineMixin, LightNode,):
 
     __slots__ = ("parsed_tag","_el_instance", "use_list", "use_deque", "element_data")
 
@@ -78,11 +94,18 @@ class LightNodeProxy(LightNode,ElementNodeMixin):
         *content: tuple[str | ElementNodeMixin],
         **attrs: dict[str, Any],
     ):
-        self.parsed_tag=tag
         super().__init__(*content,tag=tag, **attrs)
-        ElementNodeMixin.__init__(self)
-        self._set_node_children(content)
+        self.extract_pipeline_args(attrs)
 
+        self.parsed_tag=tag
+        self._set_node_children(content)
+        self.resolve_pipeline_variables()
+
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),
+                                      kwargs=self.attributes)
     def render(self,EL)->str:
         return super().render(EL)
 

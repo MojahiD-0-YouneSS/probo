@@ -199,11 +199,12 @@ class Component(ComponentNode):
 
         render_result = component.render()
         if isinstance(render_result, tuple):
-            html, _ = render_result
-            # Note: You might want to bubble up the CSS here too,
-            # but for now we just store HTML
+            html, css = render_result
+            # Store both HTML and CSS
             self.children.update({component.name: html})
-            self.active_css_rules.update(component.active_css_rules)
+            # Add the sub-component's CSS to this component's active rules
+            #self.active_css_rules.update(component.active_css_rules)
+            self.active_css_rules.extend(component.active_css_rules)
         else:
             self.children.update({component.name: render_result})
 

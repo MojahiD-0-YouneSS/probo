@@ -1,26 +1,27 @@
 from probo.components.base import BaseHTMLElement
-from probo.components.node import ElementNodeMixin,ElementMutatorMixin
+from probo.components.node import ElementNodeMixin,ElementMutatorMixin, DataPipeLineMixin, MutationPipelineMixin
 from probo.utility import StreamManager
-from typing import Any,Generator,Self
+from probo.type_hints import GenericSSDOM
+from typing import Any,Generator
 
 
-class DOCTYPE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class DOCTYPE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an DOCTYPE HTML <!> line break element (self-closing)."""
 
     __slots__ = ('html_doc',)
-    def __init__(self, content:ElementNodeMixin|None=None, **kwargs:Any):
+    def __init__(self, content:GenericSSDOM|None=None, **kwargs:Any):
         super().__init__(content, **kwargs)
-        ElementMutatorMixin.__init__(self)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([], True)
-        self.html_doc: ElementNodeMixin | None = None
+        self.html_doc: GenericSSDOM | None = None
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
         if (
             content
-            and isinstance(content, BaseHTMLElement)
-            and content.element_tag == "html"
-            or isinstance(content, ElementNodeMixin)
-            and hasattr(content, "light_tag")
-            and content.light_tag == "html"
+            and issubclass(content.__class__, BaseHTMLElement)
+            and content.tag == "HTML"
+
         ):
             self.html_doc = content
     def render(self):
@@ -32,9 +33,12 @@ class DOCTYPE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
 
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
         if self.html_doc is not None:        
             content_generator = self.html_doc.stream(batch=batch)
         else:
@@ -53,27 +57,33 @@ class DOCTYPE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class AREA(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class AREA(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an AREA HTML <area> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
-
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).area().element
 
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -88,25 +98,32 @@ class AREA(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class BASE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class BASE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an BASE HTML <base> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).base().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -121,25 +138,32 @@ class BASE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class BR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class BR(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an BR HTML <br> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).br().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -154,25 +178,32 @@ class BR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class COL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class COL(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an COL HTML <col> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).col().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -187,25 +218,32 @@ class COL(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class EMBED(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class EMBED(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an EMBED HTML <embed> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).embed().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -220,25 +258,32 @@ class EMBED(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class HR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class HR(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an HR HTML <hr> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).hr().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -253,25 +298,32 @@ class HR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class IMG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class IMG(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an IMG HTML <img> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).img().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -286,25 +338,32 @@ class IMG(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class INPUT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class INPUT(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an INPUT HTML <input> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).input().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -319,25 +378,32 @@ class INPUT(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class LINK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class LINK(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an LINK HTML <link> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).link().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -352,25 +418,32 @@ class LINK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class META(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class META(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an META HTML <meta> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).meta().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -385,25 +458,32 @@ class META(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class PARAM(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class PARAM(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an PARAM HTML <param> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).param().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -418,25 +498,32 @@ class PARAM(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class SOURCE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class SOURCE(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an SOURCE HTML <source> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).source().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -451,25 +538,32 @@ class SOURCE(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class TRACK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class TRACK(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an TRACK HTML <track> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).track().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,
@@ -484,25 +578,32 @@ class TRACK(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
         yield from stream_manager
 
 
-class WBR(BaseHTMLElement,ElementNodeMixin,ElementMutatorMixin):
+class WBR(DataPipeLineMixin, ElementNodeMixin,ElementMutatorMixin,MutationPipelineMixin,BaseHTMLElement):
     """Represents an WBR HTML <wbr> line break element (self-closing)."""
 
     __slots__ = ()
     def __init__(self, **kwargs:Any):
         super().__init__(**kwargs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children([],True)
-        ElementMutatorMixin.__init__(self)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self):
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         return self.EL.set_attrs(**self.attributes).wbr().element
     def stream(self, batch: int = 50) -> Generator[str, None, None]:
         """
         Blueprint:meter = Element(
         ).set_attrs(**self.attributes).meter().element"""
+        if self.has_unresolved_pipeline_vars:
+            self.resolve_pipeline_variables(swap_vars=True)
         self.delegate_render_conditions(
             use_list=True,
         )
+
 
         stream_manager = StreamManager(
             None,

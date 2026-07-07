@@ -64,7 +64,7 @@ def test_init(tmp_path):
         # Verify scaffolding
         assert (tmp_path / "my_new_app" / "main.py").exists()
         assert (tmp_path / "my_new_app" / "probo_tcm.py").exists()
-        assert (tmp_path / "my_new_app" / "components" / "__init__.py").exists()
+        assert (tmp_path / "my_new_app" / "ui"/"components" / "__init__.py").exists()
     finally:
         os.chdir(original_cwd)
 
@@ -102,7 +102,7 @@ def test_dj_app_base(mock_subprocess, tmp_path):
         mock_subprocess.assert_called_once()
 
         # Verify Probo scaffolding was injected into the Django app
-        assert (tmp_path / "my_django_app" / "components").exists()
+        assert (tmp_path / "my_django_app" / "ui"/"components").exists()
         assert (tmp_path / "my_django_app" / "probo_tcm.py").exists()
     finally:
         os.chdir(original_cwd)
@@ -224,3 +224,89 @@ my_routes = [MockRoute("/index"), MockRoute("/about")]
     assert "<h1>Done</h1>" in (out_dir / "index.html").read_text()
     assert "<h1>Done</h1>" in (out_dir / "about.html").read_text()
 
+# ==========================================
+# FRAMEWORK SCAFFOLDING TESTS
+# ==========================================
+
+def test_scaffold_fastapi_standard(tmp_path):
+    import os
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, ["fastapi", "my_fastapi", "--structure", "standard"])
+        assert result.exit_code == 0
+        assert "Created FastAPI App" in result.stdout
+        
+        project = tmp_path / "my_fastapi"
+        assert project.exists()
+        assert (project / "app" / "main.py").exists()
+        assert (project / "app" / "ui" / "base.py").exists()
+        assert (project / "requirements.txt").exists()
+    finally:
+        os.chdir(original_cwd)
+
+def test_scaffold_fastapi_advanced(tmp_path):
+    import os
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, ["fastapi", "my_fastapi_adv", "--structure", "advanced"])
+        assert result.exit_code == 0
+        assert "Created FastAPI App" in result.stdout
+        
+        project = tmp_path / "my_fastapi_adv"
+        assert project.exists()
+        assert (project / "app" / "main.py").exists()
+        assert (project / "app" / "routers").is_dir()
+        assert (project / "app" / "internal").is_dir()
+    finally:
+        os.chdir(original_cwd)
+
+def test_scaffold_litestar(tmp_path):
+    import os
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, ["litestar", "my_litestar"])
+        assert result.exit_code == 0
+        assert "Created Litestar App" in result.stdout
+        
+        project = tmp_path / "my_litestar"
+        assert project.exists()
+        assert (project / "app" / "main.py").exists()
+        assert (project / "app" / "controllers" / "home.py").exists()
+        assert (project / "app" / "ui" / "views" / "index.py").exists()
+    finally:
+        os.chdir(original_cwd)
+
+def test_scaffold_flask(tmp_path):
+    import os
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, ["flask", "my_flask"])
+        assert result.exit_code == 0
+        assert "Created Flask App" in result.stdout
+        
+        project = tmp_path / "my_flask"
+        assert project.exists()
+        assert (project / "run.py").exists()
+        assert (project / "app" / "routes.py").exists()
+    finally:
+        os.chdir(original_cwd)
+
+def test_scaffold_cherrypy(tmp_path):
+    import os
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    try:
+        result = runner.invoke(app, ["cherrypy", "my_cherrypy"])
+        assert result.exit_code == 0
+        assert "Created CherryPy App" in result.stdout
+        
+        project = tmp_path / "my_cherrypy"
+        assert project.exists()
+        assert (project / "app.py").exists()
+        assert (project / "ui" / "base.py").exists()
+    finally:
+        os.chdir(original_cwd)

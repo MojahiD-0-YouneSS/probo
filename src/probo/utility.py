@@ -74,9 +74,17 @@ def exists_in_dict(data: dict, x:Any) -> bool:
 
         # Check nested dict
         if isinstance(value, dict):
-            # Check nested key or nested value
-            if any(s in value for s in x) or any(s in value.values() for s in x):
+            # Check nested key
+            if any(s in value for s in x):
                 return True
+            # Check nested values (handle space-separated strings like classes)
+            for val in value.values():
+                if isinstance(val, str):
+                    val_parts = val.split()
+                    if any(s in val_parts for s in x):
+                        return True
+                elif any(s == val for s in x):
+                    return True
 
     return False
 
@@ -128,7 +136,7 @@ def render_attributes(tag_name:str, attrs:dict[str,Any]) -> str:
         for key, v in attrs.items()
         if v is not False and v is not None
         if not (key in defaults and str(v).lower() == defaults[key])
-        for k in [key.replace("_", "-") if "_" in key else key]
+        for k in [key.replace('__','_') if '__' in key else key.replace("_", "-") if "_" in key else  key]
     ]
         
     return " ".join(parts)
@@ -241,3 +249,107 @@ def data_escaper(data: Any) -> Any:
     elif isinstance(data, set):
         return {data_escaper(v) for v in data}
     return data
+
+from typing import Callable, Iterable, Optional, Union
+
+class HTMLCollection:
+    """
+    A collection wrapper for HTML nodes returned by SSDOM APIs.
+    Provides JavaScript DOM-like methods for traversing and processing multiple nodes.
+    """
+    __slots__ = ('nodes',)
+
+    def __init__(self, nodes: Optional[Iterable[Any]] = None):
+        self.nodes = list(nodes) if nodes is not None else []
+
+    def __iter__(self):
+        return iter(self.nodes)
+
+    def __len__(self):
+        return len(self.nodes)
+
+    def __getitem__(self, index: Union[int, slice]):
+        result = self.nodes[index]
+        if isinstance(index, slice):
+            return HTMLCollection(result)
+        return result
+        
+    def __bool__(self):
+        return bool(self.nodes)
+
+    def __eq__(self, other):
+        # Allow testing HTMLCollection against lists
+        if isinstance(other, list):
+            return self.nodes == other
+        if isinstance(other, HTMLCollection):
+            return self.nodes == other.nodes
+        return False
+
+    def for_each(self, callback: Callable) -> Self:
+        """
+        Executes a provided function once for each node.
+        Similar to JavaScript's NodeList.forEach().
+        The callback can accept (node), or (node, index).
+        """
+        import inspect
+        sig = inspect.signature(callback)
+        params = len(sig.parameters)
+        
+        for i, node in enumerate(self.nodes):
+            if params == 1:
+                callback(node)
+            else:
+                callback(node, i)
+        return self
+
+    def maping(self, callback: Callable) -> list:
+        """
+        Creates a new list populated with the results of calling a provided function 
+        on every node in the collection.
+        """
+        import inspect
+        sig = inspect.signature(callback)
+        params = len(sig.parameters)
+        
+        results = []
+        for i, node in enumerate(self.nodes):
+            if params == 1:
+                results.append(callback(node))
+            else:
+                results.append(callback(node, i))
+        return results
+
+    def filter(self, predicate: Callable) -> Self:
+        """
+        Creates a new HTMLCollection with all nodes that pass the test implemented 
+        by the provided function.
+        """
+        import inspect
+        sig = inspect.signature(predicate)
+        params = len(sig.parameters)
+        
+        filtered = []
+        for i, node in enumerate(self.nodes):
+            keep = predicate(node) if params == 1 else predicate(node, i)
+            if keep:
+                filtered.append(node)
+        return HTMLCollection(filtered)
+
+    @property
+    def first(self) -> Optional[Any]:
+        """Returns the first node in the collection."""
+        return self.nodes[0] if self.nodes else None
+
+    @property
+    def last(self) -> Optional[Any]:
+        """Returns the last node in the collection."""
+        return self.nodes[-1] if self.nodes else None
+        
+    def add_class(self, *classes: str) -> Self:
+        """Convenience method to add classes to all nodes in the collection."""
+        for node in self.nodes:
+            if hasattr(node, 'attr_manager'):
+                node.attr_manager.add_class(*classes)
+            elif hasattr(node, 'add_class'):
+                node.add_class(*classes)
+        return self

@@ -111,3 +111,62 @@ class TestAttributeManipulator:
         assert result is m  # The object returned itself
         assert m.contains_class("foo")
         assert m.get_attr("id") == "bar"
+
+    # 11. Test Dictionary Interface
+    def test_dictionary_interface(self):
+        m = ElementAttributeManipulator(Id="test")
+        m["data-role"] = "admin"
+        m["disabled"] = True
+        
+        assert m["id"] == "test"
+        assert m["data-role"] == "admin"
+        assert m["disabled"] == "disabled"
+        assert "id" in m
+        
+        del m["disabled"]
+        assert "disabled" not in m
+        
+        m.update(href="url", target="_blank")
+        assert m.get("href") == "url"
+        assert m["target"] == "_blank"
+        
+        keys = list(m.keys())
+        assert "Id" in keys
+        assert "data-role" in keys
+        assert "href" in keys
+
+    # 12. Test Toggle Attr
+    def test_toggle_attr(self):
+        m = ElementAttributeManipulator()
+        m.toggle_attr("disabled")
+        assert m["disabled"] == "disabled"
+        
+        m.toggle_attr("disabled")
+        assert "disabled" not in m
+        
+        m.toggle_attr("checked", condition=True)
+        assert m["checked"] == "checked"
+        m.toggle_attr("checked", condition=True)
+        assert m["checked"] == "checked"
+        
+        m.toggle_attr("hidden", condition=False)
+        assert "hidden" not in m
+
+    # 13. Test Set Attr If
+    def test_set_attr_if(self):
+        m = ElementAttributeManipulator()
+        m.set_attr_if(True, "data-val", 123)
+        assert m["data-val"] == "123"
+        
+        m.set_attr_if(False, "data-skip", 456)
+        assert "data-skip" not in m
+
+    # 14. Test Render Attrs
+    def test_render_attrs(self):
+        m = ElementAttributeManipulator(Id="main", Class="container")
+        m["disabled"] = True
+        
+        html_str = m.render_attrs()
+        assert 'Id="main"' in html_str
+        assert 'Class="container"' in html_str
+        assert ' disabled ' in html_str + " " # boolean attributes just render their name

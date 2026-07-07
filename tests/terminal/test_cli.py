@@ -37,10 +37,11 @@ def test_cli_init_pure_project(tmp_path):
     assert (project / "dist").exists()
     assert (project / "static").exists()
     assert (project / "static" / "assets").exists()
-    assert (project / "components").exists()
-    assert (project / "components" / "greeting.py").exists()
-    assert (project / "pages").exists()
-    assert (project / "pages" / "index.py").exists()
+    assert (project / "ui"/"components").exists()
+    assert (project / "ui"/"components" / "greeting.py").exists()
+    assert (project / "ui"/"pages").exists()
+    assert (project / "ui"/"pages" / "index.py").exists()
+    assert (project / "ui"/"pages" / "base.py").exists()
 
 
 def test_cli_init_duplicate_fails(tmp_path):
@@ -67,9 +68,12 @@ def mock_django_subprocess(monkeypatch):
     or to run 'dj-app' (which requires a Django project context).
     """
     import subprocess
+    from pathlib import Path
 
     def mock_run(cmd, check=True):
-        # We just assume Django succeeded
+        # We assume Django succeeded, and simulate it creating the app dir
+        if len(cmd) >= 4 and cmd[1] == "manage.py" and cmd[2] == "startapp":
+            (Path.cwd() / cmd[3]).mkdir(exist_ok=True)
         return True
 
     monkeypatch.setattr(subprocess, "run", mock_run)
@@ -88,12 +92,13 @@ def test_generate_app_base_structure(tmp_path, mock_django_subprocess):
     app_dir = tmp_path / "blog"
 
     # Base PROBO files
-    assert (app_dir / "components" / "__init__.py").exists()
-    assert (app_dir / "components" / "greeting.py").exists()
+    assert (app_dir / "ui"/"components" / "__init__.py").exists()
+    assert (app_dir / "ui"/"components" / "greeting.py").exists()
     assert (app_dir / "probo_tcm.py").exists()
-    assert (app_dir / "pages").exists()
-    assert (app_dir / "pages" / "__init__.py").exists()
-    assert (app_dir / "pages" / "index.py").exists()
+    assert (app_dir / "ui"/"pages").exists()
+    assert (app_dir / "ui"/"pages" / "__init__.py").exists()
+    assert (app_dir / "ui"/"pages" / "index.py").exists()
+    assert (app_dir / "ui"/"pages" / "base.py").exists()
 
     # Ensure Advanced folders are NOT created
     assert not (app_dir / "services").exists()
@@ -149,6 +154,35 @@ def test_generate_app_probo_dj_enterprise(tmp_path, mock_django_subprocess):
     # 3. Check Root Utils
     assert (app_dir / "signals.py").exists()
     assert (app_dir / "dependencies.py").exists()
+
+
+def test_generate_app_skip_ui(tmp_path, mock_django_subprocess):
+    """
+    Scenario: probo dj-app core --skip-ui
+    Expected: The 'ui' directory is created in the parent directory, not inside 'core'.
+    """
+    os.chdir(tmp_path)
+
+    result = runner.invoke(app, ["dj-app", "core", "--skip-ui"])
+
+    assert result.exit_code == 0
+    app_dir = tmp_path / "core"
+    parent_ui_dir = tmp_path / "ui"
+
+    # Verify that ui directory is NOT inside the app directory
+    assert not (app_dir / "ui").exists()
+    
+    # Verify that ui directory is in the parent directory
+    assert parent_ui_dir.exists()
+    assert (parent_ui_dir / "components" / "__init__.py").exists()
+    assert (parent_ui_dir / "components" / "greeting.py").exists()
+    assert (parent_ui_dir / "pages").exists()
+    assert (parent_ui_dir / "pages" / "__init__.py").exists()
+    assert (parent_ui_dir / "pages" / "index.py").exists()
+    assert (parent_ui_dir / "pages" / "base.py").exists()
+    
+    # probo_tcm.py should be inside the app directory
+    assert (app_dir / "probo_tcm.py").exists()
 
 
 # ==============================================================================

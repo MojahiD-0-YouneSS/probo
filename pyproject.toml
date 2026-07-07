@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "probo-ui"
-version = "1.4.3"
+version = "1.4.4"
 authors = [
   { name="Youness Mojahid", email="mojahidyouness0@gmail.com" },
 ]
@@ -29,7 +29,8 @@ dependencies = [
     "pytest-django>=4.11.1",
     "beautifulsoup4>=4.14.2",
     "cssutils>=2.11.1",
-    "bottle>=0.13.4"
+    "bottle>=0.13.4",
+    "asgiref>=3.11.1",
 ]
 
 [project.optional-dependencies]

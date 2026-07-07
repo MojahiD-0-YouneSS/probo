@@ -1,1485 +1,2496 @@
 from probo.components.light_tags.node import LightNode
-from probo.components.node import ElementNodeMixin, ElementMutatorMixin
+from probo.components.node import ElementNodeMixin, MutationPipelineMixin,DataPipeLineMixin
 
 from typing import Any,Generator
 
 
-class La(LightNode,ElementNodeMixin):
+class La(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
 
     """Represents an A HTML <a> element."""
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]: 
-        yield from super().stream(EL,batch)       
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
+        yield from super().stream(EL,batch)
 
-class Labbr(LightNode,ElementNodeMixin):
+class Labbr(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an ABBR HTML <abbr> element."""
 
     __slots__ = ("_el_instance", "use_list", "use_deque", "element_data")
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
         
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Laddress(LightNode,ElementNodeMixin):
+class Laddress(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an ADDRESS HTML <address> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Larticle(LightNode,ElementNodeMixin):
+class Larticle(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an ARTICLE HTML <article> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Laside(LightNode,ElementNodeMixin):
+class Laside(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an ASIDE HTML <aside> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Laudio(LightNode,ElementNodeMixin):
+class Laudio(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an AUDIO HTML <audio> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lb(LightNode,ElementNodeMixin):
+class Lb(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an B HTML <b> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lbdi(LightNode,ElementNodeMixin):
+class Lbdi(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an BDI HTML <bdi> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lbdo(LightNode,ElementNodeMixin):
+class Lbdo(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an BDO HTML <bdo> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lblockquote(LightNode,ElementNodeMixin):
+class Lblockquote(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an BLOCKQUOTE HTML <blockquote> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lbody(LightNode,ElementNodeMixin):
+class Lbody(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an BODY HTML <body> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lbutton(LightNode,ElementNodeMixin):
+class Lbutton(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an BUTTON HTML <button> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lcanvas(LightNode,ElementNodeMixin):
+class Lcanvas(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an CANVAS HTML <canvas> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lcaption(LightNode,ElementNodeMixin):
+class Lcaption(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an CAPTION HTML <caption> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lcite(LightNode,ElementNodeMixin):
+class Lcite(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an CITE HTML <cite> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lcode(LightNode,ElementNodeMixin):
+class Lcode(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an CODE HTML <code> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lcolgroup(LightNode,ElementNodeMixin):
+class Lcolgroup(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an COLGROUP HTML <colgroup> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldata(LightNode,ElementNodeMixin):
+class Ldata(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DATA HTML <data> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldatalist(LightNode,ElementNodeMixin):
+class Ldatalist(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DATALIST HTML <datalist> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldd(LightNode,ElementNodeMixin):
+class Ldd(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DD HTML <dd> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldel(LightNode,ElementNodeMixin):
+class Ldel(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DEL HTML <del> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldetails(LightNode,ElementNodeMixin):
+class Ldetails(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DETAILS HTML <details> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldfn(LightNode,ElementNodeMixin):
+class Ldfn(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DFN HTML <dfn> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldialog(LightNode,ElementNodeMixin):
+class Ldialog(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DIALOG HTML <dialog> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ldiv(LightNode,ElementNodeMixin):
+class Ldiv(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DIV HTML <div> element."""
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ldl(LightNode,ElementNodeMixin):
+class Ldl(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DL HTML <dl> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ldt(LightNode,ElementNodeMixin):
+class Ldt(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an DT HTML <dt> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lem(LightNode,ElementNodeMixin):
+class Lem(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an EM HTML <em> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lfieldset(LightNode,ElementNodeMixin):
+class Lfieldset(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an FIELDSET HTML <fieldset> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lfigcaption(LightNode,ElementNodeMixin):
+class Lfigcaption(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an FIGCAPTION HTML <figcaption> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lfigure(LightNode,ElementNodeMixin):
+class Lfigure(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an FIGURE HTML <figure> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lfooter(LightNode,ElementNodeMixin):
+class Lfooter(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an FOOTER HTML <footer> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lform(LightNode,ElementNodeMixin):
+class Lform(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an FORM HTML <form> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lh1(LightNode,ElementNodeMixin):
+class Lh1(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H1 HTML <h1> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lh2(LightNode,ElementNodeMixin):
+class Lh2(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H2 HTML <h2> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lh3(LightNode,ElementNodeMixin):
+class Lh3(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H3 HTML <h3> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Lh4(LightNode,ElementNodeMixin):
+class Lh4(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H4 HTML <h4> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lh5(LightNode,ElementNodeMixin):
+class Lh5(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H5 HTML <h5> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lh6(LightNode,ElementNodeMixin):
+class Lh6(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an H6 HTML <h6> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lhead(LightNode,ElementNodeMixin):
+class Lhead(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an HEAD HTML <head> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lheader(LightNode,ElementNodeMixin):
+class Lheader(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an HEADER HTML <header> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lhgroup(LightNode,ElementNodeMixin):
+class Lhgroup(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an HGROUP HTML <hgroup> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lhtml(LightNode,ElementNodeMixin):
+class Lhtml(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an HTML HTML <html> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Li(LightNode,ElementNodeMixin):
+class Li(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an I HTML <i> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Liframe(LightNode,ElementNodeMixin):
+class Liframe(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an IFRAME HTML <iframe> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lins(LightNode,ElementNodeMixin):
+class Lins(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an INS HTML <ins> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lkbd(LightNode,ElementNodeMixin):
+class Lkbd(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an KBD HTML <kbd> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Llabel(LightNode,ElementNodeMixin):
+class Llabel(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an LABEL HTML <label> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Llegend(LightNode,ElementNodeMixin):
+class Llegend(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an LEGEND HTML <legend> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lli(LightNode,ElementNodeMixin):
+class Lli(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an LI HTML <li> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmain(LightNode,ElementNodeMixin):
+class Lmain(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an MAIN HTML <main> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmath(LightNode,ElementNodeMixin):
+class Lmath(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an MATH HTML <math> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmap(LightNode,ElementNodeMixin):
+class Lmap(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an MAP HTML <map> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmark(LightNode,ElementNodeMixin):
+class Lmark(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an MARK HTML <mark> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmenu(LightNode,ElementNodeMixin):
+class Lmenu(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an MENU HTML <menu> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lmeter(LightNode,ElementNodeMixin):
+class Lmeter(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an METER HTML <meter> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lnav(LightNode,ElementNodeMixin):
+class Lnav(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an NAV HTML <nav> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lnoscript(LightNode,ElementNodeMixin):
+class Lnoscript(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an NOSCRIPT HTML <noscript> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lobject(LightNode,ElementNodeMixin):
+class Lobject(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an OBJECT HTML <object> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lol(LightNode,ElementNodeMixin):
+class Lol(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an OL HTML <ol> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Loptgroup(LightNode,ElementNodeMixin):
+class Loptgroup(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an OPTGROUP HTML <optgroup> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Loption(LightNode,ElementNodeMixin):
+class Loption(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an OPTION HTML <option> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Loutput(LightNode,ElementNodeMixin):
+class Loutput(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an OUTPUT HTML <output> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lp(LightNode,ElementNodeMixin):
+class Lp(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an P HTML <p> element."""
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lportal(LightNode,ElementNodeMixin):
+class Lportal(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an PORTAL HTML <portal> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lpicture(LightNode,ElementNodeMixin):
+class Lpicture(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an PICTURE HTML <picture> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lpre(LightNode,ElementNodeMixin):
+class Lpre(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an PRE HTML <pre> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lprogress(LightNode,ElementNodeMixin):
+class Lprogress(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an PROGRESS HTML <progress> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lq(LightNode,ElementNodeMixin):
+class Lq(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an Q HTML <q> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lrp(LightNode,ElementNodeMixin):
+class Lrp(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an RP HTML <rp> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lrt(LightNode,ElementNodeMixin):
+class Lrt(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an RT HTML <rt> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lruby(LightNode,ElementNodeMixin):
+class Lruby(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an RUBY HTML <ruby> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ls(LightNode,ElementNodeMixin):
+class Ls(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an S HTML <s> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsamp(LightNode,ElementNodeMixin):
+class Lsamp(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SAMP HTML <samp> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lscript(LightNode,ElementNodeMixin):
+class Lscript(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SCRIPT HTML <script> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsearch(LightNode,ElementNodeMixin):
+class Lsearch(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SEARCH HTML <search> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsection(LightNode,ElementNodeMixin):
+class Lsection(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SECTION HTML <section> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lselect(LightNode,ElementNodeMixin):
+class Lselect(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SELECT HTML <select> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lslot(LightNode,ElementNodeMixin):
+class Lslot(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SLOT HTML <slot> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsmall(LightNode,ElementNodeMixin):
+class Lsmall(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SMALL HTML <small> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lspan(LightNode,ElementNodeMixin):
+class Lspan(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SPAN HTML <span> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lstrong(LightNode,ElementNodeMixin):
+class Lstrong(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an STRONG HTML <strong> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lstyle(LightNode,ElementNodeMixin):
+class Lstyle(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an STYLE HTML <style> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsub(LightNode,ElementNodeMixin):
+class Lsub(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SUB HTML <sub> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsummary(LightNode,ElementNodeMixin):
+class Lsummary(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SUMMARY HTML <summary> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lsup(LightNode,ElementNodeMixin):
+class Lsup(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an SUP HTML <sup> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
-class Ltable(LightNode,ElementNodeMixin):
+class Ltable(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TABLE HTML <table> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltbody(LightNode,ElementNodeMixin):
+class Ltbody(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TBODY HTML <tbody> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltd(LightNode,ElementNodeMixin):
+class Ltd(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TD HTML <td> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltemplate(LightNode,ElementNodeMixin):
+class Ltemplate(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TEMPLATE HTML <template> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltextarea(LightNode,ElementNodeMixin):
+class Ltextarea(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TEXTAREA HTML <textarea> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltfoot(LightNode,ElementNodeMixin):
+class Ltfoot(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TFOOT HTML <tfoot> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lth(LightNode,ElementNodeMixin):
+class Lth(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TH HTML <th> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lthead(LightNode,ElementNodeMixin):
+class Lthead(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an THEAD HTML <thead> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltime(LightNode,ElementNodeMixin):
+class Ltime(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TIME HTML <time> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltitle(LightNode,ElementNodeMixin):
+class Ltitle(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TITLE HTML <title> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Ltr(LightNode,ElementNodeMixin):
+class Ltr(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an TR HTML <tr> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lu(LightNode,ElementNodeMixin):
+class Lu(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an U HTML <u> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lul(LightNode,ElementNodeMixin):
+class Lul(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an UL HTML <ul> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lvar(LightNode,ElementNodeMixin):
+class Lvar(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an VAR HTML <var> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
 
 
-class Lvideo(LightNode,ElementNodeMixin):
+class Lvideo(DataPipeLineMixin,ElementNodeMixin,MutationPipelineMixin,LightNode):
     """Represents an VIDEO HTML <video> element."""
 
     __slots__ = ()
     def __init__(self, *content:str | Any, **attrs:Any):
         super().__init__(*content,tag=None, **attrs)
-        ElementNodeMixin.__init__(self)
+        self.extract_pipeline_args(self.attributes)
         self._set_node_children(content)
-
+        self.resolve_pipeline_variables()
+        self.extract_mutation_args(self.attributes)
+        self.detect_effect_nodes(self.content)
+        if self.custom_attrs:
+            self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False),kwargs=self.attributes)
     def render(self,EL)->str:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         return super().render(EL)
     def stream(self, EL,batch: int = 50) -> Generator[str, None, None]:
+        if self.has_unresolved_pipeline_vars:
+            if not self.resolve_pipeline_variables(swap_vars=True):
+                self.content = []
         yield from super().stream(EL,batch)
