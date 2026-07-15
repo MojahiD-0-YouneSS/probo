@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Self
 from probo.styles.elements import element_style
 from probo.styles.css_enum import CssPropertyEnum, CssFunctionsEnum
 

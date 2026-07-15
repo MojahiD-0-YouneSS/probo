@@ -3,7 +3,7 @@ import uuid
 from typing import Generator, List, Optional, Callable, Any, Self,Dict,Set
 from probo.utility import ProboSourceString, StreamManager, HTMLCollection
 from enum import Enum
-from probo.type_hints import GenericSSDOM, GenericPowerNode,GenericProxyElement
+from probo.type_hints import GenericSSDOM, GenericPowerNode,GenericProxyElement, GenericHTMLCollection
 
 
 class ElementNodeMixin:
@@ -118,18 +118,7 @@ class ElementNodeMixin:
         return self
 
     def add(self, child: Optional[GenericSSDOM], index: Optional[int] = None) -> Self:
-        """Adds a child node and establishes the parent linkage.
-
-        If the current node is a 'void' node, the addition is ignored to 
-        maintain HTML semantic validity.
-
-        Args:
-            child: The node instance to add.
-            index: Optional position to insert the child.
-
-        Returns:
-            The current instance for method chaining.
-        """
+        """Adds a child node and establishes the parent linkage."""
         if self._void_node == True:
             return self
         if child is None or child is self:
@@ -142,8 +131,20 @@ class ElementNodeMixin:
             self.node_children.append(child)
         else:
             self.node_children.insert(index, child)
+            
         if hasattr(self, "content") and child not in self.content:
-            self.content.append(child)
+            if isinstance(self.content, tuple):
+                self.content = list(self.content)
+                self.content.append(child)
+                self.content = tuple(self.content)
+            else:
+                self.content.append(child)
+                
+            if isinstance(child, set):
+                self._has_pipeline_vars = True
+                self.resolved = False
+                self._has_unresolved_pipeline_vars = True
+                
         return self
 
     def remove(self, child: Optional[GenericSSDOM], func:Callable=None) ->Self:
@@ -286,7 +287,7 @@ class ElementNodeMixin:
         """Returns the number of direct children."""
         return len(self.node_children)
 
-    def get_children(self) -> HTMLCollection:
+    def get_children(self) -> GenericHTMLCollection:
         """Returns the direct children wrapped in an HTMLCollection."""
         from probo.utility import HTMLCollection
         return HTMLCollection(self.node_children)
@@ -358,7 +359,7 @@ class ElementNodeMixin:
                     return result
         return None
 
-    def find_all(self, predicate: Callable[[Any], bool]) -> HTMLCollection[Optional[GenericSSDOM]]:
+    def find_all(self, predicate: Callable[[Any], bool]) -> GenericHTMLCollection:
         """Searches the tree for all nodes that match a condition.
 
         Args:
@@ -418,7 +419,7 @@ class ElementNodeMixin:
         """
         return self.find(lambda n: self._match_selector(n, selector))
 
-    def css_selector_all(self, selector: str) -> HTMLCollection:
+    def css_selector_all(self, selector: str) -> GenericHTMLCollection:
         """Retrieves all nodes matching a CSS-style selector.
 
         Supports class (`.name`), ID (`#name`), and Tag (`NAME`) lookups.
@@ -788,12 +789,33 @@ class DataPipeLineMixin:
             self._data_policies[key] = policy
 
     def _retrieve_local_data(self, key: str, default: Any = None) -> Any:
+        _no_val = object()
         if self._custom_retriever:
-            return self._custom_retriever(self._data_pipeline, key, default)
+            val = self._custom_retriever(self._data_pipeline, key, _no_val)
+            if val is not _no_val: return val
+
+        if isinstance(key, str) and '.' in key:
+            parts = key.split('.')
+            if hasattr(self._data_pipeline, "get"):
+                obj = self._data_pipeline.get(parts[0], _no_val)
+            else:
+                obj = getattr(self._data_pipeline, parts[0], _no_val)
+                
+            if obj is not _no_val:
+                for part in parts[1:]:
+                    if hasattr(obj, 'get') and isinstance(obj, dict):
+                        obj = obj.get(part, _no_val)
+                    else:
+                        obj = getattr(obj, part, _no_val)
+                    if obj is _no_val:
+                        break
+                if obj is not _no_val:
+                    return obj
+
         if hasattr(self._data_pipeline, "get"):
             return self._data_pipeline.get(key, default)
         else:
-            return getattr(self._data_pipeline,key, default)
+            return getattr(self._data_pipeline, key, default)
 
     def get_data(self, key: str, default: Any = None, _depth: int = 0) -> Any:
         local_val = self._retrieve_local_data(key, default=None)
@@ -837,11 +859,10 @@ class DataPipeLineMixin:
         mutable_content = list(content) if content_is_tuple else content
         got_vars = False
 
-
         for k,v in attrs.items():
             if isinstance(v,set):
                 v_list = list(v)
-                if isinstance(v_list[0], str):
+                if len(v_list) == 1 and isinstance(v_list[0], str):
                     var_name = v_list[0]
                     resolved_val = self.get_data(var_name, default=None)
                     self._has_pipeline_vars = True
@@ -855,12 +876,50 @@ class DataPipeLineMixin:
                             attrs[k] = ""  # Standard mode -> blank variable
                     else:
                         attrs[k] = resolved_val
+                else:
+                    func = None 
+                    for x in v_list:
+                        if callable(x):
+                            func = x
+                            break
+                    if func:
+                        var_names = [x for x in v_list if isinstance(x, str)]
+                        kwargs_to_pass = {} 
+                        has_missing = False
+                        for var_name in var_names:
+                            val = self.get_data(var_name, default=None)
+                            if val is None:
+                                has_missing = True
+                            kwargs_to_pass[var_name] = val
+                        
+                        self._has_pipeline_vars = True
+                        got_vars = True
+                        
+                        if has_missing:
+                            self._has_unresolved_pipeline_vars = True
+                            if getattr(self, "strict_data", False):
+                                return False
+                            if swap_vars:
+                                attrs[k] = func(**kwargs_to_pass)
+                            else:
+                                attrs[k] = v
+                        else:
+                                attrs[k] = func(**kwargs_to_pass)
+
+                    else:
+                        if getattr(self, "strict_data", False):
+                            return False
+                        elif swap_vars:
+                            attrs[k] = ""
+                        else:
+                            attrs[k] = v
 
         if not is_closed_tag:
             for i, child in enumerate(mutable_content):
-                if isinstance(child, set) and len(child) == 1:
+                if isinstance(child, set):
                     child_list = list(child)
-                    if isinstance(child_list[0], str):
+                    
+                    if len(child_list) == 1 and isinstance(child_list[0], str):
                         var_name = child_list[0]
                         resolved_val = self.get_data(var_name, default=None)
                         self._has_pipeline_vars = True
@@ -874,8 +933,48 @@ class DataPipeLineMixin:
                                 mutable_content[i] = "" # Standard mode -> blank variable
                         else:
                             mutable_content[i] = resolved_val
+                    else:
+                        func = None
+                        for x in child_list:
+                            if callable(x):
+                                func=x
+                                break
+                        if func:
+                            var_names = [x for x in child_list if isinstance(x, str)]
+                            kwargs_to_pass = {}
+                            has_missing = False
+                            for var_name in var_names:
+                                val = self.get_data(var_name, default=None)
+                                if val is None:
+                                    has_missing = True
+                                kwargs_to_pass[var_name] = val
+                            
+                            self._has_pipeline_vars = True
+                            got_vars = True
+                            
+                            if has_missing:
+                                self._has_unresolved_pipeline_vars = True
+                                if getattr(self, "strict_data", False):
+                                    return False
+                                if swap_vars:
+                                    mutable_content[i] = func(**kwargs_to_pass)
+                                else:
+                                    mutable_content[i]=child
+                            else:
+                                mutable_content[i] = func(**kwargs_to_pass)
+                        else:
+                            if getattr(self, "strict_data", False):
+                                return False
+                            elif swap_vars:
+                                mutable_content[i] = ""
+                            else:
+                                mutable_content[i] = child
+
         self.resolved = True
         setattr(self, 'content', tuple(mutable_content) if content_is_tuple else mutable_content)
+        
+        # Synchronize node_children if we resolved variables into components
+
         if not got_vars:
             # Prevent double resolution
             self._has_unresolved_pipeline_vars = False

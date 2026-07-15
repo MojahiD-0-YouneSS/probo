@@ -13,6 +13,7 @@
     <orderEntry type="module" module-name="django-abstract" />
     <orderEntry type="module" module-name="PythonProject" />
     <orderEntry type="module" module-name="probo-ui-tutorial" />
+    <orderEntry type="module" module-name="pythonic-ecommerce" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />

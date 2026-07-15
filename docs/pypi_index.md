@@ -1,5 +1,6 @@
 #  Probo UI : Future of Python based UI
 
+
 # Python Rendered Objects for Backend-Oriented User Interfaces (Probo-UI). 
 
 ![PyPI](https://img.shields.io/pypi/v/probo-ui)
@@ -10,37 +11,257 @@
 [![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
 ![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
 ![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
-![Tests](https://img.shields.io/badge/Tests-1210%20Passed-brightgreen?style=flat-square&logo=github)
-[![APIs](https://img.shields.io/badge/APIs-580%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
+![Tests](https://img.shields.io/badge/Tests-1392%20Passed-brightgreen?style=flat-square&logo=github)
+[![APIs](https://img.shields.io/badge/APIs-580+%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
 
-Probo UI stands for Python Rendered Objects for Backend-Oriented UI is A Python-Native server-side Template Rendering Framework and Meta-framework for Django.Write Type-Safe Template Components, structure in HTML and styling in CSS with extra Logic in pure Python.that transforms Python objects into performant HTML/CSS with help with HTMX, creating a seamless bridge between Django's backend logic and the frontend interface. No context switching. No template spaghetti.
+Probo UI (Python Rendered Objects for Backend-Oriented UI) is a Python-native server-side template rendering framework. Write type-safe template, components. structuring your HTML and styling your CSS with pure Python logic. It transforms Python objects into performant HTML/CSS (with native HTMX support), creating a seamless bridge between your backend logic and frontend interface.
 
-## 📣 Version 1.4.0 is Live!
+## Version 1.4.4 is Live!
 
-Probo UI has officially reached stable v1.3 status. It is a backend-first UI framework.
+Probo UI has officially reached **stable v1.4.4**. Designed from the ground up as a backend-first UI meta-framework, Probo allows you to build robust, dynamic, and secure web interfaces without ever leaving your Python environment.
 
-## Why Probo?
+## The Probo UI Experience: Ease of Use
 
-- use your python skill in making dynamic UI templates.
-- Explicit, readable ad reusable layout
-- Easier refactoring than HTML templates (it's python)
-- IDE-friendly & type-safe
+Probo UI removes the headache of string-based templating and brings the frontend directly to your backend.
 
-*For the deeper reasoning behind these choices, see Purpose & Philosophy ↓*
+- **Highly Modular & Reusable:** It is incredibly easy to customize components. Build your UI as modular building blocks that encapsulate structure and state.
+- **100% Python Native:** If you know Python, you already know how to build a Probo UI. Leverage native list comprehensions, loops, and logic.
+- **Complete Type Safety:** Enjoy full IDE autocompletion, static type checking, and real-time error highlighting.
+- **Object-Oriented UI:** Rename tags, move components, and restructure layouts just like any other Python object.
 
-## ⚡ Purpose & Philosophy
+---
+
+## Framework-Agnostic Integration
+
+Probo UI is designed to be highly flexible and non-blocking.
+
+- **Unmatched Drop-in Support:** Use Probo UI natively within **Django, FastAPI, Flask**, and more!
+- **Native HTMX Integration:** Generate blazing-fast partial page updates and SPA-like interactions right out of the box, with zero custom JavaScript required.
+- **⏱Async & Await Capabilities:** Probo tags are natively awaitable! This allows you to resolve database queries, fetch external APIs, and render **multiple UIs concurrently** at the same time without blocking your async web frameworks.
+
+---
+
+## 📦 Installation
+
+Get up and running in seconds:
+
+```bash 
+pip install probo-ui
+```
+
+---
+
+## Show Me The Code: High-Quality Examples
+
+Probo’s syntax is designed to be instantly readable. Data merges elegantly with structure.
+
+### Example 1: The "Pythonic" Component
+
+You can build components structurally via functions, or robustly via pure Object-Oriented Python.
+
+**A. Functional Component**
+```python
+from probo import div, h1, ul, li, strong
+
+def generate_user_badge(username: str, role: str):
+    skills = ['Python', 'JavaScript', 'Docker']
+    
+    # Generate UI elements natively using Python list comprehensions!
+    skill_tags = [li(skill, Class="text-sm border-b") for skill in skills]
+
+    return div(
+        h1(username, strong(f"({role})")),
+        ul(*skill_tags),
+        Class='card shadow-lg p-4 rounded-md',
+    )
+```
+
+**B. OOP Component**
+```python
+from probo import DIV, H1, UL, LI, STRONG
+
+def generate_user_badge(username: str, role: str):
+    skills = ['Python', 'JavaScript', 'Docker']
+
+    # Generate UI elements natively using Python list comprehensions!
+    skill_tags = [LI(skill, Class="text-sm border-b") for skill in skills]
+
+    return DIV(
+        H1(username, STRONG(f"({role})")),
+        UL(*skill_tags),
+        Class='card shadow-lg p-4 rounded-md',
+    ).render()
+```
+
+### Example 2: Optional Rendering (Logic Gates)
+
+In secure applications, your UI must react dynamically to state. With Probo, you can easily use `add_render_constraints` to act as a **state guard**, conditionally hiding entire trees if data or security rules don't match.
+
+**Note**: you would need to add data as dict and pass it as **data_pipeline** attribute in any element and pass the variable as **set** data type
+```python
+from probo import DIV, H1, UL, LI, STRONG
+
+def generate_user_badge(username: str, role: str):
+    skills = ['Python', 'JavaScript', 'Docker']
+    data = {
+        'username':username,
+        'role':role,
+    }
+    # Generate UI elements natively using Python list comprehensions!
+    skill_tags = [LI(skill, Class="text-sm border-b") for skill in skills]
+
+    return DIV(
+        H1({'username'}, STRONG("(",{'role'},")")), # <----- {'variable'}
+        UL(*skill_tags).add_render_constraints(username='admin'),
+        Class='card shadow-lg p-4 rounded-md',
+        data_pipeline=data,
+    ).render()
+```
+## Advanced Usage: Async, Dynamic Mutations & PowerNodes
+Probo UI isn't just for static template generation; it's a living DOM. You can fetch data asynchronously, dynamically alter attributes and styles on the fly, and use PowerNodes to mutate the tree before it serializes.
+
+### Example 1: Async Data, Dynamic Styles & Root Proxies
+
+Because Probo tags natively support await, you can resolve database queries directly inside your component definition. You can also dynamically proxy the root element and inject Just-In-Time (JIT) CSS based on live data.
+
+```python
+import asyncio
+from probo import DIV, H1, P,ARTICLE
+
+async def fetch_user_prefs(user_id: int):
+    # Simulate an async database or API call
+    await asyncio.sleep(0.1)
+    return {"username": "Youness", "role": "admin", "theme": "dark"}
+
+async def dynamic_user_card(user_id: int):
+    # 1. Await data directly in the component scope
+    data = await fetch_user_prefs(user_id)
+    template=DIV(
+        H1({'username'}),
+        P(f"System Role:",{'role'}),
+        Class='user-card'
+    )
+    # 3. Dynamic Root Proxy & Attributes
+    # Wraps the component in an <article> tag and injects dynamic data attributes
+    article = ARTICLE(template,data_pipeline=data,data_theme={'theme'}, data_role={'role'})
+
+    return article
+```
+
+### 2. Deep DOM Manipulation with `PowerNode`
+Sometimes you need to mutate elements deep within a complex tree without breaking encapsulation. `PowerNode` acts as a targeted mutation pipeline. It searches for specific elements using a predicate and executes heavy logic or attribute changes directly on the target before the final string is rendered.
+
+```python
+from probo.components.power_node import PowerNode
+from probo import SECTION, DIV, BUTTON
+
+
+class PrivilegeEscalationNode(PowerNode):
+    """
+    A PowerNode that hunts down elements with a specific class
+    and dynamically alters their attributes and styles.
+    """
+
+    def execute(self, target, *args, **kwargs):
+        # Mutate the target node dynamically
+        target.attr_manager.add_class("admin-unlocked")
+        target.attr_manager.set_bulk_attr(**{
+            'disabled' : False,
+            'hx-post' : '/api/admin/override',
+        })
+
+
+def admin_control_panel(is_admin: bool):
+    # The PowerNode targets any button marked 'restricted'
+    modifier = PrivilegeEscalationNode(
+        target_predicate=lambda node: node.element_tag == 'button' and node.attr_manager.contains_class('restricted'),
+        hook='on_mount'
+    )
+
+    panel = SECTION(
+            DIV("Standard Controls"),
+            BUTTON("Delete Database", Class="btn restricted", disabled=True),
+        )
+
+    # If the user is an admin, append the PowerNode to the tree.
+    # It will traverse the DOM, find the target, and execute the mutation pipeline.
+    if is_admin:
+        panel.add_power_node(modifier)
+
+    return panel
+
+```
+### 3. Serving in Any Web Framework
+
+Because Probo UI components render down to string-like objects, you can return them directly in **ANY** Python web framework. Here is how seamless it is to serve the exact same component across four popular backends.
+
+#### FastAPI
+```python
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from ui.components import admin_control_panel
+from probo.components import frag
+
+app = FastAPI()
+
+@app.get("/")
+async def home():
+    # Render your Probo component directly into an HTML response!
+    return HTMLResponse(content=frag(admin_control_panel(is_admin=True)))
+```
+
+#### Flask
+```python
+from flask import Flask
+from ui.components import admin_control_panel
+from probo.components import frag
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return frag(admin_control_panel(is_admin=True))
+```
+
+#### Django
+```python
+from django.http import HttpResponse
+from ui.components import admin_control_panel
+from probo.components import frag
+
+def home(request):
+    return HttpResponse(frag(admin_control_panel(is_admin=True)))
+```
+
+#### CherryPy
+```python
+import cherrypy
+from ui.components import admin_control_panel
+from probo.components import frag
+
+class HelloWorld:
+    @cherrypy.expose
+    def index(self):
+        return frag(admin_control_panel(is_admin=True))
+
+if __name__ == '__main__':
+    cherrypy.quickstart(HelloWorld())
+```
+
+## Purpose & Philosophy
 
 Traditional Django development often requires context-switching between Python (views.py) and HTML/Jinja (templates/). Logic gets split, and typos in templates cause runtime errors.
 
 Probo UI solves this by bringing the Frontend into Python:
 
-🧠 Type-Safe UI: Write HTML in Python. If your code compiles, your HTML is valid.
+* Type-Safe UI: Write HTML in Python. If your code compiles, your HTML is valid.
 
-🎨 Just-In-Time (JIT) CSS: Styles live with components. Probo UI scans your active components and generates a minified CSS bundle on the fly. No unused styles.
+* Just-In-Time (JIT) CSS: Styles live with components. Probo UI scans your active components and generates a minified CSS bundle on the fly. No unused styles.
 
-🛡️ Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
+* Logic Gates: Built-in State Management. Components automatically hide themselves if required data (like user.is_authenticated) or permissions are missing.
 
-🔌 Framework-Agnostic & Django-Ready: Build your UI completely standalone, or drop it into a Django project. When Django is present, Probo UI automatically enables deep integration with Django Forms and Requests via the RDT.
+* Framework-Agnostic & Django-Ready: Build your UI completely standalone, or drop it into a Django project. When Django is present, Probo UI automatically enables deep integration with Django Forms and Requests via the RDT.
+
 ## Some ProboUI Architecture & Concepts
 
 - **Push & Clear**: When creating HTML elements via the ```Element``` object, the final output is pushed to the ```element``` attribute. The content and attributes used in that specific session are then cleared to maintain a clean state. To allow for cumulative processing, arguments can be passed to the class to "stash" previous results, serving as the content for the subsequent execution chain.
@@ -79,101 +300,17 @@ Probo UI solves this by bringing the Frontend into Python:
 
 - **Probo-CLI**: A command-line interface used to scaffold custom ProboUI packages as static web apps. It also enables "Django Mutation," automatically injecting the necessary Probo directories (components/, pages/, probo_tcm.py) into existing Django projects.
 
-- **proxy element**: The ```ProxyElement``` provides a mechanism to embed external logic or third-party objects directly into the SSDOM. It facilitates the integration of arbitrary objects by accepting the object and an optional render callable, which is utilized if the object does not possess a native ```render``` method.
+- **Proxy Element**: The ```ProxyElement``` provides a mechanism to embed external logic or third-party objects directly into the SSDOM. It facilitates the integration of arbitrary objects by accepting the object and an optional render callable, which is utilized if the object does not possess a native ```render``` method.
 
-- **Style Manager**: The ```StyleManager``` helps adding inline styling to HTML onbjects like in js style with remove_style/add_style methods.
+- **Style Manager**: The ```StyleManager``` helps adding inline styling to HTML objects like in js style with remove_style/add_style methods.
 
-# 📦 Installation
 
-```bash 
-        pip install probo-ui
-```
+## Explore More
 
-# 🚀 Quick Example
+If you enjoy the backend-first, Python-native approach of Probo UI, you might find these related resources and tools useful:
 
-Here is how you implement a reusable component in probo-ui:
+* 📖 [**Full Documentation & User Guide**](https://mojahid-0-youness.github.io/probo/) - Dive deeper into Server-Side DOM (SSDOM), async rendering, and dynamic routing. (V 1.4.3) 1.4.4 is still in the making.
 
-```python
-from probo import (
-    li,div,h1,ul,strong,
-)
-def user_card(username):
+*    [ 🚀 Get Started → ](https://mojahid-0-youness.github.io/probo/user_guide/)
 
-    user_id = f'User_789{username}1323'
-
-    user_info = {'practical-info':['python','javascript','docker','django']}
-
-    li_el = [li(info) for info in user_info['practical-info']]
-
-    card = div(
-        h1(username,strong(user_id)),
-        ul(*li_el),
-        Class='card',
-        style='color:red;'
-    )
-
-    return card
-
-# Render it
-html= user_card("Admin")
-print(html)
-```
-### Output: 
-```html 
-<div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
-```
-### in case of permission/authorization:
-```python
-from probo.components import (
-    Component,ComponentState, ElementState,StateProps,
-)
-from probo import (
-    div,h1,strong,ul,
-)
-
-def user_card(username):
-
-    props = StateProps(required=True,prop_equals={'username':'admin'})
-    
-    user_id = f'User_789{username}1323'
-    
-    user_info = {'practical-info':['python','javascript','docker','django']}
-    
-    li_el = ElementState('li', d_state='practical-info',i_state=True, strict_dynamic=True,props=props,)
-    
-    user_comp_state = ComponentState(
-        li_el,
-        d_data=user_info,
-    )
-
-    card = Component(
-        name="UserCard",
-        template=div(
-            h1(username,strong(user_id)),
-            ul(li_el.placeholder),
-            Class='card'),
-        # Inject Data
-        state=user_comp_state,
-        props={'username':username}
-    )
-
-    return card
-
-# Render it
-html= user_card("Admin").render()
-
-html2= user_card("admin").render()
-```
-
-### Output: 
-- `print(html)`
-```html
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul></ul></div>
-```
-- `print(html2)`
-```html
-    <div class='card'><h1>Admin<strong>User_789Admin1323</strong></h1><ul><li>python</li><li>javascript</li><li>docker</li><li>django</li></ul></div>
-```
-[ 🚀 Get Started → ](https://mojahid-0-youness.github.io/probo/user_guide/)
-
-💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.
+* 💬 Community & Support Need help? Have a question that isn't a bug? Join our <a href='https://discord.gg/jnZRbVasgd'>Discord</a> Server to chat with other probo-ui developers.

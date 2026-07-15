@@ -1,5 +1,7 @@
-from probo.components.conf import settings
+from probo.components.conf import new_ui_settings
 from probo.components.tag_classes.block_tags import DIV
+
+settings = new_ui_settings()
 
 settings.TITLE = "Global Probo Title"
 settings.SECTION_I = "Hero Section"

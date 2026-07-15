@@ -3,7 +3,8 @@ from collections.abc import Iterable
 from collections import deque
 from typing import Dict, Union, Self, Any,Generator
 import inspect
-from probo.utility import ProboSourceString,markup_escape
+from probo.utility import ProboSourceString,markup_escape, PipelineDeque, PipelineDict
+from probo.type_hints import GenericStyleManager, GenericSSDOM
 
 class ElementAttributeManipulator:
     """
@@ -14,12 +15,13 @@ class ElementAttributeManipulator:
     Note: 
         **kwargs often passed as copy of the variable itself that's why we passed them as dict literal.
     """
-    __slots__ = ('attrs',)
-    def __init__(self, attr_dict:dict=None,**kwargs:dict[str,Any]):
+    __slots__ = ('attrs','node')
+    def __init__(self, attr_dict:dict=None, node:GenericSSDOM=None, **kwargs:dict[str,Any]):
         # 1. Initialize storage per instance (Fixes Shared Memory Bug)
         self.attrs: Dict[str, str] = dict() if attr_dict is None else attr_dict
         self.attrs.update(kwargs)
-
+        self.node=node
+        
     def add_class(self, cls_str: str,*classes:tuple[str]) -> Self:
         """            
         Adds one or more classes to attr_dict's "Class" key and if not found then it woud be created.
@@ -115,6 +117,13 @@ class ElementAttributeManipulator:
                 self.remove_attr(key)
             else:
                 self.attrs[key] = str(key) # Boolean attribute (e.g. disabled="")
+        
+        elif isinstance(value, set):
+            self.attrs[self._normalize_attr_key(key)] = value
+            if hasattr(self.node,'_has_unresolved_pipeline_vars'):
+                self.node._has_unresolved_pipeline_vars = True
+            if hasattr(self.node,'resolve_pipeline_variables'):
+                self.node.resolve_pipeline_variables()
         else:
             self.attrs[self._normalize_attr_key(key)] = str(value)
         return self
@@ -433,6 +442,7 @@ class ComponentAttrManager(ElementAttributeManipulator):
             dictionaries of HTML attributes.
         """
         return self.children
+
 class BaseHTMLElement(ABC):
     """The abstract base class for all ProboUI HTML elements.
 
@@ -442,12 +452,12 @@ class BaseHTMLElement(ABC):
     `ElementAttributeManipulator`.
 
     Attributes:
-        content (tuple): The positional arguments representing inner HTML/text.
+        content (deque): The positional arguments representing inner HTML/text.
         attributes (dict): The keyword arguments representing HTML attributes.
     """
     __slots__ = ('attributes', 'content','node_children', 'rendering', 'custom_attrs','_render_conditions', 'parent','_void_node', 'element_tag', '_override_style', "_DataPipLineMixin__policy","_data_pipeline", "_data_policies", "_custom_retriever", "_has_pipeline_vars", "strict_data")
 
-    def __init__(self, *content:str, **kwargs:Any):
+    def __init__(self, *content:Any, **kwargs:Any):
         """
         Initializes the HTML element.
         Args:
@@ -463,11 +473,11 @@ class BaseHTMLElement(ABC):
         self._override_style = False
         self._render_conditions={}
         self.rendering = False
-        # self.custom_attrs = kwargs.pop('custom_attrs', False)
-        # if self.custom_attrs:
-        #     if hasattr(self,'enforce_custom_attrs'):
-        #         print(self.tag,self.node_children)
-        #         self.enforce_custom_attrs(global_tree=(True if self.custom_attrs == 'global' else False))
+        cond = kwargs.pop('render_constraints',{})
+        if cond:
+            self.add_render_constraints(**cond)
+        
+
         if hasattr(self, 'element_tag') and not self.element_tag:
             self.element_tag = self.__class__.__name__.lower()
 
@@ -479,10 +489,10 @@ class BaseHTMLElement(ABC):
             An instance of ElementAttributeManipulator initialized with 
             the element's current attributes, allowing for chainable updates.
         """
-        return ElementAttributeManipulator(self.attributes)
+        return ElementAttributeManipulator(self.attributes,node=self)
 
     @property
-    def style_manager(self) -> 'StyleManager':
+    def style_manager(self) -> GenericStyleManager:
         from probo.styles.style_manager import StyleManager
         """Accesses the style manager for this element.
 
@@ -564,10 +574,9 @@ class BaseHTMLElement(ABC):
         # 3. Process the content
         for item in self.content:
             rendered = None
-            has_render = False
+            
             # Scenario A: Child is a Component (Class)
             if hasattr(item, "render"):
-                last_was_text = False
                 # Ensure the child knows our engine flags before it renders
                 if hasattr(item, "light_tag"):
                     rendered = item.render(self.EL)
@@ -578,7 +587,6 @@ class BaseHTMLElement(ABC):
 
             # Scenario B: Child is a raw Iterable (list of tags/strings)
             elif inspect.isgenerator(item):
-                last_was_text = False
                 if use_list and use_deque:
                     rendered = ( deque((x if isinstance(x, ProboSourceString) else markup_escape(x)) if not hasattr(x,"render") else x.render() for x in item))
                 elif use_list and use_deque:
@@ -589,7 +597,6 @@ class BaseHTMLElement(ABC):
             elif isinstance(item, Iterable) and not isinstance(
                 item, (str, bytes, deque)
             ):
-                last_was_text = False
                 # Handle nested lists/iterables recursively
                 sub_collector = deque() if self.use_deque else list()
                 for sub in item:
@@ -607,13 +614,28 @@ class BaseHTMLElement(ABC):
 
             # Scenario C: Child is a raw value (String, Int, etc.)
             else:
-                if not isinstance(item, ProboSourceString):
-                    if last_was_text:
-                        collector.append(" ")
-                    last_was_text = True
-                else:
-                    last_was_text = False
                 rendered = item if isinstance(item, ProboSourceString) else markup_escape(item)
+
+            # Determine if we should add a space
+            current_is_text = False
+            if isinstance(rendered, ProboSourceString):
+                if getattr(rendered, 'is_html', False):
+                    current_is_text = False
+                else:
+                    current_is_text = True
+            elif isinstance(rendered, (list, deque, tuple)):
+                current_is_text = False
+            elif isinstance(rendered, (str, int, float, bool)):
+                current_is_text = True
+            else:
+                current_is_text = False
+
+            if current_is_text:
+                if last_was_text:
+                    collector.append(" ")
+                last_was_text = True
+            else:
+                last_was_text = False
 
             # Merge the rendered result into our main collector
             if isinstance(rendered, (list, deque)):
@@ -671,7 +693,7 @@ class BaseHTMLElement(ABC):
                 else:
                     yield res
             else:
-                if not isinstance(item, ProboSourceString):
+                if isinstance(item, (ProboSourceString,str,int,bool,float)):
                     if last_was_text:
                         yield " "
                     last_was_text = True

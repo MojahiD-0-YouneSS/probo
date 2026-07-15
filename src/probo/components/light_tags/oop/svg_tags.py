@@ -9,7 +9,7 @@ class Lg(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNode):
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="g".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -35,7 +35,7 @@ class Ldefs(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNod
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="defs".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -61,7 +61,7 @@ class Ltext(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNod
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="text".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -87,7 +87,7 @@ class Ltspan(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNo
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="tspan".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -114,7 +114,7 @@ class Lsvg(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNode
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content, **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -141,7 +141,7 @@ class Lsymbol(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightN
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="symbol".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -167,7 +167,7 @@ class Lmarker(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightN
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="marker".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -193,7 +193,7 @@ class Lpattern(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, Light
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="pattern".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -219,7 +219,7 @@ class Lmask(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightNod
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="mask".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -245,7 +245,7 @@ class LclipPath(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, Ligh
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="clipPath".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -271,7 +271,7 @@ class LlinearGradient(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="linearGradient".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -297,7 +297,7 @@ class LradialGradient(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="radialGradient".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -323,7 +323,7 @@ class Lfilter(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, LightN
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="filter".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -349,7 +349,7 @@ class LfeComponentTransfer(DataPipeLineMixin, ElementNodeMixin, MutationPipeline
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="feComponentTransfer".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -375,7 +375,7 @@ class LfeDiffuseLighting(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMi
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="feDiffuseLighting".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -401,7 +401,7 @@ class LfeMerge(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin, Light
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="feMerge".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -427,7 +427,7 @@ class LfeSpecularLighting(DataPipeLineMixin, ElementNodeMixin, MutationPipelineM
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="feSpecularLighting".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -453,7 +453,7 @@ class LanimateMotion(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin,
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="animateMotion".lower(),**attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)
@@ -479,7 +479,7 @@ class LforeignObject(DataPipeLineMixin, ElementNodeMixin, MutationPipelineMixin,
     def __init__(self, *content:str|Any, **attrs:Any):
         super().__init__(*content,tag="foreignObject".lower(), **attrs)
         self.extract_pipeline_args(self.attributes)
-        self._set_node_children(content)
+        self._set_node_children(self.content)
         self.resolve_pipeline_variables()
         self.extract_mutation_args(self.attributes)
         self.detect_effect_nodes(self.content)

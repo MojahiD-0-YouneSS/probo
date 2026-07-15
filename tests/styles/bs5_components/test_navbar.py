@@ -96,7 +96,7 @@ def test_bs5_navbar_wraper_func():
     html = nav.render()
 
     assert "navbar" in html
-    assert "&quot;" in html
+    assert '""' in html
     assert "Visible Brand" in html
 
 

@@ -1,3 +1,4 @@
+from typing import Self, Any
 from probo.components.state.component_state import (
     ElementState,
 )
@@ -25,7 +26,7 @@ from probo.request.transformer import (
 from typing import (
     Any,
     Optional,Callable, Self
-)
+)   
 from probo.utility import ProboSourceString
 
 def get_widget_info(django_bound_field) -> dict[str, str]:
@@ -148,7 +149,7 @@ class ProboFormField:
         self.tag_name:str = tag_name
         self.widget_info: dict[str, str] = dict()
         self.form_field:str = str()
-        self.dj_field:Optional['BoundField'] = dj_field
+        self.dj_field:Optional[Any] = dj_field
         self.dj_field_info:dict[str,Any] = dict()
         if dj_field:
             self.include_dj_field(dj_field)
@@ -206,7 +207,7 @@ class ProboFormField:
                 )
         return self
 
-    def include_dj_field(self, dj_field:Optional['BoundField']) -> Self:
+    def include_dj_field(self, dj_field:Optional[Any]) -> Self:
         if hasattr(dj_field, "field") and hasattr(dj_field.field, "widget"):
             field_info = get_widget_info(dj_field)
             tag = field_info["tag"]

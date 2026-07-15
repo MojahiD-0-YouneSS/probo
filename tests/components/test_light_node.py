@@ -3,6 +3,7 @@ import inspect
 from collections import deque
 # Adjust import path to wherever your LightNode actually lives
 from probo.components.light_tags.node import LightNode
+from probo.components import Element
 
 
 # ==========================================
@@ -230,3 +231,136 @@ def test_get_stream_content_types():
     assert "light_str" in res
     assert "HEAVY_STREAM" in res
     assert "normal_str" in res
+
+# ==========================================
+# TEST 5: DIFFERENT DATA TYPES (INT, FLOAT, LIST, DEQUE, BOOL, ETC)
+# ==========================================
+
+def test_lightnode_int_render():
+    el = MockEL()
+    node = LightNode(123, tag="div")
+    assert "123" in node.render(el)
+
+def test_lightnode_int_stream():
+    el = MockEL()
+    node = LightNode(123, tag="div")
+    assert "123" in "".join(node.stream(el))
+
+def test_lightnode_float_render():
+    el = MockEL()
+    node = LightNode(12.34, tag="div")
+    assert "12.34" in node.render(el)
+
+def test_lightnode_float_stream():
+    el = MockEL()
+    node = LightNode(12.34, tag="div")
+    assert "12.34" in "".join(node.stream(el))
+
+def test_lightnode_bool_render():
+    el = MockEL()
+    node = LightNode(True, False, tag="div")
+    assert "True" in node.render(el)
+    assert "False" in node.render(el)
+
+def test_lightnode_bool_stream():
+    el = MockEL()
+    node = LightNode(True, False, tag="div")
+    res = "".join(node.stream(el))
+    assert "True" in res
+    assert "False" in res
+
+def test_lightnode_list_render():
+    el = MockEL()
+    node = LightNode([1, "two", 3.0], tag="div")
+    res = node.render(el)
+    assert "1" in res
+    assert "two" in res
+    assert "3.0" in res
+
+def test_lightnode_list_stream():
+    el = MockEL()
+    node = LightNode([1, "two", 3.0], tag="div")
+    res = "".join(node.stream(el))
+    assert "1" in res
+    assert "two" in res
+    assert "3.0" in res
+    assert "1 two 3.0" in res
+
+def test_lightnode_generator_ints_render():
+    el = MockEL()
+    def gen_ints():
+        yield 42
+        yield   "test"
+        yield 100
+    node = LightNode(gen_ints(), tag="div")
+    res = node.render(el)
+    assert "42" in res
+    assert "test" in res
+    assert "100" in res
+    assert "42 test 100" in res
+
+def test_lightnode_generator_ints_stream():
+    el = MockEL()
+    def gen_ints():
+        yield 42
+        yield 100
+    node = LightNode(gen_ints(), tag="div")
+    res = "".join(node.stream(el))
+    assert "42" in res
+    assert "100" in res
+
+# ==========================================
+# TEST 6: DATA PIPELINE INTEGRATION
+# ==========================================
+
+from probo.components.light_tags import Ldiv, Lspan
+
+def test_lightnode_pipeline_simple():
+    parent = Ldiv(Lspan({'username'}))
+    parent.load_data({'username': 'Alice'})
+    assert parent.render(Element()) == "<div><span>Alice</span></div>"
+
+def test_lightnode_pipeline_nested():
+    parent = Ldiv(Lspan({'user.profile.age'}))
+    parent.load_data({'user': {'profile': {'age': 30}}})
+    assert parent.render(Element()) == "<div><span>30</span></div>"
+
+def test_lightnode_pipeline_lambda():
+    parent = Ldiv(Ldiv({'x', 'y', lambda **kw: str(kw.get('x',0) + kw.get('y',0))}))
+    parent.load_data({'x': 15, 'y': 25})
+    assert parent.render(Element()) == "<div><div>40</div></div>"
+
+def test_lightnode_pipeline_attributes():
+    parent = Ldiv(Ldiv("Content", id={'dynamic_id'}))
+    parent.load_data({'dynamic_id': 'header-123'})
+    assert parent.render(Element()) == '<div><div id="header-123">Content</div></div>'
+
+def test_lightnode_pipeline_component_return():
+    def make_badge(**kw):
+        return Lspan(kw.get('role'))
+    parent = Ldiv(Ldiv({'role', make_badge}))
+    parent.load_data({'role': 'Admin'})
+    assert parent.render(Element()) == "<div><div><span>Admin</span></div></div>"
+
+def test_lightnode_pipeline_attributes_mutation():
+
+    parent = Ldiv(Ldiv("Content", id={'dynamic_id'}))
+    parent.attributes['class']={'dynamic_id', lambda **dvars: f"admin {dvars.get('dynamic_id')} string"}
+    parent.load_data({'dynamic_id': 'header-123'})
+    print(parent.has_unresolved_pipeline_vars)
+    assert parent.render(Element()) == '<div class="admin header-123 string"><div id="header-123">Content</div></div>'
+
+def test_lightnode_pipeline_content_return_mutation():
+    def make_badge(**kw):
+        return Lspan('new content',kw.get('role'))
+    parent = Ldiv(Ldiv({'role', make_badge},Id={'role'},), data_pipeline={'role': 'Admin'})
+    # Render with MockEL instead of Element to avoid needing typewriter dependencies here
+    assert parent.render(Element()) == '<div><div id="Admin"><span>new content Admin</span></div></div>'
+    spn = parent.find(lambda n: n.attributes.get('Id') == 'Admin')
+    print(spn.content)
+    if spn:
+        spn.inner_html('new content', {'role'} ,overwrite=True,)
+    print(spn.content)
+    # Render with MockEL instead of Element to avoid needing typewriter dependencies here
+    assert parent.render(Element()) == '<div><div id="Admin">new content Admin</div></div>'
+

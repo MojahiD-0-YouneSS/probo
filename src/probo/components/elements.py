@@ -220,6 +220,7 @@ class Element:
         'view',
         'use',
         'stop',
+        'is_deque',
     )
     RESERVED_TAGS = ["del", "map", "object", "input", "filter","set"]
     def __init__(
@@ -257,6 +258,7 @@ class Element:
         self.collect_to_end = True
         self.attrs = attrs
         self._use_deque=use_deque
+        self.is_deque=use_deque
         self.tag = tag
         self.use_sibling = False
         self.sibling_element = str()

@@ -1,12 +1,9 @@
-from probo.components.conf.configs import ProboSettingConfigs
-from probo.components.conf.ui_settings import ProboUISettings
-# Instantiate the global settings objects
-settings = ProboUISettings()
-configs = ProboSettingConfigs()
+from probo.components.conf.configs import ProboSettingConfigs,new_ui_configs
+from probo.components.conf.ui_settings import ProboUISettings, new_ui_settings
 
 __all__ = [
-    "settings",
+    "new_ui_settings",
     "ProboSettingConfigs",
     "ProboUISettings",
-    "configs",
+    "new_ui_configs",
 ]

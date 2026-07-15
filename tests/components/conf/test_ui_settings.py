@@ -1,13 +1,12 @@
 import pytest
-from probo.components.conf import settings, configs
-from probo.components.conf.configs import ProboSettingConfigs
-from probo.components.conf.ui_settings import ProboUISettings
+from probo.components.conf import new_ui_settings, new_ui_configs
 from probo.components.tag_classes.block_tags import DIV
 
 
 def test_probo_ui_settings():
     """Test the text-based global UI settings."""
     # Reset settings for isolated testing if needed, though it's a singleton
+    settings=new_ui_settings()
     settings.TITLE = "Test Title"
     assert settings.TITLE == "Test Title"
     
@@ -22,6 +21,7 @@ def test_probo_setting_configs():
     class MockFormConfig:
         form_submit_btn = "Submit Form"
 
+    configs =new_ui_configs()
     # Register a config object
     configs.register("main_form", MockFormConfig())
     
@@ -37,6 +37,7 @@ def test_data_pipeline_integration():
     Test that global settings are automatically integrated into the Data Pipeline.
     When a component resolves `{'TITLE'}`, it should fall back to settings.TITLE.
     """
+    settings=new_ui_settings()
     settings.TITLE = "Global Probo Title"
     settings.SECTION_I = "Hero Section"
 
@@ -59,7 +60,7 @@ def test_data_pipeline_integration():
 def test_settings_frozen_state():
     """Test that settings cannot be modified after freezing."""
     # Create an isolated instance so we don't freeze the global one
-    local_settings = ProboUISettings()
+    local_settings = new_ui_settings()
     local_settings.TITLE = "Before Freeze"
     
     local_settings.freeze()

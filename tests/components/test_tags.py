@@ -5,6 +5,8 @@ from src.probo import (
     Input,
     fieldset,
     legend,
+DIV,
+
 )
 
 
@@ -66,3 +68,21 @@ def test_doctype_render():
     el = doctype()
     # Should be exactly this, no "/>"
     assert el == "<!DOCTYPE html>"
+
+def test_render_constraints_kwarg():
+    """Test that render_constraints kwarg is parsed and evaluated correctly."""
+    # Create an element with a render constraint
+    element = DIV("Content", render_constraints={"user_logged_in": True})
+    # Should be recorded in _render_conditions
+    assert element._render_conditions == {"user_logged_in": True}
+    
+    # Simulate data pipeline where condition is met
+    element.load_data({"user_logged_in": True})
+    assert element.render() == "<div>Content</div>"
+    
+    # Simulate data pipeline where condition is not met
+    element_fail = DIV("Content", render_constraints={"user_logged_in": True})
+    element_fail.load_data({"user_logged_in": False})
+    # When constraints fail, element renders as empty
+    assert element_fail.render() == "<div></div>"
+

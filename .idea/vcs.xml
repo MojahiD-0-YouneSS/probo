@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../probo-ui-tutorial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../pythonic-ecommerce" vcs="Git" />
   </component>
 </project>

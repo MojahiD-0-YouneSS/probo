@@ -76,3 +76,7 @@ class ProboUISettings:
                     parsed_value = value # Keep as string if it's an unquoted word
                     
                 setattr(self, key, parsed_value)
+
+# Instantiate the global settings objects
+def new_ui_settings()->ProboUISettings:
+    return ProboUISettings()

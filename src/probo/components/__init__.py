@@ -40,9 +40,9 @@ from probo.components.state import (
 )
 
 from probo.components.light_tags.node import LightNode
-from probo.components.fragment import frag
+from probo.components.fragment import frag, Frag
 from probo.components.power_node import PowerNode
-from probo.components.conf import settings, configs,ProboSettingConfigs,ProboUISettings
+from probo.components.conf import new_ui_settings, new_ui_configs,ProboSettingConfigs,ProboUISettings
 
 __all__ = [
     "ElementAttributeValidator",
@@ -68,11 +68,12 @@ __all__ = [
     "LightNode",
     "ComponentNode",
     "frag",
+    "Frag",
     "DataPipeLineMixin",
     "MutationPipelineMixin",
     "PowerNode",
-    "settings",
-    "configs",
+    "new_ui_settings",
+    "new_ui_configs",
     "ProboSettingConfigs",
     "ProboUISettings",
 ]

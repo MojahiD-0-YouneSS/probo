@@ -25,3 +25,5 @@ class ProboSettingConfigs:
             if hasattr(v,key):
                 return getattr(v,key)
         return default
+def new_ui_configs()->ProboSettingConfigs:
+    return ProboSettingConfigs()

@@ -197,8 +197,8 @@ def test_parsed_light_node_manipulation(parser):
     node = parser.parse(raw_html, mode="light")
 
     # 1. Modify attributes
+    print(node.attributes)
     node.attributes["class"] += " btn-primary"
-
     # 2. Overwrite content completely
     node.content = ["Clicked!"]
 

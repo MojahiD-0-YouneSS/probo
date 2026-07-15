@@ -111,8 +111,7 @@ def raw(
     if EL:
         return EL.raw(*variables, inner=inner, is_comment=is_comment).element
     else:
-        return Element().set_data(*variables).stringify_element().element
-
+        return Element().raw(*variables, inner=inner, is_comment=is_comment).stringify_element().element
 
 def set_data(
     *variables: Any,
@@ -134,7 +133,7 @@ def set_data(
     """
 
     if EL:
-        return EL.raw(*variables, inner=inner, is_comment=is_comment).element
+        return EL.set_data(*variables).stringify_element().element
     else:
         return Element().set_data(*variables).stringify_element().element
 

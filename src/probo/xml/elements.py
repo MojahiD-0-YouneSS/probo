@@ -1,4 +1,4 @@
-from typing import Any, Union, List, Optional
+from typing import Any, Union, List, Optional, Self
 from probo.components.base import ElementAttributeManipulator
 
 class XMLElement:

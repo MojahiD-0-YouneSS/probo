@@ -1,5 +1,5 @@
 from probo import DIV, H1, SPAN
-from probo.components.conf import settings
+from probo.components.conf import new_ui_settings
 
 
 def test_data_pipeline_separation():
@@ -9,6 +9,7 @@ def test_data_pipeline_separation():
         "theme": "dark",
         "secret_token": "abc-123"
     }
+    settings = new_ui_settings()
     settings.WELCOME_HEADING1 = "Welcome to Probo UI"
     settings.WELCOME_SPAN = "HELLO"
     # 2. Build the Component Tree

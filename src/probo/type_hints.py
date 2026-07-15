@@ -1,4 +1,5 @@
-from typing import Protocol, Any, Optional, List, Callable, Dict, Generator, Self, Deque, TypeVar
+from typing import Protocol, Any, Optional, List, Callable, Dict, Generator, Self, Deque, TypeVar, Union
+
 T_SSDOM = TypeVar('T_SSDOM', bound='GenericSSDOM')
 T_HTMLCollection = TypeVar('T_HTMLCollection', bound='GenericHTMLCollection')
 T_AttrManager = TypeVar('T_AttrManager', bound='GenericAttrManager')
@@ -21,7 +22,7 @@ class GenericAttrManager(Protocol):
     """"""
     attrs:Dict[str,Any]
 
-    def add_class(self, cls_str: str,*classes:tuple[str]) -> T_AttrManager:
+    def add_class(self, cls_str: str,*classes:str) -> T_AttrManager:
         pass
 
     def remove_class(self, cls_str: str) -> T_AttrManager:
@@ -36,7 +37,7 @@ class GenericAttrManager(Protocol):
     def set_attr(self, key: str, value: Union[str, bool]) -> T_AttrManager:
         pass
     
-    def set_bulk_attr(self, **attrs:dict[str,Any]) -> T_AttrManager:
+    def set_bulk_attr(self, **attrs:Any) -> T_AttrManager:
         pass
 
     def get_attr(self, key: str, default=None) -> str:
@@ -54,7 +55,7 @@ class GenericAttrManager(Protocol):
     def get_id(self,) -> str|None:
         pass
 
-    def merge_attrs(self, **kwargs:dict[str,str]) -> T_AttrManager:
+    def merge_attrs(self, **kwargs:str) -> T_AttrManager:
         pass
 
     def get(self, key: str, default=None) -> Any:
@@ -100,7 +101,7 @@ class GenericPowerNode(Protocol):
     parent:Self|None
     _void_node:bool
     _data_pipeline: Any 
-    _data_policies: Dict[str, NodeDataPolicy]
+    _data_policies: Dict[str, Any]
     _custom_retriever: Optional[Callable[[Any, str, Any], Any]]
     _has_pipeline_vars: bool 
     resolved: bool 
@@ -201,7 +202,7 @@ class GenericPowerNode(Protocol):
     def find(self, predicate: Callable[[Any], bool],stream_mode=False) -> Optional[T_SSDOM]:
         pass
 
-    def find_all(self, predicate: Callable[[Any], bool]) -> GenericHTMLCollection[Optional[T_SSDOM]]:
+    def find_all(self, predicate: Callable[[Any], bool]) -> GenericHTMLCollection:
         pass
 
     def select(self, selector: str) -> Optional[T_SSDOM]:
@@ -318,7 +319,7 @@ class GenericSSDOM(Protocol):
     element_data:Dict[str,Any]
     _share_element:bool
     _data_pipeline: Any 
-    _data_policies: Dict[str, NodeDataPolicy]
+    _data_policies: Dict[str, Any]
     _custom_retriever: Optional[Callable[[Any, str, Any], Any]]
     _has_pipeline_vars: bool 
     resolved: bool 
@@ -425,7 +426,7 @@ class GenericSSDOM(Protocol):
     def find(self, predicate: Callable[[Any], bool],stream_mode=False) -> Optional[T_SSDOM]:
         pass
 
-    def find_all(self, predicate: Callable[[Any], bool]) -> GenericHTMLCollection[Optional[T_SSDOM]]:
+    def find_all(self, predicate: Callable[[Any], bool]) -> GenericHTMLCollection:
         pass
 
     def select(self, selector: str) -> Optional[T_SSDOM]:
@@ -552,7 +553,7 @@ class GenericProxyElement(GenericSSDOM):
     def load_stream_logic(self,render_logic:Callable) -> None:
         pass
 
-    def render(self,obj_as_arg=True) -> ProboSourceString:
+    def render(self,obj_as_arg=True) -> str:
         pass
-    def stream(self,obj_as_arg=True,batch=50) -> Generator[ProboSourceString,None,None]:
+    def stream(self,obj_as_arg=True,batch=50) -> Generator[str,None,None]:
         pass

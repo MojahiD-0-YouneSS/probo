@@ -1,4 +1,4 @@
-from typing import Any, Dict, Set, Generator
+from typing import Any, Dict, Set, Generator, Self
 import html
 from collections import deque
 import inspect
@@ -10,6 +10,11 @@ MARKER = "\u200b"
 
 class ProboSourceString(str):
     __slots__ = ()
+
+    @property
+    def is_html(self):
+        # Ultra-fast lazy evaluation using C-optimized string search
+        return '<' in self and '>' in self
 
     def __html__(self):
         return self
@@ -24,16 +29,18 @@ class ProboSourceString(str):
         return ProboSourceString(other + str(self))
 
 
-def markup_escape(value: Any) -> str:
+def markup_escape(value: Any, quote: bool = False) -> str:
     """
     The 'Zero-Tax' Escaper.
     If the value is already marked as Safe, it is returned untouched.
     Otherwise, it is escaped to prevent XSS or broken layouts.
+    By default, quote=False for prettier HTML text content.
+    Attributes must explicitly use quote=True.
     """
     if hasattr(value, 'render'):
         value = value.render()
     # str() call handles numbers/bools; html.escape handles the security.
-    return _html_escape(str(value))
+    return _html_escape(str(value), quote=quote)
 
 def exists_in_dict(data: dict, x:Any) -> bool:
     """Checks if processed selectors exist within a dictionary's keys or values.
@@ -353,3 +360,170 @@ class HTMLCollection:
             elif hasattr(node, 'add_class'):
                 node.add_class(*classes)
         return self
+
+
+class PipelineDict(dict):
+    def __init__(self, node, *args,attrs:dict[str,Any]=None, **kwargs):
+        self._node = node
+        kwargs.update(attrs or {})
+        super().__init__(*args, **kwargs)
+        self._check_for_sets(self.values())
+
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value)
+        if isinstance(value, set):
+            self._node._has_pipeline_vars = True
+            self._node._has_unresolved_pipeline_vars = True
+            self._node.resolved = False
+
+    def update(self, *args, **kwargs):
+        super().update(*args, **kwargs)
+        self._check_for_sets(self.values())
+        
+    def _check_for_sets(self, values):
+        for v in values:
+            if isinstance(v, set):
+                self._node._has_pipeline_vars = True
+                self._node._has_unresolved_pipeline_vars = True
+                self._node.resolved = False
+                break
+
+class PipelineDeque(deque):
+    def __init__(self, node, iterable=(), *args, **kwargs):
+        self._node = node
+        super().__init__(iterable, *args, **kwargs)
+        self._check_for_sets(self)
+
+    def append(self, x):
+        super().append(x)
+        if isinstance(x, set):
+            self._node._has_pipeline_vars = True
+            self._node._has_unresolved_pipeline_vars = True
+            self._node.resolved = False
+
+    def appendleft(self, x):
+        super().appendleft(x)
+        if isinstance(x, set):
+            self._node._has_pipeline_vars = True
+            self._node._has_unresolved_pipeline_vars = True
+            self._node.resolved = False
+
+    def extend(self, iterable):
+        super().extend(iterable)
+        self._check_for_sets(iterable)
+
+    def extendleft(self, iterable):
+        super().extendleft(iterable)
+        self._check_for_sets(iterable)
+
+    def insert(self, i, x):
+        super().insert(i, x)
+        if isinstance(x, set):
+            self._node._has_pipeline_vars = True
+            self._node._has_unresolved_pipeline_vars = True
+            self._node.resolved = False
+
+    def __setitem__(self, i, x):
+        super().__setitem__(i, x)
+        if isinstance(x, set):
+            self._node._has_pipeline_vars = True
+            self._node._has_unresolved_pipeline_vars = True
+            self._node.resolved = False
+
+    def _check_for_sets(self, iterable):
+        for v in iterable:
+            if isinstance(v, set):
+                self._node._has_pipeline_vars = True
+                self._node._has_unresolved_pipeline_vars = True
+                self._node.resolved = False
+                break
+
+def deep_get(obj: Any, key: str, default: Any = None) -> Any:
+    _no_val = object()
+    if isinstance(key, str) and '.' in key:
+        parts = key.split('.')
+        if hasattr(obj, 'get') and isinstance(obj, dict):
+            current = obj.get(parts[0], _no_val)
+        else:
+            current = getattr(obj, parts[0], _no_val)
+            
+        if current is not _no_val:
+            for part in parts[1:]:
+                if hasattr(current, 'get') and isinstance(current, dict):
+                    current = current.get(part, _no_val)
+                else:
+                    current = getattr(current, part, _no_val)
+                if current is _no_val:
+                    break
+            if current is not _no_val:
+                return current
+
+    if hasattr(obj, 'get'):
+        return obj.get(key, default)
+    return getattr(obj, key, default)
+
+class DataPipeLineSource:
+    """
+    Hosts multiple data pipeline sources.
+    Allows for name-spaced data access via 'variable|source_name' syntax.
+    If no source_name is provided, it searches through all attached sources.
+    """
+    def __init__(self, *sources, **named_sources):
+        self.sources = list(sources)
+        self.named_sources = named_sources
+        self._key_cache = {}
+        
+    def add(self, source, name: str = None):
+        """Adds a new data source."""
+        if name:
+            self.named_sources[name] = source
+        else:
+            self.sources.append(source)
+            
+    def get(self, key: str, default: Any = None) -> Any:
+        source_name = None
+        if isinstance(key, str):
+            if '|' in key:
+                key, source_name = key.split('|', 1)
+            elif '.' in key:
+                source_name, key = key.split('.', 1)
+            
+        if source_name:
+            if source_name in self.named_sources:
+                return self._get_from_src(self.named_sources[source_name], key, default)
+                
+            for src in self.sources + list(self.named_sources.values()):
+                if self._get_source_name(src) == source_name:
+                    return self._get_from_src(src, key, default)
+                    
+            return default
+            
+        _no_val = object()
+        
+        # 1. Fast path: check cache first
+        if key in self._key_cache:
+            val = self._get_from_src(self._key_cache[key], key, _no_val)
+            if val is not _no_val:
+                return val
+            # If not found in cached source (e.g., data was removed), fall through to full search
+                
+        # 2. Full search across all sources
+        for src in list(self.named_sources.values()) + self.sources:
+            val = self._get_from_src(src, key, _no_val)
+            if val is not _no_val:
+                self._key_cache[key] = src  # Cache the successful source for next time
+                return val
+                
+        return default
+        
+    def _get_source_name(self, src: Any) -> str:
+        if isinstance(src, dict) and '_data_pipeline_name' in src:
+            return src['_data_pipeline_name']
+        if hasattr(src, '__class__'):
+            return src.__class__.__name__
+        return None
+
+    def _get_from_src(self, src: Any, key: str, default: Any) -> Any:
+        return deep_get(src, key, default)
+
+

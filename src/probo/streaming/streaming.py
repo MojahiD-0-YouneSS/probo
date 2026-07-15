@@ -53,7 +53,10 @@ def to_django_response(node: Any, compress: bool = True):
     Django Integration Utility.
     Returns a StreamingHttpResponse that keeps RAM usage flat.
     """
-    from django.http import StreamingHttpResponse
+    try:
+        from django.http import StreamingHttpResponse
+    except ImportError:
+        raise ImportError("Django is not installed. Please install Django to use this utility.")
 
     stream = node.render_stream()
     if compress:
