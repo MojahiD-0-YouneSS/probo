@@ -14,7 +14,9 @@ from probo.utility import (
     exists_in_dict,
     render_attributes,
     EnumLookUPMixin,
+    HTMLCollection,
 )
+
 
 
 # ==========================================
@@ -316,7 +318,6 @@ def test_resolve_stream_light_tag_class():
 # ==========================================
 # TESTS: HTMLCollection
 # ==========================================
-from probo.utility import HTMLCollection
 
 class DummyNode:
     def __init__(self, val):
