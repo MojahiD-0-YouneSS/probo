@@ -356,7 +356,7 @@ wheels = [
 
 [[package]]
 name = "probo-ui"
-version = "1.4.4.11"
+version = "1.4.4.12"
 source = { editable = "." }
 dependencies = [
     { name = "asgiref" },
