@@ -47,7 +47,7 @@ class Element:
         'tag',
         'use_sibling',
         'sibling_element',
-        '_use_deque',
+        'is_deque',
         "generator_content",
          "a",
         "abbr",
@@ -247,26 +247,38 @@ class Element:
             **attrs: Initial HTML attributes.
         """
         self.validator = ElementAttributeValidator()
-        self.element: str | list[str] = str()
         self.is_list: bool = is_list
         self.is_natural: bool = is_natural
-        self.content: str|list[str]|deque[str] = content or str() if not self.is_list else [] if not use_deque else deque()
+        self.is_deque: bool = use_deque
+
+        # Initialize element container based on mode
+        if self.is_list:
+            self.element: str | list[str] | deque[str] = deque() if use_deque else []
+        else:
+            self.element: str | list[str] | deque[str] = str()
+
+        # Initialize content container based on mode (fix precedence bug)
+        if self.is_list:
+            self.content: str | list[str] | deque[str] = deque() if use_deque else []
+        else:
+            self.content: str | list[str] | deque[str] = content or str()
+
         self.probo_pretty_error = probo_pretty_error
         self.probo_custom_attrs = probo_custom_attrs
         self.collect_history = collect_history
         self.generator_content = None
         self.collect_to_end = True
         self.attrs = attrs
-        self._use_deque=use_deque
-        self.is_deque=use_deque
         self.tag = tag
         self.use_sibling = False
         self.sibling_element = str()
         if self.tag:
-            self.element = ProboSourceString(self.build_tag(Tag.get(self.tag)).replace(MARKER, "")) if not self.is_list else self.build_tag(Tag.get(self.tag))
-        if use_deque and is_list:
+            if not self.is_list:
+                self.element = ProboSourceString(self.build_tag(Tag.get(self.tag)).replace(MARKER, ""))
+            else:
+                self.element = self.build_tag(Tag.get(self.tag))
+        if use_deque:
             self.use_deque()
-
     def __getattr__(self, name: str) -> Any:
         """Dynamically loads and returns a handler for a requested HTML tag.
 
@@ -302,9 +314,12 @@ class Element:
         self.element = str()
 
     def use_deque(self) -> None:
-
-        self.content = deque()
-        self._use_deque = True
+        if self.content:
+            self.content = deque(self.content if isinstance(self.content,list) else [self.content])
+        else:
+            self.content = deque()
+        self.is_deque = True
+        self.is_list = True
 
     def _tag_loader(self, name: str) -> bool|partial:
 
@@ -467,7 +482,7 @@ class Element:
 
         tag = None
         attrs_dict = {}
-        content = str() if not self.is_list else list() if not self._use_deque else deque()
+        content = str() if not self.is_list else list() if not self.is_deque else deque()
 
         is_sub_content = False
         sub_content = ""
@@ -588,7 +603,7 @@ class Element:
                     if self.is_list:
                         result = None
                         opening = ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",)
-                        if self._use_deque and isinstance(content, deque):
+                        if self.is_deque and isinstance(content, deque):
                             content.appendleft(opening)
                             return content
                         elif isinstance(content, list):
@@ -605,14 +620,14 @@ class Element:
                         return f"<{tag_value[0]}{self.render_attrs()}>{MARKER}{content}"
                 else:
                     if self.is_list:
-                        result = list() if not self._use_deque else deque()
+                        result = list() if not self.is_deque else deque()
                         result.append(ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",))
                         return result
                     else:
                         return f"<{tag_value[0]}{self.render_attrs()}>"
             else:
                 if self.is_list:
-                    result = list() if not self._use_deque else deque()
+                    result = list() if not self.is_deque else deque()
                     result.append(ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}/>",))
                     return result
                 else:
@@ -623,10 +638,20 @@ class Element:
                 result = None
                 opening = ProboSourceString(f"<{tag_value[0]}{self.render_attrs()}>",)
                 closing = ProboSourceString(f"</{tag_value[0]}>",)
-                if self._use_deque and isinstance(content, deque):
-                    content.appendleft(opening)
-                    content.append(closing)
-                    return content
+                if self.is_deque:
+                    if isinstance(content, deque):
+                        content.appendleft(opening)
+                        content.append(closing)
+                        return content
+                    else:
+                        result = deque()
+                        result.append(opening)
+                        if isinstance(content, list):
+                            result.extend(content)
+                        elif content:
+                            result.append(content)
+                        result.append(closing)
+                        return result
                 elif isinstance(content, list):
                     result = list() 
                     result.append(opening)
@@ -716,7 +741,7 @@ class Element:
         content_string = self.content
         if not self.is_list:
             self.content = ""
-        elif self.is_list and self._use_deque:
+        elif self.is_list and self.is_deque:
             self.content = deque()
         else:
             self.content = []
@@ -753,7 +778,13 @@ class Element:
         STRING = ProboSourceString("".join(string))
 
         if inner:
-            self.content += "<!--" + STRING + "-->" if is_comment else STRING
+            if isinstance(self.content, (list, deque)):
+                if is_comment:
+                    self.content.extend(["<!--", STRING, "-->"])
+                else:
+                    self.content.append(STRING)
+            else:
+                self.content += "<!--" + STRING + "-->" if is_comment else STRING
 
         if self.is_list:
             (
