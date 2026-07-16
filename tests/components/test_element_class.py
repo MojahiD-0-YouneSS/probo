@@ -7,6 +7,11 @@ from src.probo.components.elements import Element
 def builder():
     """Returns a fresh Element builder instance."""
     return Element()
+# --- FIXTURES ---
+@pytest.fixture
+def deque_builder():
+    """Returns a fresh Element builder instance with deque mode."""
+    return Element( use_deque=True)
 
 
 # --- TESTS ---
@@ -165,3 +170,16 @@ def test_attributes_chaining(builder):
     assert res is builder
     res.div()
     assert '<div id="1">X</div>' == builder.element
+
+def test_deque_rendering(deque_builder):
+    """Test that set_attrs returns self for chaining."""
+    from collections import deque
+    res = deque_builder.set_attrs(id="1").set_content("X")
+    assert res is deque_builder
+    res.div()
+    assert isinstance(Element(use_deque=True).set_attrs(id="1").set_content("X").div().element, deque)
+    assert isinstance(deque_builder.element, deque)
+    joined = "".join(deque_builder.element)
+    assert '<div id="1">' in joined
+    assert 'X' in joined
+    assert '</div>' in joined

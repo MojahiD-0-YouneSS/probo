@@ -18,7 +18,7 @@
 [![Discord](https://img.shields.io/badge/chat-Discord-5865F2)](https://discord.gg/jnZRbVasgd)
 ![Last Commit](https://img.shields.io/github/last-commit/MojahiD-0-YouneSS/probo)
 ![Repo Size](https://img.shields.io/github/repo-size/MojahiD-0-YouneSS/probo)
-![Tests](https://img.shields.io/badge/Tests-1392%20Passed-brightgreen?style=flat-square&logo=github)
+![Tests](https://img.shields.io/badge/Tests-1444%20Passed-brightgreen?style=flat-square&logo=github)
 [![APIs](https://img.shields.io/badge/APIs-580+%20Ready-blue?style=flat-square&logo=python&logoColor=white)](https://MojahiD-0-YouneSS.github.io/probo/)
 
 Probo UI (Python Rendered Objects for Backend-Oriented UI) is a Python-native server-side template rendering framework. Write type-safe template, components. structuring your HTML and styling your CSS with pure Python logic. It transforms Python objects into performant HTML/CSS (with native HTMX support), creating a seamless bridge between your backend logic and frontend interface.
