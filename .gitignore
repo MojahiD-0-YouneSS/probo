@@ -187,4 +187,3 @@ cython_debug/
 # snipet testing
 script_testing/
 docs/TUTORIALS/*
-*.csv

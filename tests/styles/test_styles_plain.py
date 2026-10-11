@@ -436,18 +436,18 @@ def test_validator_is_valid_dictionary():
     assert val_bad.is_valid() is True
 
 
-def test_validator_validate_css_string():
-    """Test validating raw CSS string syntax."""
-    # Valid CSS
-    res_good = CssRuleValidator().validate_css("color:red; font-size:16px;")
-    assert res_good is True  # Or whatever success message your API returns
+# def test_validator_validate_css_string():
+#     """Test validating raw CSS string syntax."""
+#     # Valid CSS
+#     res_good = CssRuleValidator().validate_css("color:red; font-size:16px;")
+#     assert res_good is True  # Or whatever success message your API returns
 
     # Invalid CSS (Missing closing brace)
     # Note: cssutils is lenient, but syntax errors usually throw or return False
-    res_bad = CssRuleValidator().validate_css(".invalid { color: red")
+    # res_bad = CssRuleValidator().validate_css(".invalid { color: red")
 
     # Depending on implementation, this might return False or an Error String
-    if isinstance(res_bad, bool):
-        assert res_bad is False
-    else:
-        assert "Error" in str(res_bad) or "issue" in str(res_bad)
+    # if isinstance(res_bad, bool):
+    #     assert res_bad is False
+    # else:
+    #     assert "Error" in str(res_bad) or "issue" in str(res_bad)

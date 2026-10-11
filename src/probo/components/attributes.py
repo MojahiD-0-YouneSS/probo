@@ -1248,15 +1248,15 @@ class AttributeValue(EnumLookUPMixin, Enum):
             "menu": ["list", "context", "toolbar"],
             
             # --- SVG Filters ---
-            "feColorMatrix": ["matrix", "saturate", "hueRotate", "luminanceToAlpha"],
-            "feTurbulence": ["fractalNoise", "turbulence"],
-            "feFuncR": ["identity", "table", "discrete", "linear", "gamma"],
-            "feFuncG": ["identity", "table", "discrete", "linear", "gamma"],
-            "feFuncB": ["identity", "table", "discrete", "linear", "gamma"],
-            "feFuncA": ["identity", "table", "discrete", "linear", "gamma"],
+            "fecolormatrix": ["matrix", "saturate", "hueRotate", "luminanceToAlpha"],
+            "feturbulence": ["fractalNoise", "turbulence"],
+            "fefunct": ["identity", "table", "discrete", "linear", "gamma"],
+            "fefuncg": ["identity", "table", "discrete", "linear", "gamma"],
+            "fefuncb": ["identity", "table", "discrete", "linear", "gamma"],
+            "fefunca": ["identity", "table", "discrete", "linear", "gamma"],
             
             # --- SVG Animation ---
-            "animateTransform": ["translate", "scale", "rotate", "skewX", "skewY"],
+            "animatetransform": ["translate", "scale", "rotate", "skewX", "skewY"],
         },  # [0]=<input>, [1]=<bottun>, [2]=any
         "usemap": ["#any"],  # starts with '#'
         "value": "any",
@@ -1276,6 +1276,34 @@ class AttributeValue(EnumLookUPMixin, Enum):
         "preserveAspectRatio": "any", 
          "opacity": "any",
          "xintegrity": "any",
+        'attributeName': 'any',
+
+        'attributeType': ["CSS", "XML", "auto",],
+
+    'begin': 'any',
+
+    'by': 'any',
+
+    'calcMode': ["discrete", "linear", "paced", "spline"],
+
+    'dur': 'any',
+
+    'end': 'any',
+
+    'from': 'any',
+
+    'keySplines': 'any',
+
+    'keyTimes': 'any',
+
+    'repeatCount': 'any',# or "indefinite",
+
+    'repeatDur': 'any',# "indefinite",
+
+    'restart': ["always", "whenNotActive", "never"],
+
+    'to': 'any',
+
     }
 
     BOOTSTRAP_DATA_BS_ATTRIBUTE = {
@@ -1677,6 +1705,14 @@ class ElementAttribute(EnumLookUPMixin, Enum):
             "<script>",
             "<source>",
             "<style>",
+            "ol",
+            "<fecolormatrix>"
+            "<feturbulence>"
+            "<fefuncr>"
+            "<fefuncg>"
+            "<fefuncb>"
+            "<fefunca>"
+            "<animatetransform>"
         ],
         'transform': ['<circle>', '<ellipse>', '<g>', '<line>', '<path>', '<polygon>', '<polyline>', '<rect>', '<text>', '<use>'],
         "usemap": ["<img>", "<object>"],
@@ -1708,7 +1744,36 @@ class ElementAttribute(EnumLookUPMixin, Enum):
         'y': ['<filter>', '<foreignObject>', '<image>', '<mask>', '<rect>', '<text>', '<tspan>', '<use>'],
         'y1': ['<line>', '<linearGradient>'],
         'y2': ['<line>', '<linearGradient>'],
-        'xintegrity':['<link>','<script>']
+        'xintegrity':['<link>','<script>'],
+        'attributeName': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+        'attributeType': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+        'begin': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+        'by': ["<animate>", "<animateMotion>", "<animateTransform>"],
+
+        'calcMode': ["<animate>", "<animateMotion>", "<animateTransform>"],
+
+        'dur': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+        'end': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+    'from': ["<animate>", "<animateMotion>", "<animateTransform>"],
+
+    'keySplines': ["<animate>", "<animateMotion>", "<animateTransform>"],
+
+    'keyTimes': ["<animate>", "<animateMotion>", "<animateTransform>"],
+
+    'repeatCount': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+    'repeatDur': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+    'restart': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+    'to': ["<animate>", "<animateMotion>", "<animateTransform>", "<set>"],
+
+    'values': ["<animate>", "<animateMotion>", "<animateTransform>"]
     }
 
 class Tag(EnumLookUPMixin, Enum):

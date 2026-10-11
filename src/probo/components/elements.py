@@ -482,22 +482,16 @@ class Element:
 
         tag = None
         attrs_dict = {}
-        content = str() if not self.is_list else list() if not self.is_deque else deque()
+        content = list() if not self.is_deque else deque()
 
         is_sub_content = False
         sub_content = ""
         def _extend_or_concat(current_content, arg):
-            if self.is_list:
-                if isinstance(arg, (list, deque)):
-                    current_content.extend(arg)
-                else:
-                    current_content.append(arg)
-                return current_content  # Return it!
+            if isinstance(arg, (list, deque)):
+                current_content.extend(arg)
             else:
-                if isinstance(arg, (list, deque)):
-                    return current_content + "".join(arg)
-                else:
-                    return current_content + arg
+                current_content.append(arg)
+            return current_content
 
         for arg in args:
 
@@ -506,10 +500,7 @@ class Element:
                 is_sub_content = False
                 continue
             if isinstance(arg, (list, deque)):
-                if self.is_list:
-                    content.extend(arg)  # Instant O(1) merge
-                else:
-                    content += "".join(arg)
+                content.extend(arg)
 
             elif type(arg) is str and str(arg).upper() in Tag.keys_set:
                 tag = Tag.get(arg)
@@ -541,13 +532,14 @@ class Element:
                     self.content.extend(netsed_el)
                 else:
                     self.content.append(netsed_el)
+            if isinstance(netsed_el, (list, deque)):
+                self.content.extend(netsed_el)
             else:
-                # If both are strings, just add them
-                if isinstance(netsed_el, (list, deque)):
-                    self.content += ProboSourceString(''.join(netsed_el))
-                else:
-                    self.content += netsed_el
+                self.content.append(netsed_el)
         attrs_dict.clear()
+        
+        if not self.is_list:
+            return ProboSourceString("".join(str(c) if type(c) is not str else c for c in content))
         return content
 
     def build_tag(self, tag: Tag, is_custom: bool = False) -> str|list[str]:

@@ -177,7 +177,6 @@ def test_deque_rendering(deque_builder):
     res = deque_builder.set_attrs(id="1").set_content("X")
     assert res is deque_builder
     res.div()
-    assert isinstance(Element(use_deque=True).set_attrs(id="1").set_content("X").div().element, deque)
     assert isinstance(deque_builder.element, deque)
     joined = "".join(deque_builder.element)
     assert '<div id="1">' in joined

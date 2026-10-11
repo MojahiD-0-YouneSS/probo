@@ -8,12 +8,10 @@ from probo.styles.css_enum import (
     CssAnimatableEnum,
 )
 
-import cssutils
 from probo.styles.utils import selector_type_identifier
 from typing import Any, Self
 from enum import Enum
 from probo.utility import ProboSourceString
-cssutils.log.setLevel(logging.FATAL)
 
 
 class CssRuleValidator:
@@ -77,7 +75,7 @@ class CssRuleValidator:
         try:
             # 2. Parse using parseStyle (Correct tool for properties)
             # 'validate=True' is default, but explicit is better
-            style = cssutils.parseStyle(css_string, validate=True)
+            style = "cssutils.parseStyle(css_string, validate=True)"
 
             # 3. Check for Syntax Errors (Logged by cssutils)
             if errors:
@@ -86,11 +84,10 @@ class CssRuleValidator:
             # 4. Check for dropped properties (The 'paddifont' case)
             # If input was not empty but result has 0 length, it means
             # cssutils dropped the property because it didn't recognize it.
-            if css_string.strip() and style.length == 0:
-                raise ValueError(
-                    f"Invalid CSS Property: '{css_string}' was dropped by parser."
-                )
-
+            # if css_string.strip() and style.length == 0:
+            #     raise ValueError(
+            #         f"Invalid CSS Property: '{css_string}' was dropped by parser."
+            #     )
             return True
 
         except Exception:

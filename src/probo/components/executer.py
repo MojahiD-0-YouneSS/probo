@@ -152,6 +152,43 @@ class ProboFunctionalExecuter:
     You do not need to pass EL manually. The ProboFunctionalExecuter uses Python's inspect module to check the signature of every tag it executes. If it detects a tag or class render method asking for EL, it automatically injects the shared_el you provided via .include_dependency().
     """
 
+    _signature_cache = {}
+
+    @classmethod
+    def _get_tag_func_meta(cls, tag_func):
+        """
+        Caches the inspection of tag functions and classes.
+        inspect.signature is very slow and the AST builds execute this thousands of times.
+        This memoizes whether a target is a class and whether it requires the 'EL' pipeline.
+        """
+        if tag_func in cls._signature_cache:
+            return cls._signature_cache[tag_func]
+        
+        is_class = inspect.isclass(tag_func)
+        requires_el = False
+        
+        if is_class:
+            for method_name in ("render", "stream"):
+                if hasattr(tag_func, method_name):
+                    try:
+                        sig = inspect.signature(getattr(tag_func, method_name))
+                        if "EL" in sig.parameters:
+                            requires_el = True
+                            break
+                    except (ValueError, TypeError):
+                        pass
+        else:
+            try:
+                sig = inspect.signature(tag_func)
+                params = list(sig.parameters.values())
+                if params and params[0].name == "EL":
+                    requires_el = True
+            except (ValueError, TypeError):
+                pass
+                
+        cls._signature_cache[tag_func] = (is_class, requires_el)
+        return is_class, requires_el
+
     def __init__(self, root_tag,*content, stream=False,batch:int=50,use_EL:bool=False, **root_attrs):
         self.use_EL=use_EL
         self._nodes = {
@@ -164,9 +201,11 @@ class ProboFunctionalExecuter:
         }
         self.default_flags = {"stream": stream,"batch":batch,}
         self.dependencies = {}
+        self._callable_cache = {}
         if use_EL:
             from probo.components.elements import Element
             self.dependencies['EL']=Element()
+    
     def include_dependency(self, **deps):
         """Injects shared state (like EL=Element()) into the context."""
         self.dependencies.update(deps)
@@ -263,50 +302,48 @@ class ProboFunctionalExecuter:
         if not callable(tag_func):
             return lambda *args: str(tag_func)
 
-        final_kwargs = dict(self.default_flags)
-        is_class = inspect.isclass(tag_func)
+        cache_key = None
+        if not user_attrs:
+            cache_key = tag_func
+        else:
+            try:
+                cache_key = (tag_func, frozenset(user_attrs.items()))
+            except TypeError:
+                pass # user_attrs has unhashable types, skip cache
+
+        if cache_key is not None and cache_key in self._callable_cache:
+            return self._callable_cache[cache_key]
+
+        is_class, requires_el = self._get_tag_func_meta(tag_func)
 
         # ==========================================
         # OOP CLASS HANDLING (LAZY INITIALIZATION)
         # ==========================================
         if is_class:
-            requires_el = False
-
-            # Inspect BOTH render and stream signatures for EL dependency
-            for method_name in ("render", "stream"):
-                if hasattr(tag_func, method_name):
-                    try:
-                        sig = inspect.signature(getattr(tag_func, method_name))
-                        if "EL" in sig.parameters:
-                            requires_el = True
-                            break
-                    except (ValueError, TypeError):
-                        pass
-
-            # Grab EL if the class methods need it
-            el_val = None
-            if requires_el and "EL" in self.dependencies:
-                el_val = final_kwargs.pop("EL", self.dependencies["EL"])
+            final_kwargs = {**self.default_flags, **user_attrs}
+            el_val = final_kwargs.pop("EL", self.dependencies.get("EL")) if requires_el and "EL" in self.dependencies else None
 
             # Return a lambda that creates the Lazy Wrapper instead of instantiating the Class!
-            return lambda *content: LazyClassWrapper(tag_func, el_val, *content, **user_attrs).include_extra_attrs(**final_kwargs)
+            callable_obj = lambda *content: LazyClassWrapper(tag_func, el_val, *content, **user_attrs).include_extra_attrs(**final_kwargs)
+            if cache_key is not None:
+                self._callable_cache[cache_key] = callable_obj
+            return callable_obj
 
         # ==========================================
         # STANDARD FUNCTIONAL HANDLING
         # ==========================================
-        try:
-            
-            final_kwargs.update(user_attrs)
-            sig = inspect.signature(tag_func)
-            params = list(sig.parameters.values())
+        if requires_el and "EL" in self.dependencies:
+            final_kwargs = {**self.default_flags, **user_attrs}
+            el_val = final_kwargs.pop("EL", self.dependencies["EL"])
+            callable_obj = functools.partial(tag_func, el_val, **final_kwargs)
+        elif user_attrs:
+            callable_obj = functools.partial(tag_func, **{**self.default_flags, **user_attrs})
+        else:
+            callable_obj = functools.partial(tag_func, **self.default_flags)
 
-            if params and params[0].name == "EL" and "EL" in self.dependencies:
-                el_val = final_kwargs.pop("EL", self.dependencies["EL"])
-                return functools.partial(tag_func, el_val, **final_kwargs)
-        except (ValueError, TypeError):
-            pass
-
-        return functools.partial(tag_func, **final_kwargs)
+        if cache_key is not None:
+            self._callable_cache[cache_key] = callable_obj
+        return callable_obj
 
     def execute(self):
         """Recursively builds and returns the final SSDOM tree."""

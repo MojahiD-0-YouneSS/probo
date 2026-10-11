@@ -33,25 +33,25 @@ class ProboUISettings:
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def get(self, key: str, default: Any = None) -> Any:
+    def get(self, key: str, default: Any = None, from_env:bool=False) -> Any:
         """
         PRODUCTION SECURE GETTER:
-        1. Checks OS Environment Variables first (Docker/Cloud priority)
-        2. Falls back to internal configuration
+        1. Falls back to internal configuration
+        2. Checks OS Environment Variables first (Docker/Cloud priority) if the from_env
         3. Returns default if neither exists
         """
-        # Cloud/Docker environments take absolute priority
-        env_val = os.getenv(key)
-        if env_val is not None:
-            # Safely attempt to parse the env string into int/bool/etc.
-            try:
-                return ast.literal_eval(env_val)
-            except (ValueError, SyntaxError):
-                return env_val # Return as string if it's just text
-                
         # Fall back to internal state parsed from files or set via code
         if hasattr(self, key):
             return getattr(self, key)
+        # Cloud/Docker environments take absolute priority
+        if from_env:
+            env_val = os.getenv(key)
+            if env_val is not None:
+                # Safely attempt to parse the env string into int/bool/etc.
+                try:
+                    return ast.literal_eval(env_val)
+                except (ValueError, SyntaxError):
+                    return env_val # Return as string if it's just text
             
         return default
 

@@ -1,4 +1,8 @@
 from src.probo.components.forms import ProboForm
+import pytest
+
+# 1. Skip the entire module immediately if django is not installed
+django = pytest.importorskip("django")
 from django import forms
 from django.test import RequestFactory
 from src.probo.request import RequestDataTransformer
